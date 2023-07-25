@@ -29,30 +29,57 @@
     position: relative;
     overflow: hidden;
     &::before {
-      display: block;
-      content: "";
-      width: 100%;
-      padding-top: calc(($height / $width) * 100%);
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: calc(($height / $width) * 100%);
     }
     > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
-  
+
     > img {
-      height: 100%;
-      object-fit: cover;
+        height: 100%;
+        object-fit: cover;
     }
-  }
-  
-  // Mixin for removing hover efects on iphone screen
-  @mixin hover-supported {    
+}
+
+// Mixin for removing hover efects on iphone screen
+@mixin hover-supported {
     @media not all and (pointer: coarse) {
         &:hover {
             @content;
         }
     }
-  }
+}
+
+// Mixin for inserting icons
+
+@mixin trello-icon($content: "", $type: sm, $color: #42526e) {
+    font-family: "trellicons";
+    color: $color;
+    @if $type ==sm {
+        font-size: 1rem;
+    } @else if $type ==md {
+        font-size: 1.25rem;
+    } @else if $type ==lg {
+        font-size: 1.5rem;
+    } @else if $type ==xl {
+        font-size: 2.5rem;
+    }
+    &::before {
+        content: $content;
+    }
+}
+
+// mixin for colors //
+@mixin label-tag-color($color) {
+    background-color: $color;
+    &::before {
+        background-color: $color;
+    }
+}
