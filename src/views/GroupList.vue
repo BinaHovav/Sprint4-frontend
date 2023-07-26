@@ -1,5 +1,5 @@
 <template>
-    <section class="group-list-container">
+    <section class="group-list-container flex">
         <GroupPreview v-for="group in groups" :key="group._id" :group="group" @removed="$emit('removed', group._id)" />
         
     </section>
