@@ -6,11 +6,12 @@ const STORAGE_KEY = 'board'
 
 export const boardService = {
   query,
-  getBoardById,
+  getById,
   save,
   remove,
   getEmptyBoard,
   addBoardMsg,
+  getEmptyGroup
 }
 window.cs = boardService
 
@@ -26,7 +27,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
   return boards
 }
 
-function getBoardById(boardId) {
+function getById(boardId) {
   return storageService.get(STORAGE_KEY, boardId)
 }
 
@@ -65,6 +66,14 @@ async function addBoardMsg(boardId, txt) {
 function getEmptyBoard() {
   return {
     title: '',
+  }
+}
+function getEmptyGroup() {
+  return {
+    id: utilService.makeId(4),
+    title: '',
+    archivedAt: null,
+    tasks: []
   }
 }
 

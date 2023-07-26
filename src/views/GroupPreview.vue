@@ -1,6 +1,10 @@
 <template>
     <div class="group-preview-container">
-            <TaskList :tasks="group.tasks"/>
+        <div class="group-header">
+            <h1 @click="updateGroup">{{ group.title }}</h1>
+            <button @click="$emit('removeGroup', group.id)">remove</button>
+        </div>
+        <TaskList :tasks="group.tasks" />
     </div>
 </template>
   
@@ -14,7 +18,12 @@ export default {
     },
     computed: {},
     created() { },
-    methods: {},
+    methods: {
+        updateGroup() {
+            const newTitle = prompt('new title')
+            this.$emit('updateGroup', newTitle, this.group)
+        }
+    },
     components: {
         TaskList,
     }
