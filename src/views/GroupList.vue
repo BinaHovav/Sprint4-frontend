@@ -1,8 +1,21 @@
 <template>
-    <button @click="addGroup">Add group</button>
     <section class="group-list-container flex">
         <GroupPreview v-for="group in groups" :key="group._id" :group="group" @removeGroup="removeGroup"
             @updateGroup="updateGroup" />
+        <div class="add-group">
+            <form @submit.prevent="addGroup">
+                <input type="text" name="name" v-model="title" placeholder="Enter list title" autocomplete="off" dir="auto"
+                    maxlength="512">
+                <div class="controls">
+                    <!-- <div > -->
+                    <button class="btn-add-list">Add list</button>
+                    <!-- </div> -->
+                    <div class="btn-close-list">
+                        <span>X</span>
+                    </div>
+                </div>
+            </form>
+        </div>
 
     </section>
 </template>
@@ -13,7 +26,9 @@ export default {
     name: 'GroupList',
     props: ['groups'],
     data() {
-        return {}
+        return {
+            title: null
+        }
     },
     computed: {},
     created() {
@@ -23,7 +38,8 @@ export default {
             this.$emit('removeGroup', groupId)
         },
         addGroup() {
-            this.$emit('addGroup')
+            this.$emit('addGroup', this.title)
+            this.title = null
         },
         updateGroup(group) {
             this.$emit('updateGroup', group)

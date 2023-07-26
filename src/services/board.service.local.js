@@ -101,7 +101,6 @@ function getEmptyTask() {
 }
 
 // Initial data
-
 // ;(async () => {
 //   await storageService.post(STORAGE_KEY, {
 //     _id: 'b101',
@@ -120,27 +119,32 @@ function getEmptyTask() {
 //       {
 //         id: 'l101',
 //         title: 'Low priority',
-//         color: 'green',
+//         color: '#164b35',
+//         backgroundColor: 'green',
 //       },
 //       {
 //         id: 'l102',
-//         title: 'Planing',
-//         color: 'orange',
+//         title: 'Planning',
+//         color: '#faa53d',
+//         backgroundColor: 'orange',
 //       },
 //       {
 //         id: 'l103',
 //         title: 'Techonology',
-//         color: 'light-green',
+//         color: '#faa53d',
+//         backgroundColor: 'light-green',
 //       },
 //       {
 //         id: 'l104',
 //         title: 'Research',
-//         color: 'yellow',
+//         color: '#faa53d',
+//         backgroundColor: 'yellow',
 //       },
 //       {
 //         id: 'l105',
 //         title: 'Design',
-//         color: 'pink',
+//         color: '#faa53d',
+//         backgroundColor: 'pink',
 //       },
 //       {
 //         id: 'l106',
@@ -160,12 +164,14 @@ function getEmptyTask() {
 //       {
 //         id: 'l109',
 //         title: 'Enhancement',
-//         color: 'purple',
+//         color: '#faa53d',
+//         backgroundColor: 'purple',
 //       },
 //       {
 //         id: 'l110',
 //         title: 'High priority',
-//         color: 'red',
+//         color: '#faa53d',
+//         backgroundColor: 'red',
 //       },
 //     ],
 //     members: [
@@ -212,7 +218,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['l101', 'l102'],
+//             labels: ['Research', 'Planning'],
 //             dueDate: 1690303727,
 //             checklists: [
 //               {

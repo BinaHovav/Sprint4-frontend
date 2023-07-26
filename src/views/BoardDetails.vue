@@ -59,10 +59,9 @@ export default {
         showErrorMsg('Cannot remove group')
       }
     },
-    async addGroup() {
-      const groupTitle = prompt('title?')
+    async addGroup(title) {
       const newGroup = boardService.getEmptyGroup()
-      newGroup.title = groupTitle
+      newGroup.title = title
       this.board.groups.push(newGroup)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
