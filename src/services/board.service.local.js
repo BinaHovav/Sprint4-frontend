@@ -98,21 +98,6 @@ function getEmptyTask() {
     comments: [],
   }
 }
-function getEmptyTask() {
-  return {
-    id: utilService.makeId(4),
-    title: '',
-    description: '',
-    members: [],
-    labels: [],
-    dueDate: null,
-    checklists: [],
-    attachment: null,
-    activity: [],
-    cover: '',
-    comments: [],
-  }
-}
 
 // Initial data
 // ;(async () => {
