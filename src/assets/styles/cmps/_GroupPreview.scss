@@ -1,0 +1,15 @@
+.group-preview-container {
+    
+    display: inline-block;
+    height: 100%;
+    margin: 0 4px;
+    scroll-margin: 8px;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 272px;
+    
+
+    &:first-child {
+        margin-left: 12px;
+    }
+}

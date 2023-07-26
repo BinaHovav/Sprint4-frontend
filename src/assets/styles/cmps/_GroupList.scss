@@ -1,0 +1,19 @@
+.group-list-container {
+    flex-grow: 1;
+    margin-top: 12px;
+    position: relative;
+
+    margin-bottom: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 8px;
+
+
+    scrollbar-color: #fff6 #00000026;
+    scrollbar-width: auto;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
+}
