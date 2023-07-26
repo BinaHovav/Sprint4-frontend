@@ -101,6 +101,7 @@ function getEmptyTask() {
 }
 
 // Initial data
+
 // ;(async () => {
 //   await storageService.post(STORAGE_KEY, {
 //     _id: 'b101',
@@ -119,62 +120,52 @@ function getEmptyTask() {
 //       {
 //         id: 'l101',
 //         title: 'Low priority',
-//         color: '#164b35',
-//         backgroundColor: 'green',
+//         color: 'green',
 //       },
 //       {
 //         id: 'l102',
-//         title: 'Planning',
-//         color: '#faa53d',
-//         backgroundColor: 'orange',
+//         title: 'Planing',
+//         color: 'orange',
 //       },
 //       {
 //         id: 'l103',
 //         title: 'Techonology',
-//         color: '#faa53d',
-//         backgroundColor: 'light-green',
+//         color: 'light-green',
 //       },
 //       {
 //         id: 'l104',
 //         title: 'Research',
-//         color: '#faa53d',
-//         backgroundColor: 'yellow',
+//         color: 'yellow',
 //       },
 //       {
 //         id: 'l105',
 //         title: 'Design',
-//         color: '#faa53d',
-//         backgroundColor: 'pink',
+//         color: 'pink',
 //       },
 //       {
 //         id: 'l106',
 //         title: 'Medium priority',
-//         color: '#faa53d',
-//         backgroundColor: 'beige',
+//         color: 'beige',
 //       },
 //       {
 //         id: 'l107',
 //         title: 'Analysis',
-//         color: '#faa53d',
-//         backgroundColor: 'blue',
+//         color: 'blue',
 //       },
 //       {
 //         id: 'l108',
 //         title: 'Finance',
-//         color: '#faa53d',
-//         backgroundColor: 'sky',
+//         color: 'sky',
 //       },
 //       {
 //         id: 'l109',
 //         title: 'Enhancement',
-//         color: '#faa53d',
-//         backgroundColor: 'purple',
+//         color: 'purple',
 //       },
 //       {
 //         id: 'l110',
 //         title: 'High priority',
-//         color: '#faa53d',
-//         backgroundColor: 'red',
+//         color: 'red',
 //       },
 //     ],
 //     members: [
@@ -221,7 +212,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Research', 'Planning'],
+//             labels: ['l101', 'l102'],
 //             dueDate: 1690303727,
 //             checklists: [
 //               {

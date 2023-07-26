@@ -21,11 +21,16 @@
 
 export default {
     name: 'TaskPreview',
-    props: ['task'],
+    props: ['task', 'groupId'],
     data() {
         return {}
     },
-    computed: {},
+    computed: {
+        onTaskDetails(){
+            const boardId = this.$route.params.boardId
+            this.$route.push(`/board/${boardId}/group/${groupId}/task/${task.id}`)
+        }
+    },
     created() { },
     methods: {},
     components: {

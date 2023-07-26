@@ -7,7 +7,7 @@
                 <button class="btn-three-dots" @click="$emit('removeGroup', group.id)"><span class="three-dots"></span></button>
             
         </div>
-        <TaskList :tasks="group.tasks" />
+        <TaskList :tasks="group.tasks" :groupId="group.id" />
     </div>
 </template>
   
