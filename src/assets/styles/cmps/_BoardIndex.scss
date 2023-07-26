@@ -3,11 +3,10 @@
     display: flex;
     gap: 20px;
     li {
-        display: flex;
+        position: relative;
         background-image: url("https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690367544/photo-1687791301950-972428a58aa4_h9urah.avif");
         background-repeat: no-repeat;
         background-size: cover;
-        opacity: 1;
         padding: 8px;
         height: 95px;
         width: 170px;
@@ -23,7 +22,17 @@
         overflow-wrap: break-word;
 
         button {
-            height: 30px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: transparent;
+            opacity: 0;
+            .btn-star-board {
+                @include trello-icon($icon-star, $type: sm, $color: white);
+            }
+            &:hover {
+                opacity: 1;
+            }
         }
 
         &.new-board {

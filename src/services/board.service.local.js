@@ -80,9 +80,10 @@ function getEmptyGroup() {
     id: utilService.makeId(4),
     title: '',
     archivedAt: null,
-    tasks: []
+    tasks: [],
   }
 }
+
 function getEmptyTask() {
   return {
     id: utilService.makeId(4),
