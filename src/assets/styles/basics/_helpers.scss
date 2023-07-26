@@ -67,9 +67,10 @@
 // .dark-green {
 //     @include label-tag-color($clr-label-dark-green);
 // }
-// .yellow {
-//     @include label-tag-color($clr-label-yellow);
-// }
+.yellow {
+    background-color: $clr-background-accent-yellow-subtle;
+    color: $clr-text-accent-yellow-bolder;
+}
 // .light-yellow {
 //     @include label-tag-color($clr-label-light-yellow);
 // }
