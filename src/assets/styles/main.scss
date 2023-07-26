@@ -13,11 +13,11 @@
 
 // Components
 @import "cmps/AppHeader";
+@import "cmps/_BoardIndex";
 @import "cmps/UserMsg";
-@import "cmps/ReviewList";
-@import "cmps/BoardDetails";
-@import "cmps/GroupList";
-@import "cmps/GroupPreview";
-@import "cmps/TaskList";
-
-
+@import "cmps/_ReviewList";
+@import "cmps/_BoardDetails";
+@import "cmps/_GroupList";
+@import "cmps/_GroupPreview";
+@import "cmps/_TaskList";
+@import "cmps/_TaskDetails";

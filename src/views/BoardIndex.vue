@@ -1,18 +1,14 @@
 <template>
   <div class="container board-index">
-    <ul class="board-list">
-      <li v-for="board in boards" :key="board._id">
-        <p>
-          {{ board.title }}
-        </p>
-        <button @click="loadBoard(board)">Board</button>
-      </li>
-    </ul>
-    <form @submit.prevent="addBoard()">
+    <section class="board-list" v-for="board in boards" :key="board._id">
+      <button @click="loadBoard(board)">{{ board.title }}</button>
+      <button class="new-board" @click="loadEmptyBoard(board)">Create new board</button>
+    </section>
+    <!-- <form @submit.prevent="addBoard()">
       <h2>Add board</h2>
       <input type="text" v-model="boardToAdd.title" />
       <button>Save</button>
-    </form>
+    </form> -->
   </div>
 </template>
 
@@ -35,7 +31,7 @@ export default {
     this.$store.dispatch({ type: 'loadBoards' })
   },
   methods: {
-    async addBoard() {
+    async loadEmptyBoard() {
       try {
         await this.$store.dispatch({ type: 'addBoard', board: this.boardToAdd })
         showSuccessMsg('Board added')
