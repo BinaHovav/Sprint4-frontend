@@ -1,5 +1,5 @@
 .group-preview-container {
-    
+
     display: inline-block;
     height: 100%;
     margin: 0 4px;
@@ -7,9 +7,13 @@
     vertical-align: top;
     white-space: nowrap;
     width: 272px;
-    
 
-    &:first-child {
-        margin-left: 12px;
+
+    .group-header {
+        padding-right: 36px;
+        flex: 0 0 auto;
+        min-height: 20px;
+        padding: 14px 8px;
+        position: relative;
     }
 }

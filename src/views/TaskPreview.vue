@@ -1,7 +1,8 @@
 <template>
     <section class="task-preview-container">
-        <h1>TaskPreview</h1>
-
+        <h1>{{ task.title }}</h1>
+        
+        
     </section>
 </template>
   
@@ -9,6 +10,7 @@
 
 export default {
     name: 'TaskPreview',
+    props: ['task'],
     data() {
         return {}
     },
