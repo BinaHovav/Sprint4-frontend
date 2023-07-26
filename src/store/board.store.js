@@ -37,13 +37,17 @@ export function getActionAddBoardMsg(boardId) {
 export const boardStore = {
   state: {
     boards: [],
-    currLabels: []
+    currLabels: [],
+    currBoardId: null
   },
   getters: {
     boards({ boards }) {
       return boards
     },
-    currLabels({ currLabels }) { return currLabels }
+    currLabels({ currLabels }) { return currLabels },
+    getCurrBoard({ boards, currBoardId }) {
+      return boards.find(board => board.id === currBoardId)
+    }
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -67,13 +71,16 @@ export const boardStore = {
       if (!board.msgs) board.msgs = []
       board.msgs.push(msg)
     },
+    setCurrBoardId(state, { boardId }) {
+      state.currBoardId = boardId
+    }
   },
   actions: {
     async addBoard(context, { board }) {
       try {
-        board = await boardService.save(board)
-        context.commit(getActionAddBoard(board))
-        return board
+        const savedBoard = await boardService.save(board)
+        context.commit(getActionAddBoard(savedBoard))
+        return savedBoard
       } catch (err) {
         console.log('boardStore: Error in addBoard', err)
         throw err
@@ -81,9 +88,9 @@ export const boardStore = {
     },
     async updateBoard(context, { board }) {
       try {
-        board = await boardService.save(board)
-        context.commit(getActionUpdateBoard(board))
-        return board
+        const savedBoard = await boardService.save(board)
+        context.commit(getActionUpdateBoard(savedBoard))
+        return savedBoard
       } catch (err) {
         console.log('boardStore: Error in updateBoard', err)
         throw err

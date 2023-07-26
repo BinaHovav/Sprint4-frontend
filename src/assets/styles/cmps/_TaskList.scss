@@ -1,16 +1,18 @@
 .task-list-container {
-    background-color: $clr-tr-background-list;
-    color: $clr-text-subtle;
-    border-radius: 12px;
-    box-shadow: $clr-shadow-raised;
-    box-sizing: border-box;
     display: flex;
-    margin-left: 12px;
     flex-direction: column;
-    max-height: 100%;
-    position: relative;
-    white-space: normal;
-    width: 100%;
-    overflow-y: scroll;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    gap: 7px;
+
+    min-height: 0;
+    
+    margin: 0 4px;
+    padding: 1px 4px 0;
+    
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    // overflow-y: scroll;
     // max-height: calc($board-hight-$board-header-hight);
 }

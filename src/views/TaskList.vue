@@ -1,6 +1,6 @@
 <template>
     <div class="task-list-container">
-        <TaskPreview v-for="task in tasks" :key="task._id" :task="task" @removed="$emit('removed', task._id)" />
+        <TaskPreview v-for="task in tasks" :key="task._id" :groupId="groupId" :task="task"  @removed="$emit('removed', task._id)" />
 
         <button @click="addTask">Add Task</button>
     </div>
@@ -10,7 +10,7 @@
 import TaskPreview from './TaskPreview.vue'
 export default {
     name: 'TaskList',
-    props: ['tasks'],
+    props: ['tasks', 'groupId'],
     data() {
         return {}
     },

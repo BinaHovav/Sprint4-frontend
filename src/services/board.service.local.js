@@ -101,262 +101,262 @@ function getEmptyTask() {
 }
 
 // Initial data
-;(async () => {
-  await storageService.post(STORAGE_KEY, {
-    _id: 'b101',
-    title: 'Gas station robotics',
-    isStarred: false,
-    archivedAt: null,
-    createdBy: {
-      _id: 'u101',
-      fullname: 'Meitar Mor',
-      imgUrl: '',
-    },
-    style: {
-      backgroundImage: '',
-    },
-    labels: [
-      {
-        id: 'l101',
-        title: 'Low priority',
-        color: '#164b35',
-        backgroundColor: 'green',
-      },
-      {
-        id: 'l102',
-        title: 'Planning',
-        color: '#faa53d',
-        backgroundColor: 'orange',
-      },
-      {
-        id: 'l103',
-        title: 'Techonology',
-        color: '#faa53d',
-        backgroundColor: 'light-green',
-      },
-      {
-        id: 'l104',
-        title: 'Research',
-        color: '#faa53d',
-        backgroundColor: 'yellow',
-      },
-      {
-        id: 'l105',
-        title: 'Design',
-        color: '#faa53d',
-        backgroundColor: 'pink',
-      },
-      {
-        id: 'l106',
-        title: 'Medium priority',
-        color: '#faa53d',
-        backgroundColor: 'beige',
-      },
-      {
-        id: 'l107',
-        title: 'Analysis',
-        color: '#faa53d',
-        backgroundColor: 'blue',
-      },
-      {
-        id: 'l108',
-        title: 'Finance',
-        color: '#faa53d',
-        backgroundColor: 'sky',
-      },
-      {
-        id: 'l109',
-        title: 'Enhancement',
-        color: '#faa53d',
-        backgroundColor: 'purple',
-      },
-      {
-        id: 'l110',
-        title: 'High priority',
-        color: '#faa53d',
-        backgroundColor: 'red',
-      },
-    ],
-    members: [
-      {
-        _id: 'u101',
-        fullname: 'Meitar Mor',
-        imgUrl: '',
-      },
-      {
-        _id: 'u102',
-        fullname: 'Tomer Appelman',
-        imgUrl: '',
-      },
-      {
-        _id: 'u103',
-        fullname: 'Bina Hovav',
-        imgUrl: '',
-      },
-    ],
-    groups: [
-      {
-        id: 'g101',
-        title: 'Research and Planning',
-        archivedAt: null,
-        tasks: [
-          {
-            id: 'c101',
-            title: 'Market Research',
-            description: 'Conduct an in-depth market analysis to identify potential opportunities, target markets, and competitor solutions in the gas station automation industry.',
-            members: [
-              {
-                _id: 'u101',
-                fullname: 'Meitar Mor',
-                imgUrl: '',
-              },
-              {
-                _id: 'u102',
-                fullname: 'Tomer Appelman',
-                imgUrl: '',
-              },
-              {
-                _id: 'u103',
-                fullname: 'Bina Hovav',
-                imgUrl: '',
-              },
-            ],
-            labels: ['Research', 'Planning'],
-            dueDate: 1690303727,
-            checklists: [
-              {
-                title: 'Todo',
-                todos: [
-                  { id: 't101', txt: 'Gather data on existing gas station automation solutions', isDone: true },
-                  { id: 't102', txt: 'Identify key competitors and their offerings.', isDone: false },
-                  { id: 't103', txt: 'Analyze market trends and customer preferences.', isDone: false },
-                  { id: 't104', txt: 'Compile a comprehensive report on the market analysis findings.', isDone: false },
-                ],
-              },
-            ],
-            attachment: null,
-            activity: [],
-            cover: 'green',
-            comments: [],
-          },
-          {
-            id: 'c102',
-            title: 'Technology Evaluation',
-            description: 'Evaluate existing robotic technologies, sensors, and AI algorithms suitable for automating gas station tasks.',
-            members: [
-              {
-                _id: 'u102',
-                fullname: 'Tomer Appelman',
-                imgUrl: '',
-              },
-              {
-                _id: 'u103',
-                fullname: 'Bina Hovav',
-                imgUrl: '',
-              },
-            ],
-            labels: ['Medium priority', 'Analysis', 'Technology'],
-            dueDate: null,
-            checklists: [
-              {
-                title: 'Research and review existing robotic technologies',
-                todos: [
-                  { id: 't101', txt: 'Identify and compile a list of robotic technologies currently used in various industries.', isDone: true },
-                  { id: 't102', txt: 'Evaluate the capabilities and limitations of each robotic technology in terms of mobility, dexterity, and adaptability.', isDone: true },
-                  {
-                    id: 't104',
-                    txt: 'Assess the potential applicability of these technologies to gas station tasks, considering factors such as safety, efficiency, and cost-effectiveness.',
-                    isDone: false,
-                  },
-                ],
-              },
-              {
-                title: 'Sensor assessment and selection',
-                todos: [
-                  { id: 't101', txt: 'Investigate available sensor technologies, including cameras, LiDAR, ultrasonic sensors, and RFID systems.', isDone: false },
-                  { id: 't102', txt: 'Compare the specifications, accuracy, and range of each sensor type to determine their suitability for gas station automation.', isDone: false },
-                  { id: 't104', txt: 'Prioritize sensors that can provide real-time data for navigation, object detection, and human interaction.', isDone: false },
-                ],
-              },
-            ],
-            attachment: null,
-            activity: [],
-            cover: '',
-            comments: [],
-          },
-          {
-            id: 'c103',
-            title: 'Regulatory Compliance Research',
-            description: 'Research and understand the legal and safety regulations related to deploying robots in gas station environments.',
-            members: [
-              {
-                _id: 'u103',
-                fullname: 'Bina Hovav',
-                imgUrl: '',
-              },
-            ],
-            labels: ['Medium priority', 'Analysis', 'Technology'],
-            dueDate: 1691661600,
-            checklists: [],
-            attachment: null,
-            activity: [],
-            cover: 'orange',
-            comments: [],
-          },
-          {
-            id: 'c104',
-            title: 'Cost-Benefit Analysis',
-            description: 'Perform a cost-benefit analysis to assess the financial viability and potential return on investment (ROI) of the robot deployment.',
-            members: [
-              {
-                _id: 'u102',
-                fullname: 'Tomer Appelman',
-                imgUrl: '',
-              },
-              {
-                _id: 'u103',
-                fullname: 'Bina Hovav',
-                imgUrl: '',
-              },
-            ],
-            labels: ['Medium priority', 'Analysis', 'Planning'],
-            dueDate: 1691834400,
-            checklists: [],
-            attachment: null,
-            activity: [],
-            cover: '',
-          },
-          {
-            id: 'c105',
-            title: 'Project Timeline',
-            description: 'Create a detailed project timeline with key milestones and deadlines for the entire development process.',
-            members: [
-              {
-                _id: 'u101',
-                fullname: 'Meitar Mor',
-                imgUrl: '',
-              },
-              {
-                _id: 'u102',
-                fullname: 'Tomer Appelman',
-                imgUrl: '',
-              },
-              {
-                _id: 'u103',
-                fullname: 'Bina Hovav',
-                imgUrl: '',
-              },
-            ],
-            labels: ['High priority', 'Planning'],
-            dueDate: 1690884000,
-            checklists: [],
-            attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif',
-            activity: [],
-            cover: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif',
-            comments: [],
-          },
-        ],
-      },
+// ;(async () => {
+//   await storageService.post(STORAGE_KEY, {
+//     _id: 'b101',
+//     title: 'Gas station robotics',
+//     isStarred: false,
+//     archivedAt: null,
+//     createdBy: {
+//       _id: 'u101',
+//       fullname: 'Meitar Mor',
+//       imgUrl: '',
+//     },
+//     style: {
+//       backgroundImage: '',
+//     },
+//     labels: [
+//       {
+//         id: 'l101',
+//         title: 'Low priority',
+//         color: '#164b35',
+//         backgroundColor: 'green',
+//       },
+//       {
+//         id: 'l102',
+//         title: 'Planning',
+//         color: '#faa53d',
+//         backgroundColor: 'orange',
+//       },
+//       {
+//         id: 'l103',
+//         title: 'Techonology',
+//         color: '#faa53d',
+//         backgroundColor: 'light-green',
+//       },
+//       {
+//         id: 'l104',
+//         title: 'Research',
+//         color: '#faa53d',
+//         backgroundColor: 'yellow',
+//       },
+//       {
+//         id: 'l105',
+//         title: 'Design',
+//         color: '#faa53d',
+//         backgroundColor: 'pink',
+//       },
+//       {
+//         id: 'l106',
+//         title: 'Medium priority',
+//         color: '#faa53d',
+//         backgroundColor: 'beige',
+//       },
+//       {
+//         id: 'l107',
+//         title: 'Analysis',
+//         color: '#faa53d',
+//         backgroundColor: 'blue',
+//       },
+//       {
+//         id: 'l108',
+//         title: 'Finance',
+//         color: '#faa53d',
+//         backgroundColor: 'sky',
+//       },
+//       {
+//         id: 'l109',
+//         title: 'Enhancement',
+//         color: '#faa53d',
+//         backgroundColor: 'purple',
+//       },
+//       {
+//         id: 'l110',
+//         title: 'High priority',
+//         color: '#faa53d',
+//         backgroundColor: 'red',
+//       },
+//     ],
+//     members: [
+//       {
+//         _id: 'u101',
+//         fullname: 'Meitar Mor',
+//         imgUrl: '',
+//       },
+//       {
+//         _id: 'u102',
+//         fullname: 'Tomer Appelman',
+//         imgUrl: '',
+//       },
+//       {
+//         _id: 'u103',
+//         fullname: 'Bina Hovav',
+//         imgUrl: '',
+//       },
+//     ],
+//     groups: [
+//       {
+//         id: 'g101',
+//         title: 'Research and Planning',
+//         archivedAt: null,
+//         tasks: [
+//           {
+//             id: 'c101',
+//             title: 'Market Research',
+//             description: 'Conduct an in-depth market analysis to identify potential opportunities, target markets, and competitor solutions in the gas station automation industry.',
+//             members: [
+//               {
+//                 _id: 'u101',
+//                 fullname: 'Meitar Mor',
+//                 imgUrl: '',
+//               },
+//               {
+//                 _id: 'u102',
+//                 fullname: 'Tomer Appelman',
+//                 imgUrl: '',
+//               },
+//               {
+//                 _id: 'u103',
+//                 fullname: 'Bina Hovav',
+//                 imgUrl: '',
+//               },
+//             ],
+//             labels: ['Research', 'Planning'],
+//             dueDate: 1690303727,
+//             checklists: [
+//               {
+//                 title: 'Todo',
+//                 todos: [
+//                   { id: 't101', txt: 'Gather data on existing gas station automation solutions', isDone: true },
+//                   { id: 't102', txt: 'Identify key competitors and their offerings.', isDone: false },
+//                   { id: 't103', txt: 'Analyze market trends and customer preferences.', isDone: false },
+//                   { id: 't104', txt: 'Compile a comprehensive report on the market analysis findings.', isDone: false },
+//                 ],
+//               },
+//             ],
+//             attachment: null,
+//             activity: [],
+//             cover: 'green',
+//             comments: [],
+//           },
+//           {
+//             id: 'c102',
+//             title: 'Technology Evaluation',
+//             description: 'Evaluate existing robotic technologies, sensors, and AI algorithms suitable for automating gas station tasks.',
+//             members: [
+//               {
+//                 _id: 'u102',
+//                 fullname: 'Tomer Appelman',
+//                 imgUrl: '',
+//               },
+//               {
+//                 _id: 'u103',
+//                 fullname: 'Bina Hovav',
+//                 imgUrl: '',
+//               },
+//             ],
+//             labels: ['Medium priority', 'Analysis', 'Technology'],
+//             dueDate: null,
+//             checklists: [
+//               {
+//                 title: 'Research and review existing robotic technologies',
+//                 todos: [
+//                   { id: 't101', txt: 'Identify and compile a list of robotic technologies currently used in various industries.', isDone: true },
+//                   { id: 't102', txt: 'Evaluate the capabilities and limitations of each robotic technology in terms of mobility, dexterity, and adaptability.', isDone: true },
+//                   {
+//                     id: 't104',
+//                     txt: 'Assess the potential applicability of these technologies to gas station tasks, considering factors such as safety, efficiency, and cost-effectiveness.',
+//                     isDone: false,
+//                   },
+//                 ],
+//               },
+//               {
+//                 title: 'Sensor assessment and selection',
+//                 todos: [
+//                   { id: 't101', txt: 'Investigate available sensor technologies, including cameras, LiDAR, ultrasonic sensors, and RFID systems.', isDone: false },
+//                   { id: 't102', txt: 'Compare the specifications, accuracy, and range of each sensor type to determine their suitability for gas station automation.', isDone: false },
+//                   { id: 't104', txt: 'Prioritize sensors that can provide real-time data for navigation, object detection, and human interaction.', isDone: false },
+//                 ],
+//               },
+//             ],
+//             attachment: null,
+//             activity: [],
+//             cover: '',
+//             comments: [],
+//           },
+//           {
+//             id: 'c103',
+//             title: 'Regulatory Compliance Research',
+//             description: 'Research and understand the legal and safety regulations related to deploying robots in gas station environments.',
+//             members: [
+//               {
+//                 _id: 'u103',
+//                 fullname: 'Bina Hovav',
+//                 imgUrl: '',
+//               },
+//             ],
+//             labels: ['Medium priority', 'Analysis', 'Technology'],
+//             dueDate: 1691661600,
+//             checklists: [],
+//             attachment: null,
+//             activity: [],
+//             cover: 'orange',
+//             comments: [],
+//           },
+//           {
+//             id: 'c104',
+//             title: 'Cost-Benefit Analysis',
+//             description: 'Perform a cost-benefit analysis to assess the financial viability and potential return on investment (ROI) of the robot deployment.',
+//             members: [
+//               {
+//                 _id: 'u102',
+//                 fullname: 'Tomer Appelman',
+//                 imgUrl: '',
+//               },
+//               {
+//                 _id: 'u103',
+//                 fullname: 'Bina Hovav',
+//                 imgUrl: '',
+//               },
+//             ],
+//             labels: ['Medium priority', 'Analysis', 'Planning'],
+//             dueDate: 1691834400,
+//             checklists: [],
+//             attachment: null,
+//             activity: [],
+//             cover: '',
+//           },
+//           {
+//             id: 'c105',
+//             title: 'Project Timeline',
+//             description: 'Create a detailed project timeline with key milestones and deadlines for the entire development process.',
+//             members: [
+//               {
+//                 _id: 'u101',
+//                 fullname: 'Meitar Mor',
+//                 imgUrl: '',
+//               },
+//               {
+//                 _id: 'u102',
+//                 fullname: 'Tomer Appelman',
+//                 imgUrl: '',
+//               },
+//               {
+//                 _id: 'u103',
+//                 fullname: 'Bina Hovav',
+//                 imgUrl: '',
+//               },
+//             ],
+//             labels: ['High priority', 'Planning'],
+//             dueDate: 1690884000,
+//             checklists: [],
+//             attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif',
+//             activity: [],
+//             cover: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif',
+//             comments: [],
+//           },
+//         ],
+//       },
 
       {
         id: 'g102',

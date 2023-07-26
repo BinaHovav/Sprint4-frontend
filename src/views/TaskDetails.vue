@@ -1,6 +1,6 @@
 <template>
-  <section class="backdrop" v-if="task">
-    <section class="task-details">
+  <section class="backdrop">
+    <section v-if="task" class="task-details">
       <a class="btn-icon-close" @click="onSaveTask"></a>
       <div class="task-cover" :class="task.cover">
         <div class="task-cover-menu">
@@ -11,7 +11,10 @@
         </div>
       </div>
       <div class="task-header">
-        <input type="text" v-model="task.title">
+        <span class="btn-title-icon"></span>
+        <div class="task-header-title">
+          <textarea type="text" v-model="task.title"></textarea>
+        </div>
       </div>
       <div class="task-main">
         <div class="task-details-data flex">
@@ -22,7 +25,7 @@
           </div>
           <div class="task-details-labels">Labels:
             <template class="flex">
-              <div v-for="label in task.labels" :class="label.color">{{ label.title }} |</div>
+              <div v-for="labelId in task.labels" :class="getLabelColor(labelId)">{{ getLabelTitle(labelId) }} |</div>
             </template>
           </div>
           <div class="task-details-notifications">Notification:
@@ -37,16 +40,29 @@
           </div>
         </div>
         <div class="task-description flex column">
-            Description
-            <textarea v-model="task.description"></textarea>
+          <button @click="test">test</button>
+          Description
+          <textarea v-model="task.description"></textarea>
         </div>
       </div>
       <div class="task-sidebar">
         <div class="task-sidebar-add">
-          Add to card
+          <h3 class="sidebar-add-txt">Add to card</h3>
           <a class="task-btn-link ">
             <span class="btn-link-members"></span>
             <span class="">Members</span>
+          </a>
+          <a class="task-btn-link ">
+            <span class="btn-link-labels"></span>
+            <span class="">Labels</span>
+          </a>
+          <a class="task-btn-link ">
+            <span class="btn-link-checklist"></span>
+            <span class="">Checklist</span>
+          </a>
+          <a class="task-btn-link ">
+            <span class="btn-link-dates"></span>
+            <span class="">Dates</span>
           </a>
         </div>
       </div>
@@ -55,68 +71,50 @@
 </template>
 
 <script>
+import { boardService } from '../services/board.service.local'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 export default {
+  // props: { board: { type: Object, required: true } },
   name: 'TaskDetails',
   data() {
     return {
-      task: {}
+      task: '',
+      currGroup: {},
+      currBoard: null
     }
   },
-  computed: {},
+  computed: {
+  },
   created() {
-    const boardId = this.$route.params.id
-    const taskId = this.$route.params.taskId
-    console.log('this.task', this.task)
-    this.task = {
-      id: 'c101',
-      title: 'Market Research',
-      description: 'Conduct an in-depth market analysis to identify potential opportunities, target markets, and competitor solutions in the gas station automation industry.',
-      members: [
-        {
-          _id: 'u101',
-          fullname: 'Meitar Mor',
-          imgUrl: '',
-        },
-        {
-          _id: 'u102',
-          fullname: 'Tomer Appelman',
-          imgUrl: '',
-        },
-        {
-          _id: 'u103',
-          fullname: 'Bina Hovav',
-          imgUrl: '',
-        },
-      ],
-      labels: [
-        {
-          title: 'Research',
-          color: 'yellow'
-        }, {
-          title: 'Planning',
-          color: 'orange'
-        }],
-      dueDate: 1690303727,
-      checklists: [
-        {
-          title: 'Todo',
-          todos: [
-            { id: 't101', txt: 'Gather data on existing gas station automation solutions', isDone: true },
-            { id: 't102', txt: 'Identify key competitors and their offerings.', isDone: false },
-            { id: 't103', txt: 'Analyze market trends and customer preferences.', isDone: false },
-            { id: 't104', txt: 'Compile a comprehensive report on the market analysis findings.', isDone: false },
-          ],
-        },
-      ],
-      attachment: null,
-      activity: [],
-      cover: 'orange',
-    }
+    this.setCurrTask()
   },
   methods: {
-    onSaveTask(){
-      console.log('task:  ',this.task);
-    }
+    async setCurrTask() {
+      try {
+        const boardId = this.$route.params.id
+        const board = await boardService.getById(boardId)
+        const taskId = this.$route.params.taskId
+        const groupId = this.$route.params.groupId
+        if (board) {
+          this.currBoard = JSON.parse(JSON.stringify(board))
+          this.currGroup = this.currBoard.groups.find(group => group.id === groupId)
+          this.task = this.currGroup.tasks.find(task => task.id === taskId)
+        }
+      } catch (err) {
+        showErrorMsg('Cannot load board')
+      }
+    },
+    getLabelById(labelId) {
+      return this.currBoard.labels.find(label => label.id === labelId)
+    },
+    getLabelTitle(labelId) {
+      const label = this.getLabelById(labelId)
+      return label.title
+    },
+    getLabelColor(labelId) {
+      const label = this.getLabelById(labelId)
+      return label.color
+    },
   },
 }
 </script>

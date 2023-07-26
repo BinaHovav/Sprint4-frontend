@@ -2,21 +2,27 @@
 .fs12 {
     font-size: rem(12px);
 }
+
 .fs14 {
     font-size: rem(14px);
 }
+
 .fs18 {
     font-size: rem(18px);
 }
+
 .fs20 {
     font-size: rem(20px);
 }
+
 .fs24 {
     font-size: rem(24px);
 }
+
 .fs28 {
     font-size: rem(28px);
 }
+
 .fs30 {
     font-size: rem(30px);
 }
@@ -24,23 +30,28 @@
 .text-center {
     text-align: center;
 }
+
 // flex helpers
 
 .flex {
     display: flex;
 
-    > *.full {
+    >*.full {
         flex: 1;
     }
+
     &.column {
         flex-direction: column;
     }
+
     &.justify-center {
         justify-content: center;
     }
+
     &.justify-space-between {
         justify-content: space-between;
     }
+
     &.align-center {
         align-items: center;
     }
@@ -51,102 +62,147 @@
 .square-ratio {
     @include aspect-ratio(1, 1);
 }
+
 .video-ratio {
     @include aspect-ratio(16, 9);
 }
+
 .portrait-ratio {
     @include aspect-ratio(9, 16);
 }
 
-// .green {
-//     @include label-tag-color($clr-label-green);
-// }
-// .light-green {
-//     @include label-tag-color($clr-label-light-green);
-// }
-// .dark-green {
-//     @include label-tag-color($clr-label-dark-green);
-// }
+.green {
+    background-color: $clr-background-accent-green-subtle;
+    color: $clr-text-accent-green-bolder;
+}
+
+.light-green {
+    background-color: $clr-background-accent-green-subtle;
+    color: $clr-text-accent-green;
+}
+
+.dark-green {
+    background-color: $clr-background-accent-green-bolder;
+    color: $clr-text-accent-green-bolder;
+}
+
 .yellow {
     background-color: $clr-background-accent-yellow-subtle;
+    color: $clr-text-accent-yellow;
+}
+
+.light-yellow {
+    background-color: $clr-background-accent-yellow-subtler;
     color: $clr-text-accent-yellow-bolder;
 }
-// .light-yellow {
-//     @include label-tag-color($clr-label-light-yellow);
-// }
-// .dark-yellow {
-//     @include label-tag-color($clr-label-dark-yellow);
-// }
+
+.dark-yellow {
+    background-color: $clr-background-accent-yellow-bolder;
+    color: $clr-text-accent-yellow-bolder;
+}
+
 .orange {
     background-color: $clr-background-accent-orange-subtle;
+    color: $clr-text-accent-orange;
+}
+
+.light-orange {
+    background-color: $clr-background-accent-orange-subtler;
     color: $clr-text-accent-orange-bolder;
 }
-// .light-orange {
-//     @include label-tag-color($clr-label-light-orange);
-// }
-// .dark-orange {
-//     @include label-tag-color($clr-label-dark-orange);
-// }
-// .red {
-//     @include label-tag-color($clr-label-red);
-// }
-// .light-red {
-//     @include label-tag-color($clr-label-light-red);
-// }
-// .dark-red {
-//     @include label-tag-color($clr-label-dark-red);
-// }
-// .purple {
-//     @include label-tag-color($clr-label-purple);
-// }
-// .light-purple {
-//     @include label-tag-color($clr-label-light-purple);
-// }
-// .dark-purple {
-//     @include label-tag-color($clr-label-dark-purple);
-// }
-// .blue {
-//     @include label-tag-color($clr-label-blue);
-// }
-// .light-blue {
-//     @include label-tag-color($clr-label-light-blue);
-// }
-// .dark-blue {
-//     @include label-tag-color($clr-label-dark-blue);
-// }
-// .sky {
-//     @include label-tag-color($clr-label-sky);
-// }
-// .light-sky {
-//     @include label-tag-color($clr-label-light-sky);
-// }
-// .dark-sky {
-//     @include label-tag-color($clr-label-dark-sky);
-// }
-// .lime {
-//     @include label-tag-color($clr-label-lime);
-// }
-// .light-lime {
-//     @include label-tag-color($clr-label-light-lime);
-// }
-// .dark-lime {
-//     @include label-tag-color($clr-label-dark-lime);
-// }
-// .pink {
-//     @include label-tag-color($clr-label-pink);
-// }
-// .light-pink {
-//     @include label-tag-color($clr-label-light-pink);
-// }
-// .dark-pink {
-//     @include label-tag-color($clr-label-dark-pink);
-// }
+
+.dark-orange {
+    background-color: $clr-background-accent-orange-bolder;
+    color: $clr-text-accent-orange-bolder;
+}
+
+.red {
+    background-color: $clr-background-accent-red-subtle;
+    color: $clr-text-accent-red;
+}
+
+.light-red {
+    background-color: $clr-background-accent-red-subtler;
+    color: $clr-text-accent-red-bolder;
+}
+
+.dark-red {
+    background-color: $clr-background-accent-red-bolder;
+    color: $clr-text-accent-red-bolder;
+}
+
+.purple {
+    background-color: $clr-background-accent-purple-subtle;
+    color: $clr-text-accent-purple;
+}
+
+.light-purple {
+    background-color: $clr-background-accent-purple-subtler;
+    color: $clr-text-accent-purple-bolder;
+}
+
+.dark-purple {
+    background-color: $clr-background-accent-purple-bolder;
+    color: $clr-text-accent-purple-bolder;
+}
+
+.blue {
+    background-color: $clr-background-accent-blue-subtle;
+    color: $clr-text-accent-blue;
+}
+.light-blue {
+    background-color: $clr-background-accent-blue-subtler;
+    color: $clr-text-accent-blue-bolder;
+}
+.dark-blue {
+    background-color: $clr-background-accent-blue-bolder;
+    color: $clr-text-accent-blue-bolder;
+}
+.teal {
+    background-color: $clr-background-accent-teal-subtle;
+    color: $clr-text-accent-teal;
+}
+.light-teal {
+    background-color: $clr-background-accent-teal-subtler;
+    color: $clr-text-accent-teal-bolder;
+}
+.dark-teal {
+    background-color: $clr-background-accent-teal-bolder;
+    color: $clr-text-accent-teal-bolder;
+}
+.lime {
+    background-color: $clr-background-accent-lime-subtle;
+    color: $clr-text-accent-lime;
+}
+.light-lime {
+    background-color: $clr-background-accent-lime-subtler;
+    color: $clr-text-accent-lime-bolder;
+}
+.dark-lime {
+    background-color: $clr-background-accent-lime-bolder;
+    color: $clr-text-accent-lime-bolder;
+}
+.pink {
+    background-color: $clr-background-accent-magenta-subtle;
+    color: $clr-text-accent-magenta;
+}
+.light-pink {
+    background-color: $clr-background-accent-magenta-subtler;
+    color: $clr-text-accent-magenta-bolder;
+}
+.dark-pink {
+    background-color: $clr-background-accent-magenta-subtle;
+    color: $clr-text-accent-magenta;
+}
 // .black {
-//     @include label-tag-color($clr-label-black);
+//     background-color: $clr-background-accent-black-subtle;
+//     color: $clr-text-accent-black;
 // }
 // .light-black {
-//     @include label-tag-color($clr-label-light-black);
+//     background-color: $clr-background-accent-black-subtler;
+//     color: $clr-text-accent-black-bolder;
 // }
 // .dark-black {
-//     @include label-tag-color($clr-label-dark-black);
+//     background-color: $clr-background-accent-black-subtle;
+//     color: $clr-text-accent-black;
 // }

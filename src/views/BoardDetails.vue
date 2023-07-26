@@ -9,12 +9,12 @@
       <span>users</span>
       <span>menu</span>
     </nav>
-    <div>
+    <!-- <div> -->
       <GroupList :groups="board?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" />
-    </div>
+    <!-- </div> -->
     
   </section>
-  <RouterView />
+  <RouterView :board="board"/>
 </template>
 
 <script>
@@ -42,6 +42,7 @@ export default {
       try {
         const boardId = this.$route.params.id
         this.board = await boardService.getById(boardId)
+        this.$store.commit({ type: 'setCurrBoardId', boardId: this.board.id })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         showSuccessMsg('Board loaded')
       } catch (err) {
@@ -58,11 +59,10 @@ export default {
         showErrorMsg('Cannot remove group')
       }
     },
-    async addGroup() {
-      const groupTitle = prompt('title?')
+    async addGroup(title) {
       const newGroup = boardService.getEmptyGroup()
-      newGroup.title = groupTitle
-      this.board.groups.unshift(newGroup)
+      newGroup.title = title
+      this.board.groups.push(newGroup)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
         showSuccessMsg('Group added')
