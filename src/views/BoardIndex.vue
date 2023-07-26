@@ -8,7 +8,14 @@
         </button>
       </li>
     </ul>
-    <button class="new-board" @click="addBoard">Create new board</button>
+    <div class="new-board" @click="openModal">Create new board</div>
+    <div v-if="showModal" class="create-board-modal">
+      <div class="create-modal-content">
+        <button @click="closeModal" class="exit-btn">X</button>
+        <input v-model="newBoardTitle" type="text" placeholder="Board title" />
+        <button @click="addBoard" class="create-btn">Create</button>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -20,6 +27,8 @@ export default {
   data() {
     return {
       board: {},
+      showModal: false,
+      newBoardTitle: '',
     }
   },
   computed: {
@@ -40,9 +49,12 @@ export default {
         showErrorMsg('Cannot load board')
       }
     },
+    openModal() {
+      this.showModal = true
+    },
     async addBoard() {
       const newBoard = boardService.getEmptyBoard()
-      newBoard.title = prompt('board title please')
+      // newBoard.title = prompt('board title please')
       try {
         const addedBoard = await this.$store.dispatch(getActionAddBoard(newBoard))
         showSuccessMsg('Board added')
@@ -63,6 +75,10 @@ export default {
         console.log(err)
         showErrorMsg('Cannot update board')
       }
+    },
+    closeModal() {
+      this.showModal = false
+      this.newBoardTitle = ''
     },
   },
 }
