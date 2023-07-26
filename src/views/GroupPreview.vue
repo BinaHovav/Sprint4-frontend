@@ -4,7 +4,7 @@
             <h1 @click="updateGroup">{{ group.title }}</h1>
             <button @click="$emit('removeGroup', group.id)">remove</button>
         </div>
-        <TaskList :tasks="group.tasks" />
+        <TaskList :tasks="group.tasks" :groupId="group.id" />
     </div>
 </template>
   

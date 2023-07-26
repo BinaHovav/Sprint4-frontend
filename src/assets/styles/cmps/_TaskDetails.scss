@@ -95,8 +95,65 @@
             }
         }
     }
-    input {
-        border: 0;
+    .task-header {
+        display: block;
+        min-height: 32px;
+        padding: 12px 40px 8px 56px;
+        position: relative;
+        z-index: 1;
+        .btn-title-icon {
+            @include trello-icon($content: $icon-card, $type: lg, $color: #44546f);
+            left: 16px;
+            position: absolute;
+            top: 20px;
+            height: 32px;
+            line-height: 32px;
+            width: 32px;
+            font-size: 24px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: inline-block;
+            font-family: trellicons;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: bottom;
+        }
+        .task-header-title {
+            padding: 12px 0 0;
+            textarea {
+                overflow: hidden;
+                overflow-wrap: break-word;
+                height: 32.8px;
+                background: #0000;
+                border-radius: 3px;
+                box-shadow: none;
+                font-size: 20px;
+                font-weight: 600;
+                height: 32px;
+                line-height: 24px;
+                margin: -4px -8px;
+                min-height: 24px;
+                padding: 4px 8px;
+                resize: none;
+                width: 100%;
+                -webkit-appearance: none;
+                border: none;
+                box-sizing: border-box;
+                display: block;
+                // outline: none;
+                border: 0;
+                transition-duration: 85ms;
+                transition-property: background-color, border-color, box-shadow;
+                transition-timing-function: ease;
+                &:focus {
+                    background-color: $clr-background-input;
+                    box-shadow: inset 0 0 0 2px $clr-border-focused;
+                }
+            }
+        }
     }
     .task-main {
         float: left;
@@ -128,13 +185,27 @@
             clear: both;
             margin-bottom: 24px;
             position: relative;
+            .sidebar-add-txt {
+                display: block;
+                // margin-block-start: 1em;
+                // margin-block-end: 1em;
+                // margin-inline-start: 0px;
+                // margin-inline-end: 0px;
+                // margin-top: 0;
+                color: #44546f;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 20px;
+                margin-bottom: -4px;
+                margin: 0 0 8px;
+            }
             .task-btn-link {
-                background-color: $clr-background-neutral, #091e420f;
+                background-color: $clr-background-neutral;
                 border: none;
                 border-radius: 3px;
                 box-shadow: none;
                 box-sizing: border-box;
-                color: $clr-text, #172b4d;
+                color: $clr-text;
                 cursor: pointer;
                 display: block;
                 height: 32px;
@@ -155,6 +226,15 @@
                     background-color: $dynamic-button-hovered;
                 }
                 .btn-link-members {
+                    @include trello-icon($content: $icon-member, $type: sm, $color: currentColor);
+                }
+                .btn-link-labels {
+                    @include trello-icon($content: $icon-label, $type: sm, $color: currentColor);
+                }
+                .btn-link-checklist {
+                    @include trello-icon($content: $icon-checklist, $type: sm, $color: currentColor);
+                }
+                .btn-link-dates {
                     @include trello-icon($content: $icon-member, $type: sm, $color: currentColor);
                 }
             }

@@ -58,9 +58,10 @@
     @include aspect-ratio(9, 16);
 }
 
-// .green {
-//     @include label-tag-color($clr-label-green);
-// }
+.green {
+    background-color: $clr-background-accent-green-subtle;
+    color: $clr-text-accent-green-bolder;
+}
 // .light-green {
 //     @include label-tag-color($clr-label-light-green);
 // }

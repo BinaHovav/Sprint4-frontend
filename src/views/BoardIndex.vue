@@ -3,7 +3,7 @@
     <ul class="board-list" v-for="board in boards" :key="board._id">
       <li @click="loadBoard(board)">
         {{ board.title }}
-        <button @click.stop="updateBoard(board.id)">star</button>
+        <button @click.stop="updateBoard(board._id)">star</button>
       </li>
     </ul>
     <button class="new-board" @click="addBoard">Create new board</button>
@@ -31,7 +31,8 @@ export default {
   methods: {
     async loadBoard(board) {
       try {
-        this.$router.push('/board/:id')
+        console.log('board',board);
+        this.$router.push(`/board/${board._id}`)
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot load board')

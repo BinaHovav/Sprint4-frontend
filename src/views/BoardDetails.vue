@@ -12,9 +12,9 @@
     <div>
       <GroupList :groups="board?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" />
     </div>
-    
+
   </section>
-  <RouterView />
+  <RouterView :board="board"/>
 </template>
 
 <script>
@@ -42,6 +42,7 @@ export default {
       try {
         const boardId = this.$route.params.id
         this.board = await boardService.getById(boardId)
+        this.$store.commit({ type: 'setCurrBoardId', boardId: this.board.id })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         showSuccessMsg('Board loaded')
       } catch (err) {
