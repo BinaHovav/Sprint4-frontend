@@ -336,14 +336,29 @@ $clr-surface-raised: #ffffff;
 $clr-surface-raised-hovered: #f1f2f4;
 $clr-surface-raised-pressed: #dcdfe4;
 $clr-surface-sunken: #f7f8f9;
-$clr-shadow-overflow: 0px 0px 8px #091e4229, 0px 0px 1px #091e421f;
+$clr-shadow-overflow:
+    0px 0px 8px #091e4229,
+    0px 0px 1px #091e421f;
 $clr-shadow-overflow-perimeter: #091e421f;
 $clr-shadow-overflow-spread: #091e4229;
-$clr-shadow-overlay: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
-$clr-shadow-raised: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+$clr-shadow-overlay:
+    0px 8px 12px #091e4226,
+    0px 0px 1px #091e424f;
+$clr-shadow-raised:
+    0px 1px 1px #091e4240,
+    0px 0px 1px #091e424f;
 $clr-opacity-disabled: 0.4;
 $clr-opacity-loading: 0.2;
 $clr-UNSAFE-transparent: transparent;
+$dynamic-button: transparent;
+$dynamic-button-hovered: #091e4224;
+$dynamic-button-pressed: #091e424f;
+$dynamic-button-highlighted: rgba(0, 0, 0, 0.5);
+$dynamic-button-highlighted-text: #ffffff;
+$dynamic-button-highlighted-hovered: rgba(0, 0, 0, 0.6);
+$dynamic-icon: #42526e;
+$dynamic-text: #172b4d;
+$dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
 // }
 
 // .main-app[data-color-mode="light"],
@@ -476,7 +491,7 @@ $clr-UNSAFE-transparent: transparent;
 //     $clr-background-inverse-subtle: #ffffff29;
 //     $clr-background-inverse-subtle-hovered: #ffffff3d;
 //     $clr-background-inverse-subtle-pressed: #ffffff52;
-//     $clr-background-neutral: #a1bdd914;
+// $clr-background-neutral: #a1bdd914;
 //     $clr-background-neutral-hovered: #a6c5e229;
 //     $clr-background-neutral-pressed: #bfdbf847;
 //     $clr-background-neutral-subtle: #00000000;

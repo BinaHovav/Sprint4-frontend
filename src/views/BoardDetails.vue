@@ -1,6 +1,7 @@
 <template>
   <section>
-    <h1>bla bla Page</h1>
+    <h1>BoardDetails</h1>
+    <RouterView/>
   </section>
 </template>
 
@@ -12,6 +13,7 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+  },
 }
 </script>

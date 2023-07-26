@@ -1,0 +1,94 @@
+.backdrop {
+    display: flex;
+    align-items: flex-start;
+    background-color: #000000a3;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+}
+
+.task-details {
+    display: block;
+    overflow: visible;
+    background-color: var(--ds-surface-overlay, #fff);
+    border-radius: 8px;
+    // display: none;
+    margin: 48px 0 80px;
+    overflow: hidden;
+    position: relative;
+    width: 768px;
+    z-index: 25;
+    border-radius: 8px;
+    min-height: 600px;
+    outline: 0;
+    .btn-icon-close {
+        @include trello-icon($content: $icon-close, $type: md, $color: #44546f);
+        border-radius: 50%;
+        height: 40px;
+        margin: 4px;
+        // overflow: hidden;
+        padding: 4px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition:
+            background-color 85ms,
+            color 85ms;
+        width: 40px;
+        z-index: 2;
+        line-height: 32px;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-weight: 400;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: bottom;
+        cursor: pointer;
+        &:hover {
+            background-color: $dynamic-button-hovered;
+            color: $dynamic-icon;
+        }
+    }
+    .task-cover {
+        background-size: initial;
+        background-origin: content-box;
+        box-sizing: border-box;
+        height: 116px;
+        min-height: 116px;
+        padding: 0px;
+        position: relative;
+        transition: opacity 85ms;
+        width: 100%;
+        outline: 0;
+        .task-cover-menu {
+            align-items: center;
+            bottom: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-end;
+            padding: 8px;
+            position: absolute;
+            width: 100%;
+            .task-cover-btn {
+                background-color: transparent;
+                border-radius: 3px;
+                padding: 6px 12px 6px 6px;
+                text-decoration: none;
+                color: $clr-text-accent-orange-bolder, #5f3811;
+                cursor: pointer;
+                .btn-icon-cover {
+                    @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
+                }
+                &:hover {
+                    background-color: $dynamic-button-hovered;
+                }
+            }
+        }
+    }
+}
