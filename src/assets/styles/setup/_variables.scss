@@ -678,3 +678,9 @@ html[data-theme~="spacing:spacing"] {
 $mobile-breakpoint: 460px;
 $narrow-breakpoint: 720px;
 $normal-breakpoint: 960px;
+
+//lentgh
+$header-hight: 48px;
+$board-hight: calc(100vh - $header-hight);
+$board-header-hight: auto;
+$board-header-width: calc(100% - 23px);

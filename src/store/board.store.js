@@ -1,6 +1,12 @@
 import { boardService } from '../services/board.service.local'
 // import { boardService } from '../services/board.service'
 
+export function getActionSetCurrBoard(boardId) {
+  return {
+    type: 'setCurrBoard',
+    boardId,
+  }
+}
 export function getActionRemoveBoard(boardId) {
   return {
     type: 'removeBoard',
@@ -30,15 +36,20 @@ export function getActionAddBoardMsg(boardId) {
 export const boardStore = {
   state: {
     boards: [],
+    currBoard: null,
   },
   getters: {
     boards({ boards }) {
       return boards
     },
+    currBoard({ currBoard }) { return currBoard }
   },
   mutations: {
     setBoards(state, { boards }) {
       state.boards = boards
+    },
+    setCurrBoard(state, { board }) {
+      state.currBoard = board
     },
     addBoard(state, { board }) {
       state.boards.push(board)
@@ -104,5 +115,14 @@ export const boardStore = {
         throw err
       }
     },
+    async setCurrBoard(context, { boardId }) {
+      try {
+        const board = await boardService.getBoardById(boardId)
+        context.commit({ type: 'setCurrBoard', board })
+      } catch (err) {
+        console.log('boardStore: Error in setCurrBoard', err)
+        throw err
+      }
+    }
   },
 }
