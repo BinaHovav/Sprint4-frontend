@@ -12,9 +12,9 @@
     <div>
       <GroupList :groups="board?.groups" />
     </div>
-
-
+    
   </section>
+  <RouterView />
 </template>
 
 <script>
