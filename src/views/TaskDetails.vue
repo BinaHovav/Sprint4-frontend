@@ -74,7 +74,6 @@
 import { boardService } from '../services/board.service.local'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 export default {
-  // props: { board: { type: Object, required: true } },
   name: 'TaskDetails',
   data() {
     return {
@@ -115,6 +114,12 @@ export default {
       const label = this.getLabelById(labelId)
       return label.color
     },
+    onSaveTask() {
+      let idx = this.currGroup.tasks.findIndex(gTask => gTask.id === this.task.id)
+      this.currGroup.tasks.splice(idx, 1, this.task)
+      this.$emit('updateBoard', this.currBoard)
+      this.$router.replace(`/board/${this.currBoard._id}`)
+    }
   },
 }
 </script>

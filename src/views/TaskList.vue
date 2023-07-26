@@ -7,7 +7,9 @@
 </template>
   
 <script>
+import { boardService } from '../services/board.service.local'
 import TaskPreview from './TaskPreview.vue'
+
 export default {
     name: 'TaskList',
     props: ['tasks', 'groupId'],
@@ -15,22 +17,14 @@ export default {
         return {}
     },
     computed: {
-        addTask() {
-            // const taskTitle = prompt('title?')
-            // const newTask = boardService.()
-            // newGroup.title = groupTitle
-            // this.board.groups.unshift(newGroup)
-            // try {
-            //     await this.$store.dispatch(getActionUpdateBoard(this.board))
-            //     showSuccessMsg('Group added')
-            // } catch (err) {
-            //     showErrorMsg('Cannot add group')
-
-            // }
-        }
     },
     created() { },
-    methods: {},
+    methods: {
+        addTask(){
+            const newTask = boardService.getEmptyTask()
+            this.$emit('addTask', newTask)
+        }
+    },
     components: {
         TaskPreview,
     }

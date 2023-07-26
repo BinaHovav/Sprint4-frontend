@@ -42,7 +42,7 @@ async function save(board) {
     savedBoard = await storageService.put(STORAGE_KEY, board)
   } else {
     // Later, owner is set by the backend
-    board.owner = userService.getLoggedinUser()
+    // board.owner = userService.getLoggedinUser()
     savedBoard = await storageService.post(STORAGE_KEY, board)
   }
   return savedBoard
@@ -66,7 +66,7 @@ async function addBoardMsg(boardId, txt) {
 
 function getEmptyBoard() {
   return {
-    id: utilService.makeId(4),
+    _id: '',
     title: '',
     isStarred: false,
     archivedAt: null,
@@ -144,18 +144,18 @@ function getEmptyTask() {
 //       },
 //       {
 //         id: 'l106',
-//         title: 'Medium priority',
-//         color: 'beige',
+//         title: 'l106',
+//         color: 'light-yellow',
 //       },
 //       {
 //         id: 'l107',
-//         title: 'Analysis',
+//         title: 'l107',
 //         color: 'blue',
 //       },
 //       {
 //         id: 'l108',
 //         title: 'Finance',
-//         color: 'sky',
+//         color: 'teal',
 //       },
 //       {
 //         id: 'l109',
@@ -194,7 +194,7 @@ function getEmptyTask() {
 //           {
 //             id: 'c101',
 //             title: 'Market Research',
-//             description: 'Conduct an in-depth market analysis to identify potential opportunities, target markets, and competitor solutions in the gas station automation industry.',
+//             description: 'Conduct an in-depth market l107 to identify potential opportunities, target markets, and competitor solutions in the gas station automation industry.',
 //             members: [
 //               {
 //                 _id: 'u101',
@@ -221,7 +221,7 @@ function getEmptyTask() {
 //                   { id: 't101', txt: 'Gather data on existing gas station automation solutions', isDone: true },
 //                   { id: 't102', txt: 'Identify key competitors and their offerings.', isDone: false },
 //                   { id: 't103', txt: 'Analyze market trends and customer preferences.', isDone: false },
-//                   { id: 't104', txt: 'Compile a comprehensive report on the market analysis findings.', isDone: false },
+//                   { id: 't104', txt: 'Compile a comprehensive report on the market l107 findings.', isDone: false },
 //                 ],
 //               },
 //             ],
@@ -232,7 +232,7 @@ function getEmptyTask() {
 //           },
 //           {
 //             id: 'c102',
-//             title: 'Technology Evaluation',
+//             title: 'l103 Evaluation',
 //             description: 'Evaluate existing robotic technologies, sensors, and AI algorithms suitable for automating gas station tasks.',
 //             members: [
 //               {
@@ -246,14 +246,14 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Analysis', 'Technology'],
+//             labels: ['l106', 'l107', 'l103'],
 //             dueDate: null,
 //             checklists: [
 //               {
 //                 title: 'Research and review existing robotic technologies',
 //                 todos: [
 //                   { id: 't101', txt: 'Identify and compile a list of robotic technologies currently used in various industries.', isDone: true },
-//                   { id: 't102', txt: 'Evaluate the capabilities and limitations of each robotic technology in terms of mobility, dexterity, and adaptability.', isDone: true },
+//                   { id: 't102', txt: 'Evaluate the capabilities and limitations of each robotic l103 in terms of mobility, dexterity, and adaptability.', isDone: true },
 //                   {
 //                     id: 't104',
 //                     txt: 'Assess the potential applicability of these technologies to gas station tasks, considering factors such as safety, efficiency, and cost-effectiveness.',
@@ -286,7 +286,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Analysis', 'Technology'],
+//             labels: ['l106', 'l107', 'l103'],
 //             dueDate: 1691661600,
 //             checklists: [],
 //             attachment: null,
@@ -296,8 +296,8 @@ function getEmptyTask() {
 //           },
 //           {
 //             id: 'c104',
-//             title: 'Cost-Benefit Analysis',
-//             description: 'Perform a cost-benefit analysis to assess the financial viability and potential return on investment (ROI) of the robot deployment.',
+//             title: 'Cost-Benefit l107',
+//             description: 'Perform a cost-benefit l107 to assess the financial viability and potential return on investment (ROI) of the robot deployment.',
 //             members: [
 //               {
 //                 _id: 'u102',
@@ -310,7 +310,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Analysis', 'Planning'],
+//             labels: ['l106', 'l107', 'l102'],
 //             dueDate: 1691834400,
 //             checklists: [],
 //             attachment: null,
@@ -338,7 +338,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Planning'],
+//             labels: ['l110', 'l102'],
 //             dueDate: 1690884000,
 //             checklists: [],
 //             attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif',
@@ -370,7 +370,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Planning', 'Design'],
+//             labels: ['l106', 'l102', 'l105'],
 //             dueDate: 1690303727,
 //             checklists: [
 //               {
@@ -384,7 +384,7 @@ function getEmptyTask() {
 //             ],
 //             attachment: null,
 //             activity: [],
-//             cover: 'sky',
+//             cover: 'teal',
 //             comments: [],
 //           },
 //           {
@@ -403,7 +403,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Technology'],
+//             labels: ['l110', 'l103'],
 //             dueDate: null,
 //             checklists: [],
 //             attachment: null,
@@ -435,7 +435,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Technology'],
+//             labels: ['l106', 'l103'],
 //             dueDate: 1691143200,
 //             checklists: [
 //               {
@@ -475,7 +475,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Planning', 'Design'],
+//             labels: ['l110', 'l102', 'l105'],
 //             dueDate: 1691834400,
 //             checklists: [],
 //             attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358214/download_wdvxxq.png',
@@ -494,12 +494,12 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Planning', 'Enhancement'],
+//             labels: ['l110', 'l102', 'l109'],
 //             dueDate: 1691056800,
 //             checklists: [],
 //             attachment: '',
 //             activity: [],
-//             cover: 'light-green',
+//             cover: 'green',
 //             comments: [],
 //           },
 //         ],
@@ -525,7 +525,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Technology'],
+//             labels: ['l110', 'l103'],
 //             dueDate: 1692007200,
 //             checklists: [],
 //             attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358903/Picture1-1-768x726_nqbwqi.png',
@@ -544,7 +544,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Enhancement', 'Analysis'],
+//             labels: ['l106', 'l109', 'l107'],
 //             dueDate: null,
 //             checklists: [
 //               {
@@ -553,7 +553,7 @@ function getEmptyTask() {
 //                   { id: 't101', txt: 'Test Case Preparation', isDone: true },
 //                   { id: 't102', txt: 'UAT Environment Setup', isDone: true },
 //                   { id: 't103', txt: 'UAT Execution and Issue Reporting', isDone: false },
-//                   { id: 't104', txt: 'Feedback Collection and Analysis', isDone: false },
+//                   { id: 't104', txt: 'Feedback Collection and l107', isDone: false },
 //                 ],
 //               },
 //             ],
@@ -579,7 +579,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Technology', 'Enhancement'],
+//             labels: ['l106', 'l103', 'l109'],
 //             dueDate: null,
 //             checklists: [],
 //             attachment: null,
@@ -598,7 +598,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority'],
+//             labels: ['l110'],
 //             dueDate: 1692439200,
 //             checklists: [],
 //             attachment: '',
@@ -624,12 +624,12 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Research', 'Planning'],
+//             labels: ['l104', 'l102'],
 //             dueDate: 1691661600,
 //             checklists: [],
 //             attachment: null,
 //             activity: [],
-//             cover: 'light-green',
+//             cover: 'lime',
 //             comments: [],
 //           },
 //           {
@@ -653,7 +653,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Planning', 'Enhancement'],
+//             labels: ['l110', 'l102', 'l109'],
 //             dueDate: 1691402400,
 //             checklists: [],
 //             attachment: null,
@@ -672,7 +672,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Design', 'Planning'],
+//             labels: ['l110', 'l105', 'l102'],
 //             dueDate: 1691316000,
 //             checklists: [
 //               {
@@ -722,7 +722,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority'],
+//             labels: ['l110'],
 //             dueDate: null,
 //             checklists: [],
 //             attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360236/large-scale-redundant-setup_d3wkno.png',
@@ -741,7 +741,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['High priority', 'Planning', 'Technology'],
+//             labels: ['l110', 'l102', 'l103'],
 //             dueDate: null,
 //             checklists: [],
 //             attachment: '',
@@ -767,7 +767,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Research', 'Analysis'],
+//             labels: ['l104', 'l107'],
 //             dueDate: 1692698400,
 //             checklists: [],
 //             attachment: null,
@@ -796,7 +796,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Research', 'Analysis', 'Enhancement'],
+//             labels: ['l104', 'l107', 'l109'],
 //             dueDate: null,
 //             checklists: [
 //               {
@@ -811,7 +811,7 @@ function getEmptyTask() {
 //             ],
 //             attachment: null,
 //             activity: [],
-//             cover: 'sky',
+//             cover: 'teal',
 //             comments: [[{ byUser: 'Bina Hovav', txt: 'We should meet weekly about this', createdAt: null }]],
 //           },
 //           {
@@ -825,7 +825,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Planning'],
+//             labels: ['l106', 'l102'],
 //             dueDate: null,
 //             checklists: [],
 //             attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360672/wedding_table_planner_powerpoint_2_mzgb5g.jpg',
@@ -854,7 +854,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Medium priority', 'Technology'],
+//             labels: ['l106', 'l103'],
 //             dueDate: null,
 //             checklists: [],
 //             attachment: '',
@@ -864,7 +864,7 @@ function getEmptyTask() {
 //           },
 //           {
 //             id: 'c105',
-//             title: 'Success Metrics Analysis',
+//             title: 'Success Metrics l107',
 //             description: "Analyze key success metrics, such as customer wait times, fueling efficiency, and cost savings, to assess the project's overall impact.",
 //             members: [
 //               {
@@ -878,7 +878,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Enhancement', 'Analysis', 'Finance'],
+//             labels: ['l109', 'l107', 'l108'],
 //             dueDate: 1693476000,
 //             checklists: [],
 //             attachment: '',

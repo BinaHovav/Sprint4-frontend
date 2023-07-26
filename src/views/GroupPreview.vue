@@ -7,7 +7,7 @@
                 <button class="btn-three-dots" @click="$emit('removeGroup', group.id)"><span class="three-dots"></span></button>
             
         </div>
-        <TaskList :tasks="group.tasks" :groupId="group.id" />
+        <TaskList :tasks="group.tasks" :groupId="group.id" @addTask="addTask" />
     </div>
 </template>
   
@@ -23,9 +23,13 @@ export default {
     created() { },
     methods: {
         updateGroup() {
-            const newTitle = prompt('new title')
-            this.$emit('updateGroup', newTitle, this.group)
+            this.$emit('updateGroup',this.group)
+        },
+        addTask(newTask){
+            this.group.tasks.push(newTask)
+            this.updateGroup()
         }
+
     },
     components: {
         TaskList,

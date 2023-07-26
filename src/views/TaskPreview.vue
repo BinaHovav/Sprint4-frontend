@@ -1,5 +1,5 @@
 <template>
-    <section class="task-preview-container">
+    <section class="task-preview-container" @click="onTaskDetails">
         <div v-if="task.cover" :class="task.cover" class="task-cover"> <span class="edit"></span></div>
         <div class="task-details-container">
             <div v-if="task.labels" class="task-labels">
@@ -27,8 +27,8 @@ export default {
     },
     computed: {
         onTaskDetails(){
-            const boardId = this.$route.params.boardId
-            this.$route.push(`/board/${boardId}/group/${groupId}/task/${task.id}`)
+            const boardId = this.$route.params.id
+            this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
         }
     },
     created() { },

@@ -33,7 +33,6 @@ export default {
   methods: {
     async loadBoard(boardId) {
       try {
-        console.log('boardId', boardId)
         this.$router.push(`/board/${boardId}`)
       } catch (err) {
         console.log(err)
@@ -46,7 +45,7 @@ export default {
       try {
         const addedBoard = await this.$store.dispatch(getActionAddBoard(newBoard))
         showSuccessMsg('Board added')
-        this.$router.push(`/board/${addedBoard.id}`)
+        this.$router.push(`/board/${addedBoard._id}`)
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot add board')
