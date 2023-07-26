@@ -69,7 +69,7 @@ function getEmptyBoard() {
 }
 
 // Initial data
-;async () => {
+;(async () => {
   await storageService.post(STORAGE_KEY, {
     _id: 'b101',
     title: 'Gas station robotics',
@@ -868,4 +868,4 @@ function getEmptyBoard() {
     ],
     style: {},
   })
-}
+})()
