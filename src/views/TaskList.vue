@@ -1,8 +1,8 @@
 <template>
     <div class="task-list-container">
-        <pre>{{tasks}}</pre>
-        <TaskPreview  />
-        <!-- v-for="toy in toys" :key="toy._id" :toy="toy" @removed="$emit('removed', toy._id)" -->
+        <TaskPreview  v-for="task in tasks" :key="task._id" :task="task" @removed="$emit('removed', task._id)"/>
+        
+        <button>Add Task</button>
     </div>
 </template>
   

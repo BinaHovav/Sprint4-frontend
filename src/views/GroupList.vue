@@ -1,7 +1,9 @@
 <template>
+    <button @click="addGroup">Add group</button>
     <section class="group-list-container flex">
-        <GroupPreview v-for="group in groups" :key="group._id" :group="group" @removed="$emit('removed', group._id)" />
-        
+        <GroupPreview v-for="group in groups" :key="group._id" :group="group" @removeGroup="removeGroup"
+            @updateGroup="updateGroup" />
+
     </section>
 </template>
   
@@ -14,9 +16,20 @@ export default {
         return {}
     },
     computed: {},
-    created() { 
+    created() {
     },
-    methods: {},
+    methods: {
+        removeGroup(groupId) {
+            this.$emit('removeGroup', groupId)
+        },
+        addGroup() {
+            this.$emit('addGroup')
+        },
+        updateGroup(title, group) {
+            this.$emit('updateGroup', title, group)
+
+        }
+    },
     components: {
         GroupPreview,
     }
