@@ -1,5 +1,5 @@
 <template>
-  <div class="container home">
+  <div class="container board-index">
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
         <p>

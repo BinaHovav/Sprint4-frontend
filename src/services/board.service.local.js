@@ -6,7 +6,7 @@ const STORAGE_KEY = 'board'
 
 export const boardService = {
   query,
-  getById,
+  getBoardById,
   save,
   remove,
   getEmptyBoard,
@@ -26,7 +26,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
   return boards
 }
 
-function getById(boardId) {
+function getBoardById(boardId) {
   return storageService.get(STORAGE_KEY, boardId)
 }
 
