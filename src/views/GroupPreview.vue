@@ -1,8 +1,11 @@
 <template>
     <div class="group-preview-container">
         <div class="group-header">
-            <h1 @click="updateGroup">{{ group.title }}</h1>
-            <button @click="$emit('removeGroup', group.id)">remove</button>
+            <form action="">
+                <textarea rows="1" class="task-title" @click="updateGroup">{{ group.title }}</textarea>
+            </form>
+                <button class="btn-three-dots" @click="$emit('removeGroup', group.id)"><span class="three-dots"></span></button>
+            
         </div>
         <TaskList :tasks="group.tasks" :groupId="group.id" />
     </div>

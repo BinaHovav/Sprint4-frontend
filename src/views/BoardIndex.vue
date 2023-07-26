@@ -1,13 +1,15 @@
 <template>
-  <div class="container board-index">
+  <section class="container board-index" v-if="board">
     <ul class="board-list" v-for="board in boards" :key="board._id">
-      <li @click="loadBoard(board)">
+      <li @click="loadBoard(board._id)">
         {{ board.title }}
-        <button @click.stop="updateBoard(board._id)">star</button>
+        <button @click.stop="updateBoard(board.id)">
+          <span class="btn-star-board"></span>
+        </button>
       </li>
     </ul>
     <button class="new-board" @click="addBoard">Create new board</button>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -17,7 +19,7 @@ import { getActionUpdateBoard, getActionAddBoard } from '../store/board.store'
 export default {
   data() {
     return {
-      // boardToAdd: boardService.getEmptyBoard(),
+      board: {},
     }
   },
   computed: {
@@ -29,10 +31,10 @@ export default {
     this.$store.dispatch({ type: 'loadBoards' })
   },
   methods: {
-    async loadBoard(board) {
+    async loadBoard(boardId) {
       try {
-        console.log('board',board);
-        this.$router.push(`/board/${board._id}`)
+        console.log('boardId', boardId)
+        this.$router.push(`/board/${boardId}`)
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot load board')

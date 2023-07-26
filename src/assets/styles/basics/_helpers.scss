@@ -62,46 +62,57 @@
     background-color: $clr-background-accent-green-subtle;
     color: $clr-text-accent-green-bolder;
 }
-// .light-green {
-//     @include label-tag-color($clr-label-light-green);
-// }
-// .dark-green {
-//     @include label-tag-color($clr-label-dark-green);
-// }
-.yellow {
-    background-color: $clr-background-accent-yellow-subtle;
-    color: $clr-text-accent-yellow-bolder;
+.light-green {
+    background-color: $clr-background-accent-lime-subtle;
+    color: $clr-text-accent-lime-bolder;
 }
+// .dark-green {
+//     background-color: $clr-background-accent-dark-green-subtle;
+//     color: $clr-text-accent-dark-green-bolder;
+// }
+// .yellow {
+//     background-color: $clr-background-accent-yellow-subtle;
+//     color: $clr-text-accent-yellow-bolder;
+// }
 // .light-yellow {
-//     @include label-tag-color($clr-label-light-yellow);
+//     background-color: $clr-background-accent-light-yellow-subtle;
+//     color: $clr-text-accent-light-yellow-bolder;
 // }
 // .dark-yellow {
-//     @include label-tag-color($clr-label-dark-yellow);
+//     background-color: $clr-background-accent-dark-yellow-subtle;
+//     color: $clr-text-accent-dark-yellow-bolder;
 // }
 .orange {
     background-color: $clr-background-accent-orange-subtle;
     color: $clr-text-accent-orange-bolder;
 }
 // .light-orange {
-//     @include label-tag-color($clr-label-light-orange);
+//     background-color: $clr-background-accent-light-orange-subtle;
+//     color: $clr-text-accent-light-orange-bolder;
 // }
 // .dark-orange {
-//     @include label-tag-color($clr-label-dark-orange);
+//     background-color: $clr-background-accent-dark-orange-subtle;
+//     color: $clr-text-accent-dark-orange-bolder;
 // }
 // .red {
-//     @include label-tag-color($clr-label-red);
+//     background-color: $clr-background-accent-red-subtle;
+//     color: $clr-text-accent-red-bolder;
 // }
 // .light-red {
-//     @include label-tag-color($clr-label-light-red);
+//     background-color: $clr-background-accent-light-red-subtle;
+//     color: $clr-text-accent-light-red-bolder;
 // }
 // .dark-red {
-//     @include label-tag-color($clr-label-dark-red);
+//     background-color: $clr-background-accent-dark-red-subtle;
+//     color: $clr-text-accent-dark-red-bolder;
 // }
 // .purple {
-//     @include label-tag-color($clr-label-purple);
+//     background-color: $clr-background-accent-purple-subtle;
+//     color: $clr-text-accent-purple-bolder;
 // }
 // .light-purple {
-//     @include label-tag-color($clr-label-light-purple);
+//     background-color: $clr-background-accent-light-purple-subtle;
+//     color: $clr-text-accent-light-purple-bolder;
 // }
 // .dark-purple {
 //     @include label-tag-color($clr-label-dark-purple);

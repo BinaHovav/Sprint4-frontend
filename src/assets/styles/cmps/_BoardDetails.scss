@@ -1,9 +1,10 @@
 .board-details-container {
-    flex-grow: 1;
+    // flex-grow: 1;
     position: relative;
     overflow: hidden;
-    height: $board-hight;
-    background-color: black;
+    // height: $board-hight;
+    height: calc(100% - 2.5rem);
+    background-color: rgb(168, 162, 162);
 
     nav {
         position: relative;

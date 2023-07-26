@@ -9,10 +9,10 @@
       <span>users</span>
       <span>menu</span>
     </nav>
-    <div>
+    <!-- <div> -->
       <GroupList :groups="board?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" />
-    </div>
-
+    <!-- </div> -->
+    
   </section>
   <RouterView :board="board"/>
 </template>
