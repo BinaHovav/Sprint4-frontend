@@ -40,7 +40,6 @@
           </div>
         </div>
         <div class="task-description flex column">
-          <button @click="test">test</button>
           Description
           <textarea v-model="task.description"></textarea>
         </div>

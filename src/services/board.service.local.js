@@ -100,7 +100,8 @@ function getEmptyTask() {
   }
 }
 
-// Initial data
+
+
 // ;(async () => {
 //   await storageService.post(STORAGE_KEY, {
 //     _id: 'b101',
@@ -218,7 +219,7 @@ function getEmptyTask() {
 //                 imgUrl: '',
 //               },
 //             ],
-//             labels: ['Research', 'Planning'],
+//             labels: ['l104', 'l102'],
 //             dueDate: 1690303727,
 //             checklists: [
 //               {
