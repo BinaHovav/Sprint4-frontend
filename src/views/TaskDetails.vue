@@ -1,19 +1,57 @@
 <template>
-    <section class="backdrop">
-        <section class="task-details">
-          <a class="btn-icon-close"></a>
-          <div class="task-cover" :class="task.cover">
-            <div class="task-cover-menu">
-              <a class="task-cover-btn">
-                <span class="btn-icon-cover"></span>
-                Cover
-              </a>
-            </div>
+  <section class="backdrop" v-if="task">
+    <section class="task-details">
+      <a class="btn-icon-close" @click="onSaveTask"></a>
+      <div class="task-cover" :class="task.cover">
+        <div class="task-cover-menu">
+          <a class="task-cover-btn">
+            <span class="btn-icon-cover"></span>
+            <span class="task-cover-txt">Cover</span>
+          </a>
+        </div>
+      </div>
+      <div class="task-header">
+        <input type="text" v-model="task.title">
+      </div>
+      <div class="task-main">
+        <div class="task-details-data flex">
+          <div class="task-details-members">Members:
+            <template class="flex">
+              <div v-for="member in task.members">{{ member.fullname }} |</div>
+            </template>
           </div>
-          <h2>hey</h2>
-        </section>
+          <div class="task-details-labels">Labels:
+            <template class="flex">
+              <div v-for="label in task.labels" :class="label.color">{{ label.title }} |</div>
+            </template>
+          </div>
+          <div class="task-details-notifications">Notification:
+            <template class="flex">
+              <div v-for="member in task.members">{{ member.fullname }} |</div>
+            </template>
+          </div>
+          <div class="task-details-notifications">Due date:
+            <template class="flex">
+              <div>{{ task.dueDate }}</div>
+            </template>
+          </div>
+        </div>
+        <div class="task-description flex column">
+            Description
+            <textarea v-model="task.description"></textarea>
+        </div>
+      </div>
+      <div class="task-sidebar">
+        <div class="task-sidebar-add">
+          Add to card
+          <a class="task-btn-link ">
+            <span class="btn-link-members"></span>
+            <span class="">Members</span>
+          </a>
+        </div>
+      </div>
     </section>
-    
+  </section>
 </template>
 
 <script>
@@ -26,7 +64,9 @@ export default {
   },
   computed: {},
   created() {
-    console.log('test')
+    const boardId = this.$route.params.id
+    const taskId = this.$route.params.taskId
+    console.log('this.task', this.task)
     this.task = {
       id: 'c101',
       title: 'Market Research',
@@ -48,7 +88,14 @@ export default {
           imgUrl: '',
         },
       ],
-      labels: ['Research', 'Planning'],
+      labels: [
+        {
+          title: 'Research',
+          color: 'yellow'
+        }, {
+          title: 'Planning',
+          color: 'orange'
+        }],
       dueDate: 1690303727,
       checklists: [
         {
@@ -66,6 +113,10 @@ export default {
       cover: 'orange',
     }
   },
-  methods: {},
+  methods: {
+    onSaveTask(){
+      console.log('task:  ',this.task);
+    }
+  },
 }
 </script>

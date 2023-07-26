@@ -75,18 +75,87 @@
             padding: 8px;
             position: absolute;
             width: 100%;
+            gap: 0;
             .task-cover-btn {
                 background-color: transparent;
                 border-radius: 3px;
                 padding: 6px 12px 6px 6px;
                 text-decoration: none;
-                color: $clr-text-accent-orange-bolder, #5f3811;
+                color: $clr-text-accent-orange-bolder;
                 cursor: pointer;
                 .btn-icon-cover {
                     @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
                 }
+                .task-cover-txt {
+                    margin-inline-start: 5px;
+                }
                 &:hover {
                     background-color: $dynamic-button-hovered;
+                }
+            }
+        }
+    }
+    input {
+        border: 0;
+    }
+    .task-main {
+        float: left;
+        margin: 0;
+        min-height: 24px;
+        padding: 0 8px 8px 16px;
+        position: relative;
+        width: 552px;
+        z-index: 1;
+        .task-details-data {
+            margin-block-start: 20px;
+            max-width: 80%;
+            gap: 10px;
+        }
+        .task-description {
+            margin-block-start: 20px;
+            textarea {
+                resize: none;
+                border: 0;
+            }
+        }
+    }
+    .task-sidebar {
+        float: right;
+        overflow: hidden;
+        padding: 0 16px 8px 8px;
+        width: calc(100% - 600px);
+        .task-sidebar-add {
+            clear: both;
+            margin-bottom: 24px;
+            position: relative;
+            .task-btn-link {
+                background-color: $clr-background-neutral, #091e420f;
+                border: none;
+                border-radius: 3px;
+                box-shadow: none;
+                box-sizing: border-box;
+                color: $clr-text, #172b4d;
+                cursor: pointer;
+                display: block;
+                height: 32px;
+                margin-top: 8px;
+                max-width: 300px;
+                overflow: hidden;
+                padding: 6px 12px;
+                position: relative;
+                text-decoration: none;
+                text-overflow: ellipsis;
+                transition-duration: 85ms;
+                transition-property: background-color, border-color, box-shadow;
+                transition-timing-function: ease;
+                -webkit-user-select: none;
+                user-select: none;
+                white-space: nowrap;
+                &:hover {
+                    background-color: $dynamic-button-hovered;
+                }
+                .btn-link-members {
+                    @include trello-icon($content: $icon-member, $type: sm, $color: currentColor);
                 }
             }
         }

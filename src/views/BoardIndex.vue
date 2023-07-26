@@ -1,29 +1,23 @@
 <template>
   <div class="container board-index">
-    <ul class="board-list">
-      <li v-for="board in boards" :key="board._id">
-        <p>
-          {{ board.title }}
-        </p>
-        <button @click="loadBoard(board)">Board</button>
+    <ul class="board-list" v-for="board in boards" :key="board._id">
+      <li @click="loadBoard(board)">
+        {{ board.title }}
+        <button @click.stop="updateBoard(board.id)">star</button>
       </li>
     </ul>
-    <form @submit.prevent="addBoard()">
-      <h2>Add board</h2>
-      <input type="text" v-model="boardToAdd.title" />
-      <button>Save</button>
-    </form>
+    <button class="new-board" @click="addBoard">Create new board</button>
   </div>
 </template>
 
 <script>
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { boardService } from '../services/board.service.local'
-import { getActionUpdateBoard } from '../store/board.store'
+import { getActionUpdateBoard, getActionAddBoard } from '../store/board.store'
 export default {
   data() {
     return {
-      boardToAdd: boardService.getEmptyBoard(),
+      // boardToAdd: boardService.getEmptyBoard(),
     }
   },
   computed: {
@@ -35,27 +29,36 @@ export default {
     this.$store.dispatch({ type: 'loadBoards' })
   },
   methods: {
-    async addBoard() {
+    async loadBoard(board) {
       try {
-        await this.$store.dispatch({ type: 'addBoard', board: this.boardToAdd })
+        this.$router.push('/board/:id')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot load board')
+      }
+    },
+    async addBoard() {
+      const newBoard = boardService.getEmptyBoard()
+      newBoard.title = prompt('board title please')
+      try {
+        const addedBoard = await this.$store.dispatch(getActionAddBoard(newBoard))
         showSuccessMsg('Board added')
-        this.boardToAdd = boardService.getEmptyBoard()
+        this.$router.push(`/board/${addedBoard.id}`)
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot add board')
       }
     },
-
-    async loadBoard(board) {
+    async updateBoard(boardId) {
+      const board = this.boards.find((board) => board.id === boardId)
+      const boardToUpdate = JSON.parse(JSON.stringify(board))
+      boardToUpdate.isStarred = true
       try {
-        this.$router.push('/board/:id')
-
-        // board = { ...board }
-        // await this.$store.dispatch(getActionUpdateBoard(board))
-        // showSuccessMsg('Board updated')
+        await this.$store.dispatch(getActionUpdateBoard(boardToUpdate))
+        showSuccessMsg('Board updated')
       } catch (err) {
         console.log(err)
-        showErrorMsg('Cannot load board')
+        showErrorMsg('Cannot update board')
       }
     },
   },

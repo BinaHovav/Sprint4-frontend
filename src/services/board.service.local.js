@@ -12,7 +12,7 @@ export const boardService = {
   getEmptyBoard,
   addBoardMsg,
   getEmptyGroup,
-  getEmptyTask
+  getEmptyTask,
 }
 window.cs = boardService
 
@@ -66,7 +66,13 @@ async function addBoardMsg(boardId, txt) {
 
 function getEmptyBoard() {
   return {
+    id: utilService.makeId(4),
     title: '',
+    isStarred: false,
+    archivedAt: null,
+    createdBy: null,
+    groups: [],
+    style: {},
   }
 }
 function getEmptyGroup() {
@@ -75,6 +81,21 @@ function getEmptyGroup() {
     title: '',
     archivedAt: null,
     tasks: []
+  }
+}
+function getEmptyTask() {
+  return {
+    id: utilService.makeId(4),
+    title: '',
+    description: '',
+    members: [],
+    labels: [],
+    dueDate: null,
+    checklists: [],
+    attachment: null,
+    activity: [],
+    cover: '',
+    comments: [],
   }
 }
 function getEmptyTask() {
