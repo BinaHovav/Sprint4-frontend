@@ -3,20 +3,14 @@
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
         <p>
-          {{ board.vendor }}
+          {{ board.title }}
         </p>
-        <p>${{ board.price?.toLocaleString() }}</p>
-        <button @click="removeBoard(board._id)">x</button>
-        <button @click="updateBoard(board)">Update</button>
-        <hr />
-        <button @click="addBoardMsg(board._id)">Add board msg</button>
-        <button @click="printBoardToConsole(board)">Print msgs to console</button>
+        <button @click="loadBoard(board)">Board</button>
       </li>
     </ul>
-    <hr />
     <form @submit.prevent="addBoard()">
       <h2>Add board</h2>
-      <input type="text" v-model="boardToAdd.vendor" />
+      <input type="text" v-model="boardToAdd.title" />
       <button>Save</button>
     </form>
   </div>
@@ -25,7 +19,7 @@
 <script>
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { boardService } from '../services/board.service.local'
-import { getActionRemoveBoard, getActionUpdateBoard, getActionAddBoardMsg } from '../store/board.store'
+import { getActionUpdateBoard } from '../store/board.store'
 export default {
   data() {
     return {
@@ -33,9 +27,6 @@ export default {
     }
   },
   computed: {
-    loggedInUser() {
-      return this.$store.getters.loggedinUser
-    },
     boards() {
       return this.$store.getters.boards
     },
@@ -54,37 +45,18 @@ export default {
         showErrorMsg('Cannot add board')
       }
     },
-    async removeBoard(boardId) {
+
+    async loadBoard(board) {
       try {
-        await this.$store.dispatch(getActionRemoveBoard(boardId))
-        showSuccessMsg('Board removed')
+        this.$router.push('/board/:id')
+
+        // board = { ...board }
+        // await this.$store.dispatch(getActionUpdateBoard(board))
+        // showSuccessMsg('Board updated')
       } catch (err) {
         console.log(err)
-        showErrorMsg('Cannot remove board')
+        showErrorMsg('Cannot load board')
       }
-    },
-    async updateBoard(board) {
-      try {
-        board = { ...board }
-        board.price = +prompt('New price?', board.price)
-        await this.$store.dispatch(getActionUpdateBoard(board))
-        showSuccessMsg('Board updated')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot update board')
-      }
-    },
-    async addBoardMsg(boardId) {
-      try {
-        await this.$store.dispatch(getActionAddBoardMsg(boardId))
-        showSuccessMsg('Board msg added')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot add board msg')
-      }
-    },
-    printBoardToConsole(board) {
-      console.log('Board msgs:', board.msgs)
     },
   },
 }
