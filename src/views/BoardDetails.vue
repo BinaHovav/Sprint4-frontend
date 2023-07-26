@@ -42,6 +42,7 @@ export default {
       try {
         const boardId = this.$route.params.id
         this.board = await boardService.getById(boardId)
+        this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         showSuccessMsg('Board loaded')
       } catch (err) {
         showErrorMsg('Cannot load board')

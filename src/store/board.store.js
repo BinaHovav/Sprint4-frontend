@@ -37,15 +37,20 @@ export function getActionAddBoardMsg(boardId) {
 export const boardStore = {
   state: {
     boards: [],
+    currLabels: []
   },
   getters: {
     boards({ boards }) {
       return boards
     },
+    currLabels({ currLabels }) { return currLabels }
   },
   mutations: {
     setBoards(state, { boards }) {
       state.boards = boards
+    },
+    setCurrLabels(state, { labels }) {
+      state.currLabels = labels
     },
     addBoard(state, { board }) {
       state.boards.push(board)
