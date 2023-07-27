@@ -28,10 +28,14 @@
             </a>
           </div>
           <div class="task-details-item">
-            <h3>Labels</h3>
-            <template class="flex">
-              <div v-for="labelId in task.labels" :class="getLabelColor(labelId)">{{ getLabelTitle(labelId) }} |</div>
-            </template>
+            <div class="task-details-labels">
+              <h3>Labels</h3>
+              <div class="task-labels">
+                <button v-for="label in task.labels" class="task-btn-label" :class="getLabelColor(label)">{{
+                  getLabelTitle(label) }}</button>
+                <button class="task-btn-add-label"><span></span></button>
+              </div>
+            </div>
           </div>
           <div class="task-details-item task-details-notifications">
             <h3>Notification</h3>
@@ -47,6 +51,7 @@
           </div>
         </div>
         <div class="task-description flex column">
+          <!-- <button @click="test($event, task.members)">toggle modal</button> -->
           Description
           <textarea v-model="task.description"></textarea>
         </div>
@@ -54,27 +59,27 @@
       <div class="task-sidebar">
         <div class="task-sidebar-add">
           <h3 class="sidebar-add-txt">Add to card</h3>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-members"></span>
             <span class="">Members</span>
           </a>
-          <a class="task-btn-link ">
+          <a ref="labels" class="task-btn-link" @click="openModal(task.labels, 'LabelModal')">
             <span class="btn-link-labels"></span>
             <span class="">Labels</span>
           </a>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-checklist"></span>
             <span class="">Checklist</span>
           </a>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-dates"></span>
             <span class="">Dates</span>
           </a>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-attachment"></span>
             <span class="">Attachment</span>
           </a>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-cover"></span>
             <span class="">Cover</span>
           </a>
@@ -86,14 +91,15 @@
 
 <script>
 import { boardService } from '../services/board.service.local'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 export default {
   name: 'TaskDetails',
   data() {
     return {
       task: '',
       currGroup: {},
-      currBoard: null
+      currBoard: null,
+      ev: null
     }
   },
   computed: {
@@ -134,6 +140,15 @@ export default {
       this.$emit('updateBoard', this.currBoard)
       this.$router.replace(`/board/${this.currBoard._id}`)
     },
+    openModal(info,type) {
+      const el = this.$refs.labels.getBoundingClientRect()
+      eventBus.emit('modal', { el, type, info })
+      window.addEventListener('resize', this.handleResize)
+    },
+    handleResize(){
+      const el = this.$refs.labels.getBoundingClientRect()
+      eventBus.emit('modal', { el })
+    }
   },
 }
 </script>
