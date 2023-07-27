@@ -9,7 +9,7 @@
     max-width: 300px;
     min-height: 20px;
 
-    background-color: $clr-surface-raised, #fff;
+    background-color: $clr-surface-raised;
     box-shadow: $clr-shadow-raised, 0 1px 1px #091e4240, 0 0 1px #091e424f;
     color: $clr-text, #172b4d;
 
@@ -17,6 +17,10 @@
 
     scroll-margin: 8px;
     z-index: 0;
+
+    &:hover {
+        background-color: $clr-surface-hovered;
+    }
 
     cursor: pointer;
 
@@ -116,6 +120,50 @@
             word-wrap: break-word;
             clear: both;
 
+        }
+
+        .badges {
+            float: left;
+            margin-left: -2px;
+            max-width: 100%;
+
+            .badge {
+                color: $clr-text-subtle;
+                display: inline-block;
+                margin: 0 4px 4px 0;
+                max-width: 100%;
+                min-height: 20px;
+                overflow: hidden;
+                padding: 2px;
+                position: relative;
+                text-decoration: none;
+                text-overflow: ellipsis;
+                vertical-align: top;
+            }
+
+            .watch-icon {
+                @include trello-icon($icon-eye)
+            }
+
+            .date-icon {
+                @include trello-icon($icon-clock)
+            }
+
+            .description-icon {
+                @include trello-icon($icon-description)
+            }
+
+            .checklist-icon {
+                @include trello-icon($icon-checklist)
+            }
+
+            .comments-icon {
+                @include trello-icon($icon-comment)
+            }
+
+            .attachment-icon {
+                @include trello-icon($icon-attachment)
+            }
         }
     }
 }
