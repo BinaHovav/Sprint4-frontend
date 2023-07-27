@@ -4,8 +4,12 @@
     overflow: hidden;
     // height: $board-hight;
     height: calc(100% - 2.5rem);
-    background-color: rgb(168, 162, 162);
-
+    background-image: url("https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690367544/photo-1687791301950-972428a58aa4_h9urah.avif");
+    // min-height: calc(80vh - 20px);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     nav {
         position: relative;
         display: inline-flex;
@@ -48,7 +52,6 @@
                 margin-bottom: 12px;
                 padding: 0 10px;
             }
-
         }
 
         .btn-star {
@@ -81,9 +84,8 @@
             transition-timing-function: ease;
 
             &:hover {
-                background-color: #091E4224
+                background-color: #091e4224;
             }
-
 
             .star {
                 @include trello-icon($icon-star);
@@ -96,5 +98,4 @@
             }
         }
     }
-
 }

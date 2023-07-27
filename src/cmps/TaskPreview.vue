@@ -11,6 +11,7 @@
 
         </div>
         <span class="task-title">{{ task.title }}</span>
+        <button @click.stop="removeTask(task.id)">X</button>
         <!-- <textarea>{{ task.title }}</textarea> -->
 
 
@@ -27,13 +28,16 @@ export default {
     },
     computed: {
         currBoard() { return this.$store.getters.getCurrBoard },
+    },
+    created(){},
+    methods: {
         onTaskDetails() {
             const boardId = this.$route.params.id
             this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
-        }
-    },
-    created() { },
-    methods: {
+        },
+        removeTask(taskId) {
+            this.$emit('removeTask', taskId)
+        },
         getLabelById(labelId) {
             return this.currBoard.labels.find(label => label.id === labelId)
         },
@@ -46,9 +50,8 @@ export default {
             return label.color
         },
     },
-    components: {
-
-    }
+    components: {}
 }
+
 </script>
   

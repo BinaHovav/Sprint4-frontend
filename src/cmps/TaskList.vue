@@ -1,6 +1,6 @@
 <template>
     <div class="task-list-container">
-        <TaskPreview v-for="task in tasks" :key="task._id" :groupId="groupId" :task="task"  @removed="$emit('removed', task._id)" />
+        <TaskPreview v-for="task in tasks" :key="task._id" :groupId="groupId" :task="task"  @removeTask="removeTask" />
 
         <button @click="addTask">Add Task</button>
     </div>
@@ -23,6 +23,9 @@ export default {
         addTask(){
             const newTask = boardService.getEmptyTask()
             this.$emit('addTask', newTask)
+        },
+        removeTask(taskId){
+            this.$emit('removeTask', taskId)
         }
     },
     components: {
