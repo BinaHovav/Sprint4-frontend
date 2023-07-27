@@ -2,7 +2,7 @@
   <section class="backdrop">
     <section v-if="task" class="task-details">
       <a class="btn-icon-close" @click="onSaveTask"></a>
-      <div class="task-cover" :class="task.cover">
+      <div v-if="task.cover" class="task-cover" :class="task.cover">
         <div class="task-cover-menu">
           <a class="task-cover-btn">
             <span class="btn-icon-cover"></span>
@@ -18,28 +18,40 @@
       </div>
       <div class="task-main">
         <div class="task-details-data flex">
-          <div class="task-details-members">Members:
+          <div class="task-details-item">
+            <h3>Members</h3>
+            <div v-for="member in task.members" class="task-details-members">
+              <img class="task-member-img" src="member.url">
+            </div>
+            <a class="task-member-add">
+              <span class="task-member-btn-add"></span>
+            </a>
+          </div>
+          <div class="task-details-item">
+            <div class="task-details-labels">
+              <h3>Labels</h3>
+              <div class="task-labels">
+                <button v-for="label in task.labels" class="task-btn-label" :class="getLabelColor(label)">{{
+                  getLabelTitle(label) }}</button>
+                <button class="task-btn-add-label"><span></span></button>
+              </div>
+            </div>
+          </div>
+          <div class="task-details-item task-details-notifications">
+            <h3>Notification</h3>
             <template class="flex">
               <div v-for="member in task.members">{{ member.fullname }} |</div>
             </template>
           </div>
-          <div class="task-details-labels">Labels:
-            <template class="flex">
-              <div v-for="labelId in task.labels" :class="getLabelColor(labelId)">{{ getLabelTitle(labelId) }} |</div>
-            </template>
-          </div>
-          <div class="task-details-notifications">Notification:
-            <template class="flex">
-              <div v-for="member in task.members">{{ member.fullname }} |</div>
-            </template>
-          </div>
-          <div class="task-details-notifications">Due date:
+          <div class="task-details-item task-details-notifications">
+            <h3>Due date</h3>
             <template class="flex">
               <div>{{ task.dueDate }}</div>
             </template>
           </div>
         </div>
         <div class="task-description flex column">
+          <!-- <button @click="test($event, task.members)">toggle modal</button> -->
           Description
           <textarea v-model="task.description"></textarea>
         </div>
@@ -47,21 +59,29 @@
       <div class="task-sidebar">
         <div class="task-sidebar-add">
           <h3 class="sidebar-add-txt">Add to card</h3>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-members"></span>
             <span class="">Members</span>
           </a>
-          <a class="task-btn-link ">
+          <a ref="labels" class="task-btn-link" @click="openModal(task.labels, 'LabelModal')">
             <span class="btn-link-labels"></span>
             <span class="">Labels</span>
           </a>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-checklist"></span>
             <span class="">Checklist</span>
           </a>
-          <a class="task-btn-link ">
+          <a class="task-btn-link" @click="openModal()">
             <span class="btn-link-dates"></span>
             <span class="">Dates</span>
+          </a>
+          <a class="task-btn-link" @click="openModal()">
+            <span class="btn-link-attachment"></span>
+            <span class="">Attachment</span>
+          </a>
+          <a class="task-btn-link" @click="openModal()">
+            <span class="btn-link-cover"></span>
+            <span class="">Cover</span>
           </a>
         </div>
       </div>
@@ -71,14 +91,15 @@
 
 <script>
 import { boardService } from '../services/board.service.local'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 export default {
   name: 'TaskDetails',
   data() {
     return {
       task: '',
       currGroup: {},
-      currBoard: null
+      currBoard: null,
+      ev: null
     }
   },
   computed: {
@@ -118,6 +139,15 @@ export default {
       this.currGroup.tasks.splice(idx, 1, this.task)
       this.$emit('updateBoard', this.currBoard)
       this.$router.replace(`/board/${this.currBoard._id}`)
+    },
+    openModal(info,type) {
+      const el = this.$refs.labels.getBoundingClientRect()
+      eventBus.emit('modal', { el, type, info })
+      window.addEventListener('resize', this.handleResize)
+    },
+    handleResize(){
+      const el = this.$refs.labels.getBoundingClientRect()
+      eventBus.emit('modal', { el })
     }
   },
 }

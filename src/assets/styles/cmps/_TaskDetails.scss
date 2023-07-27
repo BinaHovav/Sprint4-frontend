@@ -164,9 +164,140 @@
         width: 552px;
         z-index: 1;
         .task-details-data {
-            margin-block-start: 20px;
-            max-width: 80%;
-            gap: 10px;
+            margin-top: 8px;
+            margin-left: 40px;
+            .task-details-item {
+                display: block;
+                float: left;
+                margin: 0 8px 8px 0;
+                max-width: 100%;
+                h3 {
+                    color: $clr-text-subtle;
+                    display: block;
+                    font-size: 12px;
+                    font-weight: 600;
+                    line-height: 16px;
+                    line-height: 20px;
+                    margin: 0 8px 4px 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .task-details-members {
+                    background-color: $clr-background-accent-gray-subtler;
+                    color: $clr-text;
+                    border-radius: 25em;
+                    cursor: pointer;
+                    display: block;
+                    float: left;
+                    height: 32px;
+                    margin: 0 4px 4px 0;
+                    overflow: visible;
+                    position: relative;
+                    text-decoration: none;
+                    -webkit-user-select: none;
+                    user-select: none;
+                    width: 32px;
+                    z-index: 0;
+                }
+                .task-member-add {
+                    border-radius: 100%;
+                    background-color: $clr-background-neutral;
+                    border: none;
+                    // border-radius: 3px;
+                    box-shadow: none;
+                    color: $clr-text;
+                    cursor: pointer;
+                    display: block;
+                    float: left;
+                    margin: 0 8px 8px 0;
+                    transition-duration: 85ms;
+                    transition-property: background-color, border-color, box-shadow;
+                    transition-timing-function: ease;
+                    .task-member-btn-add {
+                        @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
+                        font-size: 16px;
+                        height: 16px;
+                        line-height: 16px;
+                        padding: 8px;
+                        width: 16px;
+                        cursor: pointer;
+                    }
+                }
+                .task-details-labels {
+                    float: left;
+                    margin-right: 8px;
+                    margin-bottom: 8px;
+                    max-width: 100%;
+                    .task-labels {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 4px;
+                        .task-btn-label {
+                            display: inline-block;
+                            position: relative;
+                            margin-bottom: 0;
+                            border-radius: 3px;
+                            padding: 0 12px;
+                            max-width: 100%;
+                            min-width: 48px;
+                            height: 32px;
+                            box-sizing: border-box;
+                            line-height: 32px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            text-align: left;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            &:hover {
+                                cursor: pointer;
+                                filter: saturate(85%) brightness(85%);
+                            }
+                        }
+                        .task-btn-add-label {
+                            margin-bottom: 0;
+                            padding: 8px;
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                                "Droid Sans", "Helvetica Neue", sans-serif;
+                            font-size: 14px;
+                            line-height: 20px;
+                            font-weight: 400;
+                            box-sizing: border-box;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 3px;
+                            cursor: pointer;
+                            padding: 6px 12px;
+                            text-decoration: none;
+                            white-space: normal;
+                            background-color: $clr-background-neutral;
+                            box-shadow: none;
+                            border: none;
+                            color: $clr-text;
+                            transition-property: background-color, border-color, box-shadow;
+                            transition-duration: 85ms;
+                            transition-timing-function: ease;
+                            &:hover {
+                                background-color: var(--ds-background-neutral-hovered, #091e4224);
+                                box-shadow: none;
+                                border: none;
+                                color: var(--ds-text, #172b4d);
+                                text-decoration: none;
+                            }
+                            span {
+                                @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
+                                display: inline-block;
+                                line-height: 1;
+                                font-size: 14px;
+                                line-height: 20px;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+            }
         }
         .task-description {
             margin-block-start: 20px;
@@ -236,6 +367,12 @@
                 }
                 .btn-link-dates {
                     @include trello-icon($content: $icon-clock, $type: sm, $color: currentColor);
+                }
+                .btn-link-attachment {
+                    @include trello-icon($content: $icon-attachment, $type: sm, $color: currentColor);
+                }
+                .btn-link-cover {
+                    @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
                 }
             }
         }
