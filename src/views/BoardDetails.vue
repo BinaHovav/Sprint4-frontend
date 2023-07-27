@@ -12,10 +12,8 @@
       <span>menu</span>
     </nav>
     <!-- <div> -->
-    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
-      @updateGroups="updateGroups" />
+    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
     <!-- </div> -->
-
   </section>
   <RouterView @updateBoard="updateBoard" />
 </template>
@@ -27,18 +25,17 @@ import { boardService } from '../services/board.service.local'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { getActionUpdateBoard } from '../store/board.store'
 
-
 export default {
   name: 'BoardDetails',
   data() {
     return {
-      board: null
+      board: null,
     }
   },
   computed: {
-    boardToDisplay(){
+    boardToDisplay() {
       return this.$store.getters.getCurrBoard
-    }
+    },
   },
   created() {
     this.setBoard()
@@ -48,7 +45,7 @@ export default {
       try {
         const boardId = this.$route.params.id
         this.board = await boardService.getById(boardId)
-        this.$store.commit({ type: 'setCurrBoardId', boardId:  boardId  })
+        this.$store.commit({ type: 'setCurrBoardId', boardId: boardId })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         showSuccessMsg('Board loaded')
       } catch (err) {
@@ -56,7 +53,7 @@ export default {
       }
     },
     async removeGroup(groupId) {
-      const idx = this.board.groups.findIndex(group => group.id === groupId)
+      const idx = this.board.groups.findIndex((group) => group.id === groupId)
       this.board.groups.splice(idx, 1)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
@@ -74,11 +71,10 @@ export default {
         showSuccessMsg('Group added')
       } catch (err) {
         showErrorMsg('Cannot add group')
-
       }
     },
     async updateGroup(groupToEdit) {
-      const idx = this.board.groups.findIndex(group => group.id === groupToEdit.id)
+      const idx = this.board.groups.findIndex((group) => group.id === groupToEdit.id)
       // const groupToUpdate = this.board.groups.find(group => group.id === groupToEdit.id)
       this.board.groups.splice(idx, 1, groupToEdit)
       try {
@@ -86,7 +82,6 @@ export default {
         showSuccessMsg('Group updated')
       } catch (err) {
         showErrorMsg('Cannot update group')
-
       }
     },
     async updateBoard(updatedBoard = this.board) {
@@ -96,19 +91,17 @@ export default {
         this.board = updatedBoard
       } catch (err) {
         showErrorMsg('Cannot update group')
-
       }
     },
     async updateGroups(groups) {
       this.board.groups = groups
       await this.updateBoard()
-    }
+    },
   },
-
 
   components: {
     GroupList,
-    boardService
-  }
+    boardService,
+  },
 }
 </script>

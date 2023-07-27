@@ -3,7 +3,7 @@
     <AppHeader />
     <RouterView />
     <UserMsg />
-    <AppModal/>
+    <AppModal />
   </section>
 </template>
 import AppModal from './cmps/AppModal.vue'
@@ -25,7 +25,7 @@ export default {
   components: {
     AppHeader,
     UserMsg,
-    AppModal
-},
+    AppModal,
+  },
 }
 </script>
