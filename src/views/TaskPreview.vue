@@ -4,7 +4,7 @@
         <div class="task-details-container">
             <div v-if="task.labels" class="task-labels">
                 <div v-for="label in task.labels" class="task-label">
-                    <button style="background-color: rgb(157, 227, 157);">{{ label }}</button>
+                    <button :class="getLabelColor(label)">{{ getLabelTitle(label) }}</button>
                 </div>
 
             </div>
@@ -26,13 +26,26 @@ export default {
         return {}
     },
     computed: {
-        onTaskDetails(){
+        currBoard() { return this.$store.getters.getCurrBoard },
+        onTaskDetails() {
             const boardId = this.$route.params.id
             this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
         }
     },
     created() { },
-    methods: {},
+    methods: {
+        getLabelById(labelId) {
+            return this.currBoard.labels.find(label => label.id === labelId)
+        },
+        getLabelTitle(labelId) {
+            const label = this.getLabelById(labelId)
+            return label.title
+        },
+        getLabelColor(labelId) {
+            const label = this.getLabelById(labelId)
+            return label.backgroundColor
+        },
+    },
     components: {
 
     }
