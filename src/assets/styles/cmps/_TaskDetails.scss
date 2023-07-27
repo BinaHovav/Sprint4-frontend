@@ -235,7 +235,7 @@
                     @include trello-icon($content: $icon-checklist, $type: sm, $color: currentColor);
                 }
                 .btn-link-dates {
-                    @include trello-icon($content: $icon-member, $type: sm, $color: currentColor);
+                    @include trello-icon($content: $icon-clock, $type: sm, $color: currentColor);
                 }
             }
         }

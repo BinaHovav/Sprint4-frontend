@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import GroupList from './GroupList.vue'
+import GroupList from '../cmps/GroupList.vue'
 import { boardService } from '../services/board.service.local'
 // import { boardService } from '../services/board.service'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'

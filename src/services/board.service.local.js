@@ -128,7 +128,7 @@ function getEmptyTask() {
 //       {
 //         id: 'l103',
 //         title: 'Techonology',
-//         color: 'light-green',
+//         color: 'lime',
 //       },
 //       {
 //         id: 'l104',

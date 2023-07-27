@@ -28,32 +28,30 @@ export default {
     },
     computed: {
         currBoard() { return this.$store.getters.getCurrBoard },
+    },
+    created(){},
+    methods: {
         onTaskDetails() {
-
+            const boardId = this.$route.params.id
+            this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
         },
-        created() { },
-        methods: {
-            onTaskDetails() {
-                const boardId = this.$route.params.id
-                this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
-            },
-            removeTask(taskId) {
-                this.$emit('removeTask', taskId)
-            },
-            getLabelById(labelId) {
-                return this.currBoard.labels.find(label => label.id === labelId)
-            },
-            getLabelTitle(labelId) {
-                const label = this.getLabelById(labelId)
-                return label.title
-            },
-            getLabelColor(labelId) {
-                const label = this.getLabelById(labelId)
-                return label.backgroundColor
-            },
+        removeTask(taskId) {
+            this.$emit('removeTask', taskId)
         },
-        components: {}
-    }
+        getLabelById(labelId) {
+            return this.currBoard.labels.find(label => label.id === labelId)
+        },
+        getLabelTitle(labelId) {
+            const label = this.getLabelById(labelId)
+            return label.title
+        },
+        getLabelColor(labelId) {
+            const label = this.getLabelById(labelId)
+            return label.color
+        },
+    },
+    components: {}
 }
+
 </script>
   
