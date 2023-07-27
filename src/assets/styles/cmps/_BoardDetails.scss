@@ -48,7 +48,6 @@
                 margin-bottom: 12px;
                 padding: 0 10px;
             }
-
         }
 
         .btn-star {
@@ -81,9 +80,8 @@
             transition-timing-function: ease;
 
             &:hover {
-                background-color: #091E4224
+                background-color: #091e4224;
             }
-
 
             .star {
                 @include trello-icon($icon-star);
@@ -96,5 +94,4 @@
             }
         }
     }
-
 }
