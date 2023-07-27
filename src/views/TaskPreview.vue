@@ -43,7 +43,7 @@ export default {
         },
         getLabelColor(labelId) {
             const label = this.getLabelById(labelId)
-            return label.backgroundColor
+            return label.color
         },
     },
     components: {
