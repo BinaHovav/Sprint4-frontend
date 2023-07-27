@@ -14,7 +14,7 @@
     <!-- </div> -->
     
   </section>
-  <RouterView :board="board"/>
+  <RouterView @updateBoard="updateBoard"/>
 </template>
 
 <script>
@@ -71,14 +71,23 @@ export default {
 
       }
     },
-    async updateGroup(title, groupToEdit) {
+    async updateGroup(groupToEdit) {
       const idx = this.board.groups.findIndex(group => group.id === groupToEdit.id)
       const groupToUpdate = this.board.groups.find(group => group.id === groupToEdit.id)
-      groupToUpdate.title = title
       this.board.groups.splice(idx, 1, groupToUpdate)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
         showSuccessMsg('Group updated')
+      } catch (err) {
+        showErrorMsg('Cannot update group')
+
+      }
+    },
+    async updateBoard(updatedBoard) {
+      try {
+        await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
+        showSuccessMsg('Group updated')
+        this.board = updatedBoard
       } catch (err) {
         showErrorMsg('Cannot update group')
 

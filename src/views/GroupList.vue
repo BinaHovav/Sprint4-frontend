@@ -41,8 +41,8 @@ export default {
             this.$emit('addGroup', this.title)
             this.title = null
         },
-        updateGroup(title, group) {
-            this.$emit('updateGroup', title, group)
+        updateGroup(group) {
+            this.$emit('updateGroup', group)
 
         }
     },

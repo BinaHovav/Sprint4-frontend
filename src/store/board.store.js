@@ -46,7 +46,7 @@ export const boardStore = {
     },
     currLabels({ currLabels }) { return currLabels },
     getCurrBoard({ boards, currBoardId }) {
-      return boards.find(board => board.id === currBoardId)
+      return boards.find(board => board._id === currBoardId)
     }
   },
   mutations: {

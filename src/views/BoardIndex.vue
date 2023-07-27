@@ -8,7 +8,7 @@
         </button>
       </li>
     </ul>
-    <div class="new-board" @click="openModal">Create new board</div>
+    <div class="create-new-board" @click="openModal">Create new board</div>
     <div v-if="showModal" class="create-board-modal">
       <div class="create-modal-content">
         <button @click="closeModal" class="exit-btn">X</button>
@@ -42,7 +42,6 @@ export default {
   methods: {
     async loadBoard(boardId) {
       try {
-        console.log('boardId', boardId)
         this.$router.push(`/board/${boardId}`)
       } catch (err) {
         console.log(err)
@@ -54,11 +53,11 @@ export default {
     },
     async addBoard() {
       const newBoard = boardService.getEmptyBoard()
-      // newBoard.title = prompt('board title please')
+      newBoard.title = this.newBoardTitle
       try {
         const addedBoard = await this.$store.dispatch(getActionAddBoard(newBoard))
         showSuccessMsg('Board added')
-        this.$router.push(`/board/${addedBoard.id}`)
+        this.$router.push(`/board/${addedBoard._id}`)
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot add board')
