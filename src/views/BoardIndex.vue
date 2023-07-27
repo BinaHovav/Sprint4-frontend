@@ -1,14 +1,10 @@
 <template>
   <section class="container board-index" v-if="board">
-    <ul class="board-list">
-      <li v-for="board in boards" :key="board._id" @click="loadBoard(board._id)">
-        {{ board.title }}
-        <button @click.stop="updateBoard(board.id)">
-          <span class="btn-star-board"></span>
-        </button>
-      </li>
-      <li class="create-new-board" @click="openModal">Create new board</li>
-    </ul>
+    <h2>Starred Boards</h2>
+    <BoardList :boards="starredBoards" @updateBoard="updateBoard" @loadBoard="loadBoard" />
+    <h2>Other Boards</h2>
+    <BoardList :boards="boards" @updateBoard="updateBoard" @loadBoard="loadBoard" />
+    <div class="create-new-board" @click="openModal">Create new board</div>
     <div v-if="showModal" class="create-board-modal">
       <div class="create-modal-content">
         <button @click="closeModal" class="exit-btn">X</button>
@@ -20,9 +16,11 @@
 </template>
 
 <script>
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import BoardList from '../cmps/BoardList.vue'
 import { boardService } from '../services/board.service.local'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { getActionUpdateBoard, getActionAddBoard } from '../store/board.store'
+
 export default {
   data() {
     return {
@@ -32,22 +30,34 @@ export default {
     }
   },
   computed: {
+    starredBoards() {
+      return this.$store.getters.boards.filter((board) => board.isStarred)
+    },
+
     boards() {
-      return this.$store.getters.boards
+      return this.$store.getters.boards.filter((board) => !board.isStarred)
     },
   },
   created() {},
   methods: {
-    async loadBoard(boardId) {
+    //todo: make this a routerlink
+    loadBoard(boardId) {
+      this.$router.push(`/board/${boardId}`)
+    },
+    async updateBoard(boardId) {
+      let board = this.boards.find((board) => board._id === boardId)
+      if (!board) {
+        board = this.starredBoards.find((board) => board._id === boardId)
+      }
+      const boardToUpdate = JSON.parse(JSON.stringify(board))
+      boardToUpdate.isStarred = !boardToUpdate.isStarred
       try {
-        this.$router.push(`/board/${boardId}`)
+        await this.$store.dispatch(getActionUpdateBoard(boardToUpdate))
+        showSuccessMsg('Board updated')
       } catch (err) {
         console.log(err)
-        showErrorMsg('Cannot load board')
+        showErrorMsg('Cannot update board')
       }
-    },
-    openModal() {
-      this.showModal = true
     },
     async addBoard() {
       const newBoard = boardService.getEmptyBoard()
@@ -61,22 +71,17 @@ export default {
         showErrorMsg('Cannot add board')
       }
     },
-    async updateBoard(boardId) {
-      const board = this.boards.find((board) => board.id === boardId)
-      const boardToUpdate = JSON.parse(JSON.stringify(board))
-      boardToUpdate.isStarred = true
-      try {
-        await this.$store.dispatch(getActionUpdateBoard(boardToUpdate))
-        showSuccessMsg('Board updated')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot update board')
-      }
+    openModal() {
+      this.showModal = true
     },
+
     closeModal() {
       this.showModal = false
       this.newBoardTitle = ''
     },
+  },
+  components: {
+    BoardList,
   },
 }
 </script>
