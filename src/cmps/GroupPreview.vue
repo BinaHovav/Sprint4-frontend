@@ -40,12 +40,12 @@ export default {
         },
         addTask(){
             const newTask = boardService.getEmptyTask()
-            this.group.tasks.push(newTask)
+            this.clonedGroup.tasks.push(newTask)
             this.updateGroup()
         },
         removeTask(taskId){
-            const idx = this.group.tasks.find(task => task.id === taskId)
-            this.group.tasks.splice(idx,1)
+            const idx = this.clonedGroup.tasks.find(task => task.id === taskId)
+            this.clonedGroup.tasks.splice(idx,1)
             this.updateGroup()
         }
 
