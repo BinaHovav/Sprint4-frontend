@@ -1,14 +1,14 @@
 <template>
   <section class="container board-index" v-if="board">
-    <ul class="board-list" v-for="board in boards" :key="board._id">
-      <li @click="loadBoard(board._id)">
+    <ul class="board-list">
+      <li v-for="board in boards" :key="board._id" @click="loadBoard(board._id)">
         {{ board.title }}
         <button @click.stop="updateBoard(board.id)">
           <span class="btn-star-board"></span>
         </button>
       </li>
+      <li class="create-new-board" @click="openModal">Create new board</li>
     </ul>
-    <div class="create-new-board" @click="openModal">Create new board</div>
     <div v-if="showModal" class="create-board-modal">
       <div class="create-modal-content">
         <button @click="closeModal" class="exit-btn">X</button>
@@ -36,8 +36,7 @@ export default {
       return this.$store.getters.boards
     },
   },
-  created() {
-  },
+  created() {},
   methods: {
     async loadBoard(boardId) {
       try {

@@ -9,9 +9,19 @@
 
             </div>
 
+            <span class="task-title">{{ task.title }}</span>
+            <button @click.stop="removeTask(task.id)">X</button>
+            <div class="badges">
+                <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
+                <div class="badge watch"><span class="watch-icon"></span></div>
+                <div class="badge date"> <span class="date-icon"></span></div>
+                <div class="badge description"> <span class="description-icon"></span></div>
+                <div class="badge checklist"> <span class="checklist-icon"></span></div>
+                <div class="badge comments"><span class="comments-icon"></span></div>
+                <div class="badge attachment"><span class="attachment-icon"></span></div>
+            </div>
         </div>
-        <span class="task-title">{{ task.title }}</span>
-        <button @click.stop="removeTask(task.id)">X</button>
+
         <!-- <textarea>{{ task.title }}</textarea> -->
 
 
@@ -29,7 +39,7 @@ export default {
     computed: {
         currBoard() { return this.$store.getters.getCurrBoard },
     },
-    created(){},
+    created() { },
     methods: {
         onTaskDetails() {
             const boardId = this.$route.params.id
