@@ -1,7 +1,7 @@
 .group-list-container {
     position: relative;
 
-    // flex-grow: 1;
+    flex: 1;
 
     margin-top: 12px;
     margin-bottom: 8px;
@@ -10,16 +10,16 @@
     overflow-x: scroll;
     overflow-y: hidden;
 
-    height: 100%;
+    scrollbar-color: #fff6 #00000026;
+    scrollbar-width: thin;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
 
 
-    // scrollbar-color: #fff6 #00000026;
-    // scrollbar-width: auto;
-    // -webkit-user-select: none;
-    // user-select: none;
-    // white-space: nowrap;
-    // -webkit-overflow-scrolling: touch;
-    // -webkit-transform: translateZ(0);
+
     .add-group {
 
         background-color: $clr-tr-background-list;

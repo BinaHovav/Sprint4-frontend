@@ -9,7 +9,7 @@
     max-width: 300px;
     min-height: 20px;
 
-    background-color: $clr-surface-raised, #fff;
+    background-color: $clr-surface-raised;
     box-shadow: $clr-shadow-raised, 0 1px 1px #091e4240, 0 0 1px #091e424f;
     color: $clr-text, #172b4d;
 
@@ -17,6 +17,10 @@
 
     scroll-margin: 8px;
     z-index: 0;
+
+    &:hover {
+        background-color: $clr-surface-hovered;
+    }
 
     cursor: pointer;
 
@@ -116,6 +120,86 @@
             word-wrap: break-word;
             clear: both;
 
+        }
+
+        .badges {
+            float: left;
+            margin-left: -2px;
+            max-width: 100%;
+
+            .badge {
+                color: $clr-text-subtle;
+                display: inline-block;
+                margin: 0 4px 4px 0;
+                max-width: 100%;
+                min-height: 20px;
+                overflow: hidden;
+                padding: 2px;
+                position: relative;
+                text-decoration: none;
+                text-overflow: ellipsis;
+                vertical-align: top;
+            }
+
+            .watch-icon {
+                @include trello-icon($icon-eye)
+            }
+
+            .date-icon {
+                @include trello-icon($icon-clock)
+            }
+
+            .description-icon {
+                @include trello-icon($icon-description)
+            }
+
+            .checklist-icon {
+                @include trello-icon($icon-checklist)
+            }
+
+            .comments-icon {
+                @include trello-icon($icon-comment)
+            }
+
+            .attachment-icon {
+                @include trello-icon($icon-attachment)
+            }
+        }
+
+        .task-members {
+            float: right;
+            margin: 0;
+
+            &>* {
+                float: right;
+                height: 24px;
+                margin: 0 0 4px 4px;
+                width: 24px;
+                background-color: $clr-background-accent-gray-subtler;
+                color: $clr-text;
+                border-radius: 25em;
+                cursor: pointer;
+                display: block;
+                float: left;
+                margin: 0 4px 4px 0;
+                overflow: visible;
+                position: relative;
+                text-decoration: none;
+                -webkit-user-select: none;
+                user-select: none;
+                z-index: 0;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 25em;
+                    object-fit: cover;
+                    border: 0;
+                    aspect-ratio: auto 30 / 30;
+                    overflow-clip-margin: content-box;
+                    overflow: clip;
+                }
+            }
         }
     }
 }

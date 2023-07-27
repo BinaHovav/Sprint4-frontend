@@ -2,19 +2,22 @@
   <section class="board-details-container flex column">
     <nav class="flex justify-space-between align-center">
       <div class="board-title">
-        <h1 class="fs18">{{ board?.title }}</h1>
+        <h1 class="fs18">{{ boardToDisplay?.title }}</h1>
       </div>
       <button class="btn-star"><span class="star"></span></button>
       <span>filter</span>
-      <span>users</span>
+      <!-- <div class="board-members" v-for="member in board.members">
+        <div><img :src=member.imgUrl alt="member"></div>
+      </div> -->
       <span>menu</span>
     </nav>
     <!-- <div> -->
-      <GroupList :groups="board?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" />
+    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
+      @updateGroups="updateGroups" />
     <!-- </div> -->
-    
+
   </section>
-  <RouterView @updateBoard="updateBoard"/>
+  <RouterView @updateBoard="updateBoard" />
 </template>
 
 <script>
@@ -33,6 +36,9 @@ export default {
     }
   },
   computed: {
+    boardToDisplay(){
+      return this.$store.getters.getCurrBoard
+    }
   },
   created() {
     this.setBoard()
@@ -42,7 +48,7 @@ export default {
       try {
         const boardId = this.$route.params.id
         this.board = await boardService.getById(boardId)
-        this.$store.commit({ type: 'setCurrBoardId', boardId: this.board._id })
+        this.$store.commit({ type: 'setCurrBoardId', boardId:  boardId  })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         showSuccessMsg('Board loaded')
       } catch (err) {
@@ -73,8 +79,8 @@ export default {
     },
     async updateGroup(groupToEdit) {
       const idx = this.board.groups.findIndex(group => group.id === groupToEdit.id)
-      const groupToUpdate = this.board.groups.find(group => group.id === groupToEdit.id)
-      this.board.groups.splice(idx, 1, groupToUpdate)
+      // const groupToUpdate = this.board.groups.find(group => group.id === groupToEdit.id)
+      this.board.groups.splice(idx, 1, groupToEdit)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
         showSuccessMsg('Group updated')
@@ -83,7 +89,7 @@ export default {
 
       }
     },
-    async updateBoard(updatedBoard) {
+    async updateBoard(updatedBoard = this.board) {
       try {
         await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
         showSuccessMsg('Group updated')
@@ -92,6 +98,10 @@ export default {
         showErrorMsg('Cannot update group')
 
       }
+    },
+    async updateGroups(groups) {
+      this.board.groups = groups
+      await this.updateBoard()
     }
   },
 

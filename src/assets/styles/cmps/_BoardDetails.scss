@@ -3,7 +3,7 @@
     position: relative;
     overflow: hidden;
     // height: $board-hight;
-    height: calc(100% - 2.5rem);
+    flex: 1;
     background-image: url("https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg");
     // min-height: calc(80vh - 20px);
     background-repeat: no-repeat;
@@ -94,6 +94,41 @@
                     color: #42526e;
                     cursor: pointer;
                     transform: scale(1.2);
+                }
+            }
+        }
+        .board-members{
+            float: right;
+            margin: 0;
+
+            &>* {
+                float: right;
+                height: 24px;
+                margin: 0 0 4px 4px;
+                width: 24px;
+                background-color: $clr-background-accent-gray-subtler;
+                color: $clr-text;
+                border-radius: 25em;
+                cursor: pointer;
+                display: block;
+                float: left;
+                margin: 0 4px 4px 0;
+                overflow: visible;
+                position: relative;
+                text-decoration: none;
+                -webkit-user-select: none;
+                user-select: none;
+                z-index: 0;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 25em;
+                    object-fit: cover;
+                    border: 0;
+                    aspect-ratio: auto 30 / 30;
+                    overflow-clip-margin: content-box;
+                    overflow: clip;
                 }
             }
         }

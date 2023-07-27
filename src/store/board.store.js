@@ -90,8 +90,8 @@ export const boardStore = {
     },
     async updateBoard(context, { board }) {
       try {
+        context.commit(getActionUpdateBoard(JSON.parse(JSON.stringify(board))))
         const savedBoard = await boardService.save(board)
-        context.commit(getActionUpdateBoard(savedBoard))
         return savedBoard
       } catch (err) {
         console.log('boardStore: Error in updateBoard', err)
