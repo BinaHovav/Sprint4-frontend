@@ -2,7 +2,7 @@
   <section class="backdrop">
     <section v-if="task" class="task-details">
       <a class="btn-icon-close" @click="onSaveTask"></a>
-      <div class="task-cover" :class="task.cover">
+      <div v-if="task.cover" class="task-cover" :class="task.cover">
         <div class="task-cover-menu">
           <a class="task-cover-btn">
             <span class="btn-icon-cover"></span>
@@ -18,22 +18,29 @@
       </div>
       <div class="task-main">
         <div class="task-details-data flex">
-          <div class="task-details-members">Members:
-            <template class="flex">
-              <div v-for="member in task.members">{{ member.fullname }} |</div>
-            </template>
+          <div class="task-details-item">
+            <h3>Members</h3>
+            <div v-for="member in task.members" class="task-details-members">
+              <img class="task-member-img" src="member.url">
+            </div>
+            <a class="task-member-add">
+              <span class="task-member-btn-add"></span>
+            </a>
           </div>
-          <div class="task-details-labels">Labels:
+          <div class="task-details-item">
+            <h3>Labels</h3>
             <template class="flex">
               <div v-for="labelId in task.labels" :class="getLabelColor(labelId)">{{ getLabelTitle(labelId) }} |</div>
             </template>
           </div>
-          <div class="task-details-notifications">Notification:
+          <div class="task-details-item task-details-notifications">
+            <h3>Notification</h3>
             <template class="flex">
               <div v-for="member in task.members">{{ member.fullname }} |</div>
             </template>
           </div>
-          <div class="task-details-notifications">Due date:
+          <div class="task-details-item task-details-notifications">
+            <h3>Due date</h3>
             <template class="flex">
               <div>{{ task.dueDate }}</div>
             </template>
@@ -62,6 +69,14 @@
           <a class="task-btn-link ">
             <span class="btn-link-dates"></span>
             <span class="">Dates</span>
+          </a>
+          <a class="task-btn-link ">
+            <span class="btn-link-attachment"></span>
+            <span class="">Attachment</span>
+          </a>
+          <a class="task-btn-link ">
+            <span class="btn-link-cover"></span>
+            <span class="">Cover</span>
           </a>
         </div>
       </div>
@@ -118,7 +133,7 @@ export default {
       this.currGroup.tasks.splice(idx, 1, this.task)
       this.$emit('updateBoard', this.currBoard)
       this.$router.replace(`/board/${this.currBoard._id}`)
-    }
+    },
   },
 }
 </script>

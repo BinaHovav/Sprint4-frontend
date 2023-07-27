@@ -164,9 +164,67 @@
         width: 552px;
         z-index: 1;
         .task-details-data {
-            margin-block-start: 20px;
-            max-width: 80%;
-            gap: 10px;
+            margin-top: 8px;
+            margin-left: 40px;
+            .task-details-item {
+                display: block;
+                float: left;
+                margin: 0 8px 8px 0;
+                max-width: 100%;
+                h3 {
+                    color: $clr-text-subtle;
+                    display: block;
+                    font-size: 12px;
+                    font-weight: 600;
+                    line-height: 16px;
+                    line-height: 20px;
+                    margin: 0 8px 4px 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .task-details-members {
+                    background-color: $clr-background-accent-gray-subtler;
+                    color: $clr-text;
+                    border-radius: 25em;
+                    cursor: pointer;
+                    display: block;
+                    float: left;
+                    height: 32px;
+                    margin: 0 4px 4px 0;
+                    overflow: visible;
+                    position: relative;
+                    text-decoration: none;
+                    -webkit-user-select: none;
+                    user-select: none;
+                    width: 32px;
+                    z-index: 0;
+                }
+                .task-member-add {
+                    border-radius: 100%;
+                    background-color: $clr-background-neutral;
+                    border: none;
+                    // border-radius: 3px;
+                    box-shadow: none;
+                    color: $clr-text;
+                    cursor: pointer;
+                    display: block;
+                    float: left;
+                    margin: 0 8px 8px 0;
+                    transition-duration: 85ms;
+                    transition-property: background-color, border-color, box-shadow;
+                    transition-timing-function: ease;
+                    .task-member-btn-add {
+                        @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
+                        font-size: 16px;
+                        height: 16px;
+                        line-height: 16px;
+                        padding: 8px;
+                        width: 16px;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
         .task-description {
             margin-block-start: 20px;
@@ -236,6 +294,12 @@
                 }
                 .btn-link-dates {
                     @include trello-icon($content: $icon-clock, $type: sm, $color: currentColor);
+                }
+                .btn-link-attachment {
+                    @include trello-icon($content: $icon-attachment, $type: sm, $color: currentColor);
+                }
+                .btn-link-cover {
+                    @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
                 }
             }
         }
