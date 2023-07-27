@@ -5,7 +5,7 @@
 </template>
 <script>
 import { eventBus } from '../services/event-bus.service';
-import LabelModal from './ModalTypes/LabelModal.vue' 
+import LabelModal from './ModalTypes/LabelModal.vue'
 export default {
     data() {
         return {
@@ -21,13 +21,12 @@ export default {
         eventBus.on('modal', ({ el, type, info }) => {
             this.setModalLocation(el)
             if (info && type) {
-                this.info = JSON.parse(JSON.stringify(info)) 
+                this.info = JSON.parse(JSON.stringify(info))
                 this.type = type
                 this.isVisible = !this.isVisible
             }
         }
         )
-
     },
     methods: {
         setModalLocation(el) {
