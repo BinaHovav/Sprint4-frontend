@@ -120,41 +120,36 @@ function getEmptyTask() {
 //       {
 //         id: 'l101',
 //         title: 'Low priority',
-//         color: '#164b35',
-//         backgroundColor: 'green',
+//         color: 'green',
 //       },
 //       {
 //         id: 'l102',
 //         title: 'Planning',
-//         color: '#faa53d',
-//         backgroundColor: 'orange',
+//         color: 'orange',
 //       },
 //       {
 //         id: 'l103',
 //         title: 'Techonology',
-//         color: '#faa53d',
-//         backgroundColor: 'light-green',
+//         color: 'light-green',
 //       },
 //       {
 //         id: 'l104',
 //         title: 'Research',
-//         color: '#faa53d',
-//         backgroundColor: 'yellow',
+//         color: 'yellow',
 //       },
 //       {
 //         id: 'l105',
 //         title: 'Design',
-//         color: '#faa53d',
-//         backgroundColor: 'pink',
+//         color: 'pink',
 //       },
 //       {
 //         id: 'l106',
-//         title: 'l106',
+//         title: 'Medium priority',
 //         color: 'light-yellow',
 //       },
 //       {
 //         id: 'l107',
-//         title: 'l107',
+//         title: 'Analysis',
 //         color: 'blue',
 //       },
 //       {
@@ -165,14 +160,12 @@ function getEmptyTask() {
 //       {
 //         id: 'l109',
 //         title: 'Enhancement',
-//         color: '#faa53d',
-//         backgroundColor: 'purple',
+//         color: 'purple',
 //       },
 //       {
 //         id: 'l110',
 //         title: 'High priority',
-//         color: '#faa53d',
-//         backgroundColor: 'red',
+//         color: 'red',
 //       },
 //     ],
 //     members: [

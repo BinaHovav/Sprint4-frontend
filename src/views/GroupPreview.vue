@@ -7,7 +7,7 @@
                 <button class="btn-three-dots" @click="$emit('removeGroup', group.id)"><span class="three-dots"></span></button>
             
         </div>
-        <TaskList :tasks="group.tasks" :groupId="group.id" @addTask="addTask" />
+        <TaskList :tasks="group.tasks" :groupId="group.id" @addTask="addTask" @removeTask="removeTask"/>
     </div>
 </template>
   
@@ -27,6 +27,11 @@ export default {
         },
         addTask(newTask){
             this.group.tasks.push(newTask)
+            this.updateGroup()
+        },
+        removeTask(taskId){
+            const idx = this.group.tasks.find(task => task.id === taskId)
+            this.group.tasks.splice(idx,1)
             this.updateGroup()
         }
 

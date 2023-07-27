@@ -11,6 +11,7 @@
 
         </div>
         <span class="task-title">{{ task.title }}</span>
+        <button @click.stop="removeTask(task.id)">X</button>
         <!-- <textarea>{{ task.title }}</textarea> -->
 
 
@@ -26,13 +27,18 @@ export default {
         return {}
     },
     computed: {
+        
+    },
+    created() { },
+    methods: {
         onTaskDetails(){
             const boardId = this.$route.params.id
             this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
+        },
+        removeTask(taskId){
+            this.$emit('removeTask', taskId)
         }
     },
-    created() { },
-    methods: {},
     components: {
 
     }
