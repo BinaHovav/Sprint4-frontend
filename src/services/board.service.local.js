@@ -100,8 +100,6 @@ function getEmptyTask() {
   }
 }
 
-
-
 // ;(async () => {
 //   await storageService.post(STORAGE_KEY, {
 //     _id: 'b101',
