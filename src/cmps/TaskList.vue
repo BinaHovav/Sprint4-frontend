@@ -1,14 +1,20 @@
 <template>
     <div class="task-list-container">
-        <TaskPreview v-for="task in tasks" :key="task._id" :groupId="groupId" :task="task"  @removeTask="removeTask" />
+        <!-- <draggable v-model="tasks" group="tasks"  :move="checkMove"> -->
+            <!-- <transition-group> -->
+                <TaskPreview v-for="task in tasks" :key="task.id" :groupId="groupId" :task="task"
+                    @removeTask="removeTask" />
+            <!-- </transition-group> -->
+        <!-- </draggable> -->
 
-        <button @click="addTask">Add Task</button>
+
     </div>
 </template>
   
 <script>
-import { boardService } from '../services/board.service.local'
+
 import TaskPreview from './TaskPreview.vue'
+import draggable from 'vuedraggable'
 
 export default {
     name: 'TaskList',
@@ -20,16 +26,16 @@ export default {
     },
     created() { },
     methods: {
-        addTask(){
-            const newTask = boardService.getEmptyTask()
-            this.$emit('addTask', newTask)
-        },
-        removeTask(taskId){
+        removeTask(taskId) {
             this.$emit('removeTask', taskId)
+        },
+        checkMove(evt) {
+            // return (evt.draggedContext.element.title !== 'apple');
         }
     },
     components: {
         TaskPreview,
+        draggable
     }
 }
 </script>

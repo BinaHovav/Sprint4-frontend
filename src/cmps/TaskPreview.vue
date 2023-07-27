@@ -10,15 +10,18 @@
             </div>
 
             <span class="task-title">{{ task.title }}</span>
-            <button @click.stop="removeTask(task.id)">X</button>
             <div class="badges">
                 <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
                 <div class="badge watch"><span class="watch-icon"></span></div>
-                <div class="badge date"> <span class="date-icon"></span></div>
-                <div class="badge description"> <span class="description-icon"></span></div>
-                <div class="badge checklist"> <span class="checklist-icon"></span></div>
-                <div class="badge comments"><span class="comments-icon"></span></div>
-                <div class="badge attachment"><span class="attachment-icon"></span></div>
+                <div v-if="task.dueDate" class="badge date"> <span class="date-icon"></span></div>
+                <div v-if="task.description" class="badge description"> <span class="description-icon"></span></div>
+                <div v-if="task.checklist" class="badge checklist"> <span class="checklist-icon"></span></div>
+                <div v-if="task.comments" class="badge comments"><span class="comments-icon"></span></div>
+                <div v-if="task.attachment" class="badge attachment"><span class="attachment-icon"></span></div>
+            </div>
+            <button @click.stop="removeTask(task.id)">X</button>
+            <div class="task-members" v-for="member in task.members">
+                <div><img :src=member.imgUrl alt="member"></div>
             </div>
         </div>
 
