@@ -1,9 +1,9 @@
 <template>
-  <section class="container board-index" v-if="board">
+  <section class="container board-index" v-if="boards">
     <h2>Starred Boards</h2>
-    <BoardList :boards="starredBoards" @updateBoard="updateBoard" @loadBoard="loadBoard" />
+    <BoardList :boards="starredBoards" @updateBoard="updateBoard" />
     <h2>Other Boards</h2>
-    <BoardList :boards="boards" @updateBoard="updateBoard" @loadBoard="loadBoard" />
+    <BoardList :boards="boards" @updateBoard="updateBoard" />
     <div class="create-new-board" @click="openModal">Create new board</div>
     <div v-if="showModal" class="create-board-modal">
       <div class="create-modal-content">
@@ -24,7 +24,6 @@ import { getActionUpdateBoard, getActionAddBoard } from '../store/board.store'
 export default {
   data() {
     return {
-      board: {},
       showModal: false,
       newBoardTitle: '',
     }
@@ -38,12 +37,8 @@ export default {
       return this.$store.getters.boards.filter((board) => !board.isStarred)
     },
   },
-  created() {},
+  created() { },
   methods: {
-    //todo: make this a routerlink
-    loadBoard(boardId) {
-      this.$router.push(`/board/${boardId}`)
-    },
     async updateBoard(boardId) {
       let board = this.boards.find((board) => board._id === boardId)
       if (!board) {
