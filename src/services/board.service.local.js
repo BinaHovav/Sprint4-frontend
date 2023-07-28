@@ -279,23 +279,7 @@ function getEmptyTask() {
 //                 id: 'c105',
 //                 title: 'Project Timeline',
 //                 description: 'Create a detailed project timeline with key milestones and deadlines for the entire development process.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102', 'u103' ],
 //                 labels: ['l110', 'l102'],
 //                 dueDate: 1690884000,
 //                 checklists: [],

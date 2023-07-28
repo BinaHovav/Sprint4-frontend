@@ -4,7 +4,7 @@
         <div class="task-details-container">
             <div v-if="task.labels" class="task-labels">
                 <div v-for="label in task.labels" class="task-label">
-                    <button :class="getLabelColor(label)">{{ getLabelTitle(label) }}</button>
+                    <button :class="getLabelById(label).color">{{ getLabelById(label).title }}</button>
                 </div>
 
             </div>
@@ -20,8 +20,8 @@
                 <div v-if="task.attachment" class="badge attachment"><span class="attachment-icon"></span></div>
             </div>
             <button @click.stop="removeTask(task.id)">X</button>
-            <div class="task-members" v-for="member in task.members">
-                <div><img :src=member.imgUrl alt="member"></div>
+            <div class="task-members" v-for="memberId in task.members">
+                <div><img :src="getMemberById(memberId).imgUrl" alt="member" :title="getMemberById(memberId).fullname"></div>
             </div>
         </div>
 
@@ -54,13 +54,8 @@ export default {
         getLabelById(labelId) {
             return this.currBoard.labels.find(label => label.id === labelId)
         },
-        getLabelTitle(labelId) {
-            const label = this.getLabelById(labelId)
-            return label.title
-        },
-        getLabelColor(labelId) {
-            const label = this.getLabelById(labelId)
-            return label.color
+        getMemberById(memberId) {
+            return this.currBoard.members.find(member => member._id === memberId)
         },
     },
     components: {}
