@@ -14,6 +14,7 @@
     <div v-if="showModal" class="create-board-modal">
       <div class="create-modal-content">
         <button @click="closeModal" class="exit-btn">X</button>
+        <!--TODO: hey bina its tomer (: i think this should be a form and u cannot submit it until input is entered (required) -->
         <input v-model="newBoardTitle" type="text" placeholder="Board title" />
         <button @click="addBoard" class="create-btn">Create</button>
       </div>

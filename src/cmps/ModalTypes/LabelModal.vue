@@ -17,7 +17,7 @@
         </div>
         <p class="sub-header-title">Labels</p>
         <ul class="labels-options">
-            <li v-for="label in boardLabels">
+            <li v-for="label in board.labels">
                 <label class="label-option" @click.prevent="onSetLabel(label.id)">
                     <input class="pwLA_DnwUq5xZT" type="checkbox" aria-checked="false" aria-disabled="false"
                         aria-invalid="false" value="" :checked="isLabelChecked(label.id)">
@@ -51,31 +51,44 @@ export default {
             required: true
         }
     },
+    name: 'LabelModal',
+    data() {
+        return {
+            board: {}
+        }
+    },
+    created(){
+        this.board = this.getBoard
+    },
     methods: {
         getLabelTitle(labelId) {
-            const labels = this.boardLabels
+            const labels = this.board.labels
             const label = labels.find(label => label.id === labelId)
             return label.title
         },
         getLabelColor(labelId) {
-            const labels = this.boardLabels
+            const labels = this.board.labels
             const label = labels.find(label => label.id === labelId)
             return label.color
         },
         isLabelChecked(labelId) {
-            return this.info.includes(labelId)
+            return this.info.taskLabels.includes(labelId)
         },
         onSetLabel(labelId) {
-            const idx = this.info.findIndex(label => label === labelId)
-            console.log('idx',idx);
-            if (idx >= 0) this.info.splice(idx,1) 
-            else this.info.push(labelId)
+            const idx = this.info.taskLabels.findIndex(label => label === labelId)
+            if (idx >= 0) this.info.taskLabels.splice(idx,1) 
+            else this.info.taskLabels.push(labelId)
+            this.setInfo()
+        },
+        setInfo(){
+            this.$emit('setInfo', this.info)
         }
     },
     computed: {
-        boardLabels() {
+        getBoard() {
             const board = this.$store.getters.getCurrBoard
-            return board.labels
+            const boardCopy = JSON.parse(JSON.stringify(board))
+            return boardCopy
         },
 
     },
