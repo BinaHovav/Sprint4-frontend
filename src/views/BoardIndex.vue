@@ -1,9 +1,15 @@
 <template>
-  <section class="container board-index" v-if="board">
-    <h2>Starred Boards</h2>
-    <BoardList :boards="starredBoards" @updateBoard="updateBoard" @loadBoard="loadBoard" />
-    <h2>Other Boards</h2>
-    <BoardList :boards="boards" @updateBoard="updateBoard" @loadBoard="loadBoard" />
+  <section class="container board-index" v-if="boards">
+    <div class="board-category-title">
+      <span class="star"></span>
+      <h3>Starred boards</h3>
+    </div>
+    <BoardList :boards="starredBoards" @updateBoard="updateBoard" />
+    <div class="board-category-title">
+      <span class="clock"></span>
+      <h3>Recently viewed</h3>
+    </div>
+    <BoardList :boards="boards" @updateBoard="updateBoard" />
     <div class="create-new-board" @click="openModal">Create new board</div>
     <div v-if="showModal" class="create-board-modal">
       <div class="create-modal-content">
@@ -24,7 +30,6 @@ import { getActionUpdateBoard, getActionAddBoard } from '../store/board.store'
 export default {
   data() {
     return {
-      board: {},
       showModal: false,
       newBoardTitle: '',
     }
@@ -40,10 +45,6 @@ export default {
   },
   created() {},
   methods: {
-    //todo: make this a routerlink
-    loadBoard(boardId) {
-      this.$router.push(`/board/${boardId}`)
-    },
     async updateBoard(boardId) {
       let board = this.boards.find((board) => board._id === boardId)
       if (!board) {

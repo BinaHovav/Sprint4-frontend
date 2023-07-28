@@ -1,11 +1,11 @@
 <template>
-  <div class="board-tile" @click="loadBoard(board._id)">
-    <img :src="board.imgUrl" alt="Board Image" class="board-image" />
-    <span class="board-title">{{ board.title }}</span>
+  <div class="board-tile">
+    <RouterLink :to="'/board/' + board._id">
+      <img :src="board.imgUrl" alt="Image" class="board-image" />
+      <span class="board-title">{{ board.title }}</span>
+      <button class="btn-star-board" :class="{ starred: board.isStarred }" @click.prevent="updateBoard(board._id)" @mouseenter="showStar = true" @mouseleave="showStar = false"></button>
+    </RouterLink>
   </div>
-  <button @click.stop="updateBoard(board._id)">
-    <span class="btn-star-board"></span>
-  </button>
 </template>
 
 <script>
@@ -15,17 +15,16 @@ export default {
   emits: ['loadBoard', 'updateBoard'],
   props: ['board'],
   data() {
-    return {}
+    return {
+      showStar: false,
+    }
   },
   computed: {},
   created() {},
   methods: {
-    loadBoard(boardId) {
-      this.$emit('loadBoard', boardId)
-    },
     updateBoard(boardId) {
-      console.log('boardId', boardId)
       this.$emit('updateBoard', boardId)
+      this.board.isStarred = !this.board.isStarred
     },
   },
   components: {},

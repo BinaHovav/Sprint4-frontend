@@ -1,0 +1,65 @@
+.board-tile {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+    img {
+        height: 95px;
+        min-width: 209px;
+        border-radius: 3px;
+        filter: brightness(80%);
+    }
+    .btn-star-board {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        // &.starred {
+        //     opacity: 1;
+        //     // color: gold;
+        // }
+    }
+
+    &:hover {
+        filter: brightness(80%);
+        .btn-star-board.starred,
+        .btn-star-board:not(.starred) {
+            @include trello-icon($icon-star, $type: sm, $color: white);
+            opacity: 1;
+            background-color: transparent;
+            cursor: pointer;
+            color: gold;
+        }
+    }
+
+    .board-title {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        // background-color: rgba(0, 0, 0, 0.7);
+        padding: 2px 2px;
+        border-radius: 3px;
+        font-size: 16px;
+        line-height: 20px;
+        // white-space: nowrap;
+        // text-overflow: ellipsis;
+        // overflow: hidden;
+        color: white;
+    }
+    // .btn-star-board.starred {
+    //     position: absolute;
+    //     bottom: 0;
+    //     right: 0;
+    //     background-color: transparent;
+    //     opacity: 0;
+
+    //     @include trello-icon($icon-star, $type: sm, $color: white);
+
+    //     &:hover {
+    //         opacity: 1;
+    //         cursor: pointer;
+    //     }
+    // }
+    // .btn-star-board:not(.starred):hover {
+    //     opacity: 1;
+    // }
+}

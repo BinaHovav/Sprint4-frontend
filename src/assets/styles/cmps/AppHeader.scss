@@ -1,47 +1,131 @@
-header {
-    background-color: white;
+.app-header {
+    // display: flex;
+    background-color: #b3d3db;
+    // background-color: transparent;
     padding: 8px;
-    display: flex;
-    // justify-content: space-between;
     font-size: 18px;
-    border-bottom: 1px solid gray;
-    max-height: 48px;
-
-    .loggedin-user {
-        background-color: $clr1;
-        padding: 2px 8px;
-        border-radius: 1em;
-        align-self: flex-end;
-        color: whitesmoke;
-        span {
-            background-color: $clr2;
-            padding: 4px;
-            margin: 10px;
-            border-radius: 50%;
-        }
-        // img {
-        //     width: 2em;
-        //     height: 2em;
-        //     border-radius: 50%;
-        // }
-    }
-    background-color: white;
-    justify-content: space-between;
-
-    color: $clr-text;
-    padding: 5px 0;
-    img {
-        background-color: darkblue;
-        height: 25px;
-        padding: 4px;
-    }
+    border-bottom: 1px solid hsla(218, 54%, 19.6%, 0.16);
+    // max-height: 48px;
     nav {
+        .left-nav-app-header {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            img {
+                width: 90px;
+                height: 18px;
+            }
+        }
+        display: flex;
+        padding-left: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: $clr-text;
+        // flex-grow: 0;
+        // flex-shrink: 0;
+        // flex-basis: 0;
+        align-items: center;
+        gap: 30px;
+        justify-content: space-between;
+        .left-nav-btn {
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            gap: 8px;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.2);
+                border-radius: 2px;
+            }
+            i {
+                font-size: 12px;
+            }
+        }
+        .left-nav-btn:last-child {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 6px 12px;
+            border-radius: 4px;
+            :hover {
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        span {
+            line-height: 20px;
+        }
+        .right-nav-app-header {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding-right: 16px;
+            font-size: 18px;
+            .app-header-search-box {
+                position: relative;
+
+                i {
+                    position: absolute;
+                    font-size: 12px;
+                    left: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    pointer-events: none; /* This ensures that the icon does not interfere with input interactions */
+                }
+
+                .app-header-search-box input {
+                    font-size: 8px;
+                    padding-left: 25px;
+                }
+            }
+            input {
+                // background-color: #bdd5db;
+                color: black;
+                height: 32px;
+                padding: 0px 12px 0px 30px;
+                outline: none;
+                border-radius: 5px;
+                font-size: 14px;
+                line-height: 20px;
+                border: 2px solid hsla(218, 54%, 19.6%, 0.16);
+            }
+            ::placeholder {
+                color: rgb(75, 75, 75);
+                padding-left: 2px;
+            }
+        }
+        .right-nav-btn:nth-child(2) {
+            transform: rotate(45deg);
+        }
     }
-    nav a:not(:first-child) {
-        padding: 0 5px;
-        margin: 10px;
-    }
-    nav .active {
-        color: $clr1;
-    }
+    // .loggedin-user {
+    //     background-color: $clr1;
+    //     padding: 2px 8px;
+    //     border-radius: 1em;
+    //     align-self: flex-end;
+    //     color: whitesmoke;
+    //     span {
+    //         background-color: $clr2;
+    //         padding: 4px;
+    //         margin: 10px;
+    //         border-radius: 50%;
+    // }
+
+    // background-color: white;
+    // justify-content: space-between;
+
+    // color: $clr-text;
+    // padding: 5px 0;
+    // img {
+    //     background-color: darkblue;
+    //     height: 25px;
+    //     padding: 4px;
+    // }
+
+    // nav a:not(:first-child) {
+    //     padding: 0 5px;
+    //     margin: 10px;
+    // }
+    // nav .active {
+    //     color: $clr1;
+    // }
 }
