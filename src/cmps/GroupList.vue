@@ -5,7 +5,8 @@
             handle=".drag-me">
             <!-- v-dragscroll.noleft="isDragScroll" ref="groupList" -->
             <template #item="{ element }">
-                <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup" />
+                <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
+                    @updateTasks="updateTasks" />
             </template>
             <template #footer>
                 <div class="add-group">
@@ -49,6 +50,7 @@ export default {
                 return this.groups
             },
             set(groups) {
+                console.log(groups);
                 this.$emit('updateGroups', groups)
             }
         }
@@ -75,8 +77,12 @@ export default {
         },
         updateGroup(group) {
             this.$emit('updateGroup', group)
-
         },
+        updateTasks(tasks, groupId) {
+            const clonedGroup = JSON.parse(JSON.stringify(this.groups.find(group => group.id === groupId)))
+            clonedGroup.tasks = tasks
+            this.updateGroup(clonedGroup)
+        }
     },
     components: {
         GroupPreview,
