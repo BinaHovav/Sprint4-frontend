@@ -8,14 +8,15 @@
         border-radius: 3px;
         filter: brightness(80%);
     }
+
     .btn-star-board {
         position: absolute;
         bottom: 0;
         right: 0;
         opacity: 0;
-        // &.starred {
+        // .starred {
         //     opacity: 1;
-        //     // color: gold;
+        //     color: gold;
         // }
     }
 

@@ -75,15 +75,17 @@
                 display: inline-flex;
                 max-width: calc(100% - 4px);
 
+
+
+
                 button {
                     display: inline-block;
                     position: relative;
-                    height: 8px;
-                    height: 16px;
+                    min-height: 8px;
                     min-width: 40px;
-                    max-width: 40px;
-                    min-width: 56px;
                     max-width: 100%;
+
+                    transition: width height 2s;
 
                     margin-top: 0;
                     margin-bottom: 0;
@@ -104,6 +106,26 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+
+                    &.labels-open{
+                        animation-name: labelsOpen;
+                        animation-duration: 450ms;
+                        animation-timing-function: ease-in;
+                        animation-fill-mode: forwards;
+                    }
+                    &.labels-close{
+                        animation-name: labelsClose;
+                        animation-duration: 450ms;
+                        animation-timing-function: ease-in;
+                        animation-fill-mode: forwards;
+                    }
+
+
+
+                    &:hover {
+                        cursor: pointer;
+                        filter: saturate(85%) brightness(85%);
+                    }
 
                 }
             }

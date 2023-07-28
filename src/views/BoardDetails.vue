@@ -1,25 +1,16 @@
 <template>
   <section class="board-details-container flex column">
-    <nav class="flex justify-space-between align-center">
-      <div class="board-title">
-        <h1 class="fs18">{{ boardToDisplay?.title }}</h1>
-      </div>
-      <button class="btn-star"><span class="star"></span></button>
-      <span>filter</span>
-      <!-- <div class="board-members" v-for="member in board.members">
-        <div><img :src=member.imgUrl alt="member"></div>
-      </div> -->
-      <span>menu</span>
-    </nav>
-    <!-- <div> -->
-    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
-    <!-- </div> -->
+    <TopNavbar  />
+    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
+      @updateGroups="updateGroups" />
   </section>
   <RouterView @updateBoard="updateBoard" />
 </template>
 
 <script>
 import GroupList from '../cmps/GroupList.vue'
+import TopNavbar from '../cmps/TopNavbar.vue'
+
 import { boardService } from '../services/board.service.local'
 // import { boardService } from '../services/board.service'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -52,6 +43,15 @@ export default {
         showErrorMsg('Cannot load board')
       }
     },
+    async updateBoard(updatedBoard = this.board) {
+      try {
+        await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
+        showSuccessMsg('Group updated')
+        this.board = updatedBoard
+      } catch (err) {
+        showErrorMsg('Cannot update group')
+      }
+    },
     async removeGroup(groupId) {
       const idx = this.board.groups.findIndex((group) => group.id === groupId)
       this.board.groups.splice(idx, 1)
@@ -75,20 +75,10 @@ export default {
     },
     async updateGroup(groupToEdit) {
       const idx = this.board.groups.findIndex((group) => group.id === groupToEdit.id)
-      // const groupToUpdate = this.board.groups.find(group => group.id === groupToEdit.id)
       this.board.groups.splice(idx, 1, groupToEdit)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
         showSuccessMsg('Group updated')
-      } catch (err) {
-        showErrorMsg('Cannot update group')
-      }
-    },
-    async updateBoard(updatedBoard = this.board) {
-      try {
-        await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
-        showSuccessMsg('Group updated')
-        this.board = updatedBoard
       } catch (err) {
         showErrorMsg('Cannot update group')
       }
@@ -101,7 +91,7 @@ export default {
 
   components: {
     GroupList,
-    boardService,
+    TopNavbar,
   },
 }
 </script>

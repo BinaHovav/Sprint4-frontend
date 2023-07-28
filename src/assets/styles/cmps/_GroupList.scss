@@ -1,7 +1,7 @@
 .group-list-container {
     position: relative;
-
     flex: 1;
+
 
     margin-top: 12px;
     margin-bottom: 8px;
@@ -17,7 +17,6 @@
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translateZ(0);
-    
 
 
     .add-group {
@@ -100,4 +99,25 @@
             }
         }
     }
+
+    .ghost-group {
+        background-color: $clr-shadow-overflow-spread;
+
+        &>* {
+            opacity: 0;
+        }
+    }
+
+
+
+}
+
+.draggable-dragging {
+    opacity: 1 !important;
+    /* Add any other styles to reset the dragging styles */
+}
+
+.dragGroup {
+    background-color: blue;
+    transform: translate(15deg);
 }
