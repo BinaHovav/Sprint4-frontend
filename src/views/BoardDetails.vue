@@ -6,15 +6,15 @@
       </div>
       <button class="btn-star"><span class="star"></span></button>
       <span>filter</span>
-      <!-- <div class="board-members" v-for="member in board.members">
-        <div><img :src=member.imgUrl alt="member"></div>
-      </div> -->
+      <div>
+        <div class="board-members" v-for="member in boardToDisplay?.members">
+          <div><img :src=member.imgUrl alt="member"></div>
+        </div>
+      </div>
       <span>menu</span>
     </nav>
-    <!-- <div> -->
     <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
       @updateGroups="updateGroups" />
-    <!-- </div> -->
 
   </section>
   <RouterView @updateBoard="updateBoard" />
@@ -36,7 +36,7 @@ export default {
     }
   },
   computed: {
-    boardToDisplay(){
+    boardToDisplay() {
       return this.$store.getters.getCurrBoard
     }
   },
@@ -48,11 +48,21 @@ export default {
       try {
         const boardId = this.$route.params.id
         this.board = await boardService.getById(boardId)
-        this.$store.commit({ type: 'setCurrBoardId', boardId:  boardId  })
+        this.$store.commit({ type: 'setCurrBoardId', boardId: boardId })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         showSuccessMsg('Board loaded')
       } catch (err) {
         showErrorMsg('Cannot load board')
+      }
+    },
+    async updateBoard(updatedBoard = this.board) {
+      try {
+        await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
+        showSuccessMsg('Group updated')
+        this.board = updatedBoard
+      } catch (err) {
+        showErrorMsg('Cannot update group')
+
       }
     },
     async removeGroup(groupId) {
@@ -79,21 +89,10 @@ export default {
     },
     async updateGroup(groupToEdit) {
       const idx = this.board.groups.findIndex(group => group.id === groupToEdit.id)
-      // const groupToUpdate = this.board.groups.find(group => group.id === groupToEdit.id)
       this.board.groups.splice(idx, 1, groupToEdit)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
         showSuccessMsg('Group updated')
-      } catch (err) {
-        showErrorMsg('Cannot update group')
-
-      }
-    },
-    async updateBoard(updatedBoard = this.board) {
-      try {
-        await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
-        showSuccessMsg('Group updated')
-        this.board = updatedBoard
       } catch (err) {
         showErrorMsg('Cannot update group')
 

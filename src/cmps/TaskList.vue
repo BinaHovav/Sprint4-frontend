@@ -1,11 +1,13 @@
 <template>
-    <div class="task-list-container">
-        <!-- <draggable v-model="tasks" group="tasks"  :move="checkMove"> -->
+    <div >
+        <draggable delay="250" :delay-on-touch-only="true" v-model="tasks" class="task-list-container" ghost-class="ghost-task"
+            item-key="name" drag-class="drag-task" @start="drag = true" @end="drag = false" group="tasks">
             <!-- <transition-group> -->
-                <TaskPreview v-for="task in tasks" :key="task.id" :groupId="groupId" :task="task"
-                    @removeTask="removeTask" />
+            <template #item="{ element }">
+                <TaskPreview :key="element.id" :groupId="groupId" :task="element" @removeTask="removeTask" /> 
+            </template>
             <!-- </transition-group> -->
-        <!-- </draggable> -->
+        </draggable>
 
 
     </div>
