@@ -1,5 +1,4 @@
 <template>
-    <section>
         <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex"
             @start="onDragStart = true" @end="onDragEnd = false" @click.right.prevent item-key="name" handle=".drag-me">
             <template #item="{ element }">
@@ -22,7 +21,6 @@
             </template>
         </draggable>
 
-    </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="group-preview-container" >
+    <div class="group-preview-container">
         <div class="group-header drag-me">
             <form action="">
                 <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title" @blur="updateGroup"
@@ -45,7 +45,8 @@ export default {
             this.updateGroup()
         },
         removeTask(taskId) {
-            const idx = this.clonedGroup.tasks.find(task => task.id === taskId)
+            console.log(taskId);
+            const idx = this.clonedGroup.tasks.findIndex(task => task.id === taskId)
             this.clonedGroup.tasks.splice(idx, 1)
             this.updateGroup()
         },

@@ -36,6 +36,7 @@ export default {
     created() { },
     methods: {
         removeTask(taskId) {
+           
             this.$emit('removeTask', taskId)
         },
         checkMove(evt) {
