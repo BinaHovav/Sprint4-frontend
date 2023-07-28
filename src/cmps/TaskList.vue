@@ -1,5 +1,4 @@
 <template>
-    <div >
         <draggable delay="250" :delay-on-touch-only="true" v-model="taskList" class="task-list-container" ghost-class="ghost-task"
             item-key="name" drag-class="drag-task" @start="drag = true" @end="drag = false" group="tasks">
             <!-- <transition-group> -->
@@ -9,8 +8,6 @@
             <!-- </transition-group> -->
         </draggable>
 
-
-    </div>
 </template>
   
 <script>

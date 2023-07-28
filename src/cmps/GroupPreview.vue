@@ -1,5 +1,5 @@
 <template>
-    <div class="group-preview-container">
+    <div class="group-preview-container" >
         <div class="group-header drag-me">
             <form action="">
                 <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title" @blur="updateGroup"

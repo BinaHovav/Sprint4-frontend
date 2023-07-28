@@ -1,12 +1,10 @@
 <template>
     <section>
-        <draggable v-model="groupList" group="groups" class="group-list-container flex" @start="drag = true"
-            @end="drag = false" drag-class="drag" ghost-class="ghost" @click.right.prevent item-key="name"
-            handle=".drag-me">
-            <!-- v-dragscroll.noleft="isDragScroll" ref="groupList" -->
+        <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex"
+            @start="onDragStart = true" @end="onDragEnd = false" @click.right.prevent item-key="name" handle=".drag-me">
             <template #item="{ element }">
                 <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
-                    @updateTasks="updateTasks" />
+                    @updateTasks="updateTasks"  />
             </template>
             <template #footer>
                 <div class="add-group">
@@ -41,7 +39,8 @@ export default {
     data() {
         return {
             title: null,
-            drag: false
+            drag: false,
+            dragGroup: ''
         }
     },
     computed: {
@@ -53,19 +52,20 @@ export default {
                 console.log(groups);
                 this.$emit('updateGroups', groups)
             }
+        },
+    },
+    watch: {
+        drag: {
+            handler() {
+                console.log(this.drag);
+                this.dragGroup = this.dragGroup === '' ? 'dragGroup' : ''
+                console.log(this.dragGroup);
+            }
         }
     },
-    // watch: {
-    //     drag: {
-    //         handle() {
-    //             if (drag){
 
-    //             }
-    //         }
-    //     }
-
-    // },
     created() {
+        console.log('this.dragGroup', this.dragGroup);
     },
     methods: {
         removeGroup(groupId) {
@@ -82,7 +82,17 @@ export default {
             const clonedGroup = JSON.parse(JSON.stringify(this.groups.find(group => group.id === groupId)))
             clonedGroup.tasks = tasks
             this.updateGroup(clonedGroup)
-        }
+        },
+        onDragStart(event) {
+            // Apply the custom drag styles when dragging starts
+            const draggedGroup = event.item;
+            draggedGroup.classList.add('dragGroup');
+        },
+        onDragEnd(event) {
+            // Remove the custom drag styles when dragging ends
+            const draggedGroup = event.item;
+            draggedGroup.classList.remove('dragGroup');
+        },
     },
     components: {
         GroupPreview,

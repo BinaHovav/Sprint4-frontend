@@ -100,8 +100,25 @@
             }
         }
     }
+
+    .ghost-group {
+        background-color: $clr-shadow-overflow-spread;
+
+        &>* {
+            opacity: 0;
+        }
+    }
+
+
+
 }
 
-.ghost {
-    opacity: 1;
+.draggable-dragging {
+    opacity: 1 !important;
+    /* Add any other styles to reset the dragging styles */
+}
+
+.dragGroup {
+    background-color: blue;
+    transform: translate(15deg);
 }
