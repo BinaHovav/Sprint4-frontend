@@ -23,6 +23,53 @@
         display: grid;
         align-items: center;
         grid-template-columns: 32px 1fr 32px;
+        .header-back {
+            -webkit-appearance: none;
+            border: none;
+            border-radius: 3px;
+            box-sizing: border-box;
+            display: inline-block;
+            line-height: 20px;
+            margin-bottom: 8px;
+            padding: 6px 12px;
+            position: relative;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            color: $clr-icon-subtle;
+            cursor: pointer;
+            margin: 0;
+            z-index: 2;
+            outline: none;
+            grid-column: 1;
+            grid-row: 1;
+            padding: 6px;
+            span {
+                color: $clr-icon-subtle;
+                cursor: pointer;
+                line-height: 1;
+                display: inline-block;
+                height: 12px;
+                width: auto;
+                svg {
+                    overflow: hidden;
+                    pointer-events: none;
+                    max-width: 100%;
+                    max-height: 100%;
+                    color: currentColor;
+                    fill: $clr-surface;
+                    vertical-align: bottom;
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+            &:hover {
+                background-color: $clr-background-neutral-hovered;
+                text-decoration: none;
+                border-radius: 8px;
+                color: $clr-icon;
+            }
+        }
         .header-title {
             color: $clr-text-subtle;
             font-weight: 600;
@@ -40,7 +87,7 @@
             grid-row: 1;
             font-size: 14px;
         }
-        button {
+        .close-modal {
             grid-column: 3;
             grid-row: 1;
             color: $clr-icon-subtle;

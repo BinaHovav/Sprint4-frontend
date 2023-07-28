@@ -76,28 +76,27 @@
     color: $clr-text-accent-green-bolder;
 }
 
-.light-green {
+.subtle-green {
     background-color: $clr-background-accent-green-subtler;
     color: $clr-text-accent-green;
 }
 
-.dark-green {
+.bold-green {
     background-color: $clr-background-accent-green-bolder;
     color: $clr-text-accent-green-bolder;
 }
 
 .yellow {
     background-color: $clr-background-accent-yellow-subtle;
-    color: #533f04;
-    // color: $clr-text-accent-yellow;
+    color: $clr-text-accent-yellow;
 }
 
-.light-yellow {
+.subtle-yellow {
     background-color: $clr-background-accent-yellow-subtler;
     color: $clr-text-accent-yellow-bolder;
 }
 
-.dark-yellow {
+.bold-yellow {
     background-color: $clr-background-accent-yellow-bolder;
     color: $clr-text-accent-yellow-bolder;
 }
@@ -107,12 +106,12 @@
     color: $clr-text-accent-orange;
 }
 
-.light-orange {
+.subtle-orange {
     background-color: $clr-background-accent-orange-subtler;
     color: $clr-text-accent-orange-bolder;
 }
 
-.dark-orange {
+.bold-orange {
     background-color: $clr-background-accent-orange-bolder;
     color: $clr-text-accent-orange-bolder;
 }
@@ -122,12 +121,12 @@
     color: $clr-text-accent-red-bolder;
 }
 
-.light-red {
+.subtle-red {
     background-color: $clr-background-accent-red-subtler;
     color: $clr-text-accent-red-bolder;
 }
 
-.dark-red {
+.bold-red {
     background-color: $clr-background-accent-red-bolder;
     color: $clr-text-accent-red-bolder;
 }
@@ -137,12 +136,12 @@
     color: $clr-text-accent-purple;
 }
 
-.light-purple {
+.subtle-purple {
     background-color: $clr-background-accent-purple-subtler;
     color: $clr-text-accent-purple-bolder;
 }
 
-.dark-purple {
+.bold-purple {
     background-color: $clr-background-accent-purple-bolder;
     color: $clr-text-accent-purple-bolder;
 }
@@ -151,11 +150,11 @@
     background-color: $clr-background-accent-blue-subtle;
     color: $clr-text-accent-blue;
 }
-.light-blue {
+.subtle-blue {
     background-color: $clr-background-accent-blue-subtler;
     color: $clr-text-accent-blue-bolder;
 }
-.dark-blue {
+.bold-blue {
     background-color: $clr-background-accent-blue-bolder;
     color: $clr-text-accent-blue-bolder;
 }
@@ -163,23 +162,23 @@
     background-color: $clr-background-accent-teal-subtle;
     color: $clr-text-accent-teal;
 }
-.light-teal {
+.subtle-teal {
     background-color: $clr-background-accent-teal-subtler;
     color: $clr-text-accent-teal-bolder;
 }
-.dark-teal {
+.bold-teal {
     background-color: $clr-background-accent-teal-bolder;
     color: $clr-text-accent-teal-bolder;
 }
 .lime {
     background-color: $clr-background-accent-lime-subtle;
-    color: $clr-text-accent-lime;
+    color: $clr-text-accent-lime-bolder;
 }
-.light-lime {
+.subtle-lime {
     background-color: $clr-background-accent-lime-subtler;
     color: $clr-text-accent-lime-bolder;
 }
-.dark-lime {
+.bold-lime {
     background-color: $clr-background-accent-lime-bolder;
     color: $clr-text-accent-lime-bolder;
 }
@@ -187,23 +186,23 @@
     background-color: $clr-background-accent-magenta-subtle;
     color: $clr-text-accent-magenta;
 }
-.light-pink {
+.subtle-pink {
     background-color: $clr-background-accent-magenta-subtler;
     color: $clr-text-accent-magenta-bolder;
 }
-.dark-pink {
+.bold-pink {
     background-color: $clr-background-accent-magenta-subtle;
     color: $clr-text-accent-magenta;
 }
-// .black {
-//     background-color: $clr-background-accent-black-subtle;
-//     color: $clr-text-accent-black;
-// }
-// .light-black {
-//     background-color: $clr-background-accent-black-subtler;
-//     color: $clr-text-accent-black-bolder;
-// }
-// .dark-black {
-//     background-color: $clr-background-accent-black-subtle;
-//     color: $clr-text-accent-black;
-// }
+.black {
+    background-color: $clr-background-accent-gray-subtle;
+    color: $clr-text-accent-gray;
+}
+.subtle-black {
+    background-color: $clr-background-accent-gray-subtler;
+    color: $clr-text-accent-gray-bolder;
+}
+.bold-black {
+    background-color: $clr-background-accent-gray-subtle;
+    color: $clr-text-accent-gray;
+}

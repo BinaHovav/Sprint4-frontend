@@ -15,7 +15,7 @@
 .task-details {
     display: block;
     overflow: visible;
-    background-color: var(--ds-surface-overlay, #fff);
+    background-color: $clr-surface-overlay;
     border-radius: 8px;
     // display: none;
     margin: 48px 0 80px;
@@ -31,7 +31,7 @@
         border-radius: 50%;
         height: 40px;
         margin: 4px;
-        // overflow: hidden;
+        overflow: hidden;
         padding: 4px;
         position: absolute;
         right: 0;
@@ -81,7 +81,6 @@
                 border-radius: 3px;
                 padding: 6px 12px 6px 6px;
                 text-decoration: none;
-                color: $clr-text-accent-orange-bolder;
                 cursor: pointer;
                 .btn-icon-cover {
                     @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
@@ -161,7 +160,7 @@
         min-height: 24px;
         padding: 0 8px 8px 16px;
         position: relative;
-        width: 552px;
+        width: 600px;
         z-index: 1;
         .task-details-data {
             margin-top: 8px;
@@ -225,10 +224,17 @@
                         @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
                         font-size: 16px;
                         height: 16px;
-                        line-height: 16px;
+                        line-height: 32px;
                         padding: 8px;
                         width: 16px;
                         cursor: pointer;
+                    }
+                    &:hover {
+                        background-color: $clr-background-neutral-hovered;
+                        border: none;
+                        box-shadow: none;
+                        color: $clr-text;
+                        text-decoration: none;
                     }
                 }
                 .task-details-labels {
@@ -305,12 +311,12 @@
                     }
                 }
                 .task-btn-watch {
-                    background-color: $clr-background-neutral;
+                    background-color: var(--ds-background-neutral, #091e420f);
                     border: none;
                     border-radius: 3px;
                     box-shadow: none;
                     box-sizing: border-box;
-                    color: $clr-text, #172b4d;
+                    color: var(--ds-text, #172b4d);
                     cursor: pointer;
                     display: block;
                     height: 32px;
@@ -327,6 +333,22 @@
                     -webkit-user-select: none;
                     user-select: none;
                     white-space: nowrap;
+                    margin-top: 0;
+                    // width: 138px;
+                    // padding-right: 32px;
+                    &:hover {
+                        background-color: $clr-background-neutral-hovered;
+                        border: none;
+                        box-shadow: none;
+                        color: $clr-text;
+                        text-decoration: none;
+                    }
+                    .task-txt-watch {
+                        color: $clr-text;
+                        cursor: pointer;
+                        user-select: none;
+                        white-space: nowrap;
+                    }
                     .task-icon-watch {
                         @include trello-icon($content: $icon-eye, $type: sm, $color: #44546f);
                         -webkit-font-smoothing: antialiased;
@@ -346,14 +368,319 @@
                         color: $clr-icon;
                         margin: 0 6px 0 -6px;
                     }
+                    .is-watching {
+                        color: $clr-text;
+                        cursor: pointer;
+                        user-select: none;
+                        white-space: nowrap;
+                        border-radius: 3px;
+                        font-size: 12px;
+                        font-weight: 700;
+                        height: 25px;
+                        line-height: 20px;
+                        margin: 0;
+                        padding: 2px 4px;
+                        position: absolute;
+                        right: 4px;
+                        top: 4px;
+                        text-align: center;
+                        background-color: $clr-icon-subtle;
+                        display: block;
+                        .is-watching-icon {
+                            @include trello-icon($content: $icon-checked, $type: sm, $color: #44546f);
+                            color: $clr-icon-inverse !important;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            display: inline-block;
+                            font-family: trellicons;
+                            font-style: normal;
+                            font-weight: 400;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: bottom;
+                            font-size: 16px;
+                            height: 20px;
+                            line-height: 20px;
+                            width: 20px;
+                        }
+                    }
+                }
+                .task-details-due-date {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    margin: 0 8px 8px 0;
+                    cursor: pointer;
+
+                    .due-date-complete {
+                        text-decoration: none;
+                        color: $clr-link;
+                        background-color: $clr-background-input;
+                        border-radius: 2px;
+                        box-shadow: inset 0 0 0 2px $clr-border-input;
+                        flex-shrink: 0;
+                        height: 16px;
+                        margin: auto 4px auto 0;
+                        overflow: hidden;
+                        position: relative;
+                        transition: all 0.2s ease-in-out;
+                        white-space: nowrap;
+                        width: 16px;
+                        &:hover {
+                            background-color: $clr-background-input-hovered;
+                            box-shadow: inset 0 0 0 2px $clr-border-input;
+                        }
+                    }
+                    .due-date-time-container {
+                        &:hover {
+                            background-color: $clr-background-neutral-hovered;
+                            border: none;
+                            box-shadow: none;
+                            color: $clr-text;
+                            text-decoration: none;
+                        }
+                        .due-date-btn {
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                                "Droid Sans", "Helvetica Neue", sans-serif;
+                            font-size: 14px;
+                            line-height: 20px;
+                            font-weight: 400;
+                            box-sizing: border-box;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 3px;
+                            cursor: pointer;
+                            padding: 6px 12px;
+                            text-decoration: none;
+                            white-space: normal;
+                            background-color: $clr-background-neutral;
+                            box-shadow: none;
+                            border: none;
+                            color: $clr-text;
+                            transition:
+                                background-color 85ms ease,
+                                border-color 85ms ease,
+                                box-shadow 85ms ease;
+                            margin-bottom: 0;
+                            .due-date-icon {
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
+                                    "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                font-size: 14px;
+                                font-weight: 400;
+                                cursor: pointer;
+                                white-space: normal;
+                                color: $clr-text;
+                                display: inline-block;
+                                line-height: 1;
+                                margin-left: 4px;
+                                text-align: center;
+                                .due-date-icon-span {
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    height: 16px;
+                                    width: 16px;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
         .task-description {
-            margin-block-start: 20px;
-            textarea {
-                resize: none;
-                border: 0;
+            color: $clr-text;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                Segoe UI,
+                Roboto,
+                Noto Sans,
+                Ubuntu,
+                Droid Sans,
+                Helvetica Neue,
+                sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            clear: both;
+            margin-bottom: 24px;
+            position: relative;
+            .description-header {
+                align-items: center;
+                display: flex;
+                margin: 0 0 4px 40px;
+                min-height: 32px;
+                padding: 8px 0;
+                position: relative;
+                & > span {
+                    display: inline-block;
+                    line-height: 1;
+                    left: -36px;
+                    position: absolute;
+                    top: 12px;
+                    & > span {
+                        display: inline-block;
+                        line-height: 1;
+                    }
+                }
+                & > h3 {
+                    display: block;
+                    margin-block-start: 1em;
+                    margin-block-end: 1em;
+                    margin-inline-start: 0px;
+                    margin-inline-end: 0px;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 20px;
+                    flex: 0 0 auto;
+                    margin: 0;
+                }
+                & > div {
+                    align-items: center;
+                    display: flex;
+                    flex: 1 0;
+                    justify-content: space-between;
+                    .description-info {
+                        align-items: center;
+                        display: flex;
+                        flex: 1 1;
+                        gap: 4px;
+                        margin-left: 4px;
+                        button {
+                            -webkit-appearance: none;
+                            position: relative;
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                                "Droid Sans", "Helvetica Neue", sans-serif;
+                            font-size: 14px;
+                            line-height: 20px;
+                            font-weight: 400;
+                            box-sizing: border-box;
+                            border-radius: 3px;
+                            cursor: pointer;
+                            text-decoration: none;
+                            white-space: normal;
+                            color: var(--ds-text, #172b4d);
+                            transition-property: background-color, border-color, box-shadow;
+                            transition-duration: 85ms;
+                            transition-timing-function: ease;
+                            padding: 6px;
+                            background-color: transparent;
+                            border: none;
+                            box-shadow: none;
+                            height: 32px;
+                            margin: 0;
+                            & > span {
+                                display: inline-block;
+                                line-height: 1;
+                                & > span {
+                                    display: inline-block;
+                                    line-height: 1;
+                                }
+                            }
+                        }
+                    }
+                    .description-edit-btn {
+                        align-items: center;
+                        display: flex;
+                        flex: 1 1;
+                        gap: 8px;
+                        justify-content: flex-end;
+                        button {
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                                "Droid Sans", "Helvetica Neue", sans-serif;
+                            font-size: 14px;
+                            line-height: 20px;
+                            font-weight: 400;
+                            box-sizing: border-box;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 3px;
+                            cursor: pointer;
+                            padding: 6px 12px;
+                            text-decoration: none;
+                            white-space: normal;
+                            background-color: var(--ds-background-neutral, #091e420f);
+                            box-shadow: none;
+                            border: none;
+                            color: var(--ds-text, #172b4d);
+                            transition-property: background-color, border-color, box-shadow;
+                            transition-duration: 85ms;
+                            transition-timing-function: ease;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+            .description-content {
+                position: relative;
+                margin-left: 40px;
+                .description-txt {
+                    p {
+                        margin: 0;
+                        overflow-wrap: break-word;
+                        word-break: break-word;
+                        cursor: pointer;
+                    }
+                    .description-save-cancel {
+                        clear: both;
+                        display: flex;
+                        flex-direction: row;
+                        margin-top: 8px;
+                        .description-save {
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                                "Droid Sans", "Helvetica Neue", sans-serif;
+                            font-size: 14px;
+                            line-height: 20px;
+                            font-weight: 400;
+                            box-sizing: border-box;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 3px;
+                            cursor: pointer;
+                            padding: 6px 12px;
+                            text-decoration: none;
+                            white-space: normal;
+                            box-shadow: none;
+                            border: none;
+                            transition-property: background-color, border-color, box-shadow;
+                            transition-duration: 85ms;
+                            transition-timing-function: ease;
+                            background-color: $clr-background-brand-bold;
+                            box-shadow: none;
+                            border: none;
+                            color: $clr-text-inverse;
+                            margin: 0 6px 0 0;
+                        }
+                        .description-cancel {
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                                "Droid Sans", "Helvetica Neue", sans-serif;
+                            font-size: 14px;
+                            line-height: 20px;
+                            font-weight: 400;
+                            box-sizing: border-box;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 3px;
+                            cursor: pointer;
+                            padding: 6px 12px;
+                            text-decoration: none;
+                            white-space: normal;
+                            box-shadow: none;
+                            border: none;
+                            color: $clr-text;
+                            transition-property: background-color, border-color, box-shadow;
+                            transition-duration: 85ms;
+                            transition-timing-function: ease;
+                            background-color: transparent;
+                            border: none;
+                            box-shadow: none;
+                            margin: 0 6px 0 0;
+                        }
+                    }
+                }
             }
         }
     }
@@ -368,11 +695,6 @@
             position: relative;
             .sidebar-add-txt {
                 display: block;
-                // margin-block-start: 1em;
-                // margin-block-end: 1em;
-                // margin-inline-start: 0px;
-                // margin-inline-end: 0px;
-                // margin-top: 0;
                 color: #44546f;
                 font-size: 12px;
                 font-weight: 600;
