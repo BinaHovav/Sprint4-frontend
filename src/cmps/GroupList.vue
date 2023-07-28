@@ -25,7 +25,7 @@
 
     </section>
 </template>
-  
+
 <script>
 import draggable from 'vuedraggable'
 import GroupPreview from './GroupPreview.vue'
@@ -84,4 +84,3 @@ export default {
     }
 }
 </script>
-  

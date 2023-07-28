@@ -3,13 +3,14 @@
     <AppHeader />
     <RouterView />
     <UserMsg />
-    <AppModal/>
+    <AppModal />
   </section>
 </template>
-import AppModal from './cmps/AppModal.vue'
 
 <script>
+// import AppModal from './cmps/AppModal.vue'
 import { userService } from './services/user.service'
+
 import { store } from './store/store'
 
 import AppHeader from './cmps/AppHeader.vue'
@@ -25,7 +26,7 @@ export default {
   components: {
     AppHeader,
     UserMsg,
-    AppModal
-},
+    AppModal,
+  },
 }
 </script>

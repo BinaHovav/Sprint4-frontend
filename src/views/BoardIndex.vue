@@ -1,8 +1,14 @@
 <template>
   <section class="container board-index" v-if="boards">
-    <h2>Starred Boards</h2>
+    <div class="board-category-title">
+      <span class="star"></span>
+      <h3>Starred boards</h3>
+    </div>
     <BoardList :boards="starredBoards" @updateBoard="updateBoard" />
-    <h2>Other Boards</h2>
+    <div class="board-category-title">
+      <span class="clock"></span>
+      <h3>Recently viewed</h3>
+    </div>
     <BoardList :boards="boards" @updateBoard="updateBoard" />
     <div class="create-new-board" @click="openModal">Create new board</div>
     <div v-if="showModal" class="create-board-modal">
@@ -38,7 +44,7 @@ export default {
       return this.$store.getters.boards.filter((board) => !board.isStarred)
     },
   },
-  created() { },
+  created() {},
   methods: {
     async updateBoard(boardId) {
       let board = this.boards.find((board) => board._id === boardId)

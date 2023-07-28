@@ -22,7 +22,7 @@
 
         padding-bottom: 0;
 
-        background: linear-gradient(to bottom, hsla(192, 36.9%, 78.2%, 0.9), hsla(192, 36.9%, 78.2%, 0.9));
+        // background: linear-gradient(to bottom, hsla(192, 36.9%, 78.2%, 0.9), hsla(192, 36.9%, 78.2%, 0.9));
 
         width: $board-header-width;
         height: $board-header-hight;
@@ -97,11 +97,11 @@
                 }
             }
         }
-        .board-members{
+        .board-members {
             float: right;
             margin: 0;
 
-            &>* {
+            & > * {
                 float: right;
                 height: 24px;
                 margin: 0 0 4px 4px;

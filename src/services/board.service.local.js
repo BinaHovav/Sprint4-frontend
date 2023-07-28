@@ -197,23 +197,7 @@ function getEmptyTask() {
 //                 id: 'c101',
 //                 title: 'Market Research',
 //                 description: 'Conduct an in-depth market l107 to identify potential opportunities, target markets, and competitor solutions in the gas station automation industry.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102', 'u103' ],
 //                 labels: ['l104', 'l102'],
 //                 dueDate: 1690303727,
 //                 checklists: [
@@ -236,18 +220,7 @@ function getEmptyTask() {
 //                 id: 'c102',
 //                 title: 'l103 Evaluation',
 //                 description: 'Evaluate existing robotic technologies, sensors, and AI algorithms suitable for automating gas station tasks.',
-//                 members: [
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u102', 'u103' ],
 //                 labels: ['l106', 'l107', 'l103'],
 //                 dueDate: null,
 //                 checklists: [
@@ -281,13 +254,7 @@ function getEmptyTask() {
 //                 id: 'c103',
 //                 title: 'Regulatory Compliance Research',
 //                 description: 'Research and understand the legal and safety regulations related to deploying robots in gas station environments.',
-//                 members: [
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u103' ],
 //                 labels: ['l106', 'l107', 'l103'],
 //                 dueDate: 1691661600,
 //                 checklists: [],
@@ -300,18 +267,7 @@ function getEmptyTask() {
 //                 id: 'c104',
 //                 title: 'Cost-Benefit l107',
 //                 description: 'Perform a cost-benefit l107 to assess the financial viability and potential return on investment (ROI) of the robot deployment.',
-//                 members: [
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u102', 'u103' ],
 //                 labels: ['l106', 'l107', 'l102'],
 //                 dueDate: 1691834400,
 //                 checklists: [],
@@ -323,23 +279,7 @@ function getEmptyTask() {
 //                 id: 'c105',
 //                 title: 'Project Timeline',
 //                 description: 'Create a detailed project timeline with key milestones and deadlines for the entire development process.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102', 'u103' ],
 //                 labels: ['l110', 'l102'],
 //                 dueDate: 1690884000,
 //                 checklists: [],
@@ -360,18 +300,7 @@ function getEmptyTask() {
 //                 id: 'c101',
 //                 title: 'Conceptual Design',
 //                 description: 'Design the initial concept and architecture of the gas station robots, considering safety, efficiency, and user-friendliness.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102' ],
 //                 labels: ['l106', 'l102', 'l105'],
 //                 dueDate: 1690303727,
 //                 checklists: [
@@ -393,18 +322,7 @@ function getEmptyTask() {
 //                 id: 'c102',
 //                 title: 'Hardware Selection',
 //                 description: 'Select appropriate hardware components, including robotic arms, sensors, cameras, and communication modules.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u103' ],
 //                 labels: ['l110', 'l103'],
 //                 dueDate: null,
 //                 checklists: [],
@@ -420,23 +338,7 @@ function getEmptyTask() {
 //                 id: 'c103',
 //                 title: 'Software Development',
 //                 description: 'Develop the software and AI algorithms to enable autonomous navigation, fueling, maintenance, and customer interactions.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102', 'u103' ],
 //                 labels: ['l106', 'l103'],
 //                 dueDate: 1691143200,
 //                 checklists: [
@@ -470,13 +372,7 @@ function getEmptyTask() {
 //                 id: 'c104',
 //                 title: 'UX/UI Design',
 //                 description: 'Design a user-friendly interface for gas station attendants and customers to interact with the robots seamlessly.',
-//                 members: [
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u103' ],
 //                 labels: ['l110', 'l102', 'l105'],
 //                 dueDate: 1691834400,
 //                 checklists: [],
@@ -489,13 +385,7 @@ function getEmptyTask() {
 //                 id: 'c105',
 //                 title: 'Prototyping',
 //                 description: 'Build functional prototypes of the gas station robots for testing and validation.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101' ],
 //                 labels: ['l110', 'l102', 'l109'],
 //                 dueDate: 1691056800,
 //                 checklists: [],
@@ -515,18 +405,7 @@ function getEmptyTask() {
 //                 id: 'c101',
 //                 title: 'Performance Testing',
 //                 description: 'Test the gas station robots under various scenarios to evaluate their performance, efficiency, and accuracy.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u103' ],
 //                 labels: ['l110', 'l103'],
 //                 dueDate: 1692007200,
 //                 checklists: [],
@@ -539,13 +418,7 @@ function getEmptyTask() {
 //                 id: 'c102',
 //                 title: 'User Acceptance Testing',
 //                 description: 'Conduct user acceptance testing with gas station staff and customers to gather feedback and make improvements.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101' ],
 //                 labels: ['l106', 'l109', 'l107'],
 //                 dueDate: null,
 //                 checklists: [
@@ -568,19 +441,7 @@ function getEmptyTask() {
 //                 id: 'c103',
 //                 title: 'Iterative Refinement',
 //                 description: 'Continuously improve robots functionality, user interface, and behavior based on user feedback and real-world testing results.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u103' ],
 //                 labels: ['l106', 'l103', 'l109'],
 //                 dueDate: null,
 //                 checklists: [],
@@ -593,13 +454,7 @@ function getEmptyTask() {
 //                 id: 'c104',
 //                 title: 'Security Audit',
 //                 description: 'Perform a comprehensive security audit to safeguard robots control system from potential cyber threats.',
-//                 members: [
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u102' ],
 //                 labels: ['l110'],
 //                 dueDate: 1692439200,
 //                 checklists: [],
@@ -619,13 +474,7 @@ function getEmptyTask() {
 //                 id: 'c101',
 //                 title: 'Pilot Deployment',
 //                 description: 'Deploy a pilot fleet of gas station robots in selected gas stations to assess their performance in real-world conditions.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101' ],
 //                 labels: ['l104', 'l102'],
 //                 dueDate: 1691661600,
 //                 checklists: [],
@@ -638,23 +487,7 @@ function getEmptyTask() {
 //                 id: 'c102',
 //                 title: 'Staff Training',
 //                 description: 'Provide comprehensive training to gas station attendants and staff for seamless integration with the robot system.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102', 'u103' ],
 //                 labels: ['l110', 'l102', 'l109'],
 //                 dueDate: 1691402400,
 //                 checklists: [],
@@ -667,13 +500,7 @@ function getEmptyTask() {
 //                 id: 'c103',
 //                 title: 'Public Relations Campaign',
 //                 description: 'Plan and execute a public relations campaign to create awareness and excitement about the innovative robotic gas station.',
-//                 members: [
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u103' ],
 //                 labels: ['l110', 'l105', 'l102'],
 //                 dueDate: 1691316000,
 //                 checklists: [
@@ -712,18 +539,7 @@ function getEmptyTask() {
 //                 id: 'c104',
 //                 title: 'Full-Scale Deployment',
 //                 description: 'Roll out the robotic system to gas stations across the region, starting with those that were part of the pilot program.',
-//                 members: [
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u102', 'u103' ],
 //                 labels: ['l110'],
 //                 dueDate: null,
 //                 checklists: [],
@@ -736,13 +552,7 @@ function getEmptyTask() {
 //                 id: 'c105',
 //                 title: 'Prototyping',
 //                 description: 'Build functional prototypes of the gas station robots for testing and validation.',
-//                 members: [
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u102' ],
 //                 labels: ['l110', 'l102', 'l103'],
 //                 dueDate: null,
 //                 checklists: [],
@@ -762,13 +572,7 @@ function getEmptyTask() {
 //                 id: 'c101',
 //                 title: 'Performance Evaluation',
 //                 description: 'Monitor and evaluate robots performance, efficiency, and customer satisfaction post-launch.',
-//                 members: [
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u102' ],
 //                 labels: ['l104', 'l107'],
 //                 dueDate: 1692698400,
 //                 checklists: [],
@@ -781,23 +585,7 @@ function getEmptyTask() {
 //                 id: 'c102',
 //                 title: 'Continuous Improvement',
 //                 description: 'Gather feedback from gas station staff and customers to make continuous improvements and updates.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102', 'u103' ],
 //                 labels: ['l104', 'l107', 'l109'],
 //                 dueDate: null,
 //                 checklists: [
@@ -820,13 +608,7 @@ function getEmptyTask() {
 //                 id: 'c103',
 //                 title: 'Expansion Planning',
 //                 description: 'Plan for the expansion of the robotic gas station system to other regions and countries.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101' ],
 //                 labels: ['l106', 'l102'],
 //                 dueDate: null,
 //                 checklists: [],
@@ -839,23 +621,7 @@ function getEmptyTask() {
 //                 id: 'c104',
 //                 title: 'Software Updates and Upgrades',
 //                 description: 'Regularly update robots software to introduce new features and enhancements.',
-//                 members: [
-//                   {
-//                     _id: 'u101',
-//                     fullname: 'Meitar Mor',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u101', 'u102', 'u103' ],
 //                 labels: ['l106', 'l103'],
 //                 dueDate: null,
 //                 checklists: [],
@@ -868,18 +634,7 @@ function getEmptyTask() {
 //                 id: 'c105',
 //                 title: 'Success Metrics l107',
 //                 description: "Analyze key success metrics, such as customer wait times, fueling efficiency, and cost savings, to assess the project's overall impact.",
-//                 members: [
-//                   {
-//                     _id: 'u102',
-//                     fullname: 'Tomer Appelman',
-//                     imgUrl: '',
-//                   },
-//                   {
-//                     _id: 'u103',
-//                     fullname: 'Bina Hovav',
-//                     imgUrl: '',
-//                   },
-//                 ],
+//                 members: [ 'u102', 'u103' ],
 //                 labels: ['l109', 'l107', 'l108'],
 //                 dueDate: 1693476000,
 //                 checklists: [],

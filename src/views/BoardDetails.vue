@@ -27,18 +27,17 @@ import { boardService } from '../services/board.service.local'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { getActionUpdateBoard } from '../store/board.store'
 
-
 export default {
   name: 'BoardDetails',
   data() {
     return {
-      board: null
+      board: null,
     }
   },
   computed: {
     boardToDisplay() {
       return this.$store.getters.getCurrBoard
-    }
+    },
   },
   created() {
     this.setBoard()
@@ -66,7 +65,7 @@ export default {
       }
     },
     async removeGroup(groupId) {
-      const idx = this.board.groups.findIndex(group => group.id === groupId)
+      const idx = this.board.groups.findIndex((group) => group.id === groupId)
       this.board.groups.splice(idx, 1)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
@@ -84,7 +83,6 @@ export default {
         showSuccessMsg('Group added')
       } catch (err) {
         showErrorMsg('Cannot add group')
-
       }
     },
     async updateGroup(groupToEdit) {
@@ -101,13 +99,12 @@ export default {
     async updateGroups(groups) {
       this.board.groups = groups
       await this.updateBoard()
-    }
+    },
   },
-
 
   components: {
     GroupList,
-    boardService
-  }
+    boardService,
+  },
 }
 </script>
