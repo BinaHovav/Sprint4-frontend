@@ -7,6 +7,7 @@
 import { eventBus } from '../services/event-bus.service';
 import LabelModal from './ModalTypes/LabelModal.vue'
 export default {
+    name: 'AppModal',
     data() {
         return {
             isVisible: false,
@@ -20,7 +21,7 @@ export default {
     created() {
         eventBus.on('modal', ({ el, type, info }) => {
             this.setModalLocation(el)
-            if (info && type) {
+            if (type) {
                 this.info = JSON.parse(JSON.stringify(info))
                 this.type = type
                 this.isVisible = !this.isVisible
@@ -39,8 +40,8 @@ export default {
                 this.modalPlace.top = el.bottom + 'px'
             }
         },
-        handleResize() {
-            this.setModalLocation()
+        setInfo(info){
+            eventBus.emit('setInfo', info)
         }
     },
     components: {

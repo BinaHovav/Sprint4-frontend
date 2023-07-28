@@ -17,31 +17,43 @@
         </div>
       </div>
       <div class="task-main">
-        <div class="task-details-data flex">
+        <div class="task-details-data">
           <div class="task-details-item">
             <h3>Members</h3>
-            <div v-for="member in task.members" class="task-details-members">
-              <img class="task-member-img" src="member.url">
+            <div class="">
+              <div v-for="memberId in task.members" class="task-details-members">
+                <img class="task-member-img" :src="getMemberById(memberId).imgUrl"
+                  :title="getMemberById(memberId).fullname">
+              </div>
+              <a class="task-member-add">
+                <span class="task-member-btn-add"></span>
+              </a>
             </div>
-            <a class="task-member-add">
-              <span class="task-member-btn-add"></span>
-            </a>
           </div>
           <div class="task-details-item">
-            <div class="task-details-labels">
-              <h3>Labels</h3>
-              <div class="task-labels">
-                <button v-for="label in task.labels" class="task-btn-label" :class="getLabelColor(label)">{{
-                  getLabelTitle(label) }}</button>
-                <button class="task-btn-add-label"><span></span></button>
+            <div>
+              <div class="task-details-labels">
+                <h3>Labels</h3>
+                <div class="">
+                <div class="task-labels flex">
+                  <button v-for="label in task.labels" class="task-btn-label" :class="getLabelById(label).color">{{
+                    getLabelById(label).title }}</button>
+                  <button class="task-btn-add-label"><span></span></button>
+                </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="task-details-item task-details-notifications">
+          <div class="task-details-item">
             <h3>Notification</h3>
-            <template class="flex">
+            <a class="task-btn-watch">
+              <span class="task-icon-watch"></span>
+              <span>Watch</span>
+              <span></span>
+            </a>
+            <!-- <template class="flex">
               <div v-for="member in task.members">{{ member.fullname }} |</div>
-            </template>
+            </template> -->
           </div>
           <div class="task-details-item task-details-notifications">
             <h3>Due date</h3>
@@ -51,7 +63,6 @@
           </div>
         </div>
         <div class="task-description flex column">
-          <!-- <button @click="test($event, task.members)">toggle modal</button> -->
           Description
           <textarea v-model="task.description"></textarea>
         </div>
@@ -98,14 +109,20 @@ export default {
     return {
       task: '',
       currGroup: {},
-      currBoard: null,
-      ev: null
+      board: null,
     }
   },
   computed: {
   },
   created() {
     this.setCurrTask()
+    eventBus.on('setInfo', (info) => {
+      this.task.labels = info.taskLabels
+
+    })
+  },
+  destroyed() {
+    eventBus.off('setInfo')
   },
   methods: {
     async setCurrTask() {
@@ -115,8 +132,8 @@ export default {
         const taskId = this.$route.params.taskId
         const groupId = this.$route.params.groupId
         if (board) {
-          this.currBoard = JSON.parse(JSON.stringify(board))
-          this.currGroup = this.currBoard.groups.find(group => group.id === groupId)
+          this.board = JSON.parse(JSON.stringify(board))
+          this.currGroup = this.board.groups.find(group => group.id === groupId)
           this.task = this.currGroup.tasks.find(task => task.id === taskId)
         }
       } catch (err) {
@@ -124,28 +141,24 @@ export default {
       }
     },
     getLabelById(labelId) {
-      return this.currBoard.labels.find(label => label.id === labelId)
+      return this.board.labels.find(label => label.id === labelId)
     },
-    getLabelTitle(labelId) {
-      const label = this.getLabelById(labelId)
-      return label.title
-    },
-    getLabelColor(labelId) {
-      const label = this.getLabelById(labelId)
-      return label.color
+    getMemberById(memberId) {
+      return this.board.members.find(member => member._id === memberId)
     },
     onSaveTask() {
       let idx = this.currGroup.tasks.findIndex(gTask => gTask.id === this.task.id)
       this.currGroup.tasks.splice(idx, 1, this.task)
-      this.$emit('updateBoard', this.currBoard)
-      this.$router.replace(`/board/${this.currBoard._id}`)
+      this.$emit('updateBoard', this.board)
+      this.$router.replace(`/board/${this.board._id}`)
     },
-    openModal(info,type) {
+    openModal(taskLabels, type) {
+      const info = { taskLabels }
       const el = this.$refs.labels.getBoundingClientRect()
       eventBus.emit('modal', { el, type, info })
       window.addEventListener('resize', this.handleResize)
     },
-    handleResize(){
+    handleResize() {
       const el = this.$refs.labels.getBoundingClientRect()
       eventBus.emit('modal', { el })
     }

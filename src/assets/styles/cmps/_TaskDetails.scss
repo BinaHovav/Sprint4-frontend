@@ -199,6 +199,13 @@
                     user-select: none;
                     width: 32px;
                     z-index: 0;
+                    .task-member-img {
+                        border-radius: 25em;
+                        height: 32px;
+                        object-fit: cover;
+                        width: 32px;
+                        max-width: 100%;
+                    }
                 }
                 .task-member-add {
                     border-radius: 100%;
@@ -295,6 +302,49 @@
                                 font-weight: 400;
                             }
                         }
+                    }
+                }
+                .task-btn-watch {
+                    background-color: $clr-background-neutral;
+                    border: none;
+                    border-radius: 3px;
+                    box-shadow: none;
+                    box-sizing: border-box;
+                    color: $clr-text, #172b4d;
+                    cursor: pointer;
+                    display: block;
+                    height: 32px;
+                    margin-top: 8px;
+                    max-width: 300px;
+                    overflow: hidden;
+                    padding: 6px 12px;
+                    position: relative;
+                    text-decoration: none;
+                    text-overflow: ellipsis;
+                    transition-duration: 85ms;
+                    transition-property: background-color, border-color, box-shadow;
+                    transition-timing-function: ease;
+                    -webkit-user-select: none;
+                    user-select: none;
+                    white-space: nowrap;
+                    .task-icon-watch {
+                        @include trello-icon($content: $icon-eye, $type: sm, $color: #44546f);
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        display: inline-block;
+                        font-family: trellicons;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1;
+                        text-align: center;
+                        text-decoration: none;
+                        vertical-align: bottom;
+                        font-size: 16px;
+                        height: 20px;
+                        line-height: 20px;
+                        width: 20px;
+                        color: $clr-icon;
+                        margin: 0 6px 0 -6px;
                     }
                 }
             }
