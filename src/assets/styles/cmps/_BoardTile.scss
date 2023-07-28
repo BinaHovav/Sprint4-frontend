@@ -8,6 +8,12 @@
         border-radius: 3px;
         filter: brightness(80%);
     }
+    .btn-star-board.starred {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        opacity: 1;
+    }
     .btn-star-board {
         position: absolute;
         bottom: 0;
