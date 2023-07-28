@@ -1,7 +1,8 @@
 <template>
   <section class="board-details-container flex column">
-    <TopNavbar />
-    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
+    <TopNavbar  />
+    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
+      @updateGroups="updateGroups" />
   </section>
   <RouterView @updateBoard="updateBoard" />
 </template>

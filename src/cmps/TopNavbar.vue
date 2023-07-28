@@ -79,6 +79,10 @@ export default {
       // You can store the selected background in a data property and use it in your CSS.
     },
   },
-  computed: {},
+  computed: {
+    boardToDisplay() {
+      return this.$store.getters.getCurrBoard
+    },
+  },
 }
 </script>
