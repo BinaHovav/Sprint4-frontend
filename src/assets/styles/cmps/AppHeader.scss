@@ -17,7 +17,7 @@
             }
         }
         display: flex;
-        padding-left: 10px;
+        padding-left: 20px;
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
@@ -78,7 +78,7 @@
                 }
             }
             input {
-                background-color: #bdd5db;
+                // background-color: #bdd5db;
                 color: black;
                 height: 32px;
                 padding: 0px 12px 0px 30px;
@@ -121,11 +121,11 @@
     //     padding: 4px;
     // }
 
-    nav a:not(:first-child) {
-        padding: 0 5px;
-        margin: 10px;
-    }
-    nav .active {
-        color: $clr1;
-    }
+    // nav a:not(:first-child) {
+    //     padding: 0 5px;
+    //     margin: 10px;
+    // }
+    // nav .active {
+    //     color: $clr1;
+    // }
 }
