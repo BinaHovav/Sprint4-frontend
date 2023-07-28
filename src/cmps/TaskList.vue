@@ -1,6 +1,6 @@
 <template>
     <div >
-        <draggable delay="250" :delay-on-touch-only="true" v-model="tasks" class="task-list-container" ghost-class="ghost-task"
+        <draggable delay="250" :delay-on-touch-only="true" v-model="taskList" class="task-list-container" ghost-class="ghost-task"
             item-key="name" drag-class="drag-task" @start="drag = true" @end="drag = false" group="tasks">
             <!-- <transition-group> -->
             <template #item="{ element }">
@@ -22,9 +22,19 @@ export default {
     name: 'TaskList',
     props: ['tasks', 'groupId'],
     data() {
-        return {}
+        return {
+            drag: false
+        }
     },
     computed: {
+        taskList: {
+            get() {
+                return this.tasks
+            },
+            set(tasks) {
+                this.$emit('updateTasks', tasks, this.groupId)
+            }
+        }
     },
     created() { },
     methods: {
