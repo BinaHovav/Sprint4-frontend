@@ -45,7 +45,6 @@ export default {
                 return this.groups
             },
             set(groups) {
-                console.log(groups);
                 this.$emit('updateGroups', groups)
             }
         },
@@ -53,15 +52,15 @@ export default {
     watch: {
         drag: {
             handler() {
-                console.log(this.drag);
+                // console.log(this.drag);
                 this.dragGroup = this.dragGroup === '' ? 'dragGroup' : ''
-                console.log(this.dragGroup);
+                // console.log(this.dragGroup);
             }
         }
     },
 
     created() {
-        console.log('this.dragGroup', this.dragGroup);
+        // console.log('this.dragGroup', this.dragGroup);
     },
     methods: {
         removeGroup(groupId) {
@@ -69,7 +68,6 @@ export default {
         },
         addGroup() {
             this.$emit('addGroup', this.title)
-
             eventBus.emit('boardActivity',)
             this.title = null
         },

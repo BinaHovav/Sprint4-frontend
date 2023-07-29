@@ -5,7 +5,8 @@
                 <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title" @blur="updateGroup"
                     @keydown.enter.prevent="updateGroup"></textarea>
             </form>
-            <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span class="three-dots"></span></button>
+            <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
+                    class="three-dots"></span></button>
 
         </div>
         <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" />
@@ -33,6 +34,7 @@
 <script>
 import { boardService } from '../services/board.service.local'
 import TaskList from './TaskList.vue'
+import { eventBus } from '../services/event-bus.service'
 export default {
     name: 'GroupPreview',
     props: ['group'],
@@ -43,8 +45,15 @@ export default {
             title: ''
         }
     },
-    computed: {},
-    created() { },
+    computed: {
+        board() { return this.$store.getters.getCurrBoard }
+    },
+    created() {
+        eventBus.on('setInfo', (info) => {
+            // this.$emit('removeGroup', info.removeGroup)
+            // if (info.removeGroup) this.$emit('removeGroup', info.removeGroup)
+        })
+    },
     watch: {
         group: {
             handler() {
@@ -85,21 +94,15 @@ export default {
             }, 100)
 
         },
-        handleClickOutside(event) {
-            try {
-                const ele = this.$refs.taskDetails.getBoundingClientRect();
-                if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.onSaveTask();
-            } catch { }
-        },
-        openModal(taskInfo, type, elRef) {
-            const info = { taskInfo }
+        openModal(type, elRef) {
+            const board = JSON.parse(JSON.stringify(this.board))
+            const info = { group: this.group, board }
             const el = this.$refs[elRef].getBoundingClientRect()
             eventBus.emit('modal', { el, type, info })
             window.addEventListener('resize', this.handleResize)
-            document.removeEventListener('click', this.handleClickOutside)
         },
         handleResize() {
-            const el = this.$refs.labels.getBoundingClientRect()
+            const el = this.$refs.listActions.getBoundingClientRect()
             eventBus.emit('modal', { el })
         },
 
