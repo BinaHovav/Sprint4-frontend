@@ -55,10 +55,10 @@ export default {
     },
     async removeGroup(groupId) {
       const idx = this.board.groups.findIndex((group) => group.id === groupId)
-      const activity = this.$store.getters.getEmptyActivity
-      activity.action.type='removed-group'
-      activity.action.txt=`removed group ${this.board.groups[idx].title}`
-      this.board.activitys.unshift(activity)
+      // const activity = this.$store.getters.getEmptyActivity
+      // activity.action.type='removed-group'
+      // activity.action.txt=`removed group ${this.board.groups[idx].title}`
+      // this.board.activitys.unshift(activity)
       this.board.groups.splice(idx, 1)
 
       try {

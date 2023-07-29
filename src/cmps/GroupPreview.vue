@@ -19,7 +19,7 @@
             </div>
             <div class="controls">
                 <div @click="addTask" class="btn-add">Add card</div>
-                <span @click="add = !add" class="btn-close"></span>
+                <span @click="add = !add, title = ''" class="btn-close"></span>
             </div>
         </div>
         <div v-else class="open-card-compose">
@@ -49,10 +49,7 @@ export default {
         board() { return this.$store.getters.getCurrBoard }
     },
     created() {
-        eventBus.on('setInfo', (info) => {
-            // this.$emit('removeGroup', info.removeGroup)
-            // if (info.removeGroup) this.$emit('removeGroup', info.removeGroup)
-        })
+
     },
     watch: {
         group: {
@@ -95,6 +92,13 @@ export default {
 
         },
         openModal(type, elRef) {
+            eventBus.on('setInfo', (info) => {
+                if (info?.removeGroup) {
+                    this.$emit('removeGroup', info.removeGroup)
+                    eventBus.off('setInfo')
+                }
+                // this.$emit('removeGroup', info.removeGroup)
+            })
             const board = JSON.parse(JSON.stringify(this.board))
             const info = { group: this.group, board }
             const el = this.$refs[elRef].getBoundingClientRect()
