@@ -173,7 +173,7 @@ function getEmptyActivity() {
 //           {
 //             id: 'l108',
 //             title: 'Finance',
-//             color: 'teal',
+//             color: 'sky',
 //           },
 //           {
 //             id: 'l109',
@@ -331,7 +331,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: null,
 //                 activity: [],
-//                 cover: 'teal',
+//                 cover: 'sky',
 //                 comments: [],
 //               },
 //               {
@@ -617,7 +617,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: null,
 //                 activity: [],
-//                 cover: 'teal',
+//                 cover: 'sky',
 //                 comments: [[{ byUser: 'Bina Hovav', txt: 'We should meet weekly about this', createdAt: null }]],
 //               },
 //               {

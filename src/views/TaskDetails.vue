@@ -1,12 +1,12 @@
 <template>
   <section class="backdrop">
     <section v-if="task" ref="taskDetails" class="task-details">
-      <a class="btn-icon-close" @click="onSaveTask"></a>
+      <a class="btn-icon-close" @click="closeModal"></a>
       <div v-if="task.cover" class="task-cover" :class="task.cover">
         <div class="task-cover-menu">
           <a class="task-cover-btn">
             <span class="btn-icon-cover"></span>
-            <span class="task-cover-txt" >Cover</span>
+            <span class="task-cover-txt">Cover</span>
           </a>
         </div>
       </div>
@@ -124,11 +124,11 @@
       <div class="task-sidebar">
         <div class="task-sidebar-add">
           <h3 class="sidebar-add-txt">Add to card</h3>
-          <a class="task-btn-link" @click="openModal()">
+          <a ref="members" class="task-btn-link" @click="openModal('MemberModal', 'members')">
             <span class="btn-link-members"></span>
             <span class="">Members</span>
           </a>
-          <a ref="labels" class="task-btn-link" @click="openModal(task.labels, 'LabelModal', 'labels')">
+          <a ref="labels" class="task-btn-link" @click="openModal('LabelModal', 'labels')">
             <span class="btn-link-labels"></span>
             <span class="">Labels</span>
           </a>
@@ -190,7 +190,9 @@ export default {
     this.getTask()
     eventBus.on('setInfo', (info) => {
       if (info) {
-        this.task.labels = info.taskInfo
+        this.task = info.task
+        this.board = info.board
+        this.onSaveTask()
       } else {
         setTimeout(() => {
           document.addEventListener('click', this.handleClickOutside)
@@ -229,11 +231,16 @@ export default {
     onSaveTask() {
       let idx = this.group.tasks.findIndex(gTask => gTask.id === this.task.id)
       this.group.tasks.splice(idx, 1, this.task)
+      idx = this.board.groups.findIndex(gGroup => gGroup.id === this.group.id)
+      this.board.groups.splice(idx, 1, this.group)
       this.$emit('updateBoard', this.board)
-      this.$router.replace(`/board/${this.board._id}`)
     },
-    openModal(taskInfo, type, elRef) {
-      const info = { taskInfo }
+    closeModal() {
+      this.$router.push(`/board/${this.board._id}`)
+    },
+    openModal(type, elRef) {
+      const board = JSON.parse(JSON.stringify(this.board))
+      const info = { task: this.task, board }
       const el = this.$refs[elRef].getBoundingClientRect()
       eventBus.emit('modal', { el, type, info })
       window.addEventListener('resize', this.handleResize)
@@ -249,8 +256,8 @@ export default {
     },
     handleClickOutside(event) {
       try {
-        const ele = this.$refs.taskDetails.getBoundingClientRect();
-        if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.onSaveTask();
+        const ele = this.$refs.taskDetails.getBoundingClientRect()
+        if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.closeModal()
       } catch { }
     },
   }

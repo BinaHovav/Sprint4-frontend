@@ -421,7 +421,7 @@ const cmp3 = {
 //       {
 //         id: 'l108',
 //         title: 'Finance',
-//         color: 'teal',
+//         color: 'sky',
 //       },
 //       {
 //         id: 'l109',
@@ -650,7 +650,7 @@ const cmp3 = {
 //             ],
 //             attachment: null,
 //             activity: [],
-//             cover: 'teal',
+//             cover: 'sky',
 //             comments: [],
 //           },
 //           {
@@ -1077,7 +1077,7 @@ const cmp3 = {
 //             ],
 //             attachment: null,
 //             activity: [],
-//             cover: 'teal',
+//             cover: 'sky',
 //             comments: [[{ byUser: 'Bina Hovav', txt: 'We should meet weekly about this', createdAt: null }]],
 //           },
 //           {
