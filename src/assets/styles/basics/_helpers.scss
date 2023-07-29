@@ -151,50 +151,62 @@
     background-color: $clr-background-accent-blue-subtle;
     color: $clr-text-accent-blue;
 }
+
 .light-blue {
     background-color: $clr-background-accent-blue-subtler;
     color: $clr-text-accent-blue-bolder;
 }
+
 .dark-blue {
     background-color: $clr-background-accent-blue-bolder;
     color: $clr-text-accent-blue-bolder;
 }
+
 .teal {
     background-color: $clr-background-accent-teal-subtle;
     color: $clr-text-accent-teal;
 }
+
 .light-teal {
     background-color: $clr-background-accent-teal-subtler;
     color: $clr-text-accent-teal-bolder;
 }
+
 .dark-teal {
     background-color: $clr-background-accent-teal-bolder;
     color: $clr-text-accent-teal-bolder;
 }
+
 .lime {
     background-color: $clr-background-accent-lime-subtle;
     color: $clr-text-accent-lime;
 }
+
 .light-lime {
     background-color: $clr-background-accent-lime-subtler;
     color: $clr-text-accent-lime-bolder;
 }
+
 .dark-lime {
     background-color: $clr-background-accent-lime-bolder;
     color: $clr-text-accent-lime-bolder;
 }
+
 .pink {
     background-color: $clr-background-accent-magenta-subtle;
     color: $clr-text-accent-magenta;
 }
+
 .light-pink {
     background-color: $clr-background-accent-magenta-subtler;
     color: $clr-text-accent-magenta-bolder;
 }
+
 .dark-pink {
     background-color: $clr-background-accent-magenta-subtle;
     color: $clr-text-accent-magenta;
 }
+
 // .black {
 //     background-color: $clr-background-accent-black-subtle;
 //     color: $clr-text-accent-black;
@@ -207,3 +219,58 @@
 //     background-color: $clr-background-accent-black-subtle;
 //     color: $clr-text-accent-black;
 // }
+
+.controls {
+    display: flex;
+    gap: 5px;
+    height: 32px;
+    margin: 8px 0 0;
+    overflow: hidden;
+    transition: margin 85ms ease-in, height 85ms ease-in;
+
+    .btn-add {
+        float: left;
+        height: 32px;
+        margin-top: 0;
+        min-height: 32px;
+        padding-bottom: 4px;
+        padding-top: 4px;
+        background-color: $clr-background-brand-bold;
+        border: none;
+        box-shadow: none;
+        color: $clr-text-inverse;
+        align-items: center;
+        border: none;
+        border-radius: 3px;
+        box-shadow: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 14px;
+        font-weight: 400;
+        justify-content: center;
+        line-height: 20px;
+        padding: 6px 12px;
+        text-decoration: none;
+        transition-duration: 85ms;
+        transition-property: background-color, border-color, box-shadow;
+        transition-timing-function: ease;
+        white-space: normal;
+        // margin: 8px 4px 0 0;
+        text-align: center;
+        &:hover{
+            background-color: $clr-background-brand-bold-hovered;
+        }
+    }
+    .btn-close {
+        @include trello-icon($icon-close);
+        line-height: 32px;
+        font-size: 24px;
+        color: $clr-icon;
+        
+        &:hover {
+            cursor: pointer;
+            color: $clr-text;
+        }
+    }
+}

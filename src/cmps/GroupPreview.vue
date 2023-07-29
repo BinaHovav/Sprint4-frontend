@@ -9,7 +9,19 @@
 
         </div>
         <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" />
-        <button @click="addTask">Add Task</button>
+        <div class="card-compose" v-if="add">
+            <div class="input-title">
+                <div>
+                    <textarea dir="auto" placeholder="Enter a title for this card..." data-autosize="true" autofocus
+                        v-model="title"></textarea>
+                </div>
+            </div>
+            <div class="controls">
+                <div @click="addTask" class="btn-add">Add card</div>
+                <span @click="add = !add" class="btn-close"></span>
+            </div>
+        </div>
+        <button v-else @click="add = !add">Add Task</button>
     </div>
 </template>
   
@@ -21,7 +33,9 @@ export default {
     props: ['group'],
     data() {
         return {
-            clonedGroup: null
+            clonedGroup: null,
+            add: false,
+            title: ''
         }
     },
     computed: {},
@@ -40,9 +54,13 @@ export default {
             this.$refs.groupNameInput.blur()
         },
         addTask() {
+            if(!this.title) return
             const newTask = boardService.getEmptyTask()
+            newTask.title = this.title
             this.clonedGroup.tasks.push(newTask)
             this.updateGroup()
+            this.title = ''
+            this.add = false
         },
         removeTask(taskId) {
             console.log(taskId);
@@ -52,7 +70,7 @@ export default {
         },
         updateTasks(tasks, groupId) {
             this.$emit('updateTasks', tasks, groupId)
-        }
+        },
 
     },
     components: {

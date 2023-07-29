@@ -56,47 +56,6 @@
                 font: inherit;
                 writing-mode: horizontal-tb
             }
-
-            .controls {
-                display: flex;
-                gap: 5px;
-                height: 32px;
-                margin: 8px 0 0;
-                overflow: hidden;
-                transition: margin 85ms ease-in, height 85ms ease-in;
-
-                .btn-add-list {
-                    float: left;
-                    height: 32px;
-                    margin-top: 0;
-                    min-height: 32px;
-                    padding-bottom: 4px;
-                    padding-top: 4px;
-                    background-color: $clr-background-brand-bold;
-                    border: none;
-                    box-shadow: none;
-                    color: $clr-text-inverse;
-                    align-items: center;
-                    border: none;
-                    border-radius: 3px;
-                    box-shadow: none;
-                    box-sizing: border-box;
-                    cursor: pointer;
-                    display: inline-flex;
-                    font-size: 14px;
-                    font-weight: 400;
-                    justify-content: center;
-                    line-height: 20px;
-                    padding: 6px 12px;
-                    text-decoration: none;
-                    transition-duration: 85ms;
-                    transition-property: background-color, border-color, box-shadow;
-                    transition-timing-function: ease;
-                    white-space: normal;
-                    // margin: 8px 4px 0 0;
-                    text-align: center;
-                }
-            }
         }
     }
 

@@ -1,31 +1,29 @@
 <template>
-        <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex"
-            @start="onDragStart = true" @end="onDragEnd = false" @click.right.prevent item-key="name" handle=".drag-me">
-            <template #item="{ element }">
-                <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
-                    @updateTasks="updateTasks"  />
-            </template>
-            <template #footer>
-                <div class="add-group">
-                    <form @submit.prevent="addGroup">
-                        <input type="text" name="name" v-model="title" placeholder="Enter list title" autocomplete="off"
-                            dir="auto" maxlength="512">
-                        <div class="controls">
-                            <button class="btn-add-list">Add list</button>
-                            <div class="btn-close-list">
-                                <span>X</span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </template>
-        </draggable>
-
+    <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex"
+        @start="onDragStart = true" @end="onDragEnd = false" @click.right.prevent item-key="name" handle=".drag-me">
+        <template #item="{ element }">
+            <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
+                @updateTasks="updateTasks" />
+        </template>
+        <template #footer>
+            <div class="add-group">
+                <form @submit.prevent="addGroup">
+                    <input type="text" name="name" v-model="title" placeholder="Enter list title" autocomplete="off"
+                        dir="auto" maxlength="512">
+                    <div class="controls">
+                        <button class="btn-add">Add list</button>
+                        <span class="btn-close"> </span>
+                    </div>
+                </form>
+            </div>
+        </template>
+    </draggable>
 </template>
 
 <script>
 import draggable from 'vuedraggable'
 import GroupPreview from './GroupPreview.vue'
+import { eventBus } from '../services/event-bus.service'
 export default {
     name: 'GroupList',
     props: {
@@ -71,6 +69,8 @@ export default {
         },
         addGroup() {
             this.$emit('addGroup', this.title)
+
+            eventBus.emit('boardActivity',)
             this.title = null
         },
         updateGroup(group) {

@@ -13,6 +13,7 @@ export const boardService = {
   addBoardMsg,
   getEmptyGroup,
   getEmptyTask,
+  getEmptyActivity
 }
 window.cs = boardService
 
@@ -97,6 +98,21 @@ function getEmptyTask() {
     activity: [],
     cover: '',
     comments: [],
+  }
+}
+
+function getEmptyActivity() {
+  return {
+    id: utilService.makeId(4),
+    action: {
+      type:'',
+      txt: '',
+      componentId:'',
+      movedCmp:'',
+      movedUser:''
+    },
+    date: Date.now(),
+    by: ''
   }
 }
 
@@ -647,6 +663,7 @@ function getEmptyTask() {
 //           },
 //         ],
 //         style: {},
+//         activitys:[],
 //       },
 
 //       {
