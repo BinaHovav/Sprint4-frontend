@@ -60,8 +60,12 @@ export default {
                     this.setInfo()
                     document.removeEventListener('click', this.handleClickOutside)
                 }
-            },
-            deep: true,
+            }
+        },
+        backBtn: {
+            handler() {
+                document.addEventListener('click', this.handleClickOutside)
+            }
         },
     },
     methods: {

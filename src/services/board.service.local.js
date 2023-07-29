@@ -218,6 +218,7 @@ function getEmptyActivity() {
 //                 dueDate: 1690303727,
 //                 checklists: [
 //                   {
+//                     id: 'c101',
 //                     title: 'Todo',
 //                     todos: [
 //                       { id: 't101', txt: 'Gather data on existing gas station automation solutions', isDone: true },
@@ -241,6 +242,7 @@ function getEmptyActivity() {
 //                 dueDate: null,
 //                 checklists: [
 //                   {
+//                     id: 'c101',
 //                     title: 'Research and review existing robotic technologies',
 //                     todos: [
 //                       { id: 't101', txt: 'Identify and compile a list of robotic technologies currently used in various industries.', isDone: true },
@@ -253,6 +255,7 @@ function getEmptyActivity() {
 //                     ],
 //                   },
 //                   {
+//                     id: 'c102',
 //                     title: 'Sensor assessment and selection',
 //                     todos: [
 //                       { id: 't101', txt: 'Investigate available sensor technologies, including cameras, LiDAR, ultrasonic sensors, and RFID systems.', isDone: false },
@@ -321,6 +324,7 @@ function getEmptyActivity() {
 //                 dueDate: 1690303727,
 //                 checklists: [
 //                   {
+//                     id: 'c101',
 //                     title: 'Todo',
 //                     todos: [
 //                       { id: 't101', txt: 'Brainstorm and sketch initial robot design ideas.', isDone: true },
@@ -359,6 +363,7 @@ function getEmptyActivity() {
 //                 dueDate: 1691143200,
 //                 checklists: [
 //                   {
+//                     id: 'c101',
 //                     title: 'todo',
 //                     todos: [
 //                       {
@@ -439,6 +444,7 @@ function getEmptyActivity() {
 //                 dueDate: null,
 //                 checklists: [
 //                   {
+//                     id: 'c101',
 //                     title: 'todo',
 //                     todos: [
 //                       { id: 't101', txt: 'Test Case Preparation', isDone: true },

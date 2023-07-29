@@ -17,7 +17,6 @@
     overflow: visible;
     background-color: $clr-surface-overlay;
     border-radius: 8px;
-    // display: none;
     margin: 48px 0 80px;
     overflow: hidden;
     position: relative;
@@ -26,6 +25,7 @@
     border-radius: 8px;
     min-height: 600px;
     outline: 0;
+    box-sizing: inherit;
     .btn-icon-close {
         @include trello-icon($content: $icon-close, $type: md, $color: #44546f);
         border-radius: 50%;
@@ -122,7 +122,7 @@
         }
         .task-header-title {
             padding: 12px 0 0;
-            textarea {
+            input {
                 overflow: hidden;
                 overflow-wrap: break-word;
                 height: 32.8px;
@@ -136,7 +136,6 @@
                 margin: -4px -8px;
                 min-height: 24px;
                 padding: 4px 8px;
-                resize: none;
                 width: 100%;
                 // -webkit-appearance: none;
                 border: none;
@@ -160,7 +159,7 @@
         min-height: 24px;
         padding: 0 8px 8px 16px;
         position: relative;
-        width: 600px;
+        width: 552px;
         z-index: 1;
         .task-details-data {
             margin-top: 8px;
@@ -678,6 +677,276 @@
                             border: none;
                             box-shadow: none;
                             margin: 0 6px 0 0;
+                        }
+                    }
+                }
+            }
+        }
+        .checklist-content {
+            clear: both;
+            margin-bottom: 24px;
+            position: relative;
+            .checklist {
+                margin-bottom: 24px;
+                .checklist-header {
+                    margin: 0 0 4px 40px;
+                    padding: 8px 0;
+                    position: relative;
+                    border-bottom: none;
+                    .checklist-header-icon {
+                        @include trello-icon($content: $icon-checklist, $type: lg, $color: currentColor);
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        display: inline-block;
+                        font-family: trellicons;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1;
+                        text-align: center;
+                        text-decoration: none;
+                        vertical-align: bottom;
+                        font-size: 24px;
+                        height: 32px;
+                        line-height: 32px;
+                        width: 32px;
+                        color: $clr-icon;
+                        left: -40px;
+                        position: absolute;
+                        top: 8px;
+                    }
+                    .checklist-title {
+                        align-items: center;
+                        display: flex;
+                        flex-flow: row wrap;
+                        justify-content: space-between;
+                        h3 {
+                            font-size: 16px;
+                            line-height: 20px;
+                            display: inline-block;
+                            min-height: 18px;
+                            min-width: 40px;
+                            width: auto;
+                            margin: 6px 0;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            cursor: pointer;
+                        }
+                        .checklist-options {
+                            float: right;
+                            margin: 0 2px 0 auto;
+                            .show-checked {
+                                align-items: center;
+                                background-color: $clr-background-neutral;
+                                border: none;
+                                border-radius: 3px;
+                                box-shadow: none;
+                                box-sizing: border-box;
+                                color: $clr-text;
+                                cursor: pointer;
+                                display: inline-flex;
+                                font-family:
+                                    -apple-system,
+                                    BlinkMacSystemFont,
+                                    Segoe UI,
+                                    Roboto,
+                                    Noto Sans,
+                                    Ubuntu,
+                                    Droid Sans,
+                                    Helvetica Neue,
+                                    sans-serif;
+                                font-size: 14px;
+                                font-weight: 400;
+                                justify-content: center;
+                                line-height: 20px;
+                                padding: 6px 12px;
+                                text-decoration: none;
+                                transition-duration: 85ms;
+                                transition-property: background-color, border-color, box-shadow;
+                                transition-timing-function: ease;
+                                white-space: normal;
+                                margin: 0 8px 0 0;
+                                &:hover {
+                                    background-color: $clr-background-neutral-hovered;
+                                    border: none;
+                                    box-shadow: none;
+                                    color: $clr-text;
+                                    text-decoration: none;
+                                }
+                            }
+                            .checklist-remove-btn {
+                                align-items: center;
+                                background-color: $clr-background-neutral;
+                                border: none;
+                                border-radius: 3px;
+                                box-shadow: none;
+                                box-sizing: border-box;
+                                color: $clr-text;
+                                cursor: pointer;
+                                display: inline-flex;
+                                font-family:
+                                    -apple-system,
+                                    BlinkMacSystemFont,
+                                    Segoe UI,
+                                    Roboto,
+                                    Noto Sans,
+                                    Ubuntu,
+                                    Droid Sans,
+                                    Helvetica Neue,
+                                    sans-serif;
+                                font-size: 14px;
+                                font-weight: 400;
+                                justify-content: center;
+                                line-height: 20px;
+                                padding: 6px 12px;
+                                text-decoration: none;
+                                transition-duration: 85ms;
+                                transition-property: background-color, border-color, box-shadow;
+                                transition-timing-function: ease;
+                                white-space: normal;
+                                margin: 0;
+                                &:hover {
+                                    background-color: $clr-background-neutral-hovered;
+                                    border: none;
+                                    box-shadow: none;
+                                    color: $clr-text;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                    }
+                }
+                .checklist-progress {
+                    margin-bottom: 6px;
+                    position: relative;
+                    .checklist-progress-calc {
+                        color: $clr-text-subtle;
+                        font-size: 11px;
+                        left: 0;
+                        line-height: 10px;
+                        position: absolute;
+                        text-align: center;
+                        top: -1px;
+                        width: 32px;
+                    }
+                    .checklist-progress-bar {
+                        background: $clr-background-neutral;
+                        border-radius: 4px;
+                        clear: both;
+                        height: 8px;
+                        margin: 0px 0px 0px 40px;
+                        overflow: hidden;
+                        position: relative;
+                        .checklist-current-progress {
+                            background: $clr-background-accent-blue-subtle;
+                            bottom: 0;
+                            left: 0;
+                            position: absolute;
+                            top: 0;
+                            transition-duration: 0.14s;
+                            transition-property: width, background;
+                            transition-timing-function: ease-in;
+                            width: 40%;
+                        }
+                    }
+                }
+                .checklist-list {
+                    min-height: 8px;
+                    .checklist-item {
+                        border-radius: 4px;
+                        box-sizing: border-box;
+                        clear: both;
+                        padding-left: 40px;
+                        position: relative;
+                        transform-origin: left bottom;
+                        transition-duration: 0.3s;
+                        transition-property: transform, opacity, height, padding, margin, background-color;
+                        transition-timing-function: ease-in;
+                        .checklist-checkbox {
+                            background-color: $clr-background-input;
+                            cursor: pointer;
+                            flex-shrink: 0;
+                            height: 16px;
+                            left: 0;
+                            margin: 6px;
+                            text-align: center;
+                            top: 5px;
+                            border-radius: 2px;
+                            box-shadow: inset 0 0 0 2px $clr-border-input;
+                            overflow: hidden;
+                            position: relative;
+                            position: absolute;
+                            transition: all 0.2s ease-in-out;
+                            white-space: nowrap;
+                            width: 16px;
+                            svg {
+                                fill: $clr-icon-inverse;
+                                &.checked {
+                                    background-color: $clr-background-selected-bold;
+                                    box-shadow: inset 0 0 0 2px $clr-border-selected;
+                                }
+                            }
+                        }
+                        .checklist-item-details {
+                            overflow-wrap: break-word;
+                            word-break: break-word;
+                            .checklist-item-row {
+                                display: flex;
+                                flex-direction: row;
+                                cursor: pointer;
+                                .checklist-text {
+                                    display: inline-flex;
+                                    padding: 6px 0;
+                                    width: 100%;
+                                    span {
+                                        align-self: center;
+                                        flex: 1;
+                                        margin-bottom: 0;
+                                        min-height: 20px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .checklist-add-item {
+                        margin-left: 40px;
+                        button {
+                            align-items: center;
+                            background-color: $clr-background-neutral;
+                            border: none;
+                            border-radius: 3px;
+                            box-shadow: none;
+                            box-sizing: border-box;
+                            color: $clr-text;
+                            cursor: pointer;
+                            display: inline-flex;
+                            font-family:
+                                -apple-system,
+                                BlinkMacSystemFont,
+                                Segoe UI,
+                                Roboto,
+                                Noto Sans,
+                                Ubuntu,
+                                Droid Sans,
+                                Helvetica Neue,
+                                sans-serif;
+                            font-size: 14px;
+                            font-weight: 400;
+                            justify-content: center;
+                            line-height: 20px;
+                            padding: 6px 12px;
+                            text-decoration: none;
+                            transition-duration: 85ms;
+                            transition-property: background-color, border-color, box-shadow;
+                            transition-timing-function: ease;
+                            white-space: normal;
+                            margin-top: 8px;
+                            &:hover {
+                                background-color: $clr-background-neutral-hovered;
+                                border: none;
+                                box-shadow: none;
+                                color: $clr-text;
+                                text-decoration: none;
+                            }
                         }
                     }
                 }

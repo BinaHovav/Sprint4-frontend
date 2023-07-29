@@ -13,12 +13,12 @@
       <div class="task-header">
         <span class="btn-title-icon"></span>
         <div class="task-header-title">
-          <textarea type="text" v-model="task.title"></textarea>
+          <input type="text" v-model="task.title" @keyup.enter="$event.target.blur()" @blur="onSaveTask">
         </div>
       </div>
       <div class="task-main">
         <div class="task-details-data">
-          <div class="task-details-item">
+          <div v-if="task.members?.length" class="task-details-item">
             <h3>Members</h3>
             <div class="">
               <div v-for="memberId in task.members" class="task-details-members">
@@ -26,20 +26,21 @@
                   :title="getMemberById(memberId).fullname">
               </div>
               <a class="task-member-add">
-                <span class="task-member-btn-add"></span>
+                <span class="task-member-btn-add" ref="membersAdd" @click="openModal('MemberModal', 'membersAdd')"></span>
               </a>
             </div>
           </div>
-          <div class="task-details-item">
+          <div v-if="task.labels?.length" class="task-details-item">
             <div>
               <div class="task-details-labels">
                 <h3>Labels</h3>
                 <div class="">
                   <div class="task-labels flex">
-                    <button v-for="label in task.labels" class="task-btn-label" :class="getLabelById(label).color">{{
-                      getLabelById(label).title }}</button>
-                    <button ref="label-add" class="task-btn-add-label"
-                      @click="openModal(task.labels, 'LabelModal', 'label-add')"><span></span></button>
+                    <button v-for="label in task.labels" class="task-btn-label" :ref="label"
+                      :class="getLabelById(label).color">{{
+                        getLabelById(label).title }}</button>
+                    <button ref="labelAdd" class="task-btn-add-label"
+                      @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
                   </div>
                 </div>
               </div>
@@ -104,20 +105,62 @@
                         </svg></span></span></button>
                 </div>
                 <div class="description-edit-btn">
-                  <button>Edit</button>
+                  <button @click="openDescriptionEdit">Edit</button>
                 </div>
               </div>
             </div>
             <div class="description-content">
               <div class="description-txt">
-                <p v-if="!isEditable" @click="isEditable = true" dir="auto">{{ task.description }}</p>
+                <p v-if="!isEditable" @click="openDescriptionEdit">{{ task.description }}</p>
                 <div v-if="isEditable" contenteditable="true" ref="editableDescription">{{ task.description }}</div>
                 <div v-if="isEditable" class="description-save-cancel">
                   <button class="description-save" @click="saveDescription">Save</button>
-                  <button class="description-cancel" @click="isEditable = false">Cancel</button>
+                  <button class="description-cancel" @click="saveDescription('cancel')">Cancel</button>
                 </div>
               </div>
             </div>
+            <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" ></TaskChecklistDetails>
+            <!-- <div class="checklist-content">
+              <div class="checklist">
+                <div class="checklist-header" v-for="checklist in task.checklists">
+                  <span class="checklist-header-icon"></span>
+                  <div class="checklist-title">
+                    <h3>{{ checklist?.title }}</h3>
+                    <div class="checklist-options">
+                      <a class="show-checked">Show checked items</a>
+                      <a class="checklist-remove-btn">Delete</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="checklist-progress">
+                  <span class="checklist-progress-calc">40%</span>
+                  <div class="checklist-progress-bar">
+                    <div class="checklist-current-progress"></div>
+                  </div>
+                </div>
+                <div class="checklist-list">
+                  <div class="checklist-item">
+                    <div class="checklist-checkbox"><svg :class="{ 'checked': true }" width="16px" height="16px"
+                        viewBox="-3 -4 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false"
+                        role="presentation">
+                        <path
+                          d="M1.49022 3.21486C1.2407 2.94412 0.818938 2.92692 0.548195 3.17644C0.277453 3.42597 0.260252 3.84773 0.509776 4.11847L2.91785 6.73131C3.2762 7.08204 3.80964 7.08204 4.14076 6.75092C4.18159 6.71082 4.18159 6.71082 4.38359 6.51218C4.57995 6.31903 4.79875 6.1037 5.03438 5.87167C5.70762 5.20868 6.38087 4.54459 7.00931 3.92318L7.0362 3.89659C8.15272 2.79246 9.00025 1.9491 9.47463 1.46815C9.73318 1.20602 9.73029 0.783922 9.46815 0.525367C9.20602 0.266812 8.78392 0.269712 8.52537 0.531843C8.05616 1.00754 7.21125 1.84829 6.09866 2.94854L6.07182 2.97508C5.4441 3.59578 4.77147 4.25926 4.09883 4.92165C3.90522 5.11231 3.72299 5.29168 3.55525 5.4567L1.49022 3.21486Z">
+                        </path>
+                      </svg></div>
+                    <div class="checklist-item-details">
+                      <div class="checklist-item-row">
+                        <div class="checklist-text">
+                          <span>Text</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="checklist-add-item">
+                    <button>Add an item</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -144,7 +187,7 @@
             <span class="btn-link-attachment"></span>
             <span class="">Attachment</span>
           </a>
-          <a class="task-btn-link" @click="openModal()">
+          <a v-if="!task.cover" class="task-btn-link" @click="openModal()">
             <span class="btn-link-cover"></span>
             <span class="">Cover</span>
           </a>
@@ -157,6 +200,7 @@
 <script>
 import { boardService } from '../services/board.service.local'
 import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import TaskChecklistDetails from '../cmps/TaskDetails/TaskChecklistDetails.vue'
 export default {
   name: 'TaskDetails',
   data() {
@@ -235,6 +279,10 @@ export default {
       this.board.groups.splice(idx, 1, this.group)
       this.$emit('updateBoard', this.board)
     },
+    // saveTask(task){
+    //   this.task = task
+    //   this.onSaveTask()
+    // },
     closeModal() {
       this.$router.push(`/board/${this.board._id}`)
     },
@@ -250,8 +298,12 @@ export default {
       const el = this.$refs.labels.getBoundingClientRect()
       eventBus.emit('modal', { el })
     },
-    saveDescription() {
-      this.task.description = this.$refs.description.textContent
+    saveDescription(cancel) {
+      if (cancel !== 'cancel') {
+        this.task.description = this.$refs.editableDescription.innerText
+        this.onSaveTask
+      }
+      this.$refs.editableDescription.blur()
       this.isEditable = false
     },
     handleClickOutside(event) {
@@ -259,7 +311,16 @@ export default {
         const ele = this.$refs.taskDetails.getBoundingClientRect()
         if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.closeModal()
       } catch { }
+    },
+    openDescriptionEdit() {
+      this.isEditable = true
+      setTimeout(() => {
+        this.$refs.editableDescription.focus()
+      }, 200);
     }
+  },
+  components: {
+    TaskChecklistDetails
   }
 }
 </script>

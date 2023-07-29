@@ -14,7 +14,7 @@
                     :title="color" @click="setEditableLabel(color)"></div>
             </div>
         </div>
-        <button class="remove-label">
+        <button class="remove-label" @click="editableLabel.color = ''" :disabled="!editableLabel.color">
             <span>
                 <span>
                     <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
@@ -30,7 +30,7 @@
         <hr>
         <div class="create-label-btn">
             <button @click="saveLabel">{{ editableLabel?.id ? 'Save' : 'Create' }}</button>
-            <button class="remove-label-btn" @click="">Delete</button>
+            <button @click="removeLabel" class="remove-label-btn">Delete</button>
         </div>
     </div>
 </template>
@@ -67,6 +67,9 @@ export default {
         },
         saveLabel() {
             this.$emit('saveLabel', this.editableLabel)
+        },
+        removeLabel() {
+            this.$emit('removeLabel', this.editableLabel)
         }
     },
     computed: {
