@@ -35,14 +35,14 @@
         </ul>
         <button class="create-label" @click.stop="openEditLabel">Create a new label</button>
     </div>
-    <CreateLabel v-if="showCreate" :currLabelId="currLabelId" :board="info.board" @saveLabel="saveLabel" />
+    <CreateLabel v-if="showCreate" :currLabelId="currLabelId" :board="info.board" @saveLabel="saveLabel" @removeLabel="removeLabel" />
 </template>
 <script>
 import { eventBus } from '../../services/event-bus.service'
 import { utilService } from '../../services/util.service'
 import CreateLabel from './CreateLabel.vue'
 export default {
-    emits: ['setInfo', 'closeModal'],
+    emits: ['setInfo', 'closeModal', 'showBackBtn'],
     props: {
         info: {
             type: Object,
@@ -86,7 +86,7 @@ export default {
         },
         saveLabel(newLabel) {
             if (newLabel.id) {
-                const idx = this.info.board.labels.findIndex(label => this.currLabelId === label.id)
+                const idx = this.info.board.labels.findIndex(label => newLabel.id === label.id)
                 this.info.board.labels.splice(idx, 1, newLabel)
             } else {
                 newLabel.id = utilService.makeId(4)
@@ -95,6 +95,17 @@ export default {
             }
             this.setInfo()
             this.showCreate = false
+            this.$emit('showBackBtn', this.currLabelId)
+        },
+        removeLabel(labelToRemove){
+            if (labelToRemove.id) {
+                const idx = this.info.board.labels.findIndex(label => labelToRemove.id === label.id)
+                this.info.board.labels.splice(idx, 1)
+            }
+            this.setInfo()
+            this.showCreate = false
+            this.$emit('showBackBtn', this.currLabelId)
+
         }
     },
     computed: {

@@ -29,14 +29,13 @@ export default {
   },
   methods: {
     toggleTaskMember(member){
-      console.log('member',member);
       if (this.info.task.members.includes(member._id)) {
-        const idx = this.info.task.members.findIndex(tMember => tMember._id === member._id)
+        const idx = this.info.task.members.findIndex(tMember => tMember === member._id)
         this.info.task.members.splice(idx,1)
       } else {
         this.info.task.members.push(member._id)
       }
-      // this.$emit('setInfo', this.info)
+      this.$emit('setInfo', this.info)
     }
   },
   computed: {

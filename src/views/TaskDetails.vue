@@ -13,12 +13,12 @@
       <div class="task-header">
         <span class="btn-title-icon"></span>
         <div class="task-header-title">
-          <textarea type="text" v-model="task.title"></textarea>
+          <input type="text" v-model="task.title" @keyup.enter="$event.target.blur()" @blur="onSaveTask">
         </div>
       </div>
       <div class="task-main">
         <div class="task-details-data">
-          <div class="task-details-item">
+          <div v-if="task.members?.length" class="task-details-item">
             <h3>Members</h3>
             <div class="">
               <div v-for="memberId in task.members" class="task-details-members">
@@ -26,20 +26,21 @@
                   :title="getMemberById(memberId).fullname">
               </div>
               <a class="task-member-add">
-                <span class="task-member-btn-add"></span>
+                <span class="task-member-btn-add" ref="membersAdd" @click="openModal('MemberModal', 'membersAdd')"></span>
               </a>
             </div>
           </div>
-          <div class="task-details-item">
+          <div v-if="task.labels?.length" class="task-details-item">
             <div>
               <div class="task-details-labels">
                 <h3>Labels</h3>
                 <div class="">
                   <div class="task-labels flex">
-                    <button v-for="label in task.labels" class="task-btn-label" :class="getLabelById(label).color">{{
-                      getLabelById(label).title }}</button>
-                    <button ref="label-add" class="task-btn-add-label"
-                      @click="openModal(task.labels, 'LabelModal', 'label-add')"><span></span></button>
+                    <button v-for="label in task.labels" class="task-btn-label" :ref="label"
+                      :class="getLabelById(label)?.color">{{
+                        getLabelById(label)?.title }}</button>
+                    <button ref="labelAdd" class="task-btn-add-label"
+                      @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
                   </div>
                 </div>
               </div>
@@ -104,20 +105,21 @@
                         </svg></span></span></button>
                 </div>
                 <div class="description-edit-btn">
-                  <button>Edit</button>
+                  <button @click="openDescriptionEdit">Edit</button>
                 </div>
               </div>
             </div>
             <div class="description-content">
               <div class="description-txt">
-                <p v-if="!isEditable" @click="isEditable = true" dir="auto">{{ task.description }}</p>
+                <p v-if="!isEditable" @click="openDescriptionEdit">{{ task.description }}</p>
                 <div v-if="isEditable" contenteditable="true" ref="editableDescription">{{ task.description }}</div>
                 <div v-if="isEditable" class="description-save-cancel">
                   <button class="description-save" @click="saveDescription">Save</button>
-                  <button class="description-cancel" @click="isEditable = false">Cancel</button>
+                  <button class="description-cancel" @click="saveDescription('cancel')">Cancel</button>
                 </div>
               </div>
             </div>
+            <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" ></TaskChecklistDetails>
           </div>
         </div>
       </div>
@@ -144,7 +146,7 @@
             <span class="btn-link-attachment"></span>
             <span class="">Attachment</span>
           </a>
-          <a class="task-btn-link" @click="openModal()">
+          <a v-if="!task.cover" class="task-btn-link" @click="openModal()">
             <span class="btn-link-cover"></span>
             <span class="">Cover</span>
           </a>
@@ -157,6 +159,7 @@
 <script>
 import { boardService } from '../services/board.service.local'
 import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import TaskChecklistDetails from '../cmps/TaskDetails/TaskChecklistDetails.vue'
 export default {
   name: 'TaskDetails',
   data() {
@@ -205,6 +208,7 @@ export default {
   },
   unmounted() {
     document.removeEventListener('click', this.handleClickOutside)
+    eventBus.off('setInfo')
   },
   methods: {
     async getTask() {
@@ -223,10 +227,10 @@ export default {
       }
     },
     getLabelById(labelId) {
-      return this.board.labels.find(label => label.id === labelId)
+      return this.board.labels?.find(label => label.id === labelId)
     },
     getMemberById(memberId) {
-      return this.board.members.find(member => member._id === memberId)
+      return this.board.members?.find(member => member._id === memberId)
     },
     onSaveTask() {
       let idx = this.group.tasks.findIndex(gTask => gTask.id === this.task.id)
@@ -250,8 +254,12 @@ export default {
       const el = this.$refs.labels.getBoundingClientRect()
       eventBus.emit('modal', { el })
     },
-    saveDescription() {
-      this.task.description = this.$refs.description.textContent
+    saveDescription(cancel) {
+      if (cancel !== 'cancel') {
+        this.task.description = this.$refs.editableDescription.innerText
+        this.onSaveTask
+      }
+      this.$refs.editableDescription.blur()
       this.isEditable = false
     },
     handleClickOutside(event) {
@@ -260,6 +268,15 @@ export default {
         if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.closeModal()
       } catch { }
     },
+    openDescriptionEdit() {
+      this.isEditable = true
+      setTimeout(() => {
+        this.$refs.editableDescription.focus()
+      }, 200);
+    }
+  },
+  components: {
+    TaskChecklistDetails
   }
 }
 </script>
