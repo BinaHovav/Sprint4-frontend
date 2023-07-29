@@ -1,29 +1,11 @@
 <template>
-    <header class="modal-header">
-        <button v-if="showCreate" @click.stop="showCreate = false" class="header-back"><span><svg width="10" height="18" viewBox="0 0 10 18" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M0.292893 8.29292L7.36396 1.22185C7.75449 0.831324 8.38765 0.831324 8.77817 1.22185C9.1687 1.61237 9.1687 2.24554 8.77817 2.63606L2.41421 9.00002L8.77818 15.364C9.1687 15.7545 9.1687 16.3877 8.77818 16.7782C8.38765 17.1687 7.75449 17.1687 7.36396 16.7782L0.292893 9.70713C-0.0976312 9.3166 -0.0976312 8.68344 0.292893 8.29292Z"
-                        fill="currentColor"></path>
-                </svg></span></button>
-        <h2 class="header-title">{{ headerTitle }}</h2>
-        <button class="close-modal" @click="this.$emit('closeModal')">
-            <span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893C0.683418 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.41421 7L13.7071 12.2929C14.0976 12.6834 14.0976 13.3166 13.7071 13.7071C13.3166 14.0976 12.6834 14.0976 12.2929 13.7071L7 8.41421L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7Z"
-                        fill="currentColor"></path>
-                </svg>
-            </span>
-        </button>
-    </header>
-    <div v-if="!showCreate" class="modal-container">
+    <div v-if="!showCreate" class="label-container">
         <div>
             <input class="modal-search" type="text" placeholder="Search labels...">
         </div>
         <p class="sub-header-title">Labels</p>
         <ul class="labels-options">
-            <li v-for="label in board.labels">
+            <li v-for="label in info.board.labels">
                 <label class="label-option" @click.prevent="onSetLabel(label.id)">
                     <input type="checkbox" aria-checked="false" aria-disabled="false" aria-invalid="false"
                         :checked="isLabelChecked(label.id)">
@@ -53,9 +35,11 @@
         </ul>
         <button class="create-label" @click.stop="openEditLabel">Create a new label</button>
     </div>
-    <CreateLabel v-if="showCreate" :currLabelId="currLabelId" :board="board" />
+    <CreateLabel v-if="showCreate" :currLabelId="currLabelId" :board="info.board" @saveLabel="saveLabel" />
 </template>
 <script>
+import { eventBus } from '../../services/event-bus.service'
+import { utilService } from '../../services/util.service'
 import CreateLabel from './CreateLabel.vue'
 export default {
     emits: ['setInfo', 'closeModal'],
@@ -63,50 +47,64 @@ export default {
         info: {
             type: Object,
             required: true
+        },
+        backBtn: {
+            typeof: Boolean,
+            required: true
         }
     },
     name: 'LabelModal',
     data() {
         return {
-            board: {},
             currLabelId: '',
             showCreate: false
         }
     },
     created() {
-        this.board = this.getBoard
+        eventBus.on('showBackBtn', (backBtn) => {
+            this.showCreate = backBtn
+            if (!backBtn) this.currLabelId = ''
+        })
     },
     methods: {
         isLabelChecked(labelId) {
-            return this.info.taskInfo?.includes(labelId)
+            return this.info.task.labels?.includes(labelId)
         },
         onSetLabel(labelId) {
-            const idx = this.info.taskInfo?.findIndex(label => label === labelId)
-            if (idx >= 0) this.info.taskInfo?.splice(idx, 1)
-            else this.info.taskInfo.push(labelId)
+            const idx = this.info.task.labels?.findIndex(label => label === labelId)
+            if (idx >= 0) this.info.task.labels?.splice(idx, 1)
+            else this.info.task.labels.push(labelId)
             this.setInfo()
         },
         setInfo() {
             this.$emit('setInfo', this.info)
         },
         openEditLabel(labelId) {
-            if (typeof(labelId) == 'string' ) this.currLabelId = labelId
-            this.showCreate = true
+            if (!labelId) this.currLabelId = ''
+            else if (typeof (labelId) == 'string') this.currLabelId = labelId
+            this.$emit('showBackBtn', this.currLabelId)
         },
+        saveLabel(newLabel) {
+            if (newLabel.id) {
+                const idx = this.info.board.labels.findIndex(label => this.currLabelId === label.id)
+                this.info.board.labels.splice(idx, 1, newLabel)
+            } else {
+                newLabel.id = utilService.makeId(4)
+                this.info.task.labels.push(newLabel.id)
+                this.info.board.labels.push(newLabel)
+            }
+            this.setInfo()
+            this.showCreate = false
+        }
     },
     computed: {
-        getBoard() {
-            const board = this.$store.getters.getCurrBoard
-            const boardCopy = JSON.parse(JSON.stringify(board))
-            return boardCopy
-        },
-        headerTitle() {
-            if (this.showCreate) {
-                return this.currLabelId ? 'Edit label' : 'Create label'
-            } else {
-                return 'Labels'
-            }
-        }
+        // headerTitle() {
+        //     if (this.backBtn) {
+        //         return this.currLabelId ? 'Edit label' : 'Create label'
+        //     } else {
+        //         return 'Labels'
+        //     }
+        // }
 
     },
     components: {
