@@ -20,6 +20,11 @@
 
     &:hover {
         background-color: $clr-surface-hovered;
+
+        .btn-edit {
+            visibility: visible;
+        }
+
     }
 
     cursor: pointer;
@@ -107,13 +112,14 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
 
-                    &.labels-open{
+                    &.labels-open {
                         animation-name: labelsOpen;
                         animation-duration: 450ms;
                         animation-timing-function: ease-in;
                         animation-fill-mode: forwards;
                     }
-                    &.labels-close{
+
+                    &.labels-close {
                         animation-name: labelsClose;
                         animation-duration: 450ms;
                         animation-timing-function: ease-in;
@@ -223,5 +229,28 @@
                 }
             }
         }
+    }
+
+    .btn-edit {
+        background-clip: padding-box;
+        background-color: $clr-surface-raised-hovered;
+        background-origin: initial;
+        border-radius: 8px;
+        opacity: .8;
+        padding: 6px;
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        visibility: hidden;
+        z-index: 40;
+
+        .edit-icon {
+            @include trello-icon($icon-edit)
+        }
+
+        &:hover {
+            background-color: $clr-surface-raised-pressed;
+        }
+
     }
 }

@@ -252,7 +252,7 @@ export default {
         const ele = this.$refs.taskDetails.getBoundingClientRect();
         if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.onSaveTask();
       } catch { }
-    }
+    },
   }
 }
 </script>

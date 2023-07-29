@@ -5,7 +5,7 @@
                 <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title" @blur="updateGroup"
                     @keydown.enter.prevent="updateGroup"></textarea>
             </form>
-            <button class="btn-three-dots" @click="$emit('removeGroup', group.id)"><span class="three-dots"></span></button>
+            <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span class="three-dots"></span></button>
 
         </div>
         <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" />
@@ -84,7 +84,24 @@ export default {
 
             }, 100)
 
-        }
+        },
+        handleClickOutside(event) {
+            try {
+                const ele = this.$refs.taskDetails.getBoundingClientRect();
+                if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.onSaveTask();
+            } catch { }
+        },
+        openModal(taskInfo, type, elRef) {
+            const info = { taskInfo }
+            const el = this.$refs[elRef].getBoundingClientRect()
+            eventBus.emit('modal', { el, type, info })
+            window.addEventListener('resize', this.handleResize)
+            document.removeEventListener('click', this.handleClickOutside)
+        },
+        handleResize() {
+            const el = this.$refs.labels.getBoundingClientRect()
+            eventBus.emit('modal', { el })
+        },
 
     },
     components: {
