@@ -12,7 +12,7 @@
         <div class="card-compose" v-if="add">
             <div class="input-title">
                 <div>
-                    <textarea dir="auto" placeholder="Enter a title for this card..." data-autosize="true" autofocus
+                    <textarea ref="textarea" dir="auto" placeholder="Enter a title for this card..." data-autosize="true"
                         v-model="title"></textarea>
                 </div>
             </div>
@@ -21,7 +21,12 @@
                 <span @click="add = !add" class="btn-close"></span>
             </div>
         </div>
-        <button v-else @click="add = !add">Add Task</button>
+        <div v-else class="open-card-compose">
+            <a @click="openadd">
+                <span class="btn-plus"></span>
+                <span class="add-txt"> Add a card</span>
+            </a>
+        </div>
     </div>
 </template>
   
@@ -54,7 +59,8 @@ export default {
             this.$refs.groupNameInput.blur()
         },
         addTask() {
-            if(!this.title) return
+            this.$refs.textarea.focus()
+            if (!this.title) return
             const newTask = boardService.getEmptyTask()
             newTask.title = this.title
             this.clonedGroup.tasks.push(newTask)
@@ -71,6 +77,14 @@ export default {
         updateTasks(tasks, groupId) {
             this.$emit('updateTasks', tasks, groupId)
         },
+        openadd() {
+            this.add = true
+            setTimeout(() => {
+                this.$refs.textarea.focus()
+
+            }, 100)
+
+        }
 
     },
     components: {
