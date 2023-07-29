@@ -14,10 +14,15 @@
         bottom: 0;
         right: 0;
         opacity: 0;
-        // .starred {
-        //     opacity: 1;
-        //     color: gold;
-        // }
+
+        &.starred {
+            opacity: 1;
+            color: gold;
+        }
+        &.unstarred {
+            opacity: 0;
+            color: white;
+        }
     }
 
     &:hover {
