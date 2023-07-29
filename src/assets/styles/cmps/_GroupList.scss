@@ -34,8 +34,10 @@
         vertical-align: top;
         white-space: nowrap;
         width: 272px;
+        min-width: 272px;
 
         form {
+            width: 100%;
             input {
                 height: 32px;
                 display: block;

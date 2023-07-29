@@ -9,7 +9,7 @@
             <div class="add-group">
                 <form @submit.prevent="addGroup">
                     <input type="text" name="name" v-model="title" placeholder="Enter list title" autocomplete="off"
-                        dir="auto" maxlength="512">
+                        dir="auto" maxlength="512" required>
                     <div class="controls">
                         <button class="btn-add">Add list</button>
                         <span class="btn-close"> </span>
@@ -64,9 +64,11 @@ export default {
     },
     methods: {
         removeGroup(groupId) {
+            console.log(groupId);
             this.$emit('removeGroup', groupId)
         },
         addGroup() {
+            if(!this.title) return
             this.$emit('addGroup', this.title)
             eventBus.emit('boardActivity',)
             this.title = null
