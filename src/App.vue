@@ -4,14 +4,15 @@
     <RouterView />
     <UserMsg />
     <AppModal />
+
   </section>
 </template>
 
 <script>
 // import AppModal from './cmps/AppModal.vue'
-import { userService } from './services/user.service'
+// import { userService } from './services/user.service'
 
-import { store } from './store/store'
+// import { store } from './store/store'
 
 import AppHeader from './cmps/AppHeader.vue'
 import UserMsg from './cmps/UserMsg.vue'

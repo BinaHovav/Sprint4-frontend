@@ -39,6 +39,7 @@ export const boardStore = {
     boards: [],
     currLabels: [],
     currBoardId: null,
+    labelsShow: false
   },
   getters: {
     boards({ boards }) {
@@ -50,6 +51,11 @@ export const boardStore = {
     getCurrBoard({ boards, currBoardId }) {
       return boards.find((board) => board._id === currBoardId)
     },
+    labelsShow({ labelsShow }) { return labelsShow },
+    getEmptyActivity(){
+      return boardService.getEmptyActivity()
+    }
+
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -76,6 +82,9 @@ export const boardStore = {
     setCurrBoardId(state, { boardId }) {
       state.currBoardId = boardId
     },
+    setLabelsShow(state) {
+      state.labelsShow = !state.labelsShow
+    }
   },
   actions: {
     async addBoard(context, { board }) {

@@ -1,5 +1,4 @@
 <template>
-    <div >
         <draggable delay="250" :delay-on-touch-only="true" v-model="taskList" class="task-list-container" ghost-class="ghost-task"
             item-key="name" drag-class="drag-task" @start="drag = true" @end="drag = false" group="tasks">
             <!-- <transition-group> -->
@@ -7,10 +6,9 @@
                 <TaskPreview :key="element.id" :groupId="groupId" :task="element" @removeTask="removeTask" /> 
             </template>
             <!-- </transition-group> -->
+            
         </draggable>
 
-
-    </div>
 </template>
   
 <script>
@@ -39,6 +37,7 @@ export default {
     created() { },
     methods: {
         removeTask(taskId) {
+           
             this.$emit('removeTask', taskId)
         },
         checkMove(evt) {

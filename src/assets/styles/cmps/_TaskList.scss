@@ -6,13 +6,22 @@
     gap: 7px;
 
     min-height: 0;
-    
+
     margin: 0 4px;
     padding: 1px 4px 0;
-    
+
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 1;
+
     // overflow-y: scroll;
     // max-height: calc($board-hight-$board-header-hight);
+    .ghost-task {
+        background-color: $clr-shadow-overflow-spread;
+
+        &>* {
+            opacity: 0;
+        }
+    }
+    
 }

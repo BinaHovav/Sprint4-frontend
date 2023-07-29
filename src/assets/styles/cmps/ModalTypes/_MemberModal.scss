@@ -1,0 +1,133 @@
+.members-container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0 12px 12px;
+    max-height: 927px;
+    .members-search {
+        -webkit-appearance: none;
+        background-color: $clr-background-input;
+        border: none;
+        border-radius: 3px;
+        box-shadow: inset 0 0 0 2px $clr-border-input;
+        box-sizing: border-box;
+        display: block;
+        line-height: 20px;
+        margin-bottom: 12px;
+        outline: none;
+        padding: 8px 12px;
+        transition-duration: 85ms;
+        transition-property: background-color, border-color, box-shadow;
+        transition-timing-function: ease;
+        margin: 4px 0 12px;
+        width: 100%;
+    }
+    .members-list {
+        color: $clr-text;
+        font-family:
+            -apple-system,
+            BlinkMacSystemFont,
+            Segoe UI,
+            Roboto,
+            Noto Sans,
+            Ubuntu,
+            Droid Sans,
+            Helvetica Neue,
+            sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        margin-top: 12px;
+        & > h4 {
+            color: $clr-text-subtle;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 16px;
+            margin-top: 16px;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+                display: list-item;
+                text-align: -webkit-match-parent;
+                a {
+                    border-radius: 3px;
+                    color: $clr-text;
+                    display: block;
+                    height: 40px;
+                    line-height: 32px;
+                    margin-bottom: 2px;
+                    overflow: hidden;
+                    padding: 4px;
+                    position: relative;
+                    text-decoration: none;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding-right: 28px;
+                    cursor: pointer;
+                    .member-img {
+                        border-radius: 25em;
+                        cursor: pointer;
+                        display: block;
+                        float: left;
+                        height: 32px;
+                        margin: 0 4px 4px 0;
+                        overflow: visible;
+                        position: relative;
+                        text-decoration: none;
+                        -webkit-user-select: none;
+                        user-select: none;
+                        width: 32px;
+                        z-index: 0;
+                        background-color: $clr-background-accent-gray-subtler;
+                        color: $clr-text;
+                        margin-right: 8px;
+                        img {
+                            overflow-clip-margin: content-box;
+                            overflow: clip;
+                            // aspect-ratio: auto 30 / 30;
+                            border: 0;
+                            border-radius: 25em;
+                            height: 32px;
+                            object-fit: cover;
+                            width: 32px;
+                            max-width: 100%;
+                        }
+                    }
+                    .member-fullname {
+                        color: $clr-text;
+                        line-height: 32px;
+                        white-space: nowrap;
+                    }
+                    .member-checked {
+                        @include trello-icon($icon-checked, $type: sm, $color: white);
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        font-family: trellicons;
+                        font-style: normal;
+                        font-weight: 400;
+                        text-align: center;
+                        text-decoration: none;
+                        vertical-align: bottom;
+                        font-size: 16px;
+                        height: 20px;
+                        line-height: 20px;
+                        width: 20px;
+                        color: $clr-icon;
+                        background-clip: content-box;
+                        background-origin: content-box;
+                        padding: 11px;
+                        position: absolute;
+                        right: 17px;
+                        top: 0;
+                        display: block;
+                    }
+                    &:hover {
+                        background-color: $clr-background-neutral-pressed;
+                    }
+                }
+            }
+        }
+    }
+}

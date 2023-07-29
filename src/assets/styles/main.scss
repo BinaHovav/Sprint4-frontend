@@ -3,6 +3,7 @@
 @import "setup/functions";
 @import "setup/mixins";
 @import "setup/typography";
+@import "setup/animaitions";
 
 // Basics
 @import "basics/helpers";
@@ -16,6 +17,8 @@
 @import "cmps/TopNavbar";
 @import "cmps/_AppModal";
 @import "cmps/ModalTypes/_LabelModal";
+@import "cmps/ModalTypes/ListActions";
+@import "cmps/ModalTypes/_MemberModal";
 @import "cmps/_BoardIndex";
 @import "cmps/_BoardTile";
 @import "cmps/UserMsg";

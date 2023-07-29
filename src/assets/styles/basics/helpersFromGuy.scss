@@ -147,92 +147,92 @@
 .green {
     @include label-tag-color($clr-label-green);
 }
-.light-green {
+.subtle-green {
     @include label-tag-color($clr-label-light-green);
 }
-.dark-green {
-    @include label-tag-color($clr-label-dark-green);
+.bold-green {
+    @include label-tag-color($clr-label-bold-green);
 }
 .yellow {
     @include label-tag-color($clr-label-yellow);
 }
-.light-yellow {
+.subtle-yellow {
     @include label-tag-color($clr-label-light-yellow);
 }
-.dark-yellow {
-    @include label-tag-color($clr-label-dark-yellow);
+.bold-yellow {
+    @include label-tag-color($clr-label-bold-yellow);
 }
 .orange {
     @include label-tag-color($clr-label-orange);
 }
-.light-orange {
+.subtle-orange {
     @include label-tag-color($clr-label-light-orange);
 }
-.dark-orange {
-    @include label-tag-color($clr-label-dark-orange);
+.bold-orange {
+    @include label-tag-color($clr-label-bold-orange);
 }
 .red {
     @include label-tag-color($clr-label-red);
 }
-.light-red {
+.subtle-red {
     @include label-tag-color($clr-label-light-red);
 }
-.dark-red {
-    @include label-tag-color($clr-label-dark-red);
+.bold-red {
+    @include label-tag-color($clr-label-bold-red);
 }
 .purple {
     @include label-tag-color($clr-label-purple);
 }
-.light-purple {
+.subtle-purple {
     @include label-tag-color($clr-label-light-purple);
 }
-.dark-purple {
-    @include label-tag-color($clr-label-dark-purple);
+.bold-purple {
+    @include label-tag-color($clr-label-bold-purple);
 }
 .blue {
     @include label-tag-color($clr-label-blue);
 }
-.light-blue {
+.subtle-blue {
     @include label-tag-color($clr-label-light-blue);
 }
-.dark-blue {
-    @include label-tag-color($clr-label-dark-blue);
+.bold-blue {
+    @include label-tag-color($clr-label-bold-blue);
 }
 .sky {
     @include label-tag-color($clr-label-sky);
 }
-.light-sky {
+.subtle-sky {
     @include label-tag-color($clr-label-light-sky);
 }
-.dark-sky {
-    @include label-tag-color($clr-label-dark-sky);
+.bold-sky {
+    @include label-tag-color($clr-label-bold-sky);
 }
 .lime {
     @include label-tag-color($clr-label-lime);
 }
-.light-lime {
+.subtle-lime {
     @include label-tag-color($clr-label-light-lime);
 }
-.dark-lime {
-    @include label-tag-color($clr-label-dark-lime);
+.bold-lime {
+    @include label-tag-color($clr-label-bold-lime);
 }
 .pink {
     @include label-tag-color($clr-label-pink);
 }
-.light-pink {
-    @include label-tag-color($clr-label-light-pink);
+.subtle-pink {
+    @include label-tag-color($clr-label-subtle-pink);
 }
-.dark-pink {
-    @include label-tag-color($clr-label-dark-pink);
+.bold-pink {
+    @include label-tag-color($clr-label-bold-pink);
 }
 .black {
     @include label-tag-color($clr-label-black);
 }
-.light-black {
+.subtle-black {
     @include label-tag-color($clr-label-light-black);
 }
-.dark-black {
-    @include label-tag-color($clr-label-dark-black);
+.bold-black {
+    @include label-tag-color($clr-label-bold-black);
 }
 
 .dot::before {

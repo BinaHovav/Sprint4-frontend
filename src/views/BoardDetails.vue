@@ -1,7 +1,8 @@
 <template>
   <section class="board-details-container flex column">
     <TopNavbar />
-    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
+    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
+      @updateGroups="updateGroups" />
   </section>
   <RouterView @updateBoard="updateBoard" />
 </template>
@@ -12,7 +13,7 @@ import TopNavbar from '../cmps/TopNavbar.vue'
 
 import { boardService } from '../services/board.service.local'
 // import { boardService } from '../services/board.service'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { getActionUpdateBoard } from '../store/board.store'
 
 export default {
@@ -29,6 +30,7 @@ export default {
   },
   created() {
     this.setBoard()
+
   },
   methods: {
     async setBoard() {
@@ -45,15 +47,20 @@ export default {
     async updateBoard(updatedBoard = this.board) {
       try {
         await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
-        showSuccessMsg('Group updated')
+        showSuccessMsg('Board updated')
         this.board = updatedBoard
       } catch (err) {
-        showErrorMsg('Cannot update group')
+        showErrorMsg('Cannot update board')
       }
     },
     async removeGroup(groupId) {
       const idx = this.board.groups.findIndex((group) => group.id === groupId)
+      // const activity = this.$store.getters.getEmptyActivity
+      // activity.action.type='removed-group'
+      // activity.action.txt=`removed group ${this.board.groups[idx].title}`
+      // this.board.activitys.unshift(activity)
       this.board.groups.splice(idx, 1)
+
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
         showSuccessMsg('Group removed')
