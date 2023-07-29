@@ -163,7 +163,7 @@ function getEmptyActivity() {
 //           {
 //             id: 'l106',
 //             title: 'Medium priority',
-//             color: 'light-yellow',
+//             color: 'subtle-yellow',
 //           },
 //           {
 //             id: 'l107',

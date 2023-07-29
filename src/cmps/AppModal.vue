@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isVisible" :style="modalPlace" class="app-modal">
+    <div ref="appmodal" v-if="isVisible" :style="modalPlace" class="app-modal">
         <Component :is="type" :info="info" @setInfo="setInfo" @closeModal="isVisible = false" />
     </div>
 </template>
@@ -29,6 +29,21 @@ export default {
         }
         )
     },
+    watch: {
+        isVisible: {
+            handler() {
+                if (this.isVisible) {
+                    setTimeout(() => {
+                        document.addEventListener('click', this.handleClickOutside)
+                    }, 200);
+                } else {
+                    this.setInfo()
+                    document.removeEventListener('click', this.handleClickOutside)
+                }
+            },
+            deep: true,
+        },
+    },
     methods: {
         setModalLocation(el) {
             const screen = { width: window.innerWidth, height: window.innerHeight }
@@ -40,8 +55,15 @@ export default {
                 this.modalPlace.top = el.bottom + 'px'
             }
         },
-        setInfo(info){
-            eventBus.emit('setInfo', info)
+        setInfo(info) {
+            info ? eventBus.emit('setInfo', info) : eventBus.emit('setInfo')
+            
+        },
+        handleClickOutside(event) {
+            try {
+                const ele = this.$refs.appmodal.getBoundingClientRect();
+                if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.isVisible = false;
+            } catch { }
         }
     },
     components: {
