@@ -20,7 +20,7 @@
                 <div class="badge watch"><span class="watch-icon"></span></div>
                 <div v-if="task.dueDate" class="badge date"> <span class="date-icon"></span></div>
                 <div v-if="task.description" class="badge description"> <span class="description-icon"></span></div>
-                <div v-if="task.checklist" class="badge checklist"> <span class="checklist-icon"></span></div>
+                <div v-if="task.checklists" class="badge checklist"> <span class="checklist-icon"></span></div>
                 <div v-if="task.comments" class="badge comments"><span class="comments-icon"></span></div>
                 <div v-if="task.attachment" class="badge attachment"><span class="attachment-icon"></span></div>
             </div>
