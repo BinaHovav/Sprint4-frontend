@@ -6,6 +6,7 @@
                 <TaskPreview :key="element.id" :groupId="groupId" :task="element" @removeTask="removeTask" /> 
             </template>
             <!-- </transition-group> -->
+            
         </draggable>
 
 </template>
