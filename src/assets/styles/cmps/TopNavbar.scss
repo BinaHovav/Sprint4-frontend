@@ -3,92 +3,89 @@
     overflow: hidden;
     nav {
         position: relative;
-        display: inline-flex;
+        display: flex;
         flex-wrap: wrap;
-
+        align-items: center;
         gap: 4px;
-        padding: 12px 10px 12px 16px;
-        padding-bottom: 0;
+        padding: 0 10px 0 16px;
 
         // background: linear-gradient(to bottom, hsla(192, 36.9%, 78.2%, 0.9), hsla(192, 36.9%, 78.2%, 0.9));
 
         width: $board-header-width;
         height: $board-header-hight;
+        .left-board-nav {
+            .board-title {
+                display: inline-flex;
+                position: relative;
 
-        .board-title {
-            border-radius: 3px;
-            cursor: default;
-            display: inline-flex;
-            position: relative;
-            white-space: nowrap;
-            height: 32px;
-            line-height: 32px;
-            margin-right: 4px;
-            margin-bottom: 0;
-            max-width: 100%;
-
-            h1 {
-                background: transparent;
-                font-weight: bold;
-                line-height: 32px;
-                text-decoration: none;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                height: 100%;
-                color: $clr-text;
-                margin-bottom: 12px;
-                padding: 0 10px;
-            }
-        }
-
-        .btn-star {
-            height: 32px;
-            width: 32px;
-            // line-height: 32px;
-            margin-bottom: 0;
-            flex-shrink: 0;
-            background-color: transparent;
-            // padding: 6px;
-
-            font-size: 14px;
-            // line-height: 20px;
-            font-weight: 400;
-            box-sizing: border-box;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 3px;
-            cursor: pointer;
-            padding: 6px 12px;
-            text-decoration: none;
-            white-space: normal;
-            background-color: $clr-background-neutral, #091e420f;
-            box-shadow: none;
-            border: none;
-            color: $clr-text, #172b4d;
-            transition-property: background-color, border-color, box-shadow;
-            transition-duration: 85ms;
-            transition-timing-function: ease;
-
-            &:hover {
-                background-color: #091e4224;
-            }
-
-            .star {
-                @include trello-icon($icon-star);
-
-                &:hover {
-                    color: #42526e;
-                    cursor: pointer;
-                    transform: scale(1.2);
+                h1 {
+                    background: transparent;
+                    font-size: 18px;
+                    font-weight: bold;
+                    // line-height: 32px;
+                    text-decoration: none;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    height: 100%;
+                    color: $clr-text;
+                    padding: 0 10px;
                 }
             }
+
+            .btn-star {
+                height: 32px;
+                width: 32px;
+                // line-height: 32px;
+                margin-bottom: 0;
+                flex-shrink: 0;
+                background-color: transparent;
+                // padding: 6px;
+
+                font-size: 14px;
+                // line-height: 20px;
+                font-weight: 400;
+                box-sizing: border-box;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 3px;
+                cursor: pointer;
+                padding: 6px 12px;
+                text-decoration: none;
+                white-space: normal;
+                background-color: $clr-background-neutral, #091e420f;
+                box-shadow: none;
+                border: none;
+                color: $clr-text, #172b4d;
+                transition-property: background-color, border-color, box-shadow;
+                transition-duration: 85ms;
+                transition-timing-function: ease;
+
+                &:hover {
+                    background-color: #091e4224;
+                }
+
+                .star {
+                    @include trello-icon($icon-full-star);
+                    transition: 0.2s ease;
+
+                    &:hover {
+                        @include trello-icon($icon-star);
+                        color: #42526e;
+                        cursor: pointer;
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+        .right-board-nav {
+            display: flex;
+            align-items: center;
         }
         .board-members {
             float: right;
             margin: 0;
-
             & > * {
                 float: right;
                 height: 24px;
@@ -135,17 +132,23 @@
             transition: 0.2s ease-in; /* 0.5 second transition effect to slide in the sidenav */
             .topSidenav {
                 display: flex;
-                padding: 14px;
-                border-bottom: 1px solid hsla(218, 54%, 19.6%, 0.16);
-                overflow: hidden;
-                text-align: center;
-                white-space: nowrap;
-                align-items: center;
+                justify-content: space-between;
                 justify-content: center;
+                padding: 8px;
+                border-bottom: 1px solid hsla(218, 54%, 19.6%, 0.16);
+                // text-align: center;
+                align-items: center;
                 font-weight: 600;
                 font-size: 16px;
+                .menu-text {
+                    margin-left: 8px;
+                    font-weight: bold;
+                }
+                .back-icon {
+                    // margin-right: 8px;
+                    cursor: pointer;
+                }
                 span {
-                    flex-grow: 1;
                     text-align: center;
                 }
                 a {
@@ -153,8 +156,6 @@
                     color: $clr-text;
                     font-size: 30px;
                     font-weight: 300;
-
-                    // margin-inline-start: auto;
                 }
             }
             .sidenavButtons {
@@ -165,39 +166,93 @@
                 padding-top: 12px;
                 padding-left: 20px;
 
-                a {
-                    padding: 8px 8px 8px 32px;
-                    text-decoration: none;
-                    font-size: 14px;
-                    font-weight: 600;
-                    line-height: 20px;
-                    color: $clr-text;
-                    // display: block;
-                    transition: 0.3s;
+                .about-button {
+                    display: flex;
+                    align-items: center;
+                    // background-color: lightgreen;
+                    cursor: pointer;
+                    button {
+                        cursor: pointer;
+                        &:hover {
+                            background-color: lightgray;
+                        }
+                    }
+                    .trello-icon {
+                        @include trello-icon($content: $icon-trello, $type: md, $color: #44546f);
+                        padding-bottom: 8px;
+                    }
                 }
-                a:last-child {
-                    padding-top: 80px;
-                }
-                &.closebtn {
-                    position: absolute;
-                    top: 0;
-                    right: 25px;
-                    font-size: 36px;
-                    margin-left: 50px;
+                .change-bcg-button {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    button {
+                        cursor: pointer;
+                        &:hover {
+                            background-color: lightgray;
+                        }
+                    }
+                    img {
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 3px;
+                        padding-bottom: 8px;
+                    }
                 }
             }
-        }
-        .open-menu-btn {
-            @include trello-icon($icon-three-dots);
-            font-size: 30px;
+            .background-options {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 15px;
+                justify-content: center;
+                img {
+                    border-radius: 15px;
+                    width: 150px;
+                    aspect-ratio: 3/2;
+                    cursor: pointer;
+                }
+            }
+            p {
+                margin-left: 10px;
+                line-height: 2.5;
+            }
+            a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 20px;
+                color: $clr-text;
+                // display: block;
+                transition: 0.3s;
+            }
+
+            &.closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
         }
     }
-    @media screen and (max-height: 450px) {
-        .sidenav {
-            padding-top: 15px;
+    .open-menu-btn {
+        @include trello-icon($icon-three-dots);
+        background-color: transparent;
+        font-size: 20px;
+        padding-left: 10px;
+        cursor: pointer;
+        &:hover {
+            background-color: rgb(150, 147, 147);
         }
-        .sidenav a {
-            font-size: 18px;
-        }
+    }
+}
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
     }
 }

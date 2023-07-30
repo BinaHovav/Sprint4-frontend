@@ -52,11 +52,44 @@
   </header>
 </template>
 <script>
+import ColorThief from 'colorthief'
+
 export default {
+  name: 'AppHeader',
+  created() {
+    this.getDominantColor()
+  },
+  watch: {
+    backgroundImg: {
+      handler() {
+        this.getDominantColor()
+      },
+    },
+  },
+  methods: {
+    getDominantColor() {
+      const img = new Image()
+      img.src = this.backgroundImg || ''
+      img.crossOrigin = 'Anonymous'
+
+      img.onload = () => {
+        const colorThief = new ColorThief()
+        const dominantColor = colorThief.getColor(img)
+
+        // Now you can apply the dominant color to the TopNavbar background
+        const rgbColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`
+        this.$el.style.backgroundColor = rgbColor
+      }
+    },
+  },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser
     },
+    backgroundImg() {
+      return this.$store.getters.boardImgUrl
+    },
   },
+  components: {},
 }
 </script>

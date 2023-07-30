@@ -39,7 +39,8 @@ export const boardStore = {
     boards: [],
     currLabels: [],
     currBoardId: null,
-    labelsShow: false
+    labelsShow: false,
+    backgroundImg: null,
   },
   getters: {
     boards({ boards }) {
@@ -51,11 +52,18 @@ export const boardStore = {
     getCurrBoard({ boards, currBoardId }) {
       return boards.find((board) => board._id === currBoardId)
     },
-    labelsShow({ labelsShow }) { return labelsShow },
-    getEmptyActivity(){
+    labelsShow({ labelsShow }) {
+      return labelsShow
+    },
+    getEmptyActivity() {
       return boardService.getEmptyActivity()
-    }
-
+    },
+    backgroundImg({ backgroundImg }) {
+      return backgroundImg
+    },
+    boardImgUrl({ boards, currBoardId }) {
+      return boards.find((board) => board._id === currBoardId)?.imgUrl
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -84,7 +92,10 @@ export const boardStore = {
     },
     setLabelsShow(state) {
       state.labelsShow = !state.labelsShow
-    }
+    },
+    setBackgroundImg(state, { backgroundImg }) {
+      state.backgroundImg = backgroundImg
+    },
   },
   actions: {
     async addBoard(context, { board }) {

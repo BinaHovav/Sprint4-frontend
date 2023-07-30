@@ -13,7 +13,7 @@ export const boardService = {
   addBoardMsg,
   getEmptyGroup,
   getEmptyTask,
-  getEmptyActivity
+  getEmptyActivity,
 }
 window.cs = boardService
 
@@ -75,7 +75,7 @@ function getEmptyBoard() {
     groups: [],
     style: {},
     labels: [],
-    members: []
+    members: [],
   }
 }
 function getEmptyGroup() {
@@ -107,14 +107,14 @@ function getEmptyActivity() {
   return {
     id: utilService.makeId(6),
     action: {
-      type:'',
+      type: '',
       txt: '',
-      componentId:'',
-      movedCmp:'',
-      movedUser:''
+      componentId: '',
+      movedCmp: '',
+      movedUser: '',
     },
     date: Date.now(),
-    by: ''
+    by: '',
   }
 }
 
@@ -127,7 +127,7 @@ function getEmptyActivity() {
 //         title: 'Gas Station Robotics',
 //         isStarred: true,
 //         archivedAt: null,
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690367544/photo-1687791301950-972428a58aa4_h9urah.avif',
+//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg',
 //         createdBy: {
 //           _id: 'u101',
 //           fullname: 'Meitar Mor',
@@ -673,7 +673,7 @@ function getEmptyActivity() {
 //           },
 //         ],
 //         style: {},
-//         activitys:[],
+//         activitys: [],
 //       },
 
 //       {

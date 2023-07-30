@@ -2,6 +2,10 @@
     display: inline-block;
     position: relative;
     margin-right: 20px;
+    &:hover {
+        filter: brightness(85%);
+    }
+
     img {
         height: 95px;
         min-width: 209px;
@@ -13,23 +17,31 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        opacity: 0;
-        // .starred {
-        //     opacity: 1;
-        //     color: gold;
-        // }
-    }
+        opacity: 1;
+        @include trello-icon($icon-full-star, $type: sm, $color: white);
+        background-color: transparent;
+        cursor: pointer;
+        color: gold;
 
-    &:hover {
-        filter: brightness(80%);
-        .btn-star-board.starred,
-        .btn-star-board:not(.starred) {
+        &:hover {
+            filter: brightness(80%);
             @include trello-icon($icon-star, $type: sm, $color: white);
-            opacity: 1;
-            background-color: transparent;
-            cursor: pointer;
             color: gold;
+            scale: 1.2;
         }
+        &.unstarred {
+            @include trello-icon($icon-star, $type: sm, $color: white);
+            opacity: 0;
+            transition: transform 0.3s ease;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    &:hover .unstarred {
+        @include trello-icon($icon-star, $type: sm, $color: white);
+        opacity: 1;
+        transform: translateX(-10px);
     }
 
     .board-title {
@@ -46,21 +58,4 @@
         // overflow: hidden;
         color: white;
     }
-    // .btn-star-board.starred {
-    //     position: absolute;
-    //     bottom: 0;
-    //     right: 0;
-    //     background-color: transparent;
-    //     opacity: 0;
-
-    //     @include trello-icon($icon-star, $type: sm, $color: white);
-
-    //     &:hover {
-    //         opacity: 1;
-    //         cursor: pointer;
-    //     }
-    // }
-    // .btn-star-board:not(.starred):hover {
-    //     opacity: 1;
-    // }
 }
