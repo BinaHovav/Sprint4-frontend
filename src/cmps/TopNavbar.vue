@@ -1,56 +1,38 @@
 <template>
   <section class="top-navbar">
-    <nav class="flex justify-space-between align-center">
-      <div class="board-title">
-        <h1 class="fs18">{{ boardToDisplay?.title }}</h1>
+    <nav class="flex justify-space-between">
+      <div class="left-board-nav">
+        <div class="board-title">
+          <h1 class="fs18">{{ boardToDisplay?.title }}</h1>
+        </div>
+        <button class="btn-star"><span class="star"></span></button>
       </div>
-      <button class="btn-star"><span class="star"></span></button>
-      <span>filter</span>
+      <!-- <span>filter</span> -->
       <div>
-        <div class="board-members" v-for="member in boardToDisplay?.members">
-          <div><img :src="member.imgUrl" alt="member" /></div>
-        </div>
-      </div>
-      <!-- <RightNavbar /> -->
-      <div id="mySidenav" class="sidenav">
-        <div class="topSidenav">
-          <span>Menu</span>
-          <a href="javascript:void(0)" class="closebtn" @click="closeRightNav">&times;</a>
-        </div>
-        <!-- <div class="sidenavButtons"> -->
-        <div class="sidenavButtons" v-if="currMenuContent === 'default'">
-          <button @click="openMenuOption('about')">About this board</button>
-          <button @click="openMenuOption('changeBackground')">Change background</button>
-          <button @click="openMenuOption('activity')">Activity</button>
-        </div>
-        <div v-else-if="currMenuContent === 'about'">
-          <p>This board is about our wonderful project.</p>
-          <a href="#">Go back</a>
-        </div>
-        <div v-else-if="currMenuContent === 'changeBackground'">
-          <!-- Content for "Change background" -->
-          <div class="background-options">
-            <div v-for="background in backgroundOptions" :key="background">
-              <img :src="background" alt="Background" @click="changeBackground(background)" />
-            </div>
+        <div class="right-board-nav">
+          <div class="board-members" v-for="member in boardToDisplay?.members">
+            <div><img :src="member.imgUrl" alt="member" /></div>
           </div>
-          <!-- <a href="#" @click="openRightNav('default')">Go back</a> -->
-          <!-- </div> -->
+          <RightMenu :board="board" />
+          <button class="open-menu-btn" @click="openRightNav"></button>
         </div>
       </div>
-      <button class="open-menu-btn" @click="openRightNav"></button>
     </nav>
   </section>
 </template>
 
 <script>
+import RightMenu from './RightMenu.vue'
+import ColorThief from 'colorthief'
+
 export default {
   name: 'TopNavbar',
+  props: ['board'],
   data() {
-    return {
-      currMenuContent: 'default',
-      backgroundOptions: [],
-    }
+    return {}
+  },
+  created() {
+    this.getDominantColor()
   },
   methods: {
     openRightNav() {
@@ -59,30 +41,28 @@ export default {
     closeRightNav() {
       document.getElementById('mySidenav').style.width = '0'
     },
-    openMenuOption(option) {
-      switch (option) {
-        case 'about':
-          this.currMenuContent = 'about'
-          break
-        case 'changeBackground':
-          this.currMenuContent = 'changeBackground'
-          break
-        case 'activity':
-          this.currMenuContent = 'activity'
-        default:
-          break
+    getDominantColor() {
+      const img = new Image()
+      img.src = this.board?.imgUrl
+      img.crossOrigin = 'Anonymous'
+
+      img.onload = () => {
+        const colorThief = new ColorThief()
+        const dominantColor = colorThief.getColor(img)
+
+        // Now you can apply the dominant color to the TopNavbar background
+        const rgbColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 0.5)`
+        this.$el.style.backgroundColor = rgbColor
       }
-    },
-    changeBackground(background) {
-      // Implement the logic to apply the selected background to your board
-      // For example, you can use CSS to change the background image of the board container.
-      // You can store the selected background in a data property and use it in your CSS.
     },
   },
   computed: {
     boardToDisplay() {
       return this.$store.getters.getCurrBoard
     },
+  },
+  components: {
+    RightMenu,
   },
 }
 </script>

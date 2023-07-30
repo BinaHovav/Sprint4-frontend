@@ -1,15 +1,14 @@
 <template>
-  <section class="board-details-container flex column">
-    <TopNavbar />
-    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
-      @updateGroups="updateGroups" />
+  <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${board?.imgUrl})` }">
+    <TopNavbar :board="this.board" />
+    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
   </section>
   <RouterView @updateBoard="updateBoard" />
 </template>
 
 <script>
-import GroupList from '../cmps/GroupList.vue'
 import TopNavbar from '../cmps/TopNavbar.vue'
+import GroupList from '../cmps/GroupList.vue'
 
 import { boardService } from '../services/board.service.local'
 // import { boardService } from '../services/board.service'
@@ -30,7 +29,6 @@ export default {
   },
   created() {
     this.setBoard()
-
   },
   methods: {
     async setBoard() {
@@ -39,6 +37,7 @@ export default {
         this.board = await boardService.getById(boardId)
         this.$store.commit({ type: 'setCurrBoardId', boardId: boardId })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
+        this.$store.commit({ type: 'setBackgroundImg', backgroundImg: this.board?.imgUrl })
         showSuccessMsg('Board loaded')
       } catch (err) {
         showErrorMsg('Cannot load board')
@@ -96,8 +95,8 @@ export default {
   },
 
   components: {
-    GroupList,
     TopNavbar,
+    GroupList,
   },
 }
 </script>
