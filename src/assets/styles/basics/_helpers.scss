@@ -78,17 +78,17 @@
 
 .subtle-green {
     background-color: $clr-background-accent-green-subtler;
-    color: $clr-text-accent-green;
+    color: $clr-text-accent-green-bolder;
 }
 
 .bold-green {
     background-color: $clr-background-accent-green-bolder;
-    color: $clr-text-accent-green-bolder;
+    color: $ds-text-inverse;
 }
 
 .yellow {
     background-color: $clr-background-accent-yellow-subtle;
-    color: $clr-text-accent-yellow;
+    color: $clr-text-accent-yellow-bolder;
 }
 
 .subtle-yellow {
@@ -98,12 +98,12 @@
 
 .bold-yellow {
     background-color: $clr-background-accent-yellow-bolder;
-    color: $clr-text-accent-yellow-bolder;
+    color: $ds-text-inverse;
 }
 
 .orange {
     background-color: $clr-background-accent-orange-subtle;
-    color: $clr-text-accent-orange;
+    color: $clr-text-accent-orange-bolder;
 }
 
 .subtle-orange {
@@ -113,7 +113,7 @@
 
 .bold-orange {
     background-color: $clr-background-accent-orange-bolder;
-    color: $clr-text-accent-orange-bolder;
+    color: $ds-text-inverse;
 }
 
 .red {
@@ -128,12 +128,12 @@
 
 .bold-red {
     background-color: $clr-background-accent-red-bolder;
-    color: $clr-text-accent-red-bolder;
+    color: $ds-text-inverse;
 }
 
 .purple {
     background-color: $clr-background-accent-purple-subtle;
-    color: $clr-text-accent-purple;
+    color: $clr-text-accent-purple-bolder;
 }
 
 .subtle-purple {
@@ -143,12 +143,12 @@
 
 .bold-purple {
     background-color: $clr-background-accent-purple-bolder;
-    color: $clr-text-accent-purple-bolder;
+    color: $ds-text-inverse;
 }
 
 .blue {
     background-color: $clr-background-accent-blue-subtle;
-    color: $clr-text-accent-blue;
+    color: $clr-text-accent-blue-bolder;
 }
 
 .subtle-blue {
@@ -158,11 +158,11 @@
 
 .bold-blue {
     background-color: $clr-background-accent-blue-bolder;
-    color: $clr-text-accent-blue-bolder;
+    color: $ds-text-inverse;
 }
 .sky {
     background-color: $clr-background-accent-teal-subtle;
-    color: $clr-text-accent-teal;
+    color: $clr-text-accent-teal-bolder;
 }
 .subtle-sky {
     background-color: $clr-background-accent-teal-subtler;
@@ -170,7 +170,7 @@
 }
 .bold-sky {
     background-color: $clr-background-accent-teal-bolder;
-    color: $clr-text-accent-teal-bolder;
+    color: $ds-text-inverse;
 }
 
 .lime {
@@ -185,12 +185,12 @@
 
 .bold-lime {
     background-color: $clr-background-accent-lime-bolder;
-    color: $clr-text-accent-lime-bolder;
+    color: $ds-text-inverse;
 }
 
 .pink {
     background-color: $clr-background-accent-magenta-subtle;
-    color: $clr-text-accent-magenta;
+    color: $clr-text-accent-magenta-bolder;
 }
 
 .subtle-pink {
@@ -199,13 +199,13 @@
 }
 
 .bold-pink {
-    background-color: $clr-background-accent-magenta-subtle;
-    color: $clr-text-accent-magenta;
+    background-color: $clr-background-accent-magenta-bolder;
+    color: $ds-text-inverse;
 }
 
 .black {
     background-color: $clr-background-accent-gray-subtle;
-    color: $clr-text-accent-gray;
+    color: $clr-text-accent-gray-bolder;
 }
 
 .subtle-black {
@@ -214,8 +214,8 @@
 }
 
 .bold-black {
-    background-color: $clr-background-accent-gray-subtle;
-    color: $clr-text-accent-gray;
+    background-color: $clr-background-accent-gray-bolder;
+    color: $ds-text-inverse;
 }
 
 .controls {

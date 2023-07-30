@@ -124,6 +124,12 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
 
+                    &.labels-close {
+                        animation-name: labelsClose;
+                        animation-duration: 450ms;
+                        animation-timing-function: ease-in;
+                        animation-fill-mode: forwards;
+                    }
                     &.labels-open {
                         animation-name: labelsOpen;
                         animation-duration: 450ms;
@@ -131,12 +137,6 @@
                         animation-fill-mode: forwards;
                     }
 
-                    &.labels-close {
-                        animation-name: labelsClose;
-                        animation-duration: 450ms;
-                        animation-timing-function: ease-in;
-                        animation-fill-mode: forwards;
-                    }
 
 
 
