@@ -1,19 +1,27 @@
 <template>
     <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex"
-        @start="drag = true" @end="drag = false" @change="handleDragChange" @click.right.prevent item-key="name" handle=".drag-me"
-        drag-class="drag-group">
+        @start="drag = true" @end="drag = false" @change="handleDragChange" @click.right.prevent item-key="name"
+        handle=".drag-me" drag-class="drag-group">
         <template #item="{ element }">
             <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
                 @updateTasks="updateTasks" />
         </template>
         <template #footer>
-            <div class="add-group">
+            <div @click="addList = !addList" v-if="!addList" class="add-group-before">
+                <div>
+                    <span class="plus-icon"> </span>
+                </div>
+                <div>Add another list </div>
+
+
+            </div>
+            <div v-else class="add-group">
                 <form @submit.prevent="addGroup">
                     <input type="text" name="name" v-model="title" placeholder="Enter list title" autocomplete="off"
-                        dir="auto" maxlength="512" required>
+                        dir="auto" maxlength="512" required ref="addGroupRef">
                     <div class="controls">
                         <button class="btn-add">Add list</button>
-                        <span class="btn-close"> </span>
+                        <span @click="addList = !addList" class="btn-close"> </span>
                     </div>
                 </form>
             </div>
@@ -37,7 +45,8 @@ export default {
         return {
             title: null,
             drag: false,
-            dragGroup: ''
+            dragGroup: '',
+            addList: false,
         }
     },
     computed: {
