@@ -18,7 +18,7 @@
             <div v-else class="add-group">
                 <form @submit.prevent="addGroup">
                     <input type="text" name="name" v-model="title" placeholder="Enter list title" autocomplete="off"
-                        dir="auto" maxlength="512" required ref="addGroupRef">
+                        dir="auto" maxlength="512" required ref="addGroupRef" v-focus>
                     <div class="controls">
                         <button class="btn-add">Add list</button>
                         <span @click="addList = !addList" class="btn-close"> </span>

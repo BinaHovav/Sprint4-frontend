@@ -317,13 +317,6 @@
         transition-duration: 85ms;
         transition-timing-function: ease;
         width: 100%;
-        &:disabled {
-            background-color: $clr-background-disabled;
-            box-shadow: none;
-            border: none;
-            color: $clr-text-disabled;
-            cursor: not-allowed;
-        }
         & > span {
             display: inline-block;
             line-height: 1;
@@ -343,6 +336,17 @@
                     fill: $clr-text-accent-gray-bolder;
                     vertical-align: bottom;
                 }
+            }
+        }
+        &:disabled {
+            background-color: $clr-background-disabled;
+            box-shadow: none;
+            border: none;
+            color: $clr-text-disabled;
+            cursor: not-allowed;
+            svg {
+                background-color: $clr-background-disabled;
+                color: $clr-text-disabled;
             }
         }
     }
