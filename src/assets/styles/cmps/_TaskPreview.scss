@@ -64,6 +64,18 @@
         // }
     }
 
+    .task-cover-img {
+        background-size: contain;
+        background-color: #fcfcfb;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 8px 8px 0 0;
+        min-height: em(200px);
+        width: 100%;
+    }
+
+
+
     .task-details-container {
         position: relative;
         overflow: hidden;

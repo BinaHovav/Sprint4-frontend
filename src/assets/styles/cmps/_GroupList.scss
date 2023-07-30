@@ -38,17 +38,17 @@
 
         form {
             width: 100%;
+
             input {
+                box-sizing: border-box;
                 height: 32px;
                 display: block;
                 margin: 0;
                 transition: margin 85ms ease-in, background-color 85ms ease-in;
-                width: 100%;
                 border: none;
 
                 border-radius: 3px;
                 padding: 8px 12px;
-
                 line-height: 20px;
                 outline: none;
                 background-color: $clr-background-input, #fff;
@@ -56,7 +56,8 @@
                 color: $clr-text, #172b4d;
                 font-size: 14px;
                 font: inherit;
-                writing-mode: horizontal-tb
+                writing-mode: horizontal-tb;
+                width: 100%;
             }
         }
     }
@@ -65,20 +66,25 @@
         background-color: $clr-shadow-overflow-spread;
 
         &>* {
-            opacity: 0;
+            visibility: hidden;
         }
     }
 
 
+    // .draggable-dragging {
+    //     opacity: 1 !important;
+    //     /* Add any other styles to reset the dragging styles */
+    // }
 
-}
+    .drag-group {
+        // background-color: blue;
+        // rotate: 4deg;
 
-.draggable-dragging {
-    opacity: 1 !important;
-    /* Add any other styles to reset the dragging styles */
-}
+        .group-preview-wrapper {
+            .group-list-container {
+            }
 
-.dragGroup {
-    background-color: blue;
-    transform: translate(15deg);
+        }
+    }
+
 }

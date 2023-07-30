@@ -62,7 +62,6 @@ export const boardStore = {
       return backgroundImg
     },
     boardImgUrl({ boards, currBoardId }) {
-      console.log(boards.find((board) => board._id === currBoardId))
       return boards.find((board) => board._id === currBoardId)?.imgUrl
     },
   },

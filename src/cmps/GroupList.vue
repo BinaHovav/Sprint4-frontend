@@ -1,6 +1,7 @@
 <template>
     <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex"
-        @start="onDragStart = true" @end="onDragEnd = false" @click.right.prevent item-key="name" handle=".drag-me">
+        @start="drag = true" @end="drag = false" @change="handleDragChange" @click.right.prevent item-key="name" handle=".drag-me"
+        drag-class="drag-group">
         <template #item="{ element }">
             <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
                 @updateTasks="updateTasks" />
@@ -49,15 +50,15 @@ export default {
             }
         },
     },
-    watch: {
-        drag: {
-            handler() {
-                // console.log(this.drag);
-                this.dragGroup = this.dragGroup === '' ? 'dragGroup' : ''
-                // console.log(this.dragGroup);
-            }
-        }
-    },
+    // watch: {
+    //     drag: {
+    //         handler() {
+    //             // console.log(this.drag);
+    //             this.dragGroup = this.dragGroup === '' ? 'dragGroup' : ''
+    //             // console.log(this.dragGroup);
+    //         }
+    //     }
+    // },
 
     created() {
         // console.log('this.dragGroup', this.dragGroup);
@@ -68,7 +69,7 @@ export default {
             this.$emit('removeGroup', groupId)
         },
         addGroup() {
-            if(!this.title) return
+            if (!this.title) return
             this.$emit('addGroup', this.title)
             eventBus.emit('boardActivity',)
             this.title = null
@@ -81,15 +82,44 @@ export default {
             clonedGroup.tasks = tasks
             this.updateGroup(clonedGroup)
         },
-        onDragStart(event) {
-            // Apply the custom drag styles when dragging starts
-            const draggedGroup = event.item;
-            draggedGroup.classList.add('dragGroup');
+        // onDragStart(event) {
+        //     // Apply the custom drag styles when dragging starts
+        //     const draggedGroup = event.item;
+        //     draggedGroup.classList.add('dragGroup');
+        // },
+        // onDragEnd(event) {
+        //     // Remove the custom drag styles when dragging ends
+        //     const draggedGroup = event.item;
+        //     draggedGroup.classList.remove('dragGroup');
+        // },
+        handleDragStart(evt) {
+            // Get the dragged element
+            const draggedElement = evt.item;
+
+            // Add custom styles for opacity and rotation while dragging starts
+            draggedElement.style.opacity = '0.8'; // Adjust the opacity value as needed
+            draggedElement.style.transform = 'rotate(5deg)'; // Adjust the rotation angle as needed
         },
-        onDragEnd(event) {
-            // Remove the custom drag styles when dragging ends
-            const draggedGroup = event.item;
-            draggedGroup.classList.remove('dragGroup');
+        handleDragEnd(evt) {
+            // Get the dragged element
+            const draggedElement = evt.item;
+
+            // Remove custom styles when dragging ends
+            draggedElement.style.opacity = '';
+            draggedElement.style.transform = '';
+        },
+        handleDragChange(evt) {
+            // Get the dragged element
+            const draggedElement = evt.item;
+
+            // Check if the element is currently being dragged
+            if (evt.dragging) {
+                draggedElement.style.opacity = '0.8'; // Adjust the opacity value as needed
+                draggedElement.style.transform = 'rotate(5deg)'; // Adjust the rotation angle as needed
+            } else {
+                draggedElement.style.opacity = '';
+                draggedElement.style.transform = '';
+            }
         },
     },
     components: {
