@@ -13,102 +13,33 @@
 }
 
 .task-details {
-    display: block;
-    overflow: visible;
-    background-color: $clr-surface-overlay;
-    border-radius: 8px;
+    color: $ds-text;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Noto Sans,
+        Ubuntu,
+        Droid Sans,
+        Helvetica Neue,
+        sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    background-color: $ds-surface-overlay;
+    border-radius: 12px;
     margin: 48px 0 80px;
-    overflow: hidden;
     position: relative;
     width: 768px;
     z-index: 25;
-    border-radius: 8px;
-    min-height: 600px;
-    outline: 0;
-    box-sizing: inherit;
-    .btn-icon-close {
-        @include trello-icon($content: $icon-close, $type: md, $color: #44546f);
-        border-radius: 50%;
-        height: 40px;
-        margin: 4px;
-        overflow: hidden;
-        padding: 4px;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transition:
-            background-color 85ms,
-            color 85ms;
-        width: 40px;
-        z-index: 2;
-        line-height: 32px;
-        -webkit-font-smoothing: antialiased;
-        display: inline-block;
-        font-style: normal;
-        font-weight: 400;
-        text-align: center;
-        text-decoration: none;
-        vertical-align: bottom;
-        cursor: pointer;
-        &:hover {
-            background-color: $dynamic-button-hovered;
-            color: $dynamic-icon;
-        }
-    }
-    .task-cover {
-        background-size: initial;
-        background-origin: content-box;
-        box-sizing: border-box;
-        height: 116px;
-        min-height: 116px;
-        padding: 0px;
-        position: relative;
-        transition: opacity 85ms;
-        width: 100%;
-        outline: 0;
-        .task-cover-menu {
-            align-items: center;
-            bottom: 0;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: flex-end;
-            padding: 8px;
-            position: absolute;
-            width: 100%;
-            gap: 0;
-            .task-cover-btn {
-                background-color: transparent;
-                border-radius: 3px;
-                padding: 6px 12px 6px 6px;
-                text-decoration: none;
-                cursor: pointer;
-                .btn-icon-cover {
-                    @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
-                }
-                .task-cover-txt {
-                    margin-inline-start: 5px;
-                }
-                &:hover {
-                    background-color: $dynamic-button-hovered;
-                }
-            }
-        }
-    }
-    .task-header {
+    overflow: visible;
+    display: block;
+    .task-details-container {
         display: block;
-        min-height: 32px;
-        padding: 12px 40px 8px 56px;
-        position: relative;
-        z-index: 1;
-        .btn-title-icon {
-            @include trello-icon($content: $icon-card, $type: lg, $color: #44546f);
-            left: 16px;
-            position: absolute;
-            top: 20px;
-            height: 32px;
-            line-height: 32px;
-            width: 32px;
-            font-size: 24px;
+        outline: none;
+        .btn-icon-close {
+            @include trello-icon($content: $icon-close, $type: md, $color: currentColor);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             display: inline-block;
@@ -119,281 +50,90 @@
             text-align: center;
             text-decoration: none;
             vertical-align: bottom;
-        }
-        .task-header-title {
-            padding: 12px 0 0;
-            input {
-                overflow: hidden;
-                overflow-wrap: break-word;
-                height: 32.8px;
-                background: #0000;
-                border-radius: 3px;
-                box-shadow: none;
-                font-size: 20px;
-                font-weight: 600;
-                height: 32px;
-                line-height: 24px;
-                margin: -4px -8px;
-                min-height: 24px;
-                padding: 4px 8px;
-                width: 100%;
-                // -webkit-appearance: none;
-                border: none;
-                box-sizing: border-box;
-                display: block;
-                // outline: none;
-                border: 0;
-                transition-duration: 85ms;
-                transition-property: background-color, border-color, box-shadow;
-                transition-timing-function: ease;
-                &:focus {
-                    background-color: $clr-background-input;
-                    box-shadow: inset 0 0 0 2px $clr-border-focused;
-                }
+            height: 32px;
+            line-height: 32px;
+            width: 32px;
+            font-size: 20px;
+            border-radius: 50%;
+            color: $clr-icon;
+            height: 32px;
+            margin: 0;
+            overflow: hidden;
+            padding: 4px;
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            transition:
+                background-color 85ms,
+                color 85ms;
+            width: 32px;
+            z-index: 2;
+            color: $dynamic-icon;
+            background-color: $dynamic-button;
+            cursor: pointer;
+            &:hover {
+                background-color: $dynamic-button-hovered;
+                color: $dynamic-icon;
             }
         }
-    }
-    .task-main {
-        float: left;
-        margin: 0;
-        min-height: 24px;
-        padding: 0 8px 8px 16px;
-        position: relative;
-        width: 552px;
-        z-index: 1;
-        .task-details-data {
-            margin-top: 8px;
-            margin-left: 40px;
-            .task-details-item {
-                display: block;
-                float: left;
-                margin: 0 8px 8px 0;
-                max-width: 100%;
-                h3 {
-                    color: $clr-text-subtle;
-                    display: block;
-                    font-size: 12px;
-                    font-weight: 600;
-                    line-height: 16px;
-                    line-height: 20px;
-                    margin: 0 8px 4px 0;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-                .task-details-members {
-                    background-color: $clr-background-accent-gray-subtler;
-                    color: $clr-text;
-                    border-radius: 25em;
-                    cursor: pointer;
-                    display: block;
-                    float: left;
-                    height: 32px;
-                    margin: 0 4px 4px 0;
-                    overflow: visible;
-                    position: relative;
-                    text-decoration: none;
-                    -webkit-user-select: none;
-                    user-select: none;
-                    width: 32px;
-                    z-index: 0;
-                    .task-member-img {
-                        border-radius: 25em;
-                        height: 32px;
-                        object-fit: cover;
-                        width: 32px;
-                        max-width: 100%;
-                    }
-                }
-                .task-member-add {
-                    border-radius: 100%;
-                    background-color: $clr-background-neutral;
-                    border: none;
-                    // border-radius: 3px;
-                    box-shadow: none;
-                    color: $clr-text;
-                    cursor: pointer;
-                    display: block;
-                    float: left;
-                    margin: 0 8px 8px 0;
-                    transition-duration: 85ms;
-                    transition-property: background-color, border-color, box-shadow;
-                    transition-timing-function: ease;
-                    .task-member-btn-add {
-                        @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
-                        font-size: 16px;
-                        height: 16px;
-                        line-height: 32px;
-                        padding: 8px;
-                        width: 16px;
-                        cursor: pointer;
-                    }
-                    &:hover {
-                        background-color: $clr-background-neutral-hovered;
-                        border: none;
-                        box-shadow: none;
-                        color: $clr-text;
-                        text-decoration: none;
-                    }
-                }
-                .task-details-labels {
-                    float: left;
-                    margin-right: 8px;
-                    margin-bottom: 8px;
-                    max-width: 100%;
-                    .task-labels {
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 4px;
-                        .task-btn-label {
-                            display: inline-block;
-                            position: relative;
-                            margin-bottom: 0;
-                            border-radius: 3px;
-                            padding: 0 12px;
-                            max-width: 100%;
-                            min-width: 48px;
-                            height: 32px;
-                            box-sizing: border-box;
-                            line-height: 32px;
-                            font-size: 14px;
-                            font-weight: 500;
-                            text-align: left;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-                            &:hover {
-                                cursor: pointer;
-                                filter: saturate(85%) brightness(85%);
-                            }
-                        }
-                        .task-btn-add-label {
-                            margin-bottom: 0;
-                            padding: 8px;
-                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
-                                "Droid Sans", "Helvetica Neue", sans-serif;
-                            font-size: 14px;
-                            line-height: 20px;
-                            font-weight: 400;
-                            box-sizing: border-box;
-                            display: inline-flex;
-                            align-items: center;
-                            justify-content: center;
-                            border-radius: 3px;
-                            cursor: pointer;
-                            padding: 6px 12px;
-                            text-decoration: none;
-                            white-space: normal;
-                            background-color: $clr-background-neutral;
-                            box-shadow: none;
-                            border: none;
-                            color: $clr-text;
-                            transition-property: background-color, border-color, box-shadow;
-                            transition-duration: 85ms;
-                            transition-timing-function: ease;
-                            &:hover {
-                                background-color: var(--ds-background-neutral-hovered, #091e4224);
-                                box-shadow: none;
-                                border: none;
-                                color: var(--ds-text, #172b4d);
-                                text-decoration: none;
-                            }
-                            span {
-                                @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
-                                display: inline-block;
-                                line-height: 1;
-                                font-size: 14px;
-                                line-height: 20px;
-                                font-weight: 400;
-                            }
-                        }
-                    }
-                }
-                .task-btn-watch {
-                    background-color: var(--ds-background-neutral, #091e420f);
-                    border: none;
-                    border-radius: 3px;
-                    box-shadow: none;
+        .task-details-container-two {
+            // background-color: $ds-background-neutral;
+            border-radius: 8px;
+            min-height: 600px;
+            .task-cover {
+                background-position: 50%;
+                background-repeat: no-repeat;
+                background-size: contain;
+                border-radius: 12px 12px 0 0;
+                height: 160px;
+                overflow: hidden;
+                position: relative;
+                transition: opacity 85ms;
+                width: 100%;
+                height: 116px;
+                min-height: 116px;
+                padding: 0px;
+                background-size: initial;
+                background-origin: content-box;
+                box-sizing: border-box;
+                background-position: left center;
+                .task-cover-menu {
+                    align-items: center;
+                    bottom: 0;
                     box-sizing: border-box;
-                    color: var(--ds-text, #172b4d);
-                    cursor: pointer;
-                    display: block;
-                    height: 32px;
-                    margin-top: 8px;
-                    max-width: 300px;
-                    overflow: hidden;
-                    padding: 6px 12px;
-                    position: relative;
-                    text-decoration: none;
-                    text-overflow: ellipsis;
-                    transition-duration: 85ms;
-                    transition-property: background-color, border-color, box-shadow;
-                    transition-timing-function: ease;
-                    -webkit-user-select: none;
-                    user-select: none;
-                    white-space: nowrap;
-                    margin-top: 0;
-                    // width: 138px;
-                    // padding-right: 32px;
-                    &:hover {
-                        background-color: $clr-background-neutral-hovered;
-                        border: none;
-                        box-shadow: none;
-                        color: $clr-text;
-                        text-decoration: none;
-                    }
-                    .task-txt-watch {
-                        color: $clr-text;
-                        cursor: pointer;
-                        user-select: none;
-                        white-space: nowrap;
-                    }
-                    .task-icon-watch {
-                        @include trello-icon($content: $icon-eye, $type: sm, $color: #44546f);
-                        -webkit-font-smoothing: antialiased;
-                        -moz-osx-font-smoothing: grayscale;
-                        display: inline-block;
-                        font-family: trellicons;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 1;
-                        text-align: center;
-                        text-decoration: none;
-                        vertical-align: bottom;
-                        font-size: 16px;
-                        height: 20px;
-                        line-height: 20px;
-                        width: 20px;
-                        color: $clr-icon;
-                        margin: 0 6px 0 -6px;
-                    }
-                    .is-watching {
-                        color: $clr-text;
-                        cursor: pointer;
-                        user-select: none;
-                        white-space: nowrap;
+                    display: flex;
+                    justify-content: flex-end;
+                    padding: 12px;
+                    position: absolute;
+                    width: 100%;
+                    .task-cover-btn {
+                        background-color: transparent;
                         border-radius: 3px;
-                        font-size: 12px;
-                        font-weight: 700;
-                        height: 25px;
+                        padding: 6px 12px 6px 6px;
+                        text-decoration: none;
+                        font-family:
+                            -apple-system,
+                            BlinkMacSystemFont,
+                            Segoe UI,
+                            Roboto,
+                            Noto Sans,
+                            Ubuntu,
+                            Droid Sans,
+                            Helvetica Neue,
+                            sans-serif;
+                        font-size: 14px;
+                        font-weight: 400;
                         line-height: 20px;
-                        margin: 0;
-                        padding: 2px 4px;
-                        position: absolute;
-                        right: 4px;
-                        top: 4px;
-                        text-align: center;
-                        background-color: $clr-icon-subtle;
-                        display: block;
-                        .is-watching-icon {
-                            @include trello-icon($content: $icon-checked, $type: sm, $color: #44546f);
-                            color: $clr-icon-inverse !important;
+                        cursor: pointer;
+                        .btn-icon-cover {
+                            @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
                             -webkit-font-smoothing: antialiased;
                             -moz-osx-font-smoothing: grayscale;
                             display: inline-block;
                             font-family: trellicons;
                             font-style: normal;
                             font-weight: 400;
+                            line-height: 1;
                             text-align: center;
                             text-decoration: none;
                             vertical-align: bottom;
@@ -401,545 +141,217 @@
                             height: 20px;
                             line-height: 20px;
                             width: 20px;
+                            color: currentColor;
                         }
-                    }
-                }
-                .task-details-due-date {
-                    display: flex;
-                    align-items: center;
-                    flex-direction: row;
-                    margin: 0 8px 8px 0;
-                    cursor: pointer;
-
-                    .due-date-complete {
-                        text-decoration: none;
-                        color: $clr-link;
-                        background-color: $clr-background-input;
-                        border-radius: 2px;
-                        box-shadow: inset 0 0 0 2px $clr-border-input;
-                        flex-shrink: 0;
-                        height: 16px;
-                        margin: auto 4px auto 0;
-                        overflow: hidden;
-                        position: relative;
-                        transition: all 0.2s ease-in-out;
-                        white-space: nowrap;
-                        width: 16px;
                         &:hover {
-                            background-color: $clr-background-input-hovered;
-                            box-shadow: inset 0 0 0 2px $clr-border-input;
-                        }
-                    }
-                    .due-date-time-container {
-                        &:hover {
-                            background-color: $clr-background-neutral-hovered;
-                            border: none;
-                            box-shadow: none;
-                            color: $clr-text;
-                            text-decoration: none;
-                        }
-                        .due-date-btn {
-                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
-                                "Droid Sans", "Helvetica Neue", sans-serif;
-                            font-size: 14px;
-                            line-height: 20px;
-                            font-weight: 400;
-                            box-sizing: border-box;
-                            display: inline-flex;
-                            align-items: center;
-                            justify-content: center;
-                            border-radius: 3px;
-                            cursor: pointer;
-                            padding: 6px 12px;
-                            text-decoration: none;
-                            white-space: normal;
-                            background-color: $clr-background-neutral;
-                            box-shadow: none;
-                            border: none;
-                            color: $clr-text;
-                            transition:
-                                background-color 85ms ease,
-                                border-color 85ms ease,
-                                box-shadow 85ms ease;
-                            margin-bottom: 0;
-                            .due-date-icon {
-                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
-                                    "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
-                                font-size: 14px;
-                                font-weight: 400;
-                                cursor: pointer;
-                                white-space: normal;
-                                color: $clr-text;
-                                display: inline-block;
-                                line-height: 1;
-                                margin-left: 4px;
-                                text-align: center;
-                                .due-date-icon-span {
-                                    font-size: 14px;
-                                    line-height: 20px;
-                                    height: 16px;
-                                    width: 16px;
-                                }
-                            }
+                            background-color: $dynamic-button-hovered;
                         }
                     }
                 }
             }
-        }
-        .task-description {
-            color: $clr-text;
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                Segoe UI,
-                Roboto,
-                Noto Sans,
-                Ubuntu,
-                Droid Sans,
-                Helvetica Neue,
-                sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-            clear: both;
-            margin-bottom: 24px;
-            position: relative;
-            .description-header {
-                align-items: center;
-                display: flex;
-                margin: 0 0 4px 40px;
+            .task-header {
+                color: $ds-text;
+                font-family:
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    Segoe UI,
+                    Roboto,
+                    Noto Sans,
+                    Ubuntu,
+                    Droid Sans,
+                    Helvetica Neue,
+                    sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                display: block;
                 min-height: 32px;
-                padding: 8px 0;
+                padding: 8px 52px 8px 56px;
                 position: relative;
-                & > span {
+                z-index: 1;
+                .btn-title-icon {
+                    @include trello-icon($content: $icon-card, $type: lg, $color: #44546f);
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
                     display: inline-block;
+                    font-family: trellicons;
+                    font-style: normal;
+                    font-weight: 400;
                     line-height: 1;
-                    left: -36px;
+                    text-align: center;
+                    text-decoration: none;
+                    vertical-align: bottom;
+                    font-size: 24px;
+                    height: 32px;
+                    line-height: 32px;
+                    width: 32px;
+                    color: $ds-icon;
+                    left: 16px;
                     position: absolute;
-                    top: 12px;
-                    & > span {
-                        display: inline-block;
-                        line-height: 1;
-                    }
+                    top: 16px;
                 }
-                & > h3 {
-                    display: block;
-                    margin-block-start: 1em;
-                    margin-block-end: 1em;
-                    margin-inline-start: 0px;
-                    margin-inline-end: 0px;
-                    font-weight: 600;
-                    font-size: 16px;
+                .task-header-title {
+                    padding: 12px 0 0;
+                    color: $ds-text;
+                    font-family:
+                        -apple-system,
+                        BlinkMacSystemFont,
+                        Segoe UI,
+                        Roboto,
+                        Noto Sans,
+                        Ubuntu,
+                        Droid Sans,
+                        Helvetica Neue,
+                        sans-serif;
+                    font-size: 14px;
+                    font-weight: 400;
                     line-height: 20px;
-                    flex: 0 0 auto;
-                    margin: 0;
-                }
-                & > div {
-                    align-items: center;
-                    display: flex;
-                    flex: 1 0;
-                    justify-content: space-between;
-                    .description-info {
-                        align-items: center;
-                        display: flex;
-                        flex: 1 1;
-                        gap: 4px;
-                        margin-left: 4px;
-                        button {
-                            -webkit-appearance: none;
-                            position: relative;
-                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
-                                "Droid Sans", "Helvetica Neue", sans-serif;
-                            font-size: 14px;
-                            line-height: 20px;
-                            font-weight: 400;
-                            box-sizing: border-box;
-                            border-radius: 3px;
-                            cursor: pointer;
-                            text-decoration: none;
-                            white-space: normal;
-                            color: var(--ds-text, #172b4d);
-                            transition-property: background-color, border-color, box-shadow;
-                            transition-duration: 85ms;
-                            transition-timing-function: ease;
-                            padding: 6px;
-                            background-color: transparent;
-                            border: none;
-                            box-shadow: none;
-                            height: 32px;
-                            margin: 0;
-                            & > span {
-                                display: inline-block;
-                                line-height: 1;
-                                & > span {
-                                    display: inline-block;
-                                    line-height: 1;
-                                }
-                            }
-                        }
+                    h2 {
+                        display: block;
+                        margin-block-start: 0.83em;
+                        margin-block-end: 0.83em;
+                        margin-inline-start: 0px;
+                        margin-inline-end: 0px;
+                        unicode-bidi: isolate;
+                        font-size: 20px;
+                        line-height: 24px;
+                        font-weight: 600;
+                        margin: 0 0 0;
+                        margin-right: 4px;
                     }
-                    .description-edit-btn {
-                        align-items: center;
-                        display: flex;
-                        flex: 1 1;
-                        gap: 8px;
-                        justify-content: flex-end;
-                        button {
-                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
-                                "Droid Sans", "Helvetica Neue", sans-serif;
-                            font-size: 14px;
-                            line-height: 20px;
-                            font-weight: 400;
-                            box-sizing: border-box;
-                            display: inline-flex;
-                            align-items: center;
-                            justify-content: center;
-                            border-radius: 3px;
-                            cursor: pointer;
-                            padding: 6px 12px;
-                            text-decoration: none;
-                            white-space: normal;
-                            background-color: var(--ds-background-neutral, #091e420f);
-                            box-shadow: none;
-                            border: none;
-                            color: var(--ds-text, #172b4d);
-                            transition-property: background-color, border-color, box-shadow;
-                            transition-duration: 85ms;
-                            transition-timing-function: ease;
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-            }
-            .description-content {
-                position: relative;
-                margin-left: 40px;
-                .description-txt {
-                    p {
-                        margin: 0;
-                        overflow-wrap: break-word;
-                        word-break: break-word;
-                        cursor: pointer;
-                    }
-                    .description-save-cancel {
-                        clear: both;
-                        display: flex;
-                        flex-direction: row;
-                        margin-top: 8px;
-                        .description-save {
-                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
-                                "Droid Sans", "Helvetica Neue", sans-serif;
-                            font-size: 14px;
-                            line-height: 20px;
-                            font-weight: 400;
-                            box-sizing: border-box;
-                            display: inline-flex;
-                            align-items: center;
-                            justify-content: center;
-                            border-radius: 3px;
-                            cursor: pointer;
-                            padding: 6px 12px;
-                            text-decoration: none;
-                            white-space: normal;
-                            box-shadow: none;
-                            border: none;
-                            transition-property: background-color, border-color, box-shadow;
-                            transition-duration: 85ms;
-                            transition-timing-function: ease;
-                            background-color: $clr-background-brand-bold;
-                            box-shadow: none;
-                            border: none;
-                            color: $clr-text-inverse;
-                            margin: 0 6px 0 0;
-                        }
-                        .description-cancel {
-                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
-                                "Droid Sans", "Helvetica Neue", sans-serif;
-                            font-size: 14px;
-                            line-height: 20px;
-                            font-weight: 400;
-                            box-sizing: border-box;
-                            display: inline-flex;
-                            align-items: center;
-                            justify-content: center;
-                            border-radius: 3px;
-                            cursor: pointer;
-                            padding: 6px 12px;
-                            text-decoration: none;
-                            white-space: normal;
-                            box-shadow: none;
-                            border: none;
-                            color: $clr-text;
-                            transition-property: background-color, border-color, box-shadow;
-                            transition-duration: 85ms;
-                            transition-timing-function: ease;
-                            background-color: transparent;
-                            border: none;
-                            box-shadow: none;
-                            margin: 0 6px 0 0;
-                        }
-                    }
-                }
-            }
-        }
-        .checklist-content {
-            clear: both;
-            margin-bottom: 24px;
-            position: relative;
-            .checklist {
-                margin-bottom: 24px;
-                .checklist-header {
-                    margin: 0 0 4px 40px;
-                    padding: 8px 0;
-                    position: relative;
-                    border-bottom: none;
-                    .checklist-header-icon {
-                        @include trello-icon($content: $icon-checklist, $type: lg, $color: currentColor);
-                        -webkit-font-smoothing: antialiased;
-                        -moz-osx-font-smoothing: grayscale;
-                        display: inline-block;
-                        font-family: trellicons;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 1;
-                        text-align: center;
-                        text-decoration: none;
-                        vertical-align: bottom;
-                        font-size: 24px;
+                    textarea {
+                        -webkit-appearance: none;
+                        border: none;
+                        box-sizing: border-box;
+                        display: block;
+                        outline: none;
+                        transition-duration: 85ms;
+                        transition-property: background-color, border-color, box-shadow;
+                        transition-timing-function: ease;
+                        width: 100%;
+                        background: #0000;
+                        border-radius: 4px;
+                        box-shadow: none;
+                        font-size: 20px;
+                        font-weight: 600;
                         height: 32px;
-                        line-height: 32px;
-                        width: 32px;
-                        color: $clr-icon;
-                        left: -40px;
-                        position: absolute;
-                        top: 8px;
+                        line-height: 24px;
+                        margin: -6px -10px;
+                        min-height: 24px;
+                        padding: 6px 10px;
+                        resize: none;
+                        overflow: hidden;
+                        overflow-wrap: break-word;
+                        height: 36.8px;
+                        font-family:
+                            -apple-system,
+                            BlinkMacSystemFont,
+                            Segoe UI,
+                            Roboto,
+                            Noto Sans,
+                            Ubuntu,
+                            Droid Sans,
+                            Helvetica Neue,
+                            sans-serif;
+                        &:focus {
+                            background-color: $ds-background-input;
+                            box-shadow: inset 0 0 0 2px $ds-border-focused;
+                        }
                     }
-                    .checklist-title {
-                        align-items: center;
-                        display: flex;
-                        flex-flow: row wrap;
-                        justify-content: space-between;
+                }
+                .task-header-group {
+                    color: $ds-text-subtle;
+                    cursor: default;
+                    margin: 4px 8px 4px 2px;
+                    display: inline-block;
+                    p {
+                        display: inline-block;
+                        margin: 0 0 8px;
+                        a {
+                            cursor: pointer;
+                            background-color: initial;
+                            color: $ds-text-subtle;
+                            text-decoration: underline;
+                            display: inline;
+                        }
+                    }
+                }
+            }
+            .task-main {
+                float: left;
+                margin: 0;
+                min-height: 24px;
+                padding: 0 8px 8px 16px;
+                position: relative;
+                width: 552px;
+                z-index: 1;
+                .task-details-data {
+                    margin-top: 8px;
+                    margin-left: 40px;
+                    .task-details-item {
+                        display: block;
+                        float: left;
+                        margin: 0 8px 8px 0;
+                        max-width: 100%;
                         h3 {
-                            font-size: 16px;
+                            color: $clr-text-subtle;
+                            display: block;
+                            font-size: 12px;
+                            font-weight: 600;
+                            line-height: 16px;
                             line-height: 20px;
-                            display: inline-block;
-                            min-height: 18px;
-                            min-width: 40px;
-                            width: auto;
-                            margin: 6px 0;
+                            margin: 0 8px 4px 0;
                             overflow: hidden;
                             text-overflow: ellipsis;
-                            cursor: pointer;
-                        }
-                        .checklist-options {
-                            float: right;
-                            margin: 0 2px 0 auto;
-                            .show-checked {
-                                align-items: center;
-                                background-color: $clr-background-neutral;
-                                border: none;
-                                border-radius: 3px;
-                                box-shadow: none;
-                                box-sizing: border-box;
-                                color: $clr-text;
-                                cursor: pointer;
-                                display: inline-flex;
-                                font-family:
-                                    -apple-system,
-                                    BlinkMacSystemFont,
-                                    Segoe UI,
-                                    Roboto,
-                                    Noto Sans,
-                                    Ubuntu,
-                                    Droid Sans,
-                                    Helvetica Neue,
-                                    sans-serif;
-                                font-size: 14px;
-                                font-weight: 400;
-                                justify-content: center;
-                                line-height: 20px;
-                                padding: 6px 12px;
-                                text-decoration: none;
-                                transition-duration: 85ms;
-                                transition-property: background-color, border-color, box-shadow;
-                                transition-timing-function: ease;
-                                white-space: normal;
-                                margin: 0 8px 0 0;
-                                &:hover {
-                                    background-color: $clr-background-neutral-hovered;
-                                    border: none;
-                                    box-shadow: none;
-                                    color: $clr-text;
-                                    text-decoration: none;
-                                }
-                            }
-                            .checklist-remove-btn {
-                                align-items: center;
-                                background-color: $clr-background-neutral;
-                                border: none;
-                                border-radius: 3px;
-                                box-shadow: none;
-                                box-sizing: border-box;
-                                color: $clr-text;
-                                cursor: pointer;
-                                display: inline-flex;
-                                font-family:
-                                    -apple-system,
-                                    BlinkMacSystemFont,
-                                    Segoe UI,
-                                    Roboto,
-                                    Noto Sans,
-                                    Ubuntu,
-                                    Droid Sans,
-                                    Helvetica Neue,
-                                    sans-serif;
-                                font-size: 14px;
-                                font-weight: 400;
-                                justify-content: center;
-                                line-height: 20px;
-                                padding: 6px 12px;
-                                text-decoration: none;
-                                transition-duration: 85ms;
-                                transition-property: background-color, border-color, box-shadow;
-                                transition-timing-function: ease;
-                                white-space: normal;
-                                margin: 0;
-                                &:hover {
-                                    background-color: $clr-background-neutral-hovered;
-                                    border: none;
-                                    box-shadow: none;
-                                    color: $clr-text;
-                                    text-decoration: none;
-                                }
-                            }
-                        }
-                    }
-                }
-                .checklist-progress {
-                    margin-bottom: 6px;
-                    position: relative;
-                    .checklist-progress-calc {
-                        color: $clr-text-subtle;
-                        font-size: 11px;
-                        left: 0;
-                        line-height: 10px;
-                        position: absolute;
-                        text-align: center;
-                        top: -1px;
-                        width: 32px;
-                    }
-                    .checklist-progress-bar {
-                        background: $clr-background-neutral;
-                        border-radius: 4px;
-                        clear: both;
-                        height: 8px;
-                        margin: 0px 0px 0px 40px;
-                        overflow: hidden;
-                        position: relative;
-                        .checklist-current-progress {
-                            background: $clr-background-accent-blue-subtle;
-                            bottom: 0;
-                            left: 0;
-                            position: absolute;
-                            top: 0;
-                            transition-duration: 0.14s;
-                            transition-property: width, background;
-                            transition-timing-function: ease-in;
-                            width: 40%;
-                        }
-                    }
-                }
-                .checklist-list {
-                    min-height: 8px;
-                    .checklist-item {
-                        border-radius: 4px;
-                        box-sizing: border-box;
-                        clear: both;
-                        padding-left: 40px;
-                        position: relative;
-                        transform-origin: left bottom;
-                        transition-duration: 0.3s;
-                        transition-property: transform, opacity, height, padding, margin, background-color;
-                        transition-timing-function: ease-in;
-                        .checklist-checkbox {
-                            background-color: $clr-background-input;
-                            cursor: pointer;
-                            flex-shrink: 0;
-                            height: 16px;
-                            left: 0;
-                            margin: 6px;
-                            text-align: center;
-                            top: 5px;
-                            border-radius: 2px;
-                            box-shadow: inset 0 0 0 2px $clr-border-input;
-                            overflow: hidden;
-                            position: relative;
-                            position: absolute;
-                            transition: all 0.2s ease-in-out;
                             white-space: nowrap;
-                            width: 16px;
-                            svg {
-                                fill: $clr-icon-inverse;
-                                &.checked {
-                                    background-color: $clr-background-selected-bold;
-                                    box-shadow: inset 0 0 0 2px $clr-border-selected;
-                                }
+                        }
+                        .task-details-members {
+                            background-color: $clr-background-accent-gray-subtler;
+                            color: $clr-text;
+                            border-radius: 25em;
+                            cursor: pointer;
+                            display: block;
+                            float: left;
+                            height: 32px;
+                            margin: 0 4px 4px 0;
+                            overflow: visible;
+                            position: relative;
+                            text-decoration: none;
+                            -webkit-user-select: none;
+                            user-select: none;
+                            width: 32px;
+                            z-index: 0;
+                            .task-member-img {
+                                border-radius: 25em;
+                                height: 32px;
+                                object-fit: cover;
+                                width: 32px;
+                                max-width: 100%;
                             }
                         }
-                        .checklist-item-details {
-                            overflow-wrap: break-word;
-                            word-break: break-word;
-                            .checklist-item-row {
-                                display: flex;
-                                flex-direction: row;
-                                cursor: pointer;
-                                .checklist-text {
-                                    display: inline-flex;
-                                    padding: 6px 0;
-                                    width: 100%;
-                                    span {
-                                        align-self: center;
-                                        flex: 1;
-                                        margin-bottom: 0;
-                                        min-height: 20px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .checklist-add-item {
-                        margin-left: 40px;
-                        button {
-                            align-items: center;
+                        .task-member-add {
+                            border-radius: 100%;
                             background-color: $clr-background-neutral;
                             border: none;
-                            border-radius: 3px;
+                            // border-radius: 3px;
                             box-shadow: none;
-                            box-sizing: border-box;
                             color: $clr-text;
                             cursor: pointer;
-                            display: inline-flex;
-                            font-family:
-                                -apple-system,
-                                BlinkMacSystemFont,
-                                Segoe UI,
-                                Roboto,
-                                Noto Sans,
-                                Ubuntu,
-                                Droid Sans,
-                                Helvetica Neue,
-                                sans-serif;
-                            font-size: 14px;
-                            font-weight: 400;
-                            justify-content: center;
-                            line-height: 20px;
-                            padding: 6px 12px;
-                            text-decoration: none;
+                            display: block;
+                            float: left;
+                            margin: 0 8px 8px 0;
                             transition-duration: 85ms;
                             transition-property: background-color, border-color, box-shadow;
                             transition-timing-function: ease;
-                            white-space: normal;
-                            margin-top: 8px;
+                            .task-member-btn-add {
+                                @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
+                                font-size: 16px;
+                                height: 16px;
+                                line-height: 32px;
+                                padding: 8px;
+                                width: 16px;
+                                cursor: pointer;
+                            }
                             &:hover {
                                 background-color: $clr-background-neutral-hovered;
                                 border: none;
@@ -948,72 +360,1036 @@
                                 text-decoration: none;
                             }
                         }
+                        .task-details-labels {
+                            float: left;
+                            margin-right: 8px;
+                            margin-bottom: 8px;
+                            max-width: 100%;
+                            .task-labels {
+                                display: flex;
+                                flex-wrap: wrap;
+                                gap: 4px;
+                                .task-btn-label {
+                                    display: inline-block;
+                                    position: relative;
+                                    margin-bottom: 0;
+                                    border-radius: 3px;
+                                    padding: 0 12px;
+                                    max-width: 100%;
+                                    min-width: 48px;
+                                    height: 32px;
+                                    box-sizing: border-box;
+                                    line-height: 32px;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    text-align: left;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    &:hover {
+                                        cursor: pointer;
+                                        filter: saturate(85%) brightness(85%);
+                                    }
+                                }
+                                .task-btn-add-label {
+                                    margin-bottom: 0;
+                                    padding: 8px;
+                                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
+                                        "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    font-weight: 400;
+                                    box-sizing: border-box;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 3px;
+                                    cursor: pointer;
+                                    padding: 6px 12px;
+                                    text-decoration: none;
+                                    white-space: normal;
+                                    background-color: $clr-background-neutral;
+                                    box-shadow: none;
+                                    border: none;
+                                    color: $clr-text;
+                                    transition-property: background-color, border-color, box-shadow;
+                                    transition-duration: 85ms;
+                                    transition-timing-function: ease;
+                                    &:hover {
+                                        background-color: var(--ds-background-neutral-hovered, #091e4224);
+                                        box-shadow: none;
+                                        border: none;
+                                        color: var(--ds-text, #172b4d);
+                                        text-decoration: none;
+                                    }
+                                    span {
+                                        @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
+                                        display: inline-block;
+                                        line-height: 1;
+                                        font-size: 14px;
+                                        line-height: 20px;
+                                        font-weight: 400;
+                                    }
+                                }
+                            }
+                        }
+                        .task-btn-watch {
+                            background-color: $ds-background-neutral;
+                            border: none;
+                            border-radius: 3px;
+                            box-shadow: none;
+                            box-sizing: border-box;
+                            color: $ds-text;
+                            cursor: pointer;
+                            display: block;
+                            height: 32px;
+                            margin-top: 8px;
+                            max-width: 300px;
+                            overflow: hidden;
+                            padding: 6px 12px;
+                            position: relative;
+                            text-decoration: none;
+                            text-overflow: ellipsis;
+                            transition-duration: 85ms;
+                            transition-property: background-color, border-color, box-shadow;
+                            transition-timing-function: ease;
+                            -webkit-user-select: none;
+                            user-select: none;
+                            white-space: nowrap;
+                            margin-top: 0;
+                            &:hover {
+                                background-color: $clr-background-neutral-hovered;
+                                border: none;
+                                box-shadow: none;
+                                color: $clr-text;
+                                text-decoration: none;
+                            }
+                            .task-txt-watch {
+                                color: $clr-text;
+                                cursor: pointer;
+                                user-select: none;
+                                white-space: nowrap;
+                            }
+                            .task-icon-watch {
+                                @include trello-icon($content: $icon-eye, $type: sm, $color: #44546f);
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                                display: inline-block;
+                                font-family: trellicons;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 1;
+                                text-align: center;
+                                text-decoration: none;
+                                vertical-align: bottom;
+                                font-size: 16px;
+                                height: 20px;
+                                line-height: 20px;
+                                width: 20px;
+                                color: $clr-icon;
+                                margin: 0 6px 0 -6px;
+                            }
+                            .is-watching {
+                                color: $ds-text;
+                                cursor: pointer;
+                                user-select: none;
+                                white-space: nowrap;
+                                border-radius: 3px;
+                                display: none;
+                                font-size: 12px;
+                                font-weight: 700;
+                                height: 20px;
+                                line-height: 20px;
+                                margin: 0;
+                                padding: 2px 4px;
+                                position: absolute;
+                                right: 4px;
+                                text-align: center;
+                                top: 4px;
+                                background-color: $ds-icon-subtle;
+                                display: block;
+                                .is-watching-icon {
+                                    @include trello-icon($content: $icon-checked, $type: sm, $color: #44546f);
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
+                                    display: inline-block;
+                                    font-family: trellicons;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 1;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    vertical-align: bottom;
+                                    font-size: 16px;
+                                    height: 20px;
+                                    line-height: 20px;
+                                    width: 20px;
+                                    text-decoration: none;
+                                    color: $ds-icon-inverse !important;
+                                }
+                            }
+                        }
+                        .task-details-due-date {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: row;
+                            margin: 0 8px 8px 0;
+                            cursor: pointer;
+
+                            .due-date-complete {
+                                text-decoration: none;
+                                color: $clr-link;
+                                background-color: $clr-background-input;
+                                border-radius: 2px;
+                                box-shadow: inset 0 0 0 2px $clr-border-input;
+                                flex-shrink: 0;
+                                height: 16px;
+                                margin: auto 4px auto 0;
+                                overflow: hidden;
+                                position: relative;
+                                transition: all 0.2s ease-in-out;
+                                white-space: nowrap;
+                                width: 16px;
+                                &:hover {
+                                    background-color: $clr-background-input-hovered;
+                                    box-shadow: inset 0 0 0 2px $clr-border-input;
+                                }
+                            }
+                            .due-date-time-container {
+                                &:hover {
+                                    background-color: $clr-background-neutral-hovered;
+                                    border: none;
+                                    box-shadow: none;
+                                    color: $clr-text;
+                                    text-decoration: none;
+                                }
+                                .due-date-btn {
+                                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
+                                        "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    font-weight: 400;
+                                    box-sizing: border-box;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 3px;
+                                    cursor: pointer;
+                                    padding: 6px 12px;
+                                    text-decoration: none;
+                                    white-space: normal;
+                                    background-color: $clr-background-neutral;
+                                    box-shadow: none;
+                                    border: none;
+                                    color: $clr-text;
+                                    transition:
+                                        background-color 85ms ease,
+                                        border-color 85ms ease,
+                                        box-shadow 85ms ease;
+                                    margin-bottom: 0;
+                                    .due-date-icon {
+                                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+                                            "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        cursor: pointer;
+                                        white-space: normal;
+                                        color: $clr-text;
+                                        display: inline-block;
+                                        line-height: 1;
+                                        margin-left: 4px;
+                                        text-align: center;
+                                        .due-date-icon-span {
+                                            font-size: 14px;
+                                            line-height: 20px;
+                                            height: 16px;
+                                            width: 16px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .task-description {
+                    color: $clr-text;
+                    font-family:
+                        -apple-system,
+                        BlinkMacSystemFont,
+                        Segoe UI,
+                        Roboto,
+                        Noto Sans,
+                        Ubuntu,
+                        Droid Sans,
+                        Helvetica Neue,
+                        sans-serif;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 20px;
+                    clear: both;
+                    margin-bottom: 24px;
+                    position: relative;
+                    .description-header {
+                        align-items: center;
+                        display: flex;
+                        margin: 0 0 4px 40px;
+                        min-height: 32px;
+                        padding: 8px 0;
+                        position: relative;
+                        & > span {
+                            display: inline-block;
+                            line-height: 1;
+                            left: -36px;
+                            position: absolute;
+                            top: 12px;
+                            & > span {
+                                display: inline-block;
+                                line-height: 1;
+                            }
+                        }
+                        & > h3 {
+                            display: block;
+                            margin-block-start: 1em;
+                            margin-block-end: 1em;
+                            margin-inline-start: 0px;
+                            margin-inline-end: 0px;
+                            font-weight: 600;
+                            font-size: 16px;
+                            line-height: 20px;
+                            flex: 0 0 auto;
+                            margin: 0;
+                        }
+                        & > div {
+                            align-items: center;
+                            display: flex;
+                            flex: 1 0;
+                            justify-content: space-between;
+                            .description-info {
+                                align-items: center;
+                                display: flex;
+                                flex: 1 1;
+                                gap: 4px;
+                                margin-left: 4px;
+                                button {
+                                    -webkit-appearance: none;
+                                    position: relative;
+                                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
+                                        "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    font-weight: 400;
+                                    box-sizing: border-box;
+                                    border-radius: 3px;
+                                    cursor: pointer;
+                                    text-decoration: none;
+                                    white-space: normal;
+                                    color: var(--ds-text, #172b4d);
+                                    transition-property: background-color, border-color, box-shadow;
+                                    transition-duration: 85ms;
+                                    transition-timing-function: ease;
+                                    padding: 6px;
+                                    background-color: transparent;
+                                    border: none;
+                                    box-shadow: none;
+                                    height: 32px;
+                                    margin: 0;
+                                    & > span {
+                                        display: inline-block;
+                                        line-height: 1;
+                                        & > span {
+                                            display: inline-block;
+                                            line-height: 1;
+                                        }
+                                    }
+                                }
+                            }
+                            .description-edit-btn {
+                                align-items: center;
+                                display: flex;
+                                flex: 1 1;
+                                gap: 8px;
+                                justify-content: flex-end;
+                                button {
+                                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
+                                        "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    font-weight: 400;
+                                    box-sizing: border-box;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 3px;
+                                    cursor: pointer;
+                                    padding: 6px 12px;
+                                    text-decoration: none;
+                                    white-space: normal;
+                                    background-color: var(--ds-background-neutral, #091e420f);
+                                    box-shadow: none;
+                                    border: none;
+                                    color: var(--ds-text, #172b4d);
+                                    transition-property: background-color, border-color, box-shadow;
+                                    transition-duration: 85ms;
+                                    transition-timing-function: ease;
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                    .description-content {
+                        position: relative;
+                        margin-left: 40px;
+                        .description-txt {
+                            p {
+                                margin: 0;
+                                overflow-wrap: break-word;
+                                word-break: break-word;
+                                cursor: pointer;
+                            }
+                            .description-save-cancel {
+                                clear: both;
+                                display: flex;
+                                flex-direction: row;
+                                margin-top: 8px;
+                                .description-save {
+                                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
+                                        "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    font-weight: 400;
+                                    box-sizing: border-box;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 3px;
+                                    cursor: pointer;
+                                    padding: 6px 12px;
+                                    text-decoration: none;
+                                    white-space: normal;
+                                    box-shadow: none;
+                                    border: none;
+                                    transition-property: background-color, border-color, box-shadow;
+                                    transition-duration: 85ms;
+                                    transition-timing-function: ease;
+                                    background-color: $clr-background-brand-bold;
+                                    box-shadow: none;
+                                    border: none;
+                                    color: $clr-text-inverse;
+                                    margin: 0 6px 0 0;
+                                }
+                                .description-cancel {
+                                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans",
+                                        "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    font-weight: 400;
+                                    box-sizing: border-box;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border-radius: 3px;
+                                    cursor: pointer;
+                                    padding: 6px 12px;
+                                    text-decoration: none;
+                                    white-space: normal;
+                                    box-shadow: none;
+                                    border: none;
+                                    color: $clr-text;
+                                    transition-property: background-color, border-color, box-shadow;
+                                    transition-duration: 85ms;
+                                    transition-timing-function: ease;
+                                    background-color: transparent;
+                                    border: none;
+                                    box-shadow: none;
+                                    margin: 0 6px 0 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                .checklist-content {
+                    clear: both;
+                    margin-bottom: 24px;
+                    position: relative;
+                    .checklist {
+                        margin-bottom: 24px;
+                        .checklist-header {
+                            margin: 0 0 4px 40px;
+                            padding: 8px 0;
+                            position: relative;
+                            border-bottom: none;
+                            .checklist-header-icon {
+                                @include trello-icon($content: $icon-checklist, $type: lg, $color: currentColor);
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                                display: inline-block;
+                                font-family: trellicons;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 1;
+                                text-align: center;
+                                text-decoration: none;
+                                vertical-align: bottom;
+                                font-size: 24px;
+                                height: 32px;
+                                line-height: 32px;
+                                width: 32px;
+                                color: $clr-icon;
+                                left: -40px;
+                                position: absolute;
+                                top: 8px;
+                            }
+                            .checklist-title {
+                                align-items: center;
+                                display: flex;
+                                flex-flow: row wrap;
+                                justify-content: space-between;
+                                h3 {
+                                    font-size: 16px;
+                                    line-height: 20px;
+                                    display: inline-block;
+                                    min-height: 18px;
+                                    min-width: 40px;
+                                    width: auto;
+                                    margin: 6px 0;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    cursor: pointer;
+                                }
+                                .checklist-options {
+                                    float: right;
+                                    margin: 0 2px 0 auto;
+                                    .show-checked {
+                                        align-items: center;
+                                        background-color: $clr-background-neutral;
+                                        border: none;
+                                        border-radius: 3px;
+                                        box-shadow: none;
+                                        box-sizing: border-box;
+                                        color: $clr-text;
+                                        cursor: pointer;
+                                        display: inline-flex;
+                                        font-family:
+                                            -apple-system,
+                                            BlinkMacSystemFont,
+                                            Segoe UI,
+                                            Roboto,
+                                            Noto Sans,
+                                            Ubuntu,
+                                            Droid Sans,
+                                            Helvetica Neue,
+                                            sans-serif;
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        justify-content: center;
+                                        line-height: 20px;
+                                        padding: 6px 12px;
+                                        text-decoration: none;
+                                        transition-duration: 85ms;
+                                        transition-property: background-color, border-color, box-shadow;
+                                        transition-timing-function: ease;
+                                        white-space: normal;
+                                        margin: 0 8px 0 0;
+                                        &:hover {
+                                            background-color: $clr-background-neutral-hovered;
+                                            border: none;
+                                            box-shadow: none;
+                                            color: $clr-text;
+                                            text-decoration: none;
+                                        }
+                                    }
+                                    .checklist-remove-btn {
+                                        align-items: center;
+                                        background-color: $clr-background-neutral;
+                                        border: none;
+                                        border-radius: 3px;
+                                        box-shadow: none;
+                                        box-sizing: border-box;
+                                        color: $clr-text;
+                                        cursor: pointer;
+                                        display: inline-flex;
+                                        font-family:
+                                            -apple-system,
+                                            BlinkMacSystemFont,
+                                            Segoe UI,
+                                            Roboto,
+                                            Noto Sans,
+                                            Ubuntu,
+                                            Droid Sans,
+                                            Helvetica Neue,
+                                            sans-serif;
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        justify-content: center;
+                                        line-height: 20px;
+                                        padding: 6px 12px;
+                                        text-decoration: none;
+                                        transition-duration: 85ms;
+                                        transition-property: background-color, border-color, box-shadow;
+                                        transition-timing-function: ease;
+                                        white-space: normal;
+                                        margin: 0;
+                                        &:hover {
+                                            background-color: $clr-background-neutral-hovered;
+                                            border: none;
+                                            box-shadow: none;
+                                            color: $clr-text;
+                                            text-decoration: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .checklist-progress {
+                            margin-bottom: 6px;
+                            position: relative;
+                            .checklist-progress-calc {
+                                color: $clr-text-subtle;
+                                font-size: 11px;
+                                left: 0;
+                                line-height: 10px;
+                                position: absolute;
+                                text-align: center;
+                                top: -1px;
+                                width: 32px;
+                            }
+                            .checklist-progress-bar {
+                                background: $clr-background-neutral;
+                                border-radius: 4px;
+                                clear: both;
+                                height: 8px;
+                                margin: 0px 0px 0px 40px;
+                                overflow: hidden;
+                                position: relative;
+                                .checklist-current-progress {
+                                    background: $clr-background-accent-blue-subtle;
+                                    bottom: 0;
+                                    left: 0;
+                                    position: absolute;
+                                    top: 0;
+                                    transition-duration: 0.14s;
+                                    transition-property: width, background;
+                                    transition-timing-function: ease-in;
+                                    width: 40%;
+                                }
+                            }
+                        }
+                        .checklist-list {
+                            min-height: 8px;
+                            .checklist-item {
+                                border-radius: 4px;
+                                box-sizing: border-box;
+                                clear: both;
+                                padding-left: 40px;
+                                position: relative;
+                                transform-origin: left bottom;
+                                transition-duration: 0.3s;
+                                transition-property: transform, opacity, height, padding, margin, background-color;
+                                transition-timing-function: ease-in;
+                                .checklist-checkbox {
+                                    background-color: $clr-background-input;
+                                    cursor: pointer;
+                                    flex-shrink: 0;
+                                    height: 16px;
+                                    left: 0;
+                                    margin: 6px;
+                                    text-align: center;
+                                    top: 5px;
+                                    border-radius: 2px;
+                                    box-shadow: inset 0 0 0 2px $clr-border-input;
+                                    overflow: hidden;
+                                    position: relative;
+                                    position: absolute;
+                                    transition: all 0.2s ease-in-out;
+                                    white-space: nowrap;
+                                    width: 16px;
+                                    svg {
+                                        fill: $clr-icon-inverse;
+                                        &.checked {
+                                            background-color: $clr-background-selected-bold;
+                                            box-shadow: inset 0 0 0 2px $clr-border-selected;
+                                        }
+                                    }
+                                }
+                                .checklist-item-details {
+                                    overflow-wrap: break-word;
+                                    word-break: break-word;
+                                    .checklist-item-row {
+                                        display: flex;
+                                        flex-direction: row;
+                                        cursor: pointer;
+                                        .checklist-text {
+                                            display: inline-flex;
+                                            padding: 6px 0;
+                                            width: 100%;
+                                            span {
+                                                align-self: center;
+                                                flex: 1;
+                                                margin-bottom: 0;
+                                                min-height: 20px;
+                                                &.checked {
+                                                    text-decoration: line-through;
+                                                }
+                                            }
+                                            .checklist-text-options {
+                                                cursor: pointer;
+                                                display: inline-flex;
+                                                flex-direction: row;
+                                                float: right;
+                                                .checklist-text-item-actions {
+                                                    opacity: 0;
+                                                    height: 24px;
+                                                    margin-left: 4px;
+                                                    min-width: 24px;
+                                                    border-radius: 3px;
+                                                    box-sizing: border-box;
+                                                    cursor: pointer;
+                                                    padding: 2px;
+                                                    &:hover {
+                                                        background-color: $clr-background-neutral-hovered;
+                                                    }
+                                                    a {
+                                                        background-color: initial;
+                                                        text-decoration: none;
+                                                        color: $clr-link;
+                                                        height: 20px;
+                                                        width: 20px;
+                                                        border-radius: 0;
+                                                        box-sizing: unset;
+                                                        padding: 2px;
+                                                        margin: -2px;
+                                                        cursor: pointer;
+                                                        display: block;
+                                                        span {
+                                                            @include trello-icon(
+                                                                $content: $icon-close,
+                                                                $type: md,
+                                                                $color: #44546f
+                                                            );
+                                                            cursor: pointer;
+                                                            -webkit-font-smoothing: antialiased;
+                                                            -moz-osx-font-smoothing: grayscale;
+                                                            display: inline-block;
+                                                            font-family: trellicons;
+                                                            font-style: normal;
+                                                            font-weight: 400;
+                                                            line-height: 1;
+                                                            text-align: center;
+                                                            text-decoration: none;
+                                                            vertical-align: bottom;
+                                                            font-size: 16px;
+                                                            height: 20px;
+                                                            line-height: 20px;
+                                                            width: 20px;
+                                                            color: $clr-icon;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                &:hover {
+                                    background-color: $clr-background-neutral;
+                                    & .checklist-item-row {
+                                        & .checklist-text {
+                                            & .checklist-text-options {
+                                                & .checklist-text-item-actions {
+                                                    opacity: 1;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .checklist-add-item {
+                                margin-left: 40px;
+                                button {
+                                    align-items: center;
+                                    background-color: $clr-background-neutral;
+                                    border: none;
+                                    border-radius: 3px;
+                                    box-shadow: none;
+                                    box-sizing: border-box;
+                                    color: $clr-text;
+                                    cursor: pointer;
+                                    display: inline-flex;
+                                    font-family:
+                                        -apple-system,
+                                        BlinkMacSystemFont,
+                                        Segoe UI,
+                                        Roboto,
+                                        Noto Sans,
+                                        Ubuntu,
+                                        Droid Sans,
+                                        Helvetica Neue,
+                                        sans-serif;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    justify-content: center;
+                                    line-height: 20px;
+                                    padding: 6px 12px;
+                                    text-decoration: none;
+                                    transition-duration: 85ms;
+                                    transition-property: background-color, border-color, box-shadow;
+                                    transition-timing-function: ease;
+                                    white-space: normal;
+                                    margin-top: 8px;
+                                    &:hover {
+                                        background-color: $clr-background-neutral-hovered;
+                                        border: none;
+                                        box-shadow: none;
+                                        color: $clr-text;
+                                        text-decoration: none;
+                                    }
+                                }
+                                textarea {
+                                    margin: 4px 0 0;
+                                    min-height: 32px;
+                                    text-align: initial;
+                                    text-decoration: none;
+                                    display: none;
+                                    padding-bottom: 9px;
+                                    z-index: 50;
+                                    overflow: hidden;
+                                    overflow-wrap: break-word;
+                                    height: 56px;
+                                    width: 100%;
+                                    &:focus {
+                                        background-color: $clr-background-input, #fff;
+                                        box-shadow: inset 0 0 0 2px $clr-border-focused;
+                                        color: $clr-text, #172b4d;
+                                        cursor: text;
+                                        float: none;
+                                        resize: vertical;
+                                    }
+                                }
+                                .add-item-options {
+                                    cursor: auto;
+                                    margin-top: 8px;
+                                    display: none;
+                                    flex-direction: row;
+                                    input {
+                                        text-align: center;
+                                        align-items: center;
+                                        border-radius: 3px;
+                                        box-sizing: border-box;
+                                        cursor: pointer;
+                                        display: inline-flex;
+                                        font-family:
+                                            -apple-system,
+                                            BlinkMacSystemFont,
+                                            Segoe UI,
+                                            Roboto,
+                                            Noto Sans,
+                                            Ubuntu,
+                                            Droid Sans,
+                                            Helvetica Neue,
+                                            sans-serif;
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        justify-content: center;
+                                        line-height: 20px;
+                                        padding: 6px 12px;
+                                        text-decoration: none;
+                                        transition-duration: 85ms;
+                                        transition-property: background-color, border-color, box-shadow;
+                                        transition-timing-function: ease;
+                                        white-space: normal;
+                                        background-color: $clr-background-brand-bold, #0c66e4;
+                                        border: none;
+                                        box-shadow: none;
+                                        color: $clr-text-inverse, #fff;
+                                        float: left;
+                                        margin: 0 4px 0 0;
+                                    }
+                                    a {
+                                        align-items: center;
+                                        background-color: $clr-background-neutral, #091e420f;
+                                        border: none;
+                                        border-radius: 3px;
+                                        box-shadow: none;
+                                        box-sizing: border-box;
+                                        color: $clr-text, #172b4d;
+                                        cursor: pointer;
+                                        display: inline-flex;
+                                        font-family:
+                                            -apple-system,
+                                            BlinkMacSystemFont,
+                                            Segoe UI,
+                                            Roboto,
+                                            Noto Sans,
+                                            Ubuntu,
+                                            Droid Sans,
+                                            Helvetica Neue,
+                                            sans-serif;
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        justify-content: center;
+                                        line-height: 20px;
+                                        padding: 6px 12px;
+                                        text-decoration: none;
+                                        transition-duration: 85ms;
+                                        transition-property: background-color, border-color, box-shadow;
+                                        transition-timing-function: ease;
+                                        white-space: normal;
+                                        background-color: initial;
+                                        border: none;
+                                        box-shadow: none;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
-    }
-    .task-sidebar {
-        float: right;
-        overflow: hidden;
-        padding: 0 16px 8px 8px;
-        width: calc(100% - 600px);
-        .task-sidebar-add {
-            clear: both;
-            margin-bottom: 24px;
-            position: relative;
-            .sidebar-add-txt {
-                display: block;
-                color: #44546f;
-                font-size: 12px;
-                font-weight: 600;
-                line-height: 20px;
-                margin-bottom: -4px;
-                margin: 0 0 8px;
-            }
-            .task-btn-link {
-                background-color: $clr-background-neutral;
-                border: none;
-                border-radius: 3px;
-                box-shadow: none;
-                box-sizing: border-box;
-                color: $clr-text;
-                cursor: pointer;
-                display: block;
-                height: 32px;
-                margin-top: 8px;
-                max-width: 300px;
+            .task-sidebar {
+                float: right;
                 overflow: hidden;
-                padding: 6px 12px;
-                position: relative;
-                text-decoration: none;
-                text-overflow: ellipsis;
-                transition-duration: 85ms;
-                transition-property: background-color, border-color, box-shadow;
-                transition-timing-function: ease;
-                -webkit-user-select: none;
-                user-select: none;
-                white-space: nowrap;
-                &:hover {
-                    background-color: $dynamic-button-hovered;
-                }
-                .btn-link-members {
-                    @include trello-icon($content: $icon-member, $type: sm, $color: currentColor);
-                }
-                .btn-link-labels {
-                    @include trello-icon($content: $icon-label, $type: sm, $color: currentColor);
-                }
-                .btn-link-checklist {
-                    @include trello-icon($content: $icon-checklist, $type: sm, $color: currentColor);
-                }
-                .btn-link-dates {
-                    @include trello-icon($content: $icon-clock, $type: sm, $color: currentColor);
-                }
-                .btn-link-attachment {
-                    @include trello-icon($content: $icon-attachment, $type: sm, $color: currentColor);
-                }
-                .btn-link-cover {
-                    @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
+                padding: 0 16px 8px 8px;
+                width: calc(100% - 600px);
+                .task-sidebar-add {
+                    clear: both;
+                    margin-bottom: 24px;
+                    position: relative;
+                    .sidebar-add-txt {
+                        display: block;
+                        color: #44546f;
+                        font-size: 12px;
+                        font-weight: 600;
+                        line-height: 20px;
+                        margin-bottom: -4px;
+                        margin: 0 0 8px;
+                    }
+                    .task-btn-link {
+                        background-color: $clr-background-neutral;
+                        border: none;
+                        border-radius: 3px;
+                        box-shadow: none;
+                        box-sizing: border-box;
+                        color: $clr-text;
+                        cursor: pointer;
+                        display: block;
+                        height: 32px;
+                        margin-top: 8px;
+                        max-width: 300px;
+                        overflow: hidden;
+                        padding: 6px 12px;
+                        position: relative;
+                        text-decoration: none;
+                        text-overflow: ellipsis;
+                        transition-duration: 85ms;
+                        transition-property: background-color, border-color, box-shadow;
+                        transition-timing-function: ease;
+                        -webkit-user-select: none;
+                        user-select: none;
+                        white-space: nowrap;
+                        &:hover {
+                            background-color: $dynamic-button-hovered;
+                        }
+                        .btn-link-members {
+                            @include trello-icon($content: $icon-member, $type: sm, $color: currentColor);
+                            display: inline-block;
+                            font-family: trellicons;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: bottom;
+                            font-size: 16px;
+                            height: 20px;
+                            line-height: 20px;
+                            width: 20px;
+                            color: $clr-icon;
+                            margin: 0 6px 0 -6px;
+                        }
+                        .btn-link-labels {
+                            @include trello-icon($content: $icon-label, $type: sm, $color: currentColor);
+                            display: inline-block;
+                            font-family: trellicons;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: bottom;
+                            font-size: 16px;
+                            height: 20px;
+                            line-height: 20px;
+                            width: 20px;
+                            color: $clr-icon;
+                            margin: 0 6px 0 -6px;
+                        }
+                        .btn-link-checklist {
+                            @include trello-icon($content: $icon-checklist, $type: sm, $color: currentColor);
+                            display: inline-block;
+                            font-family: trellicons;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: bottom;
+                            font-size: 16px;
+                            height: 20px;
+                            line-height: 20px;
+                            width: 20px;
+                            color: $clr-icon;
+                            margin: 0 6px 0 -6px;
+                        }
+                        .btn-link-dates {
+                            @include trello-icon($content: $icon-clock, $type: sm, $color: currentColor);
+                            display: inline-block;
+                            font-family: trellicons;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: bottom;
+                            font-size: 16px;
+                            height: 20px;
+                            line-height: 20px;
+                            width: 20px;
+                            color: $clr-icon;
+                            margin: 0 6px 0 -6px;
+                        }
+                        .btn-link-attachment {
+                            @include trello-icon($content: $icon-attachment, $type: sm, $color: currentColor);
+                            display: inline-block;
+                            font-family: trellicons;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: bottom;
+                            font-size: 16px;
+                            height: 20px;
+                            line-height: 20px;
+                            width: 20px;
+                            color: $clr-icon;
+                            margin: 0 6px 0 -6px;
+                        }
+                        .btn-link-cover {
+                            @include trello-icon($content: $icon-card-cover, $type: sm, $color: currentColor);
+                            display: inline-block;
+                            font-family: trellicons;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: bottom;
+                            font-size: 16px;
+                            height: 20px;
+                            line-height: 20px;
+                            width: 20px;
+                            color: $clr-icon;
+                            margin: 0 6px 0 -6px;
+                        }
+                    }
                 }
             }
         }

@@ -87,6 +87,7 @@ export default {
             this.add = true
             setTimeout(() => {
                 this.$refs.textarea.focus()
+                window.removeEventListener('resize', this.handleResize)
 
             }, 100)
 
