@@ -18,6 +18,54 @@
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translateZ(0);
 
+    .add-group-before {
+        background-color: $dynamic-button-hovered;
+        cursor: pointer;
+        border-radius: 12px;
+        transition: background-color 85ms ease-in, opacity 40ms ease-in, border-color 85ms ease-in, color 85ms ease-in;
+        box-sizing: border-box;
+        display: flex;
+        height: 48px;
+        margin: 0 4px;
+        scroll-margin: 8px;
+        vertical-align: top;
+        white-space: nowrap;
+        min-width: 272px;
+        text-decoration-line: none;
+        color: #fff;
+        padding: 14px 16px;
+
+        align-items: center;
+        div {
+            height: 20px;
+            width: 20px;
+            margin-right: 3px;
+
+            .plus-icon {
+                @include trello-icon($icon-plus);
+                color: #fff;
+                font-size: 16px;
+                height: 20px;
+                line-height: 20px;
+                width: 20px;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                // display: inline-block;
+                // font-family: trellicons;
+                // font-style: normal;
+                // font-weight: 400;
+                // line-height: 1;
+                text-align: center;
+                // text-decoration: none;
+                vertical-align: bottom;
+            }
+        }
+
+        div {
+            width: fit-content;
+
+        }
+    }
 
     .add-group {
 
@@ -81,8 +129,7 @@
         // rotate: 4deg;
 
         .group-preview-wrapper {
-            .group-list-container {
-            }
+            .group-list-container {}
 
         }
     }
