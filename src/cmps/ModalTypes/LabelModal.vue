@@ -109,13 +109,6 @@ export default {
         }
     },
     computed: {
-        // headerTitle() {
-        //     if (this.backBtn) {
-        //         return this.currLabelId ? 'Edit label' : 'Create label'
-        //     } else {
-        //         return 'Labels'
-        //     }
-        // }
 
     },
     components: {

@@ -18,7 +18,8 @@
                 </span>
             </button>
         </header>
-        <Component :is="type" :info="info" @closeModal="isVisible=false" @setInfo="setInfo" :backBtn="backBtn" @showBackBtn="changeBackBtn" />
+        <Component :is="type" :info="info" @closeModal="isVisible = false" @setInfo="setInfo" :backBtn="backBtn"
+            @showBackBtn="changeBackBtn" />
     </div>
 </template>
 <script>
@@ -26,6 +27,7 @@ import { eventBus } from '../services/event-bus.service';
 import LabelModal from './ModalTypes/LabelModal.vue'
 import MemberModal from './ModalTypes/MemberModal.vue'
 import ListActions from './ModalTypes/ListActions.vue'
+import ChecklistModal from './ModalTypes/ChecklistModal.vue'
 export default {
     name: 'AppModal',
     data() {
@@ -106,6 +108,8 @@ export default {
                     return 'Members'
                 case 'ListActions':
                     return 'List actions'
+                case 'ChecklistModal':
+                    return 'Add checklist'
                 default:
                     break
             }
@@ -114,7 +118,8 @@ export default {
     components: {
         LabelModal,
         MemberModal,
-        ListActions
+        ListActions,
+        ChecklistModal
     }
 }
 </script>

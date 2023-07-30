@@ -134,7 +134,7 @@
             <span class="btn-link-labels"></span>
             <span class="">Labels</span>
           </a>
-          <a class="task-btn-link" @click="openModal()">
+          <a ref="checklists" class="task-btn-link" @click="openModal('ChecklistModal', 'checklists')">
             <span class="btn-link-checklist"></span>
             <span class="">Checklist</span>
           </a>
@@ -208,6 +208,7 @@ export default {
   },
   unmounted() {
     document.removeEventListener('click', this.handleClickOutside)
+    window.removeEventListener('resize', this.handleResize)
     eventBus.off('setInfo')
   },
   methods: {
