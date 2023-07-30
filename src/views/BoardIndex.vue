@@ -32,6 +32,7 @@ export default {
       return this.$store.getters.boards.filter((board) => !board.isStarred)
     },
   },
+
   created() {},
   methods: {},
   components: {

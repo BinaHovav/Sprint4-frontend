@@ -23,6 +23,7 @@ export default {
     // const user = userService.getLoggedinUser()
     // if (user) store.commit({ type: 'setLoggedinUser', user })
   },
+
   components: {
     AppHeader,
     UserMsg,

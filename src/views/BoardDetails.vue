@@ -1,6 +1,6 @@
 <template>
   <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${board?.imgUrl})` }">
-    <TopNavbar :board="this.board" />
+    <TopNavbar :board="this.board" @updateBoard="updateBoard" />
     <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
   </section>
   <RouterView @updateBoard="updateBoard" />
@@ -29,6 +29,7 @@ export default {
   },
   created() {
     this.setBoard()
+    eventBus.emit('backgroundChange')
   },
   methods: {
     async setBoard() {

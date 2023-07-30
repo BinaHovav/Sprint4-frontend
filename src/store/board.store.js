@@ -58,6 +58,9 @@ export const boardStore = {
     getEmptyActivity() {
       return boardService.getEmptyActivity()
     },
+    // backgroundImg({ backgroundImg }) {
+    //   return backgroundImg
+    // },
     backgroundImg({ backgroundImg }) {
       return backgroundImg
     },

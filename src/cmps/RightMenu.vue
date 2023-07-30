@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { eventBus } from '../services/event-bus.service'
+
 export default {
   name: 'RightMenu',
   props: ['board'],
@@ -60,6 +62,8 @@ export default {
     },
     changeBackground(backgroundImg) {
       this.board.imgUrl = backgroundImg
+      this.$emit('updateBoard', this.board)
+      eventBus.emit('backgroundChange')
     },
     openRightNav() {
       document.getElementById('mySidenav').style.width = '335px'
