@@ -110,7 +110,6 @@ export default {
   watch: {
     '$route.path'(newPath) {
       if (newPath === '/board') {
-        console.log('hi')
         this.$refs.header.style.backgroundColor = 'white'
       }
     },
@@ -120,7 +119,6 @@ export default {
     getAverageColor() {
       const img = new Image()
       img.src = this.board?.imgUrl
-      console.log('img.src', img.src)
       img.crossOrigin = 'Anonymous'
 
       img.onload = () => {
@@ -149,7 +147,6 @@ export default {
         const averageBlue = Math.floor(totalBlue / pixelCount)
 
         const rgbColor = `rgb(${averageRed}, ${averageGreen}, ${averageBlue})`
-        console.log(rgbColor)
         this.$refs.header.style.backgroundColor = rgbColor
       }
     },

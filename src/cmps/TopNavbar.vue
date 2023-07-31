@@ -1,22 +1,23 @@
 <template>
-  <section class="top-navbar">
-    <nav class="flex justify-space-between">
-      <div class="left-board-nav">
+  <section class="board-header">
+    <nav>
+      <span class="left-board-header">
         <div class="board-title">
           <h1 class="fs18">{{ boardToDisplay?.title }}</h1>
         </div>
-        <button class="btn-star"><span class="star"></span></button>
-      </div>
-      <!-- <span>filter</span> -->
-      <div>
-        <div class="right-board-nav">
-          <div class="board-members" v-for="member in boardToDisplay?.members">
-            <div><img :src="member.imgUrl" alt="member" /></div>
+        <button class="btn-star-container" @click.prevent="updateBoard(board)">
+          <span :class="boardClass"></span>
+        </button>
+      </span>
+
+      <span class="right-board-header">
+        <div class="board-members">
+          <div class="board-members-item" v-for="member in boardToDisplay?.members">
+            <img :src="member.imgUrl" alt="member" />
           </div>
-          <RightMenu :board="board" @updateBoard="this.$emit('updateBoard', this.board)" />
-          <button class="open-menu-btn" @click="openRightNav"></button>
         </div>
-      </div>
+        <button class="open-menu-btn" @click="openRightNav"></button>
+      </span>
     </nav>
   </section>
 </template>
@@ -27,19 +28,21 @@ import RightMenu from './RightMenu.vue'
 export default {
   name: 'TopNavbar',
   props: ['board'],
-  data() {
-    return {}
-  },
+
   created() {
-    // this.getDominantColor()
     this.getAverageColor()
   },
   methods: {
+    updateBoard(board) {
+      this.board.isStarred = !this.board.isStarred
+      this.$emit('updateBoard', board)
+    },
     openRightNav() {
-      document.getElementById('mySidenav').style.width = '335px'
+      this.$emit('openMenu')
     },
     closeRightNav() {
-      document.getElementById('mySidenav').style.width = '0'
+      document.getElementById('.board-menu').style.width = '0'
+      // this.$refs.menu.style.width = '0'
     },
     getAverageColor() {
       const img = new Image()
@@ -76,24 +79,16 @@ export default {
         this.$el.style.backgroundColor = rgbColor
       }
     },
-    // getDominantColor() {
-    //   const img = new Image()
-    //   img.src = this.board?.imgUrl
-    //   img.crossOrigin = 'Anonymous'
-
-    //   img.onload = () => {
-    //     const colorThief = new ColorThief()
-    //     const dominantColor = colorThief.getColor(img)
-
-    //     // Now you can apply the dominant color to the TopNavbar background
-    //     const rgbColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 0.5)`
-    //     this.$el.style.backgroundColor = rgbColor
-    //   }
-    // },
   },
   computed: {
     boardToDisplay() {
       return this.$store.getters.getCurrBoard
+    },
+    boardClass() {
+      return {
+        unstarred: !this.board.isStarred,
+        starred: this.board.isStarred,
+      }
     },
   },
   components: {
