@@ -4,7 +4,7 @@
         handle=".drag-me" drag-class="drag-group">
         <template #item="{ element }">
             <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
-                @updateTasks="updateTasks" />
+                @updateTasks="updateTasks"  />
         </template>
         <template #footer>
             <div @click="addList = !addList" v-if="!addList" class="add-group-before">

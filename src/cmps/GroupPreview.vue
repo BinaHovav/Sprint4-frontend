@@ -1,34 +1,24 @@
 <template>
-        <div class="group-preview-container">
-            <div class="group-header drag-me">
-                <form action="">
-                    <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title"
-                        @blur="updateGroup" @keydown.enter.prevent="updateGroup"></textarea>
-                </form>
-                <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
-                        class="three-dots"></span></button>
+    <div class="group-preview-container">
+        <div class="group-header drag-me">
+            <form action="">
+                <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title" @blur="updateGroup"
+                    @keydown.enter.prevent="updateGroup"></textarea>
+            </form>
+            <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
+                    class="three-dots"></span></button>
 
-            </div>
-            <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" />
-            <div class="card-compose" v-if="add">
-                <div class="input-title">
-                    <div>
-                        <textarea ref="textarea" dir="auto" placeholder="Enter a title for this card..."
-                            data-autosize="true" v-model="title"></textarea>
-                    </div>
-                </div>
-                <div class="controls">
-                    <div @click="addTask" class="btn-add">Add card</div>
-                    <span @click="add = !add, title = ''" class="btn-close"></span>
-                </div>
-            </div>
-            <div v-else class="open-card-compose">
-                <a @click="openadd">
-                    <span class="btn-plus"></span>
-                    <span class="add-txt"> Add a card</span>
-                </a>
-            </div>
         </div>
+        <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" :add="add"
+            @changeAdd="add = !add" @addTask="addTask"/>
+
+        <div v-if="!add" class="open-card-compose">
+            <a @click="openadd">
+                <span class="btn-plus"></span>
+                <span class="add-txt"> Add a card</span>
+            </a>
+        </div>
+    </div>
 </template>
   
 <script>
@@ -64,15 +54,12 @@ export default {
             this.$emit('updateGroup', this.clonedGroup)
             this.$refs.groupNameInput.blur()
         },
-        addTask() {
-            this.$refs.textarea.focus()
-            if (!this.title) return
+        addTask(title) {
+            this.add = false
             const newTask = boardService.getEmptyTask()
-            newTask.title = this.title
+            newTask.title = title
             this.clonedGroup.tasks.push(newTask)
             this.updateGroup()
-            this.title = ''
-            this.add = false
         },
         removeTask(taskId) {
             console.log(taskId);
@@ -86,7 +73,7 @@ export default {
         openadd() {
             this.add = true
             setTimeout(() => {
-                this.$refs.textarea.focus()
+
                 window.removeEventListener('resize', this.handleResize)
 
             }, 100)
