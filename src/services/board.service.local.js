@@ -118,7 +118,7 @@ function getEmptyActivity() {
   }
 }
 
-// ; (async () => {
+// ;(async () => {
 //   localStorage.setItem(
 //     STORAGE_KEY,
 //     JSON.stringify([
@@ -141,62 +141,61 @@ function getEmptyActivity() {
 //             id: 'l101',
 //             title: 'Low priority',
 //             color: 'green',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l102',
 //             title: 'Planning',
 //             color: 'orange',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l103',
 //             title: 'Techonology',
 //             color: 'lime',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l104',
 //             title: 'Research',
 //             color: 'yellow',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l105',
 //             title: 'Design',
 //             color: 'pink',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l106',
 //             title: 'Medium priority',
 //             color: 'subtle-yellow',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l107',
 //             title: 'Analysis',
 //             color: 'blue',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l108',
 //             title: 'Finance',
 //             color: 'sky',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l109',
 //             title: 'Enhancement',
 //             color: 'purple',
-//             animationClass: 'labels-close'
+//             animationClass: 'labels-close',
 //           },
 //           {
 //             id: 'l110',
 //             title: 'High priority',
 //             color: 'red',
-//             animationClass: 'labels-close'
-
+//             animationClass: 'labels-close',
 //           },
 //         ],
 //         members: [

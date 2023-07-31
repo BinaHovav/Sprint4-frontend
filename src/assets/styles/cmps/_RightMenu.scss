@@ -10,7 +10,7 @@
     z-index: 5;
 
     &.show-menu {
-        background-color: pink;
+        background-color: $clr-tr-background-list;
         transform: translate(-339px); /* Start the menu in its visible position */
     }
     .board-menu-container {
