@@ -15,7 +15,8 @@
 
 // Components
 @import "cmps/AppHeader";
-@import "cmps/TopNavbar";
+@import "cmps/_TopNavbar";
+@import "cmps/RightMenu";
 @import "cmps/_AppModal";
 @import "cmps/ModalTypes/_LabelModal";
 @import "cmps/ModalTypes/ListActions";

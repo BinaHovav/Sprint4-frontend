@@ -1,35 +1,54 @@
 <template>
-  <div id="mySidenav" class="sidenav">
-    <div class="topSidenav">
-      <span v-if="showBackIcon" class="back-icon" @click="openMenuOption('default')">
-        <i class="fas fa-chevron-left"></i>
-      </span>
-      <span class="menu-text">{{ menuText }}</span>
-      <a href="javascript:void(0)" class="closebtn" @click="closeRightNav">&times;</a>
-    </div>
+  <div ref="menu" class="board-menu js-fill-board-menu" :class="{ 'show-menu': showMenu }">
+    <div class="board-menu-container">
+      <div class="board-menu-tab-content">
+        <div class="board-menu-header js-board-menu-title is-in-frame is-board-menu-default-view">
+          <div class="board-menu-header-content">
+            <a v-if="showBackIcon" class="board-menu-header-back-button" @click="goBack">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+            <a v-else class="board-menu-header-back-button" @click="closeRightNav"></a>
 
-    <div v-if="currentMenuContent === 'default'">
-      <div class="sidenavButtons">
-        <div class="about-button">
-          <span class="trello-icon"></span>
-          <button @click="openMenuOption('about')">About this board</button>
+            <h3 class="board-menu-header-title">{{ menuText }}</h3>
+            <a href="javascript:void(0)" class="board-menu-header-close-button" @click="closeRightNav"></a>
+          </div>
         </div>
-        <div class="change-bcg-button">
-          <img :src="board.imgUrl" />
-          <button @click="openMenuOption('changeBackground')">Change background</button>
-        </div>
-        <button @click="openMenuOption('activity')">Activity</button>
-      </div>
-    </div>
+        <div class="board-menu-content u-fancy-scrollbar js-board-menu-content-wrapper">
+          <div class="board-menu-content-frame">
+            <ul class="board-menu-navigation" v-if="currentMenuContent === 'default'">
+              <li class="board-menu-navigation-item">
+                <button class="board-menu-navigation-item-link-about">
+                  <span v-icon="'aboutRightMenu'"></span>
+                  <a @click="openMenuOption('about')">About this board</a>
+                </button>
+              </li>
+              <li class="board-menu-navigation-item">
+                <button class="board-menu-navigation-item-link">
+                  <img :src="board.imgUrl" />
+                  <a @click="openMenuOption('changeBackground')">Change background</a>
+                </button>
+              </li>
+              <li class="board-menu-navigation-item">
+                <button class="board-menu-navigation-item-link-activity">
+                  <a @click="openMenuOption('activity')">Activity</a>
+                </button>
+              </li>
+            </ul>
 
-    <div v-else-if="currentMenuContent === 'about'">
-      <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
-    </div>
+            <div v-else-if="currentMenuContent === 'about'">
+              <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
+            </div>
 
-    <div v-else-if="currentMenuContent === 'changeBackground'">
-      <div class="background-options">
-        <div v-for="background in backgroundOptions" :key="background">
-          <img :src="background" alt="Background" @click="changeBackground(background)" />
+            <div v-else-if="currentMenuContent === 'changeBackground'">
+              <div class="background-options">
+                <div v-for="background in backgroundOptions" :key="background">
+                  <img :src="background" alt="Background" @click="changeBackground(background)" />
+                </div>
+              </div>
+              <!-- </div> -->
+              <!-- </div> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -41,11 +60,12 @@ import { eventBus } from '../services/event-bus.service'
 
 export default {
   name: 'RightMenu',
-  props: ['board'],
+  props: ['board', 'showMenu'],
 
   data() {
     return {
       currMenuOption: 'default',
+      prevMenuOption: null,
       menuOptions: {
         default: 'Menu',
         about: 'About this board',
@@ -57,19 +77,24 @@ export default {
   },
   methods: {
     openMenuOption(option) {
+      this.prevMenuOption = this.currMenuOption
       this.currMenuOption = option
       this.menuText = this.menuOptions[option]
+    },
+    goBack() {
+      if (this.prevMenuOption) {
+        this.currMenuOption = this.prevMenuOption
+        this.prevMenuOption = null
+        this.menuText = this.menuOptions[this.currMenuOption]
+      }
     },
     changeBackground(backgroundImg) {
       this.board.imgUrl = backgroundImg
       this.$emit('updateBoard', this.board)
       eventBus.emit('backgroundChange')
     },
-    openRightNav() {
-      document.getElementById('mySidenav').style.width = '335px'
-    },
     closeRightNav() {
-      document.getElementById('mySidenav').style.width = '0'
+      this.$emit('closeMenu')
     },
   },
   computed: {
@@ -83,7 +108,7 @@ export default {
       }
     },
     showBackIcon() {
-      return this.currMenuOption !== 'default'
+      return this.currMenuOption !== 'default' && this.prevMenuOption !== null
     },
     backgroundOptions() {
       return [

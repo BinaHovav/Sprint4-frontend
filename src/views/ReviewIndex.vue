@@ -7,13 +7,14 @@
         <p>
           About
           <RouterLink :to="`user/${review.aboutUser._id}`">
-            {{review.aboutUser.fullname}}
-          </RouterLink> 
+            {{ review.aboutUser.fullname }}
+          </RouterLink>
         </p>
-        <pre>{{review.txt}}</pre>
-        <p>By 
+        <pre>{{ review.txt }}</pre>
+        <p>
+          By
           <RouterLink :to="`user/${review.byUser._id}`">
-            {{review.byUser.fullname}}
+            {{ review.byUser.fullname }}
           </RouterLink>
         </p>
       </li>
@@ -22,8 +23,8 @@
     <form v-if="loggedInUser" @submit.prevent="addReview()">
       <h2>Your gossip:</h2>
       <select v-model="reviewToEdit.aboutUserId">
-        <option v-for="user in users" :key="user._id" :value="user._id" >
-          {{user.fullname}}
+        <option v-for="user in users" :key="user._id" :value="user._id">
+          {{ user.fullname }}
         </option>
       </select>
       <textarea placeholder="Your Opinion Matters..." v-model="reviewToEdit.txt"></textarea>
@@ -33,14 +34,13 @@
 </template>
 
 <script>
-
-import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { reviewService } from '../services/review.service.local'
 
 export default {
   data() {
     return {
-      reviewToEdit: reviewService.getEmptyReview()
+      reviewToEdit: reviewService.getEmptyReview(),
     }
   },
   computed: {
@@ -52,24 +52,21 @@ export default {
     },
     loggedInUser() {
       return this.$store.getters.loggedinUser
-    }
+    },
   },
   created() {
-    this.$store.dispatch({type: 'loadUsers'})
-    this.$store.dispatch({type: 'loadReviews'})
+    this.$store.dispatch({ type: 'loadUsers' })
+    this.$store.dispatch({ type: 'loadReviews' })
   },
   methods: {
     async addReview() {
       try {
-        await this.$store.dispatch({type: 'addReview', review: this.reviewToEdit})
-        showSuccessMsg('Review added')
+        await this.$store.dispatch({ type: 'addReview', review: this.reviewToEdit })
         this.reviewToEdit = reviewService.getEmptyReview()
-      } catch(err) {
+      } catch (err) {
         showErrorMsg('Cannot add review')
       }
-    }
-  }
-
-  
+    },
+  },
 }
 </script>
