@@ -120,7 +120,6 @@ export default {
     board: function (newValue) {
       if (this.bgImg !== newValue.imgUrl)
         this.bgImg = newValue.imgUrl
-        console.log('test');
         this.getAverageColor()
     }
   },
@@ -128,10 +127,7 @@ export default {
   methods: {
     getAverageColor() {
       const img = new Image()
-      // this.bgImg = this.board?.imgUrl
-      // img.src = this.board?.imgUrl
       img.src = this.bgImg
-      console.log('img.src', img.src)
       img.crossOrigin = 'Anonymous'
 
       img.onload = () => {

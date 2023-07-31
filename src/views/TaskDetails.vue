@@ -141,7 +141,7 @@ export default {
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
       ]
-      const dateObj = new Date(this.task.dueDate * 1000)
+      const dateObj = new Date(this.task.date.dueDate * 1000)
       const month = months[dateObj.getMonth()]
       const day = dateObj.getDate()
       const hours = dateObj.getHours()
