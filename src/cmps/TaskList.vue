@@ -4,7 +4,8 @@
         group="tasks">
         <!-- <transition-group> -->
         <template #item="{ element }">
-            <TaskPreview :key="element.id" :groupId="groupId" :task="element" @removeTask="removeTask" />
+            <TaskPreview :key="element.id" :groupId="groupId" :task="element" @removeTask="removeTask"
+                @onTaskIsDone="onTaskIsDone" />
         </template>
         <template #footer>
 
@@ -56,9 +57,9 @@ export default {
         add: {
             handler() {
                 if (this.add) {
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this.$refs.textarea.focus()
-                    },200)
+                    }, 200)
                 }
             }
         }
@@ -72,7 +73,9 @@ export default {
             if (!this.title) return
             this.$emit('addTask', this.title)
             this.title = ''
-
+        },
+        onTaskIsDone(taskId) {
+            this.$emit('onTaskIsDone', taskId)
         }
     },
     components: {

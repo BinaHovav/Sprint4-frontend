@@ -7,7 +7,7 @@
     margin-bottom: 8px;
     margin-inline-start: 0.25em;
 
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 
     scrollbar-color: #fff6 #00000026;
@@ -19,7 +19,8 @@
     -webkit-transform: translateZ(0);
 
     .add-group-before {
-        background-color: $dynamic-button-hovered;
+        background-color: #ffffff3d;
+
         cursor: pointer;
         border-radius: 12px;
         transition: background-color 85ms ease-in, opacity 40ms ease-in, border-color 85ms ease-in, color 85ms ease-in;
@@ -36,6 +37,11 @@
         padding: 14px 16px;
 
         align-items: center;
+
+        &:hover {
+            background-color: $dynamic-button-hovered;
+        }
+
         div {
             height: 20px;
             width: 20px;

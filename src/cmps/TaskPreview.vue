@@ -21,8 +21,12 @@
             <span class="task-title">{{ task.title }}</span>
             <div class="badges">
                 <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
-                <!-- <div class="badge watch"><span class="watch-icon"></span></div> -->
-                <div v-if="task.dueDate" class="badge date"><span class="date-icon"></span></div>
+                <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
+                <div @click.stop="this.$emit('onTaskIsDone',task.id)" v-if="task.date.dueDate" class="badge"
+                    :class="dateClass">
+                    <span class="clock-icon"></span>
+                    <span class="badge-text">{{ dueDate() }}</span>
+                </div>
                 <div v-if="task.description" class="badge description"><span class="description-icon"></span></div>
                 <div v-if="task.checklists?.length" class="badge checklist"><span class="checklist-icon"></span></div>
                 <div v-if="task.comments?.length" class="badge comments"><span class="comments-icon"></span></div>
@@ -57,6 +61,16 @@ export default {
         cover() {
             return this.task.cover.startsWith('https') ? false : true
         },
+        dateClass() {
+            const dateObj = this.task.date.dueDate * 1000
+            const now = Date.now()
+            let classDisplay = dateObj > now ? 'due' : 'is-due-past'
+            const oneDay = 60 * 60 * 24 * 1000
+            if (dateObj - now <= oneDay && dateObj - now > 0) classDisplay = 'is-due-soon'
+            if (this.task.date.isDone) classDisplay = 'is-due-complete'
+            return classDisplay
+
+        }
     },
     created() { },
     mounted() {
@@ -99,6 +113,18 @@ export default {
             });
             this.$store.dispatch({ type: 'updateBoard', board })
         },
+        dueDate() {
+            const months = [
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+            ]
+            const dateObj = new Date(this.task.date.dueDate * 1000)
+            const month = months[dateObj.getMonth()]
+            const day = dateObj.getDate()
+            const formattedDate = `${month} ${day}`
+            return formattedDate
+        },
+
     },
     components: {},
 }

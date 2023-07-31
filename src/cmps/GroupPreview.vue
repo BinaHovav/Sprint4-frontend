@@ -10,7 +10,7 @@
 
         </div>
         <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" :add="add"
-            @changeAdd="add = !add" @addTask="addTask"/>
+            @changeAdd="add = !add" @addTask="addTask" @onTaskIsDone="onTaskIsDone" />
 
         <div v-if="!add" class="open-card-compose">
             <a @click="openadd">
@@ -62,7 +62,6 @@ export default {
             this.updateGroup()
         },
         removeTask(taskId) {
-            console.log(taskId);
             const idx = this.clonedGroup.tasks.findIndex(task => task.id === taskId)
             this.clonedGroup.tasks.splice(idx, 1)
             this.updateGroup()
@@ -97,6 +96,13 @@ export default {
             const el = this.$refs.listActions.getBoundingClientRect()
             eventBus.emit('modal', { el })
         },
+        onTaskIsDone(taskId) {
+            const task = this.clonedGroup.tasks.find(task => task.id === taskId)
+            task.date.isDone = !task.date.isDone
+            const idx = this.clonedGroup.tasks.findIndex(task => task.id === taskId)
+            this.clonedGroup.tasks.splice(idx, 1, task)
+            this.updateGroup()
+        }
 
     },
     components: {
