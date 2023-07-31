@@ -166,39 +166,7 @@
         .badges {
             float: left;
             margin-left: -2px;
-            max-width: 100%;
-
-            // .date {
-            //     &:hover{
-            //         background-color: $clr-background-neutral-subtle-hovered;
-            //         border-radius: 3px;
-            //         .clock-icon{
-            //             @include trello-icon($icon-empty-checked)
-            //         }
-            //     } 
-            // }
-
-            .watch-icon {
-                @include trello-icon($icon-eye)
-            }
-
-            
-
-            .description-icon {
-                @include trello-icon($icon-description)
-            }
-
-            .checklist-icon {
-                @include trello-icon($icon-checklist)
-            }
-
-            .comments-icon {
-                @include trello-icon($icon-comment)
-            }
-
-            .attachment-icon {
-                @include trello-icon($icon-attachment)
-            }
+            max-width: 100%;           
         }
 
         .task-members {
