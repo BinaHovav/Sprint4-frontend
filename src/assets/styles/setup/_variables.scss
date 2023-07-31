@@ -377,6 +377,15 @@ $icon-secondary-color: inherit;
 $clr-label-text-color: #533f04;
 // }
 
+:root {
+    --text-clr: #fff;
+}
+
+.dark-theme {
+    --text-clr: #000;
+}
+
+
 // .main-app[data-color-mode="light"],
 // .main-app[data-color-mode="dark"] {
 //     color-scheme: dark;

@@ -13,7 +13,6 @@ const icon = {
 export const focusDirective = {
   // When the bound element is inserted into the DOM...
   mounted(el) {
-    console.log('Hi', el)
     el.focus()
   }
 }

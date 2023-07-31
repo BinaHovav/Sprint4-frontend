@@ -1,34 +1,34 @@
 <template>
-        <div class="group-preview-container">
-            <div class="group-header drag-me">
-                <form action="">
-                    <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title"
-                        @blur="updateGroup" @keydown.enter.prevent="updateGroup"></textarea>
-                </form>
-                <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
-                        class="three-dots"></span></button>
+    <div class="group-preview-container">
+        <div class="group-header drag-me">
+            <form action="">
+                <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title" @blur="updateGroup"
+                    @keydown.enter.prevent="updateGroup"></textarea>
+            </form>
+            <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
+                    class="three-dots"></span></button>
 
-            </div>
-            <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" />
-            <div class="card-compose" v-if="add">
-                <div class="input-title">
-                    <div>
-                        <textarea ref="textarea" dir="auto" placeholder="Enter a title for this card..."
-                            data-autosize="true" v-model="title"></textarea>
-                    </div>
-                </div>
-                <div class="controls">
-                    <div @click="addTask" class="btn-add">Add card</div>
-                    <span @click="add = !add, title = ''" class="btn-close"></span>
+        </div>
+        <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" />
+        <div class="card-compose" v-if="add">
+            <div class="input-title">
+                <div>
+                    <textarea ref="textarea" dir="auto" placeholder="Enter a title for this card..." data-autosize="true"
+                        v-model="title"></textarea>
                 </div>
             </div>
-            <div v-else class="open-card-compose">
-                <a @click="openadd">
-                    <span class="btn-plus"></span>
-                    <span class="add-txt"> Add a card</span>
-                </a>
+            <div class="controls">
+                <div @click="addTask" class="btn-add">Add card</div>
+                <span @click="add = !add, title = ''" class="btn-close"></span>
             </div>
         </div>
+        <div v-else class="open-card-compose">
+            <a @click="openadd">
+                <span class="btn-plus"></span>
+                <span class="add-txt"> Add a card</span>
+            </a>
+        </div>
+    </div>
 </template>
   
 <script>

@@ -80,32 +80,7 @@
                 </div>
               </div>
             </div>
-            <div class="task-description">
-              <div class="task-description-container">
-                <div class="description-header">
-                  <span><span v-icon="'description'"></span></span>
-                  <h3>Description</h3>
-                  <div>
-                    <div v-if="isEditable" class="description-info">
-                      <button><span><span v-icon="'descriptionInfo'"></span></span></button>
-                    </div>
-                    <div class="description-edit-btn">
-                      <button @click="openDescriptionEdit">Edit</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="description-content">
-                  <div class="description-txt">
-                    <p v-if="!isEditable" @click="openDescriptionEdit">{{ task.description }}</p>
-                    <div v-if="isEditable" contenteditable="true" ref="editableDescription" @blur="saveDescription('cancel')">{{ task.description }}</div>
-                    <div v-if="isEditable" class="description-save-cancel">
-                      <button class="description-save" @click="saveDescription">Save</button>
-                      <button class="description-cancel" @click="saveDescription('cancel')">Cancel</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask"></TaskDescriptionDetails>
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask"></TaskChecklistDetails>
           </div>
           <div class="task-sidebar">
@@ -147,6 +122,7 @@
 import { boardService } from '../services/board.service.local'
 import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import TaskChecklistDetails from '../cmps/TaskDetails/TaskChecklistDetails.vue'
+import TaskDescriptionDetails from '../cmps/TaskDetails/TaskDescriptionDetails.vue'
 export default {
   name: 'TaskDetails',
   data() {
@@ -155,7 +131,6 @@ export default {
       group: {},
       board: null,
       isWatching: false,
-      isEditable: false,
       showTaskTitle: false,
       dueDateChecked: false
     }
@@ -244,29 +219,18 @@ export default {
       const el = this.$refs.labels.getBoundingClientRect()
       eventBus.emit('modal', { el })
     },
-    saveDescription(cancel) {
-      if (cancel !== 'cancel') {
-        this.task.description = this.$refs.editableDescription.innerText
-        this.onSaveTask
-      }
-      this.$refs.editableDescription.blur()
-      this.isEditable = false
-    },
+    
     handleClickOutside(event) {
       try {
         const ele = this.$refs.taskDetails.getBoundingClientRect()
         if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.closeModal()
       } catch { }
     },
-    openDescriptionEdit() {
-      this.isEditable = true
-      setTimeout(() => {
-        this.$refs.editableDescription.focus()
-      }, 200);
-    }
+    
   },
   components: {
-    TaskChecklistDetails
+    TaskChecklistDetails,
+    TaskDescriptionDetails
   }
 }
 </script>

@@ -29,10 +29,6 @@ export default {
   },
   created() {
     this.setBoard()
-    setTimeout(() => {
-      eventBus.emit('backgroundChange')
-      
-    }, 700);
   },
   methods: {
     async setBoard() {
