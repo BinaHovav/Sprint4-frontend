@@ -57,17 +57,17 @@ export default {
             handler() {
                 if (this.isVisible) {
                     setTimeout(() => {
-                        document.addEventListener('click', this.handleClickOutside)
+                        document.addEventListener('mousedown', this.handleClickOutside)
                     }, 200);
                 } else {
                     this.setInfo()
-                    document.removeEventListener('click', this.handleClickOutside)
+                    document.removeEventListener('mousedown', this.handleClickOutside)
                 }
             }
         },
         backBtn: {
             handler() {
-                document.addEventListener('click', this.handleClickOutside)
+                document.addEventListener('mousedown', this.handleClickOutside)
             }
         },
     },
@@ -76,11 +76,17 @@ export default {
             const screen = { width: window.innerWidth, height: window.innerHeight }
             if ((el.left + 304) < screen.width) {
                 this.modalPlace.left = el.left + 'px'
-                this.modalPlace.top = el.bottom + 'px'
             } else {
                 this.modalPlace.left = (screen.width - 304) + 'px'
-                this.modalPlace.top = el.bottom + 'px'
             }
+            setTimeout(() => {
+                const ele = this.$refs.appmodal.getBoundingClientRect();            
+                if (el.top + ele.height > screen.height){
+                    this.modalPlace.top = '55px'
+                } else {
+                    this.modalPlace.top = el.bottom + 'px'
+                }
+            }, 100);
         },
         setInfo(info) {
             info ? eventBus.emit('setInfo', info) : eventBus.emit('setInfo')

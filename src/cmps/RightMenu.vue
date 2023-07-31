@@ -91,7 +91,6 @@ export default {
     changeBackground(backgroundImg) {
       this.board.imgUrl = backgroundImg
       this.$emit('updateBoard', this.board)
-      eventBus.emit('backgroundChange')
     },
     closeRightNav() {
       this.$emit('closeMenu')
