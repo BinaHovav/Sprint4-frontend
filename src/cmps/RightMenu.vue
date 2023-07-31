@@ -18,7 +18,7 @@
             <ul class="board-menu-navigation" v-if="currentMenuContent === 'default'">
               <li class="board-menu-navigation-item">
                 <button class="board-menu-navigation-item-link-about">
-                  <span v-icon="'trelloIcon'"></span>
+                  <span v-icon="'aboutRightMenu'"></span>
                   <a @click="openMenuOption('about')">About this board</a>
                 </button>
               </li>

@@ -32,7 +32,10 @@ export default {
   },
   created() {
     this.setBoard()
-    eventBus.emit('backgroundChange')
+    setTimeout(() => {
+      eventBus.emit('backgroundChange')
+      
+    }, 700);
   },
   methods: {
     onShowMenu() {
