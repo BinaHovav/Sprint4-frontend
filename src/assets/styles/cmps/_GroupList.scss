@@ -10,13 +10,35 @@
     overflow-x: auto;
     overflow-y: hidden;
 
-    scrollbar-color: #fff6 #00000026;
-    scrollbar-width: thin;
     -webkit-user-select: none;
     user-select: none;
     white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    -webkit-transform: translateZ(0);
+
+    &.u-fancy-scrollbar {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        -webkit-transform: translateZ(0);
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #fff6;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+
+
+        }
+
+        &::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        &::-webkit-scrollbar-track-piece {
+            background-color: #00000026;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            margin: 0 7px 0 2px;
+
+        }
+    }
 
     .add-group-before {
         background-color: #ffffff3d;

@@ -1,5 +1,5 @@
 <template>
-    <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex"
+    <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex u-fancy-scrollbar"
         @start="drag = true" @end="drag = false" @change="handleDragChange" @click.right.prevent item-key="name"
         handle=".drag-me" drag-class="drag-group">
         <template #item="{ element }">
