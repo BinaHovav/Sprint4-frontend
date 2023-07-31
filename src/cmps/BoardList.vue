@@ -41,7 +41,6 @@ export default {
       newBoard.title = this.newBoardTitle
       try {
         const addedBoard = await this.$store.dispatch(getActionAddBoard(newBoard))
-        showSuccessMsg('Board added')
         this.$router.push(`/board/${addedBoard._id}`)
       } catch (err) {
         console.log(err)
@@ -57,7 +56,6 @@ export default {
       boardToUpdate.isStarred = !boardToUpdate.isStarred
       try {
         await this.$store.dispatch(getActionUpdateBoard(boardToUpdate))
-        // showSuccessMsg('Board updated')
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot update board')

@@ -1,6 +1,7 @@
 .top-navbar {
     position: relative;
     overflow: hidden;
+
     nav {
         position: relative;
         display: flex;
@@ -13,6 +14,7 @@
 
         width: $board-header-width;
         height: $board-header-hight;
+
         .left-board-nav {
             .board-title {
                 display: inline-flex;
@@ -79,57 +81,82 @@
                 }
             }
         }
+
         .right-board-nav {
             display: flex;
             align-items: center;
-        }
-        .board-members {
-            float: right;
-            margin: 0;
-            & > * {
-                float: right;
-                height: 24px;
-                margin: 0 0 4px 4px;
-                width: 24px;
-                background-color: $clr-background-accent-gray-subtler;
-                color: $clr-text;
+            margin-right: 8px;
+
+            .board-members {
                 border-radius: 25em;
                 cursor: pointer;
                 display: block;
                 float: left;
                 margin: 0 4px 4px 0;
                 overflow: visible;
-                position: relative;
                 text-decoration: none;
-                -webkit-user-select: none;
-                user-select: none;
-                z-index: 0;
+                z-index: 3;
+                width: 30px;
+                height: 30px;
+                margin-right: -4px;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+                background-color: unset;
 
-                img {
-                    height: 100%;
-                    width: 100%;
+                &>* {
+                    float: right;
+                    height: 28px;
+                    width: 28px;
+                    background-color: $clr-background-accent-gray-subtler;
+                    color: $clr-text;
                     border-radius: 25em;
-                    object-fit: cover;
-                    border: 0;
-                    aspect-ratio: auto 30 / 30;
-                    overflow-clip-margin: content-box;
-                    overflow: clip;
+                    cursor: pointer;
+                    display: block;
+                    float: left;
+                    margin: 0 -4px 4px 0;
+                    overflow: visible;
+                    position: relative;
+                    text-decoration: none;
+                    -webkit-user-select: none;
+                    user-select: none;
+                    z-index: 0;
+
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 25em;
+                        object-fit: cover;
+                        border: 0;
+                        aspect-ratio: auto 30 / 30;
+                        overflow-clip-margin: content-box;
+                        overflow: clip;
+                    }
                 }
             }
         }
+
         .sidenav {
             display: flex;
             flex-direction: column;
-            height: 100%; /* 100% Full-height */
-            width: 0; /* 0 width - change this with JavaScript */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Stay on top */
-            top: 48px; /* Stay at the top */
+            height: 100%;
+            /* 100% Full-height */
+            width: 0;
+            /* 0 width - change this with JavaScript */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Stay on top */
+            top: 48px;
+            /* Stay at the top */
             right: 0;
             background-color: #f1f2f4;
             color: $clr-text;
-            overflow-x: hidden; /* Disable horizontal scroll */
-            transition: 0.2s ease-in; /* 0.5 second transition effect to slide in the sidenav */
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            transition: 0.2s ease-in;
+
+            /* 0.5 second transition effect to slide in the sidenav */
             .topSidenav {
                 display: flex;
                 justify-content: space-between;
@@ -140,17 +167,21 @@
                 align-items: center;
                 font-weight: 600;
                 font-size: 16px;
+
                 .menu-text {
                     margin-left: 8px;
                     font-weight: bold;
                 }
+
                 .back-icon {
                     // margin-right: 8px;
                     cursor: pointer;
                 }
+
                 span {
                     text-align: center;
                 }
+
                 a {
                     text-decoration: none;
                     color: $clr-text;
@@ -158,6 +189,7 @@
                     font-weight: 300;
                 }
             }
+
             .sidenavButtons {
                 display: flex;
                 flex-direction: column;
@@ -171,27 +203,34 @@
                     align-items: center;
                     // background-color: lightgreen;
                     cursor: pointer;
+
                     button {
                         cursor: pointer;
+
                         &:hover {
                             background-color: lightgray;
                         }
                     }
+
                     .trello-icon {
                         @include trello-icon($content: $icon-trello, $type: md, $color: #44546f);
                         padding-bottom: 8px;
                     }
                 }
+
                 .change-bcg-button {
                     display: flex;
                     align-items: center;
                     cursor: pointer;
+
                     button {
                         cursor: pointer;
+
                         &:hover {
                             background-color: lightgray;
                         }
                     }
+
                     img {
                         height: 25px;
                         width: 25px;
@@ -200,12 +239,14 @@
                     }
                 }
             }
+
             .background-options {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 10px;
                 margin-top: 15px;
                 justify-content: center;
+
                 img {
                     border-radius: 15px;
                     width: 150px;
@@ -213,10 +254,12 @@
                     cursor: pointer;
                 }
             }
+
             p {
                 margin-left: 10px;
                 line-height: 2.5;
             }
+
             a {
                 padding: 8px 8px 8px 32px;
                 text-decoration: none;
@@ -237,21 +280,25 @@
             }
         }
     }
+
     .open-menu-btn {
         @include trello-icon($icon-three-dots);
         background-color: transparent;
         font-size: 20px;
         padding-left: 10px;
         cursor: pointer;
+
         &:hover {
             background-color: rgb(150, 147, 147);
         }
     }
 }
+
 @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;
     }
+
     .sidenav a {
         font-size: 18px;
     }

@@ -1,0 +1,255 @@
+.board-header {
+    backdrop-filter: blur(4px);
+    nav {
+        height: auto;
+        position: relative;
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        gap: 4px;
+        width: calc(100% - 23px);
+        align-items: center;
+        padding: 12px 10px 12px 16px;
+        .left-board-header {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            min-height: 32px;
+            flex-wrap: nowrap;
+            max-width: 100%;
+            .board-title {
+                border-radius: 3px;
+                cursor: default;
+                display: inline-flex;
+                position: relative;
+                white-space: nowrap;
+                height: 32px;
+                line-height: 32px;
+                margin-right: 4px;
+                margin-bottom: 0;
+                max-width: 100%;
+                color: $clr-text;
+                h1 {
+                    line-height: 32px;
+                }
+            }
+            .btn-star-container {
+                background-color: transparent;
+                height: 32px;
+                width: 32px;
+                line-height: 32px;
+                margin-left: 10px;
+                margin-bottom: 0;
+                flex-shrink: 0;
+                transition: 0.2s ease;
+                padding: 0;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $dynamic-button-hovered;
+                }
+                .starred {
+                    @include trello-icon($icon-full-star);
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+                .unstarred {
+                    @include trello-icon($icon-star);
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+        .right-board-header {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            min-height: 32px;
+            flex-wrap: nowrap;
+            margin-left: auto;
+            .board-members {
+                position: relative;
+                top: 2px;
+                display: inherit;
+                align-items: baseline;
+                padding: 0 0 0 2px;
+                line-height: 32px;
+                max-height: 32px;
+                overflow: visible;
+                margin-right: 25px;
+                .board-members-item {
+                    z-index: 3;
+                    width: 30px;
+                    height: 30px;
+                    margin-right: -4px;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 25em;
+                        object-fit: cover;
+                        border: 0;
+                        aspect-ratio: auto 30 / 30;
+                        overflow-clip-margin: content-box;
+                        overflow: clip;
+                    }
+                }
+            }
+            .open-menu-btn {
+                @include trello-icon($icon-three-dots);
+                margin: 0 4px 0 0;
+                transition: 0.1s ease;
+                // background-color: transparent;
+                // font-size: 20px;
+                // padding-left: 10px;
+                cursor: pointer;
+                &:hover {
+                    background-color: rgb(150, 147, 147);
+                }
+            }
+        }
+    }
+}
+
+// .top-navbar {
+//     position: relative;
+//     overflow: hidden;
+//     nav {
+//         position: relative;
+//         display: flex;
+//         flex-wrap: wrap;
+//         align-items: center;
+//         gap: 4px;
+//         padding: 0 10px 0 16px;
+
+//         // background: linear-gradient(to bottom, hsla(192, 36.9%, 78.2%, 0.9), hsla(192, 36.9%, 78.2%, 0.9));
+
+//         width: $board-header-width;
+//         height: $board-header-hight;
+//         .left-board-nav {
+//             .board-title {
+//                 display: inline-flex;
+//                 position: relative;
+
+//                 h1 {
+//                     background: transparent;
+//                     font-size: 18px;
+//                     font-weight: bold;
+//                     // line-height: 32px;
+//                     text-decoration: none;
+//                     overflow: hidden;
+//                     text-overflow: ellipsis;
+//                     white-space: nowrap;
+//                     height: 100%;
+//                     color: $clr-text;
+//                     padding: 0 10px;
+//                 }
+//             }
+
+//             .btn-star {
+//                 height: 32px;
+//                 width: 32px;
+//                 // line-height: 32px;
+//                 margin-bottom: 0;
+//                 flex-shrink: 0;
+//                 background-color: transparent;
+//                 // padding: 6px;
+
+//                 font-size: 14px;
+//                 // line-height: 20px;
+//                 font-weight: 400;
+//                 box-sizing: border-box;
+//                 display: inline-flex;
+//                 align-items: center;
+//                 justify-content: center;
+//                 border-radius: 3px;
+//                 cursor: pointer;
+//                 padding: 6px 12px;
+//                 text-decoration: none;
+//                 white-space: normal;
+//                 background-color: $clr-background-neutral, #091e420f;
+//                 box-shadow: none;
+//                 border: none;
+//                 color: $clr-text, #172b4d;
+//                 transition-property: background-color, border-color, box-shadow;
+//                 transition-duration: 85ms;
+//                 transition-timing-function: ease;
+
+//                 &:hover {
+//                     background-color: #091e4224;
+//                 }
+
+// .star {
+//     @include trello-icon($icon-full-star);
+//     transition: 0.2s ease;
+
+//     &:hover {
+//         @include trello-icon($icon-star);
+//         color: #42526e;
+//         cursor: pointer;
+//         transform: scale(1.1);
+//     }
+// }
+//             }
+//         }
+//         .right-board-nav {
+//             display: flex;
+//             align-items: center;
+//         }
+//         .board-members {
+//             float: right;
+//             margin: 0;
+//             & > * {
+//                 float: right;
+//                 height: 24px;
+//                 margin: 0 0 4px 4px;
+//                 width: 24px;
+//                 background-color: $clr-background-accent-gray-subtler;
+//                 color: $clr-text;
+//                 border-radius: 25em;
+//                 cursor: pointer;
+//                 display: block;
+//                 float: left;
+//                 margin: 0 4px 4px 0;
+//                 overflow: visible;
+//                 position: relative;
+//                 text-decoration: none;
+//                 -webkit-user-select: none;
+//                 user-select: none;
+//                 z-index: 0;
+
+// img {
+//     height: 100%;
+//     width: 100%;
+//     border-radius: 25em;
+//     object-fit: cover;
+//     border: 0;
+//     aspect-ratio: auto 30 / 30;
+//     overflow-clip-margin: content-box;
+//     overflow: clip;
+// }
+//             }
+//         }
+//     }
+// .open-menu-btn {
+//     @include trello-icon($icon-three-dots);
+//     background-color: transparent;
+//     font-size: 20px;
+//     padding-left: 10px;
+//     cursor: pointer;
+//     &:hover {
+//         background-color: rgb(150, 147, 147);
+//     }
+// }
+// }
+// @media screen and (max-height: 450px) {
+//     .sidenav {
+//         padding-top: 15px;
+//     }
+//     .sidenav a {
+//         font-size: 18px;
+//     }
+// }

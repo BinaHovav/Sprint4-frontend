@@ -1,0 +1,117 @@
+.badge {
+    color: $clr-text-subtle;
+    display: inline-block;
+    margin: 0 4px 4px 0;
+    max-width: 100%;
+    min-height: 20px;
+    overflow: hidden;
+    padding: 2px;
+    position: relative;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    vertical-align: top;
+
+
+    .is-unread-notification {
+        background-color: $clr-background-danger-bold;
+        border-radius: 3px;
+        color: $clr-text-inverse;
+    }
+
+    //date
+    &.due {
+        .clock-icon {
+            @include trello-icon($icon-clock);
+            padding: 2px;
+
+        }
+
+        &:hover {
+            .clock-icon {
+                @include trello-icon($icon-empty-checked);
+                padding: 2px;
+            }
+        }
+
+    }
+    &.is-due-past {
+        background-color: $clr-background-danger;
+        border-radius: 3px;
+        color: $clr-text-danger;
+
+        .clock-icon {
+            @include trello-icon($icon-clock);
+            padding: 2px;
+            color: $clr-icon-danger;
+        }
+
+        &:hover {
+            background-color: $clr-background-danger-hovered;
+
+            .clock-icon {
+                @include trello-icon($icon-empty-checked);
+                color: $clr-icon-danger;
+                padding: 2px;
+            }
+        }
+
+    }
+    &.is-due-complete {
+        background-color: $clr-background-success-bold;
+        border-radius: 3px;
+        color: $clr-text-inverse;
+
+        .clock-icon {
+            @include trello-icon($icon-clock);
+            padding: 2px;
+            color: $clr-icon-inverse;
+        }
+
+        &:hover {
+            background-color: $clr-background-success-bold-hovered;
+
+            .clock-icon {
+                @include trello-icon($icon-full-checked);
+                color: $clr-icon-inverse;
+                padding: 2px;
+            }
+        }
+    }
+    &.is-due-soon {
+        background-color: $clr-background-warning-bold;
+        border-radius: 3px;
+        color: $clr-text-warning-inverse;
+
+        .clock-icon {
+            @include trello-icon($icon-clock);
+            padding: 2px;
+            color: $clr-text-warning-inverse;
+        }
+
+        &:hover {
+            background-color: $clr-background-warning-bold-hovered;
+
+            .clock-icon {
+                @include trello-icon($icon-empty-checked);
+                color: $clr-text-warning-inverse;
+                padding: 2px;
+            }
+        }
+    }
+
+    .badge-text {
+        font-size: 12px;
+        padding: 0 4px 0 2px;
+        vertical-align: top;
+        white-space: nowrap;
+    }
+
+}
+
+
+
+
+.badge.mod-due-date:hover.is-due-complete {
+    background-color: $clr-background-success-bold-hovered;
+
+}

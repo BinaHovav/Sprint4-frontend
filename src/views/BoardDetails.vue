@@ -1,6 +1,7 @@
 <template>
   <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${board?.imgUrl})` }">
-    <TopNavbar :board="this.board" @updateBoard="updateBoard" />
+    <TopNavbar :board="this.board" @openMenu="onShowMenu" @updateBoard="updateBoard" />
+    <RightMenu @closeMenu="onCloseMenu" :showMenu="showMenu" :board="this.board" @updateBoard="this.$emit('updateBoard', this.board)" />
     <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
   </section>
   <RouterView @updateBoard="updateBoard" />
@@ -9,6 +10,7 @@
 <script>
 import TopNavbar from '../cmps/TopNavbar.vue'
 import GroupList from '../cmps/GroupList.vue'
+import RightMenu from '../cmps/RightMenu.vue'
 
 import { boardService } from '../services/board.service.local'
 // import { boardService } from '../services/board.service'
@@ -20,6 +22,7 @@ export default {
   data() {
     return {
       board: null,
+      showMenu: false,
     }
   },
   computed: {
@@ -31,6 +34,12 @@ export default {
     this.setBoard()
   },
   methods: {
+    onShowMenu() {
+      this.showMenu = true
+    },
+    onCloseMenu() {
+      this.showMenu = false
+    },
     async setBoard() {
       try {
         const boardId = this.$route.params.id
@@ -38,7 +47,6 @@ export default {
         this.$store.commit({ type: 'setCurrBoardId', boardId: boardId })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         this.$store.commit({ type: 'setBackgroundImg', backgroundImg: this.board?.imgUrl })
-        showSuccessMsg('Board loaded')
       } catch (err) {
         showErrorMsg('Cannot load board')
       }
@@ -46,7 +54,6 @@ export default {
     async updateBoard(updatedBoard = this.board) {
       try {
         await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
-        showSuccessMsg('Board updated')
         this.board = updatedBoard
       } catch (err) {
         showErrorMsg('Cannot update board')
@@ -62,7 +69,6 @@ export default {
 
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
-        showSuccessMsg('Group removed')
       } catch (err) {
         showErrorMsg('Cannot remove group')
       }
@@ -73,7 +79,6 @@ export default {
       this.board.groups.push(newGroup)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
-        showSuccessMsg('Group added')
       } catch (err) {
         showErrorMsg('Cannot add group')
       }
@@ -83,7 +88,6 @@ export default {
       this.board.groups.splice(idx, 1, groupToEdit)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
-        showSuccessMsg('Group updated')
       } catch (err) {
         showErrorMsg('Cannot update group')
       }
@@ -97,6 +101,7 @@ export default {
   components: {
     TopNavbar,
     GroupList,
+    RightMenu,
   },
 }
 </script>

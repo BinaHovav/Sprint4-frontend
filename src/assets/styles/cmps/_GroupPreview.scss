@@ -19,55 +19,7 @@
     scroll-margin: 8px;
     vertical-align: top;
 
-    .card-compose {
-        border-radius: 8px;
-        flex-shrink: 0;
-        margin: 7px 4px;
-        padding: 1px 4px 0;
-
-        .input-title {
-            border-radius: 8px;
-            flex-shrink: 0;
-            margin-bottom: 1px;
-            text-decoration: none;
-            background-color: $clr-surface-raised;
-            box-shadow: $clr-shadow-raised;
-            color: $clr-text;
-            cursor: pointer;
-            display: block;
-            margin-bottom: 8px;
-            max-width: 300px;
-            min-height: 20px;
-            position: relative;
-            scroll-margin: 8px;
-            z-index: 0;
-
-            div {
-                overflow: hidden;
-                padding: 8px 8px 4px 12px;
-                position: relative;
-                z-index: 10;
-
-                textarea {
-                    overflow: hidden;
-                    overflow-wrap: break-word;
-                    resize: none;
-                    height: 54px;
-                    background: none;
-                    border: none;
-                    box-shadow: none;
-                    height: auto;
-                    margin-bottom: 4px;
-                    max-height: 162px;
-                    min-height: 54px;
-                    overflow-y: auto;
-                    padding: 0;
-                    resize: none;
-                    width: 100%;
-                }
-            }
-        }
-    }
+    
 
     .open-card-compose {
         align-items: center;

@@ -114,7 +114,6 @@ export default {
   watch: {
     '$route.path'(newPath) {
       if (newPath === '/board') {
-        console.log('hi')
         this.$refs.header.style.backgroundColor = 'white'
       }
     },
@@ -161,7 +160,6 @@ export default {
         const averageBlue = Math.floor(totalBlue / pixelCount)
 
         const rgbColor = `rgb(${averageRed}, ${averageGreen}, ${averageBlue})`
-        console.log(rgbColor)
         this.$refs.header.style.backgroundColor = rgbColor
       }
     },
