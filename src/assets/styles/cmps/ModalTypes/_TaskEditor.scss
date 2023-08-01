@@ -116,12 +116,14 @@
                 border-radius: 3px;
                 clear: both;
                 color: #c7d1db;
-                display: block;
+                display: flex;
+                align-items: center;
                 float: left;
                 margin: 0 0 4px 8px;
                 padding: 6px 12px 6px 10px;
                 transition: transform 85ms ease-in;
                 cursor: pointer;
+
 
                 .btn-text {
                     margin-left: 4px;
@@ -137,7 +139,42 @@
                 .btn-card {
                     @include trello-icon($icon-card);
                     color: inherit;
-                    padding: 2px;
+                    padding: 0 2px;
+                }
+                .btn-label {
+                    @include trello-icon($icon-label);
+                    color: inherit;
+                    padding: 0 2px;
+                }
+                .btn-member {
+                    @include trello-icon($icon-member);
+                    color: inherit;
+                    padding: 0 2px;
+                }
+                .btn-cover {
+                    @include trello-icon($icon-card-cover);
+                    color: inherit;
+                    padding: 0 2px;
+                }
+                .btn-arrow {
+                    @include trello-icon($icon-arrow-right);
+                    color: inherit;
+                    padding: 0 2px;
+                }
+                .btn-card {
+                    @include trello-icon($icon-card);
+                    color: inherit;
+                    padding: 0 2px;
+                }
+                .btn-clock {
+                    @include trello-icon($icon-clock);
+                    color: inherit;
+                    padding: 0 2px;
+                }
+                .btn-archive {
+                    @include trello-icon($icon-archive);
+                    color: inherit;
+                    padding: 0 2px;
                 }
             }
         }

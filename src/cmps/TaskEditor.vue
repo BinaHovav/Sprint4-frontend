@@ -57,9 +57,37 @@
             </section>
             <button class="btn-save" @click="updateTask">Save</button>
             <div class="quick-card-editor-buttons">
-                <div class="quick-card-editor-btn">
+                <div class="quick-card-editor-btn" ref="">
                     <span class="btn-card"></span>
                     <span class="btn-text">Open card</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorLabels" @click="openModal('LabelModal', 'editorLabels')">
+                    <span class="btn-label"></span>
+                    <span class="btn-text">Edit labels</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorMembers" @click="openModal('MemberModal', 'editorMembers')">
+                    <span class="btn-member"></span>
+                    <span class="btn-text">Change members</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorCovers">
+                    <span class="btn-cover"></span>
+                    <span class="btn-text">Change cover</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorMove">
+                    <span class="btn-arrow"></span>
+                    <span class="btn-text">Move</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorCopy">
+                    <span class="btn-card"></span>
+                    <span class="btn-text">Copy</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorDate">
+                    <span class="btn-clock"></span>
+                    <span class="btn-text">Edit dates</span>
+                </div>
+                <div class="quick-card-editor-btn" @click="removeTask(task.id)">
+                    <span class="btn-archive"></span>
+                    <span class="btn-text">Archive</span>
                 </div>
             </div>
         </div>
@@ -163,6 +191,7 @@ export default {
         },
         removeTask(taskId) {
             this.$emit('removeTask', taskId)
+            this.closeEditor()
         },
         getLabelById(labelId) {
             return this.currBoard.labels?.find((label) => label.id === labelId)
@@ -200,7 +229,19 @@ export default {
         },
         closeEditor() {
             this.isVisible = false
-        }
+        },
+        openModal(type, elRef) {
+            const board = JSON.parse(JSON.stringify(this.board))
+            const info = { task: this.task, board }
+            const el = this.$refs[elRef].getBoundingClientRect()
+            eventBus.emit('modal', { el, type, info })
+            window.addEventListener('resize', this.handleResize)
+            document.removeEventListener('click', this.handleClickOutside)
+        },
+        handleResize() {
+            const el = this.$refs.labels.getBoundingClientRect()
+            eventBus.emit('modal', { el })
+        },
 
     },
     components: {
