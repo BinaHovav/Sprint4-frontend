@@ -1,0 +1,209 @@
+<template>
+    <div class="quick-card-editor" v-if="isVisible" @click="closeEditor">
+        <span class="icon-close" @click="closeEditor"> </span>
+        <div class="editor-wrapper" @click.stop="">
+            <section class="task-preview-container">
+                <!-- <div class="btn-edit" @click.stop="removeTask(task.id)"> -->
+                <div v-if="task?.cover && cover" :class="task.cover" class="task-cover"><span class="edit"></span></div>
+                <div v-else-if="task?.cover" class="task-cover-img"
+                    :style="{ height: calculatedHeight, backgroundImage: `url(${task.cover})` }">
+                    <span class="edit"></span>
+                </div>
+                <div class="task-details-container">
+                    <div v-if="task.labels" class="task-labels">
+                        <div v-for="label in task.labels" class="task-label">
+                            <button @click.stop="animateLabels"
+                                :class="[getLabelById(label)?.color, getLabelById(label)?.animationClass]">
+                                {{ getLabelById(label)?.title }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <textarea class="task-title" v-model="task.title" dir="auto" ref="textarea"></textarea>
+                    <div class="badges">
+                        <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
+                        <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
+                        <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id)" class="badge"
+                            :class="dateClass" :title="dateTitle">
+                            <span class="clock-icon"></span>
+                            <span class="badge-text">{{ dueDate() }}</span>
+                        </div>
+                        <div v-if="task.description" class="badge description" title="This card has a description">
+                            <span class="description-icon"></span>
+                        </div>
+                        <div v-if="task.comments?.length" class="badge comments" title="Comments">
+                            <span class="comments-icon"></span>
+                            <span class="badge-text">{{ task.comments.length }}</span>
+                        </div>
+                        <div v-if="task.checklists?.length" class="badge checklist" title="checklist items"
+                            :class="checklistClass">
+                            <span class="checklist-icon"></span>
+                            <span class="badge-text">{{ checklistCount }}</span>
+                        </div>
+                        <div v-if="task.attachments" class="badge attachment">
+                            <span class="attachment-icon"></span>
+                            <span class="badge-text">{{ task.attachments.length }}</span>
+                        </div>
+                    </div>
+                    <div class="task-members">
+                        <div v-for="memberId in task.members">
+                            <img :src="getMemberById(memberId).imgUrl" alt="member"
+                                :title="getMemberById(memberId).fullname" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <textarea>{{ task.title }}</textarea> -->
+            </section>
+            <button class="btn-save" @click="updateTask">Save</button>
+            <div class="quick-card-editor-buttons">
+                <div class="quick-card-editor-btn">
+                    <span class="btn-card"></span>
+                    <span class="btn-text">Open card</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { eventBus } from '../services/event-bus.service'
+import { getActionUpdateBoard } from '../store/board.store'
+
+export default {
+    name: 'TaskEditor',
+    data() {
+        return {
+            calculatedHeight: 0,
+            dateTitle: '',
+            checklistClass: '',
+            task: null,
+            isVisible: false,
+            group: null
+        }
+    },
+    computed: {
+        currBoard() {
+            return this.$store.getters.getCurrBoard
+        },
+        labelsShow() {
+            return this.$store.getters.labelsShow
+        },
+        cover() {
+            return this.task.cover.startsWith('https') ? false : true
+        },
+        dateClass() {
+            const dateObj = this.task.date.dueDate * 1000
+            const now = Date.now()
+            let classDisplay = ''
+            if (dateObj > now) {
+                classDisplay = 'due'
+                this.dateTitle = 'This card is due later.'
+            } else {
+                classDisplay = 'is-due-past'
+                this.dateTitle = 'This card is past due.'
+            }
+            const oneDay = 60 * 60 * 24 * 1000
+            if (dateObj - now <= oneDay && dateObj - now > 0) {
+                classDisplay = 'is-due-soon'
+                this.dateTitle = 'This card is due in less then twenty-four hours.'
+            }
+            if (this.task.date.isDone) {
+                classDisplay = 'is-due-complete'
+                this.dateTitle = 'This card is complete.'
+            }
+            return classDisplay
+        },
+        checklistCount() {
+            let sum = 0
+            let doneCount = 0
+            this.task.checklists.forEach(checklist => {
+                sum += checklist.todos.length
+                checklist.todos.forEach(todo => {
+                    doneCount += todo.isDone ? 1 : 0
+                })
+            })
+            this.checklistClass = doneCount === sum ? 'is-checklist-complete' : ''
+            return `${doneCount}/${sum}`
+        }
+    },
+    created() { },
+    mounted() {
+        this.calculateHeight()
+        // You can also add a listener for window resize if needed
+        window.addEventListener('resize', this.calculateHeight)
+        eventBus.on('onTaskEditor', ({ task, groupId }) => {
+            this.isVisible = true
+            this.task = JSON.parse(JSON.stringify(task))
+            this.group = JSON.parse(JSON.stringify(this.currBoard.groups.find(group => group.id === groupId)))
+        })
+    },
+    beforeUnmount() {
+        // Don't forget to remove the event listener when the component is unmounted
+        window.removeEventListener('resize', this.calculateHeight)
+    },
+    methods: {
+        async updateTask() {
+            const board = JSON.parse(JSON.stringify(this.currBoard))
+            const idx = this.group.tasks.findIndex(task => task.id === this.task.id)
+            this.group.tasks.splice(idx, 1, this.task)
+            const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
+            board.groups.splice(groupIdx, 1, this.group)
+            try {
+                await this.$store.dispatch(getActionUpdateBoard(board))
+                this.isVisible = false
+            }
+            catch {
+                console.log('cant update task');
+            }
+        },
+        onTaskDetails() {
+            const boardId = this.$route.params.id
+            this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
+        },
+        removeTask(taskId) {
+            this.$emit('removeTask', taskId)
+        },
+        getLabelById(labelId) {
+            return this.currBoard.labels?.find((label) => label.id === labelId)
+        },
+        getMemberById(memberId) {
+            return this.currBoard.members?.find((member) => member._id === memberId)
+        },
+        calculateHeight() {
+            const imageWidth = 16 // Adjust the aspect ratio width
+            const imageHeight = 9 // Adjust the aspect ratio height
+            const containerWidth = this.$el.clientWidth // Width of the task preview container
+
+            this.calculatedHeight = (containerWidth / imageWidth) * imageHeight + 'px'
+        },
+        animateLabels(ev) {
+            // Assuming you have a variable or some logic to determine whether the labels are open or closed
+            // Replace this with your actual logic
+            const board = JSON.parse(JSON.stringify(this.currBoard))
+            // Update the animation class for each task label based on the labels state
+            board.labels.forEach((label) => {
+                label.animationClass = label.animationClass === "labels-close" ? "labels-open" : "labels-close";
+            });
+            this.$store.dispatch({ type: 'updateBoard', board })
+        },
+        dueDate() {
+            const months = [
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+            ]
+            const dateObj = new Date(this.task.date.dueDate * 1000)
+            const month = months[dateObj.getMonth()]
+            const day = dateObj.getDate()
+            const formattedDate = `${month} ${day}`
+            return formattedDate
+        },
+        closeEditor() {
+            this.isVisible = false
+        }
+
+    },
+    components: {
+    },
+}
+</script>

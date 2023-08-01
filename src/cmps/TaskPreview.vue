@@ -1,6 +1,7 @@
 <template>
     <section class="task-preview-container" @click="onTaskDetails">
-        <div class="btn-edit" @click.stop="removeTask(task.id)">
+        <!-- <div class="btn-edit" @click.stop="removeTask(task.id)"> -->
+        <div class="btn-edit" @click.stop="openEditor">
             <span class="edit-icon"></span>
         </div>
         <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span class="edit"></span></div>
@@ -55,6 +56,8 @@
 </template>
 
 <script>
+import { eventBus } from '../services/event-bus.service'
+
 export default {
     name: 'TaskPreview',
     props: ['task', 'groupId'],
@@ -162,8 +165,12 @@ export default {
             const formattedDate = `${month} ${day}`
             return formattedDate
         },
+        openEditor() {
+            eventBus.emit('onTaskEditor', { task: this.task, groupId: this.groupId })
+        }
 
     },
-    components: {},
+    components: {
+    },
 }
 </script>
