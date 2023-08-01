@@ -4,6 +4,8 @@
     <RouterView />
     <UserMsg />
     <AppModal />
+    <TaskEditor />
+
   </section>
 </template>
 
@@ -16,6 +18,7 @@
 import AppHeader from './cmps/AppHeader.vue'
 import UserMsg from './cmps/UserMsg.vue'
 import AppModal from './cmps/AppModal.vue'
+import TaskEditor from './cmps/TaskEditor.vue'
 
 export default {
   created() {
@@ -23,11 +26,14 @@ export default {
     // const user = userService.getLoggedinUser()
     // if (user) store.commit({ type: 'setLoggedinUser', user })
   },
+  computed: {
+  },
 
   components: {
     AppHeader,
     UserMsg,
     AppModal,
+    TaskEditor
   },
 }
 </script>

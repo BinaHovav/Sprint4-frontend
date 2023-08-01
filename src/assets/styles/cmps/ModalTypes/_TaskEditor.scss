@@ -1,0 +1,145 @@
+.quick-card-editor {
+    background: #0009;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10;
+
+    .icon-close {
+        @include trello-icon($icon-close);
+        color: $clr-icon-subtle;
+        padding: 9px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition-duration: .15s;
+        transition-property: transform, color;
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+        font-size: 24px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: inline-block;
+        font-family: trellicons;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: bottom;
+
+        &:hover {
+            color: $clr-icon-inverse;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+    }
+
+    .editor-wrapper {
+        top: 165px;
+        left: 320px;
+        width: 256px;
+        position: absolute;
+        cursor: default;
+        z-index: 1;
+
+        .task-preview-container {
+            cursor: default;
+
+            &:hover {
+                background-color: $clr-surface-raised;
+            }
+
+            .task-details-container {
+                .task-labels {
+                    margin: -4px 0 8px;
+                    height: 8px;
+
+                    .task-label {
+                        button {}
+                    }
+                }
+
+                .task-title {
+                    overflow: hidden;
+                    overflow-wrap: break-word;
+                    resize: none;
+                    height: 90px;
+                    background-color: initial;
+                    box-shadow: none;
+                    margin: -1px;
+                    padding: 0;
+                    width: 100%;
+                    color: #828c8d;
+                }
+            }
+        }
+
+        .btn-save {
+            background-color: $clr-background-brand-bold;
+            border: none;
+            box-shadow: none;
+            color: $clr-text-inverse;
+            align-items: center;
+            padding: 6px 24px;
+            margin: 8px 4px 0 0;
+            font-weight: 400;
+            box-sizing: border-box;
+            display: inline-flex;
+            font-size: 14px;
+            line-height: 20px;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $clr-background-brand-bold-hovered;
+            }
+
+        }
+
+        .quick-card-editor-buttons {
+            opacity: 1;
+            transform: translateX(0);
+            left: 108%;
+            position: absolute;
+            top: 0;
+            transform: translateX(-20px);
+            transition: opacity 85ms ease-in, transform 85ms ease-in;
+            width: 240px;
+            z-index: 0;
+
+            .quick-card-editor-btn {
+                background: #0009;
+                border-radius: 3px;
+                clear: both;
+                color: #c7d1db;
+                display: block;
+                float: left;
+                margin: 0 0 4px 8px;
+                padding: 6px 12px 6px 10px;
+                transition: transform 85ms ease-in;
+                cursor: pointer;
+
+                .btn-text {
+                    margin-left: 4px;
+                }
+
+                &:hover {
+                    background: #000c;
+                    color: #fff;
+                    text-decoration: none;
+                    transform: translateX(5px);
+                }
+
+                .btn-card {
+                    @include trello-icon($icon-card);
+                    color: inherit;
+                    padding: 2px;
+                }
+            }
+        }
+    }
+}
