@@ -1,12 +1,12 @@
 <template>
   <section class="backdrop">
-    <div v-if="task" ref="taskDetails" class="task-details">
+    <div v-if="task" ref="taskDetails" class="task-details" v-clickOutside="closeModal">
       <div class="task-details-container">
         <a class="btn-icon-close" @click="closeModal"></a>
         <div class="task-details-container-two">
-          <div v-if="task.cover" class="task-cover" :class="task.cover">
+          <div v-if="task.cover.background" class="task-cover" :class="isCoverImg ? task.cover.background : 'task-cover-img'" :style="isCoverImg ? '' : getCoverImgStyle()">
             <div class="task-cover-menu">
-              <a class="task-cover-btn">
+              <a class="task-cover-btn" ref="coversTop" @click="openModal('CoverModal', 'coversTop')">
                 <span class="btn-icon-cover"></span>
                 Cover
               </a>
@@ -16,10 +16,11 @@
             <span class="btn-title-icon"></span>
             <div class="task-header-title">
               <h2 v-if="!showTaskTitle" @click="showTaskTitle = true">{{ task.title }}</h2>
-              <textarea v-if="showTaskTitle" @blur="onSaveTask, showTaskTitle = false" v-model="task.title" v-focus></textarea>
+              <textarea v-if="showTaskTitle" @blur="onSaveTask, (showTaskTitle = false)" v-model="task.title" v-focus></textarea>
             </div>
             <div class="task-header-group">
-              <p>in list
+              <p>
+                in list
                 <a>{{ group.title }}</a>
               </p>
             </div>
@@ -30,12 +31,10 @@
                 <h3>Members</h3>
                 <div class="">
                   <div v-for="memberId in task.members" class="task-details-members">
-                    <img class="task-member-img" :src="getMemberById(memberId).imgUrl"
-                      :title="getMemberById(memberId).fullname">
+                    <img class="task-member-img" :src="getMemberById(memberId).imgUrl" :title="getMemberById(memberId).fullname" />
                   </div>
                   <a class="task-member-add">
-                    <span class="task-member-btn-add" ref="membersAdd"
-                      @click="openModal('MemberModal', 'membersAdd')"></span>
+                    <span class="task-member-btn-add" ref="membersAdd" @click="openModal('MemberModal', 'membersAdd')"></span>
                   </a>
                 </div>
               </div>
@@ -45,11 +44,8 @@
                     <h3>Labels</h3>
                     <div class="">
                       <div class="task-labels flex">
-                        <button v-for="label in task.labels" class="task-btn-label" :ref="label"
-                          :class="getLabelById(label)?.color">{{
-                            getLabelById(label)?.title }}</button>
-                        <button ref="labelAdd" class="task-btn-add-label"
-                          @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
+                        <button v-for="label in task.labels" class="task-btn-label" :ref="label" :class="getLabelById(label)?.color">{{ getLabelById(label)?.title }}</button>
+                        <button ref="labelAdd" class="task-btn-add-label" @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
                       </div>
                     </div>
                   </div>
@@ -57,8 +53,7 @@
               </div>
               <div class="task-details-item">
                 <h3>Notifications</h3>
-                <a class="task-btn-watch" :style="{ width: isWatching ? '138px' : 'auto' }"
-                  @click="isWatching = !isWatching">
+                <a class="task-btn-watch" :style="{ width: isWatching ? '138px' : 'auto' }" @click="isWatching = !isWatching">
                   <span class="task-icon-watch"></span>
                   <span class="task-txt-watch">{{ isWatching ? 'Watching' : 'Watch' }}</span>
                   <span class="is-watching" v-if="isWatching"><span class="is-watching-icon"></span></span>
@@ -67,7 +62,7 @@
               <div class="task-details-item">
                 <h3>Due date</h3>
                 <div class="task-details-due-date">
-                  <a @click="dueDateChecked = !dueDateChecked" class="due-date-complete" :class="{'checked': dueDateChecked}" v-icon="'checkBox'"></a>
+                  <a @click="dueDateChecked = !dueDateChecked" class="due-date-complete" :class="{ checked: dueDateChecked }" v-icon="'checkBox'"></a>
                   <div class="due-date-time-container">
                     <div>
                       <button class="due-date-btn">
@@ -75,7 +70,6 @@
                         <span class="due-date-icon"><span class="due-date-icon-span" v-icon="'arrowDown'"></span></span>
                       </button>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -86,27 +80,27 @@
           <div class="task-sidebar">
             <div class="task-sidebar-add">
               <h3 class="sidebar-add-txt">Add to card</h3>
-              <a ref="members" class="task-btn-link" @click="openModal('MemberModal', 'members')">
+              <a ref="members" class="task-btn-link" @click.stop="openModal('MemberModal', 'members')">
                 <span class="btn-link-members"></span>
                 <span class="">Members</span>
               </a>
-              <a ref="labels" class="task-btn-link" @click="openModal('LabelModal', 'labels')">
+              <a ref="labels" class="task-btn-link" @click.stop="openModal('LabelModal', 'labels')">
                 <span class="btn-link-labels"></span>
                 <span class="">Labels</span>
               </a>
-              <a ref="checklists" class="task-btn-link" @click="openModal('ChecklistModal', 'checklists')">
+              <a ref="checklists" class="task-btn-link" @click.stop="openModal('ChecklistModal', 'checklists')">
                 <span class="btn-link-checklist"></span>
                 <span class="">Checklist</span>
               </a>
-              <a class="task-btn-link" @click="openModal()">
+              <a ref="datePickerSide" class="task-btn-link" @click.stop="openModal('DatePickerModal', 'datePickerSide')">
                 <span class="btn-link-dates"></span>
                 <span class="">Dates</span>
               </a>
-              <a class="task-btn-link" @click="openModal()">
+              <a class="task-btn-link" @click.stop="openModal()">
                 <span class="btn-link-attachment"></span>
                 <span class="">Attachment</span>
               </a>
-              <a v-if="!task.cover" class="task-btn-link" @click="openModal()">
+              <a v-if="!task.cover.background" ref="covers" class="task-btn-link" @click="openModal('CoverModal', 'covers')">
                 <span class="btn-link-cover"></span>
                 <span class="">Cover</span>
               </a>
@@ -119,7 +113,8 @@
 </template>
 
 <script>
-import { boardService } from '../services/board.service.local'
+// import { boardService } from '../services/board.service.local'
+import { boardService } from '../services/board.service.js'
 import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import TaskChecklistDetails from '../cmps/TaskDetails/TaskChecklistDetails.vue'
 import TaskDescriptionDetails from '../cmps/TaskDetails/TaskDescriptionDetails.vue'
@@ -132,15 +127,14 @@ export default {
       board: null,
       isWatching: false,
       showTaskTitle: false,
-      dueDateChecked: false
+      dueDateChecked: false,
+      modalRef: 'labels',
+      modalOpen: false,
     }
   },
   computed: {
     dueDate() {
-      const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-      ]
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       const dateObj = new Date(this.task.date.dueDate * 1000)
       const month = months[dateObj.getMonth()]
       const day = dateObj.getDate()
@@ -151,7 +145,7 @@ export default {
       const displayMinutes = minutes.toString().padStart(2, '0')
       const formattedDate = `${month} ${day} at ${displayHours}:${displayMinutes} ${ampm}`
       return formattedDate
-    }
+    },
   },
   created() {
     this.getTask()
@@ -160,18 +154,16 @@ export default {
         this.task = info.task
         this.board = info.board
         this.onSaveTask()
+        this.modalOpen = true
       } else {
         setTimeout(() => {
-          document.addEventListener('click', this.handleClickOutside)
-        }, 200);
+          this.modalOpen = false
+          window.removeEventListener('resize', this.handleResize)
+        }, 200)
       }
     })
   },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside)
-  },
   unmounted() {
-    document.removeEventListener('click', this.handleClickOutside)
     window.removeEventListener('resize', this.handleResize)
     eventBus.off('setInfo')
   },
@@ -184,53 +176,52 @@ export default {
         const groupId = this.$route.params.groupId
         if (board) {
           this.board = JSON.parse(JSON.stringify(board))
-          this.group = this.board.groups.find(group => group.id === groupId)
-          this.task = this.group.tasks.find(task => task.id === taskId)
+          this.group = this.board.groups.find((group) => group.id === groupId)
+          this.task = this.group.tasks.find((task) => task.id === taskId)
         }
       } catch (err) {
         showErrorMsg('Cannot load board')
       }
     },
     getLabelById(labelId) {
-      return this.board.labels?.find(label => label.id === labelId)
+      return this.board.labels?.find((label) => label.id === labelId)
     },
     getMemberById(memberId) {
-      return this.board.members?.find(member => member._id === memberId)
+      return this.board.members?.find((member) => member._id === memberId)
     },
     onSaveTask() {
-      let idx = this.group.tasks.findIndex(gTask => gTask.id === this.task.id)
+      let idx = this.group.tasks.findIndex((gTask) => gTask.id === this.task.id)
       this.group.tasks.splice(idx, 1, this.task)
-      idx = this.board.groups.findIndex(gGroup => gGroup.id === this.group.id)
+      idx = this.board.groups.findIndex((gGroup) => gGroup.id === this.group.id)
       this.board.groups.splice(idx, 1, this.group)
       this.$emit('updateBoard', this.board)
     },
     closeModal() {
-      this.$router.push(`/board/${this.board._id}`)
+      if (!this.modalOpen) this.$router.push(`/board/${this.board._id}`)
     },
     openModal(type, elRef) {
+      this.modalRef = elRef
       const board = JSON.parse(JSON.stringify(this.board))
       const info = { task: this.task, board }
-      const el = this.$refs[elRef].getBoundingClientRect()
+      const el = this.$refs[this.modalRef].getBoundingClientRect()
       eventBus.emit('modal', { el, type, info })
+      this.modalOpen = true
       window.addEventListener('resize', this.handleResize)
-      document.removeEventListener('click', this.handleClickOutside)
     },
     handleResize() {
-      const el = this.$refs.labels.getBoundingClientRect()
+      const el = this.$refs[this.modalRef].getBoundingClientRect()
       eventBus.emit('modal', { el })
     },
-    
-    handleClickOutside(event) {
-      try {
-        const ele = this.$refs.taskDetails.getBoundingClientRect()
-        if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.closeModal()
-      } catch { }
+    isCoverImg() {
+      return this.task.cover.background?.startsWith('https')
     },
-    
+    getCoverImgStyle() {
+      return { height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }
+    },
   },
   components: {
     TaskChecklistDetails,
-    TaskDescriptionDetails
-  }
+    TaskDescriptionDetails,
+  },
 }
 </script>

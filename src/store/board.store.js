@@ -1,5 +1,5 @@
-import { boardService } from '../services/board.service.local'
-// import { boardService } from '../services/board.service'
+// import { boardService } from '../services/board.service.local'
+import { boardService } from '../services/board.service.js'
 
 export function getActionSetCurrBoard(boardId) {
   return {
@@ -41,6 +41,7 @@ export const boardStore = {
     currBoardId: null,
     labelsShow: false,
     backgroundImg: null,
+    taskQEId: null,
   },
   getters: {
     boards({ boards }) {
@@ -66,6 +67,9 @@ export const boardStore = {
     },
     boardImgUrl({ boards, currBoardId }) {
       return boards.find((board) => board._id === currBoardId)?.imgUrl
+    },
+    taskQEId({ taskQEId }) {
+      return taskQEId
     },
   },
   mutations: {
@@ -98,6 +102,9 @@ export const boardStore = {
     },
     setBackgroundImg(state, { backgroundImg }) {
       state.backgroundImg = backgroundImg
+    },
+    onQuickEditor(state, { taskId }) {
+      state.taskQEId = taskId
     },
   },
   actions: {

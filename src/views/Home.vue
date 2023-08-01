@@ -1,10 +1,10 @@
 <template>
-  <section class="homepage-container">
-    <RouterLink to="/board">Start Trello</RouterLink>
-  </section>
+  <!-- <HomepageHeader /> -->
 </template>
 
 <script>
+import HomepageHeader from '../cmps/HomepageHeader.vue'
+
 export default {
   name: 'home',
   data() {
@@ -13,5 +13,6 @@ export default {
   computed: {},
   created() {},
   methods: {},
+  components: { HomepageHeader },
 }
 </script>

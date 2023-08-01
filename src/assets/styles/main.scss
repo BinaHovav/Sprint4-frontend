@@ -15,6 +15,7 @@
 
 // Components
 @import "cmps/AppHeader";
+@import "cmps/_HomepageHeader";
 @import "cmps/_TopNavbar";
 @import "cmps/RightMenu";
 @import "cmps/_AppModal";
@@ -23,7 +24,10 @@
 @import "cmps/ModalTypes/ListActions";
 @import "cmps/ModalTypes/_MemberModal";
 @import "cmps/ModalTypes/_ChecklistModal";
+@import "cmps/ModalTypes/_CoverModal";
+@import "cmps/ModalTypes/_DatePickerModal";
 @import "cmps/ModalTypes/CreateBoardModal";
+@import "cmps/ModalTypes/TaskEditor";
 @import "cmps/_BoardIndex";
 @import "cmps/_BoardTile";
 @import "cmps/UserMsg";

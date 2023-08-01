@@ -1,11 +1,12 @@
 <template>
     <section class="task-preview-container" @click="onTaskDetails">
-        <div class="btn-edit" @click.stop="removeTask(task.id)">
+        <!-- <div class="btn-edit" @click.stop="removeTask(task.id)"> -->
+        <div class="btn-edit" @click.stop="openEditor">
             <span class="edit-icon"></span>
         </div>
-        <div v-if="task?.cover && cover" :class="task.cover" class="task-cover"><span class="edit"></span></div>
+        <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span class="edit"></span></div>
         <div v-else-if="task?.cover" class="task-cover-img"
-            :style="{ height: calculatedHeight, backgroundImage: `url(${task.cover})` }">
+            :style="{ height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }">
             <span class="edit"></span>
         </div>
         <div class="task-details-container">
@@ -55,6 +56,8 @@
 </template>
 
 <script>
+import { eventBus } from '../services/event-bus.service'
+
 export default {
     name: 'TaskPreview',
     props: ['task', 'groupId'],
@@ -73,7 +76,7 @@ export default {
             return this.$store.getters.labelsShow
         },
         cover() {
-            return this.task.cover.startsWith('https') ? false : true
+            return this.task.cover.background?.startsWith('https') ? false : true
         },
         dateClass() {
             const dateObj = this.task.date.dueDate * 1000
@@ -162,8 +165,12 @@ export default {
             const formattedDate = `${month} ${day}`
             return formattedDate
         },
+        openEditor() {
+            eventBus.emit('onTaskEditor', { task: this.task, groupId: this.groupId })
+        }
 
     },
-    components: {},
+    components: {
+    },
 }
 </script>
