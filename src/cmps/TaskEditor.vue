@@ -4,7 +4,8 @@
         <div class="editor-wrapper" @click.stop="">
             <section class="task-preview-container">
                 <!-- <div class="btn-edit" @click.stop="removeTask(task.id)"> -->
-                <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span class="edit"></span></div>
+                <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span
+                        class="edit"></span></div>
                 <div v-else-if="task?.cover" class="task-cover-img"
                     :style="{ height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }">
                     <span class="edit"></span>
@@ -69,7 +70,7 @@
                     <span class="btn-member"></span>
                     <span class="btn-text">Change members</span>
                 </div>
-                <div class="quick-card-editor-btn" ref="editorCovers">
+                <div class="quick-card-editor-btn" ref="editorCovers" @click="openModal('CoverModal', 'editorCovers')">
                     <span class="btn-cover"></span>
                     <span class="btn-text">Change cover</span>
                 </div>
@@ -81,7 +82,7 @@
                     <span class="btn-card"></span>
                     <span class="btn-text">Copy</span>
                 </div>
-                <div class="quick-card-editor-btn" ref="editorDate">
+                <div class="quick-card-editor-btn" ref="editorDate" @click="openModal('DatePickerModal', 'datePickerSide')">
                     <span class="btn-clock"></span>
                     <span class="btn-text">Edit dates</span>
                 </div>
@@ -107,7 +108,8 @@ export default {
             checklistClass: '',
             task: null,
             isVisible: false,
-            group: null
+            group: null,
+            elRef: ''
         }
     },
     computed: {
@@ -164,6 +166,17 @@ export default {
             this.isVisible = true
             this.task = JSON.parse(JSON.stringify(task))
             this.group = JSON.parse(JSON.stringify(this.currBoard.groups.find(group => group.id === groupId)))
+            eventBus.on('setInfo', (info) => {
+                if (info) {
+                    this.task = info.task
+                    this.updateTask(info.board)
+                } else {
+                    setTimeout(() => {
+                        eventBus.off('setInfo')
+                    }, 200);
+    
+                }
+            })
         })
     },
     beforeUnmount() {
@@ -171,8 +184,8 @@ export default {
         window.removeEventListener('resize', this.calculateHeight)
     },
     methods: {
-        async updateTask() {
-            const board = JSON.parse(JSON.stringify(this.currBoard))
+        async updateTask(updatedBoard) {
+            const board = updatedBoard ? updatedBoard : JSON.parse(JSON.stringify(this.currBoard))
             const idx = this.group.tasks.findIndex(task => task.id === this.task.id)
             this.group.tasks.splice(idx, 1, this.task)
             const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
@@ -231,17 +244,13 @@ export default {
             this.isVisible = false
         },
         openModal(type, elRef) {
-            const board = JSON.parse(JSON.stringify(this.board))
+            this.elRef = elRef
+            const board = JSON.parse(JSON.stringify(this.currBoard))
             const info = { task: this.task, board }
             const el = this.$refs[elRef].getBoundingClientRect()
             eventBus.emit('modal', { el, type, info })
-            window.addEventListener('resize', this.handleResize)
-            document.removeEventListener('click', this.handleClickOutside)
         },
-        handleResize() {
-            const el = this.$refs.labels.getBoundingClientRect()
-            eventBus.emit('modal', { el })
-        },
+        
 
     },
     components: {

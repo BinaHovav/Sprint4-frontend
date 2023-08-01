@@ -1,5 +1,5 @@
 <template >
-    <div ref="appmodal" v-if="isVisible" :style="modalPlace" class="app-modal" v-clickOutside="setInfo">
+    <div ref="appmodal" v-if="isVisible" :style="modalPlace" class="app-modal" v-clickOutside="setInfo" @click.stop="">
         <header class="modal-header">
             <button v-if="backBtn" @click.stop="changeBackBtn" class="header-back"><span
                     v-icon="'arrowLeft'"></span></button>
