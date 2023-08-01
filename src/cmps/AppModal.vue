@@ -88,25 +88,14 @@ export default {
       } else {
         this.modalPlace.left = screen.width - 304 + 'px'
       }
-      if (this.type !== 'CreateBoardModal') {
-        setTimeout(() => {
-          const ele = this.$refs.appmodal.getBoundingClientRect()
-          if (el.top + ele.height > screen.height) {
-            this.modalPlace.top = '55px'
-          } else {
-            this.modalPlace.top = el.bottom + 'px'
-          }
-        }, 100)
-      } else {
-        setTimeout(() => {
-          const ele = this.$refs.appmodal.getBoundingClientRect()
-          if (el.top + ele.height > screen.height) {
-            this.modalPlace.bottom = el.top + 'px'
-          } else {
-            this.modalPlace.top = el.bottom + 'px'
-          }
-        }, 100)
-      }
+      setTimeout(() => {
+        const ele = this.$refs.appmodal.getBoundingClientRect()
+        if (el.top + ele.height > screen.height) {
+          this.modalPlace.top = '55px'
+        } else {
+          this.modalPlace.top = el.bottom + 'px'
+        }
+      }, 100)
     },
     setInfo(info) {
       info ? eventBus.emit('setInfo', info) : eventBus.emit('setInfo')
