@@ -60,12 +60,11 @@ export default {
             this.$emit('saveLabel', this.editableLabel)
         },
         removeLabel() {
-            console.log(this.editableLabel);
             this.$emit('removeLabel', this.editableLabel)
         }
     },
     computed: {
-
+        
     },
 }
 </script>

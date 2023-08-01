@@ -147,7 +147,8 @@ export default {
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
       ]
-      const dateObj = new Date(this.task.date.dueDate * 1000)
+      const dateObj = new Date(this.task.date.dueDate*1000)
+      console.log('test',dateObj);
       const month = months[dateObj.getMonth()]
       const day = dateObj.getDate()
       const hours = dateObj.getHours()
@@ -161,20 +162,6 @@ export default {
   },
   created() {
     this.getTask()
-    eventBus.on('setInfo', (info) => {
-      if (info) {
-        this.task = info.task
-        this.board = info.board
-        this.onSaveTask()
-        console.log('isOpen?',this.modalOpen);
-      } else {
-        setTimeout(() => {
-          this.modalOpen = false
-          console.log('isOpen?',this.modalOpen);
-          window.removeEventListener('resize', this.handleResize)
-        }, 200);
-      }
-    })
   },
   unmounted() {
     window.removeEventListener('resize', this.handleResize)
@@ -220,6 +207,19 @@ export default {
       eventBus.emit('modal', { el, type, info })
       this.modalOpen = true
       window.addEventListener('resize', this.handleResize)
+      eventBus.on('setInfo', (info) => {
+      if (info) {
+        this.task = info.task
+        this.board = info.board
+        this.onSaveTask()
+      } else {
+        setTimeout(() => {
+          this.modalOpen = false
+          window.removeEventListener('resize', this.handleResize)
+          eventBus.off('setInfo')
+        }, 200);
+      }
+    })
     },
     handleResize() {
       const el = this.$refs[this.modalRef].getBoundingClientRect()
