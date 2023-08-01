@@ -58,7 +58,7 @@
             </section>
             <button class="btn-save" @click="onSave">Save</button>
             <div class="quick-card-editor-buttons">
-                <div class="quick-card-editor-btn" ref="">
+                <div class="quick-card-editor-btn" ref="" @click="onTaskDetails">
                     <span class="btn-card"></span>
                     <span class="btn-text">Open card</span>
                 </div>
@@ -82,7 +82,7 @@
                     <span class="btn-card"></span>
                     <span class="btn-text">Copy</span>
                 </div>
-                <div class="quick-card-editor-btn" ref="editorDate" @click="openModal('DatePickerModal', 'datePickerSide')">
+                <div class="quick-card-editor-btn" ref="editorDate" @click="openModal('DatePickerModal', 'editorDate')">
                     <span class="btn-clock"></span>
                     <span class="btn-text">Edit dates</span>
                 </div>
@@ -159,7 +159,13 @@ export default {
             return `${doneCount}/${sum}`
         },
         getPos() {
-            // return {right: '30px'}
+            const screen = { width: window.innerWidth, height: window.innerHeight }
+            const clickPos = this.cords
+            const left = clickPos.left - 256 + 32 + 'px'
+            var top = clickPos.top - 2
+            if (screen.height - clickPos.bottom <= 200) top -= 200
+            top += 'px'
+            return { left, top }
         }
     },
     created() { },
@@ -190,20 +196,26 @@ export default {
                 await this.$store.dispatch(getActionUpdateBoard(board))
             }
             catch {
-                console.log('cant update task');
+                console.log('Cannot update task');
             }
         },
         onSave() {
             this.updateTask()
             this.isVisible = false
         },
-        onTaskDetails() {
-            const boardId = this.$route.params.id
-            this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
-        },
-        removeTask(taskId) {
-            this.$emit('removeTask', taskId)
+        async removeTask(taskId) {
+            const board = JSON.parse(JSON.stringify(this.currBoard))
+            const idx = this.group.tasks.findIndex(task => task.id === taskId)
+            this.group.tasks.splice(idx, 1)
+            const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
+            board.groups.splice(groupIdx, 1, this.group)
             this.closeEditor()
+            try {
+                await this.$store.dispatch(getActionUpdateBoard(board))
+            }
+            catch {
+                console.log('Cannot remove task');
+            }
         },
         getLabelById(labelId) {
             return this.currBoard.labels?.find((label) => label.id === labelId)
@@ -240,7 +252,6 @@ export default {
             return formattedDate
         },
         closeEditor() {
-            console.log(this.isModalOpen);
             if (!this.isModalOpen) this.isVisible = false
         },
         openModal(type, elRef) {
@@ -262,6 +273,13 @@ export default {
 
                 }
             })
+        },
+        onTaskDetails() {
+            const boardId = this.currBoard._id
+            const groupId = this.group.id
+            const taskId = this.task.id
+            this.closeEditor()
+            this.$router.push(`/board/${boardId}/group/${groupId}/task/${taskId}`)
         },
 
 
