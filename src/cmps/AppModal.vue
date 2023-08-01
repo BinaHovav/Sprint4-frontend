@@ -43,7 +43,9 @@ export default {
                 this.isVisible = true
                 this.setModalLocation(el)
                 if (type) {
-                    this.info = JSON.parse(JSON.stringify(info))
+                    if (info) {
+                        this.info = JSON.parse(JSON.stringify(info))
+                    }
                     this.type = type
                 }
             } else {
@@ -110,7 +112,8 @@ export default {
         ListActions,
         ChecklistModal,
         CoverModal,
-        DatePickerModal
+        DatePickerModal,
+        CreateBoardModal
     }
 }
 </script>
