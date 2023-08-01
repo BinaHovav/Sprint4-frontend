@@ -36,13 +36,13 @@
                     </div>
                 </div>
                 <div class="checklist-add-item" @blue="toggleAddTodo($event, checklist.id)">
-                    <button @click="toggleAddTodo($event, checklist.id)">Add an item</button>
+                    <button @click.stop="toggleAddTodo($event, checklist.id)">Add an item</button>
                     <textarea @keyup.enter="addTodo(checklist?.todos, checklist.id)" :ref="checklist.id"
                         class="add-item" placeholder="Add an item" v-focus></textarea>
                     <form @keyup.enter="addTodo(checklist?.todos, checklist.id)"
                         class="add-item-options">
-                        <input @click="addTodo(checklist?.todos, checklist.id)" type="submit" value="Add">
-                        <a @click="toggleAddTodo($event, checklist.id)" class="add-item-cancel">Cancel</a>
+                        <input @click.stop="addTodo(checklist?.todos, checklist.id)" type="submit" value="Add">
+                        <a @click.stop="toggleAddTodo($event, checklist.id)" class="add-item-cancel">Cancel</a>
                         <div class="add-item-spacer"></div>
                     </form>
                 </div>
@@ -62,6 +62,7 @@ export default {
     },
     data() {
         return {
+            addItem:false
         }
     },
     created() {
@@ -100,7 +101,6 @@ export default {
             const todo = { id: utilService.makeId(4), txt: '', isDone: false }
             todo.txt = this.$refs[checklistRef][0].value
             this.$refs[checklistRef][0].value = ''
-            // this.$refs[checklistRef][0].focus()
             todos.push(todo)
             this.$emit('onSaveTask')
         },

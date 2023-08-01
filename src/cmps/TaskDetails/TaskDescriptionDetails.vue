@@ -15,15 +15,17 @@
             </div>
             <div class="description-content">
                 <div class="description-txt">
-                    <div v-if="isEditable" class="description-quill">
-                        <QuillEditor ref="quill" theme="snow" toolbar="essential" dir="auto" />
+                    <div v-if="isEditable" class="description-quill" >
+                        <div class="quill">
+                            <QuillEditor ref="quill" theme="snow" toolbar="essential" dir="auto" />
+                        </div>
+                        <div v-if="isEditable" class="description-save-cancel">
+                            <button class="description-save" @click.stop="saveDescription">Save</button>
+                            <button class="description-cancel" @click.stop="saveDescription('cancel')">Cancel</button>
+                        </div>
                     </div>
                     <div v-if="!isEditable && !task.description" @click="openDescriptionEdit">Add a more detailed description...</div>
                     <div v-if="!isEditable" class="all" @click="openDescriptionEdit" dir="auto" v-html="task.description"></div>
-                    <div v-if="isEditable" class="description-save-cancel">
-                        <button class="description-save" @click.stop="saveDescription">Save</button>
-                        <button class="description-cancel" @click.stop="saveDescription('cancel')">Cancel</button>
-                    </div>
                 </div>
             </div>
         </div>

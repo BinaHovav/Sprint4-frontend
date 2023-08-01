@@ -1,0 +1,319 @@
+.date-picker-container {
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 12px;
+    .date-picker {
+        box-sizing: border-box;
+        appearance: none;
+        border: none;
+        display: inline-block;
+        user-select: none;
+        width: 100%;
+        .vc-pane-container {
+            width: 110%;
+            display: flex;
+            flex-direction: column;
+        }
+        .vc-container {
+            display: flex;
+            box-sizing: border-box;
+            gap: 0.75rem;
+            flex-direction: column;
+            border: 0;
+            .vc-header {
+                box-sizing: border-box;
+                appearance: none;
+                border: none;
+                width: 100%;
+                margin-top: 0;
+                margin-block-end: 16px;
+                .vc-arrow {
+                    -webkit-box-align: baseline;
+                    align-items: baseline;
+                    border-width: 0px;
+                    border-radius: 3px;
+                    box-sizing: border-box;
+                    display: inline-flex;
+                    font-size: inherit;
+                    font-style: normal;
+                    font-family:
+                        -apple-system,
+                        BlinkMacSystemFont,
+                        Segoe UI,
+                        Roboto,
+                        Noto Sans,
+                        Ubuntu,
+                        Droid Sans,
+                        Helvetica Neue,
+                        sans-serif;
+                    font-weight: 500;
+                    max-width: 100%;
+                    position: relative;
+                    text-align: center;
+                    text-decoration: none;
+                    transition:
+                        background 0.1s ease-out 0s,
+                        box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+                    white-space: nowrap;
+                    background: $clr-background-neutral-subtle;
+                    cursor: pointer;
+                    line-height: inherit;
+                    padding: 0px;
+                    vertical-align: baseline;
+                    -webkit-box-pack: center;
+                    justify-content: center;
+                    color: $clr-text !important;
+                    opacity: 1;
+                    transition: opacity 0.3s ease 0s;
+                    display: flex;
+                    margin: 0px;
+                    -webkit-box-flex: 0;
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                    align-self: center;
+                    font-size: 0px;
+                    line-height: 0;
+                    user-select: none;
+                    display: inline-block;
+                    flex-shrink: 0;
+                    line-height: 1;
+                    & svg {
+                        overflow: hidden;
+                        // pointer-events: none;
+                        max-width: 100%;
+                        max-height: 100%;
+                        color: $icon-primary-color;
+                        // fill: $icon-secondary-color;
+                        vertical-align: bottom;
+                        width: 20px;
+                        height: 20px;
+                    }
+                    &:hover {
+                        background: $clr-background-neutral-subtle-hovered;
+                        text-decoration: inherit;
+                        transition-duration: 0s, 0.15s;
+                        color: $clr-text !important;
+                    }
+                }
+                .vc-title {
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    color: $clr-text;
+                    font-size: 14px;
+                    font-weight: 600;
+                    letter-spacing: -0.003em;
+                    line-height: 16px;
+                    background-color: #fff;
+                    &:hover {
+                        cursor: default;
+                        opacity: 1;
+                    }
+                }
+            }
+            .vc-weekdays {
+                box-sizing: border-box;
+                margin: 0px;
+                padding: 0px;
+                font-family: var(
+                    --ds-font-family-sans,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    "Roboto",
+                    "Oxygen",
+                    "Ubuntu",
+                    "Fira Sans",
+                    "Droid Sans",
+                    "Helvetica Neue",
+                    sans-serif
+                );
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                vertical-align: middle;
+                white-space: nowrap;
+                text-align: center;
+                line-height: 16px;
+                color: $clr-text-subtle;
+                .vc-weekday {
+                    font-size: 11px;
+                    color: $clr-text-subtle;
+                }
+            }
+        }
+        .vc-monthly .is-not-in-month * {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .vc-week:last-child {
+            display: none;
+        }
+    }
+    .vc-highlight-bg-light {
+        background-color: #fff;
+        border-radius: var(--vc-rounded-full);
+        color: $clr-text-subtle;
+    }
+    .date-picker-time {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .start-date {
+            margin-bottom: 12px;
+            .start-date-container {
+                display: flex;
+                flex-wrap: wrap;
+                max-width: 100%;
+                .start-date-title {
+                    color: $clr-text-subtle;
+                    display: block;
+                    font-size: 12px;
+                    font-weight: 700;
+                    line-height: 16px;
+                    margin-bottom: 4px;
+                    width: 100%;
+                    margin-top: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    max-width: 100%;
+                }
+                .start-date-time-picker {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: center;
+                    margin: 0;
+                    padding: 0;
+                    margin-top: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    max-width: 100%;
+                    span {
+                        position: relative;
+                        flex-shrink: 0;
+                        border-radius: 2px;
+                        height: 16px;
+                        width: 16px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        transition: all 0.2s ease-in-out;
+                        background-color: #ffffff;
+                        box-shadow: inset 0 0 0 2px rgba(9, 30, 66, 0.1411764706);
+                        margin-inline-end: 8px;
+                        &.checked {
+                            background-color: #0c66e4;
+                            box-shadow: inset 0 0 0 2px #0c66e4;
+                        }
+                        svg {
+                            fill: #ffffff;
+                        }
+                    }
+                    input {
+                        outline: none;
+                        border: none;
+                        box-sizing: border-box;
+                        color: $clr-text;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                            "Droid Sans", "Helvetica Neue", sans-serif;
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 400;
+                        transition-property: background-color, border-color, box-shadow;
+                        transition-duration: 85ms;
+                        transition-timing-function: ease;
+                        border-radius: 3px;
+                        padding: 6px;
+                        width: 90px;
+                        margin: 0;
+                        background-color: $clr-background-input;
+                        box-shadow: inset 0 0 0 2px $clr-border-focused;
+                        &.start-timer {
+                            margin-inline-end: 8px;
+                        }
+                    }
+                }
+            }
+        }
+        .due-date {
+            margin-bottom: 12px;
+            .due-date-container {
+                display: flex;
+                flex-wrap: wrap;
+                max-width: 100%;
+                .due-date-title {
+                    color: $clr-text-subtle;
+                    display: block;
+                    font-size: 12px;
+                    font-weight: 700;
+                    line-height: 16px;
+                    margin-bottom: 4px;
+                    width: 100%;
+                    margin-top: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    max-width: 100%;
+                }
+                .due-date-time-picker {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: center;
+                    margin: 0;
+                    padding: 0;
+                    margin-top: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    max-width: 100%;
+                    span {
+                        position: relative;
+                        flex-shrink: 0;
+                        border-radius: 2px;
+                        height: 16px;
+                        width: 16px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        transition: all 0.2s ease-in-out;
+                        background-color: #ffffff;
+                        box-shadow: inset 0 0 0 2px rgba(9, 30, 66, 0.1411764706);
+                        margin-inline-end: 8px;
+                        &.checked {
+                            background-color: #0c66e4;
+                            box-shadow: inset 0 0 0 2px #0c66e4;
+                        }
+                        svg {
+                            fill: #ffffff;
+                        }
+                    }
+                    input {
+                        outline: none;
+                        border: none;
+                        box-sizing: border-box;
+                        color: $clr-text;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu",
+                            "Droid Sans", "Helvetica Neue", sans-serif;
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 400;
+                        transition-property: background-color, border-color, box-shadow;
+                        transition-duration: 85ms;
+                        transition-timing-function: ease;
+                        border-radius: 3px;
+                        padding: 6px;
+                        width: 90px;
+                        margin: 0;
+                        background-color: $clr-background-input;
+                        box-shadow: inset 0 0 0 2px $clr-border-focused;
+                        &.due-timer {
+                            margin-inline-end: 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
