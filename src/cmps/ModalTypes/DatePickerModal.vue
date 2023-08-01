@@ -75,11 +75,7 @@ export default {
             return (hour > 12) ? `${hour - 12}:${min} PM` : `${hour}:${min} AM`
         },
         saveDueDate(){
-            console.log(this.dueDate);
             const numDate = parseInt(this.dueDate.getTime() / 1000)
-            console.log(numDate);
-            console.log(Date.now())
-            if (numDate > Date.now()) console.log('tooEarly')
             this.info.task.date.dueDate = numDate
             this.$emit('setInfo', this.info)
         },

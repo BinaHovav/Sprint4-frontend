@@ -7,7 +7,7 @@
                     <h3>{{ checklist?.title }}</h3>
                     <div class="checklist-options">
                         <a class="show-checked">Show checked items</a>
-                        <a class="checklist-remove-btn" @click="removeChecklist(checklist.id)">Delete</a>
+                        <a class="checklist-remove-btn" @click.stop="removeChecklist(checklist.id)">Delete</a>
                     </div>
                 </div>
             </div>
@@ -21,21 +21,21 @@
             </div>
             <div class="checklist-list">
                 <div v-for="item in checklist?.todos" class="checklist-item">
-                    <div @click="setItemDone(checklist.id, item.id)" class="checklist-checkbox" :class="{ 'checked': item.isDone }" v-icon="'checkBox'"></div>
+                    <div @click.stop="setItemDone(checklist.id, item.id)" class="checklist-checkbox" :class="{ 'checked': item.isDone }" v-icon="'checkBox'"></div>
                     <div class="checklist-item-details">
                         <div class="checklist-item-row">
                             <div class="checklist-text">
                                 <span :class="{ 'checked': item.isDone }">{{ item.txt }}</span>
                                 <div class="checklist-text-options">
                                     <div class="checklist-text-item-actions">
-                                        <a><span @click="removeTodo(item.id,checklist.id)"></span></a>
+                                        <a><span @click.stop="removeTodo(item.id,checklist.id)"></span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="checklist-add-item" @blue="toggleAddTodo($event, checklist.id)">
+                <div class="checklist-add-item" @blur="toggleAddTodo($event, checklist.id)">
                     <button @click.stop="toggleAddTodo($event, checklist.id)">Add an item</button>
                     <textarea @keyup.enter="addTodo(checklist?.todos, checklist.id)" :ref="checklist.id"
                         class="add-item" placeholder="Add an item" v-focus></textarea>

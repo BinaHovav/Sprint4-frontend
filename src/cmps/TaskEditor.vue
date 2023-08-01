@@ -160,7 +160,6 @@ export default {
         },
         getPos() {
             const screen = { width: window.innerWidth, height: window.innerHeight }
-            console.log(this.cords);
             const clickPos = this.cords
             // const left = clickPos.left - 256 + 32 + 'px'
             const left = clickPos.left + 'px'

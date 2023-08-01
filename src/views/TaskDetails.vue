@@ -69,12 +69,12 @@
               <div class="task-details-item">
                 <h3>Due date</h3>
                 <div class="task-details-due-date">
-                  <a @click="dueDateChecked = !dueDateChecked" class="due-date-complete"
-                    :class="{ 'checked': dueDateChecked }" v-icon="'checkBox'"></a>
+                  <a @click.stop="task.date.isDone = !task.date.isDone" class="due-date-complete"
+                    :class="{ 'checked': task.date.isDone }" v-icon="'checkBox'"></a>
                   <div class="due-date-time-container">
                     <div>
                       <button class="due-date-btn">
-                        <span> {{ dueDate }}</span>
+                        <span> {{ dueDate }} <span v-if="dueDateProgress === 'soon'">Due soon</span><span v-if="dueDateProgress === 'over'">Overdue</span></span>
                         <span class="due-date-icon"><span class="due-date-icon-span" v-icon="'arrowDown'"></span></span>
                       </button>
                     </div>
@@ -148,7 +148,6 @@ export default {
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
       ]
       const dateObj = new Date(this.task.date.dueDate*1000)
-      console.log('test',dateObj);
       const month = months[dateObj.getMonth()]
       const day = dateObj.getDate()
       const hours = dateObj.getHours()
@@ -158,6 +157,13 @@ export default {
       const displayMinutes = minutes.toString().padStart(2, '0')
       const formattedDate = `${month} ${day} at ${displayHours}:${displayMinutes} ${ampm}`
       return formattedDate
+    },
+    dueDateProgress(){
+      const taskDate = this.task.date.dueDate * 1000
+      const now = Date.now()
+      // let timeProgress = 
+      if (now > taskDate) timeProgress = 'over'
+      return 'soon'
     }
   },
   created() {

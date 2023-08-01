@@ -58,7 +58,6 @@ export default {
       this.updateGroup()
     },
     removeTask(taskId) {
-      console.log(taskId)
       const idx = this.clonedGroup.tasks.findIndex((task) => task.id === taskId)
       this.clonedGroup.tasks.splice(idx, 1)
       this.updateGroup()
