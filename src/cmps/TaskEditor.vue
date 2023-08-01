@@ -287,4 +287,5 @@ export default {
     components: {
     },
 }
+
 </script>
