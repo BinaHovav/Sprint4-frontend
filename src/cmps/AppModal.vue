@@ -4,7 +4,7 @@
             <button v-if="backBtn" @click.stop="changeBackBtn" class="header-back"><span
                     v-icon="'arrowLeft'"></span></button>
             <span class="header-title">{{ headerTitle }}</span>
-            <a class="close-modal" @click="isVisible = false">
+            <a class="close-modal" @click.stop="closeModal">
             </a>
         </header>
         <Component :is="type" :info="info" @closeModal="isVisible = false" @setInfo="setInfo" :backBtn="backBtn"
@@ -75,6 +75,7 @@ export default {
             if (info) {
                 eventBus.emit('setInfo', info)
             } else {
+                console.log('test');
                 eventBus.emit('setInfo')
                 this.isVisible = false
             }
@@ -83,6 +84,10 @@ export default {
             this.edit = (labelId) ? true : false
             this.backBtn = !this.backBtn
             eventBus.emit('showBackBtn', this.backBtn)
+        },
+        closeModal(){
+            eventBus.emit('setInfo')
+            this.isVisible = false
         }
     },
     computed: {

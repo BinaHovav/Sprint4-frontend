@@ -88,6 +88,8 @@ export default {
             if (labelToRemove.id) {
                 const idx = this.info.board.labels.findIndex(label => labelToRemove.id === label.id)
                 this.info.board.labels.splice(idx, 1)
+                const taskIdx = this.info.task.labels.findIndex(label => label.id === labelToRemove.id)
+                this.info.task.labels.splice(taskIdx,1)
             }
             this.setInfo()
             this.showCreate = false
