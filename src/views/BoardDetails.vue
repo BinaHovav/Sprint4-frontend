@@ -40,6 +40,7 @@ export default {
     onCloseMenu() {
       this.showMenu = false
     },
+
     async setBoard() {
       try {
         const boardId = this.$route.params.id
