@@ -88,6 +88,7 @@ export default {
       } else {
         this.modalPlace.left = screen.width - 304 + 'px'
       }
+
       setTimeout(() => {
         const ele = this.$refs.appmodal.getBoundingClientRect()
         if (el.top + ele.height > screen.height) {
