@@ -774,12 +774,135 @@
                     .description-content {
                         position: relative;
                         margin-left: 40px;
+                        word-wrap: break-word;
                         .description-txt {
-                            p {
-                                margin: 0;
+                            cursor: pointer;
+                            & > h1,
+                            h2,
+                            h3,
+                            h4,
+                            h5,
+                            h6:not(:first-child) {
+                                margin-top: 0.75rem;
+                            }
+                            & h1 {
+                                font-size: 2em;
+                            }
+                            & h2 {
+                                font-size: 1.5em;
+                            }
+                            & h3 {
+                                font-size: 1.17em;
+                            }
+                            & h4 {
+                                font-size: 1em;
+                            }
+                            & h5 {
+                                font-size: 0.83em;
+                            }
+                            & h6 {
+                                font-size: 0.67em;
+                                line-height: 1.45455;
+                            }
+                            .description-quill {
+                                display: block;
+                                float: left;
+                                padding-bottom: 9px;
+                                width: 100%;
+                                z-index: 50;
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                box-shadow: 0 0 0 2px inset $clr-border-brand;
+                                background-color: $clr-background-input;
+                                display: flex;
+                                flex-direction: column;
+                                min-width: 272px;
+                                height: auto;
+                                border: 1px solid $clr-border;
+                                box-sizing: border-box;
+                                border-radius: 3px;
+                                max-width: inherit;
                                 overflow-wrap: break-word;
-                                word-break: break-word;
-                                cursor: pointer;
+                                min-height: 275px;
+                                animation: auto ease 0s 1 normal none running none;
+                                padding: 2px;
+                                border: none;
+                                .ql-toolbar {
+                                    -webkit-box-align: center;
+                                    align-items: center;
+                                    display: flex;
+                                    height: auto;
+                                    background-color: $clr-surface;
+                                    box-shadow: none;
+                                    padding-left: 20px;
+                                    position: sticky;
+                                    z-index: 500;
+                                    top: 0px;
+                                    transition: box-shadow 0.2s ease-in-out 0s;
+                                    box-shadow: 0 2px 0 0 $clr-border;
+                                    &:first-child {
+                                        border-radius: 3px 3px 0 0;
+                                        padding-left: 8px;
+                                    }
+                                    button {
+                                        margin-bottom: 0;
+                                    }
+                                    .ql-align {
+                                        display: none;
+                                    }
+                                }
+                                .ql-container {
+                                    overflow-wrap: break-word;
+                                    -webkit-box-flex: 1;
+                                    flex-grow: 1;
+                                    height: auto;
+                                    min-height: 223px;
+                                    cursor: text;
+                                    .ql-editor {
+                                        -webkit-box-flex: 1;
+                                        flex-grow: 1;
+                                        overflow: hidden auto;
+                                        line-height: 24px;
+                                        padding: 20px;
+                                        & > h1,
+                                        h2,
+                                        h3,
+                                        h4,
+                                        h5,
+                                        h6,
+                                        p:not(:first-child) {
+                                            font-size: 1em;
+                                            line-height: 1.714;
+                                            font-weight: normal;
+                                            margin-top: 0.75rem;
+                                            margin-bottom: 0px;
+                                            letter-spacing: -0.005em;
+                                        }
+                                        & > :first-child {
+                                            margin-top: 0;
+                                        }
+                                        & h1 {
+                                            font-size: 2em;
+                                        }
+                                        & h2 {
+                                            font-size: 1.5em;
+                                        }
+                                        & h3 {
+                                            font-size: 1.17em;
+                                        }
+                                        & h4 {
+                                            font-size: 1em;
+                                        }
+                                        & h5 {
+                                            font-size: 0.83em;
+                                        }
+                                        & h6 {
+                                            font-size: 0.67em;
+                                            line-height: 1.45455;
+                                        }
+                                    }
+                                }
                             }
                             .description-save-cancel {
                                 clear: both;

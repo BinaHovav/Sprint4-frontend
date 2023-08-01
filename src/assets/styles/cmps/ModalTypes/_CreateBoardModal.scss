@@ -1,0 +1,154 @@
+.create-board-modal {
+    // display: flex;
+    // flex-direction: column;
+    // padding: 5px;
+    // align-items: center;
+    // justify-content: center;
+    // max-width: 300px;
+
+    .create-board-header {
+        // padding: 0 8px;
+        // position: relative;
+        // text-align: center;
+        // display: grid;
+        // align-items: center;
+        // grid-template-columns: 32px 1fr 32px;
+        .create-board-title {
+            // color: $clr-text-subtle;
+            // font-size: 16px;
+            // font-weight: 600;
+            // letter-spacing: -0.003em;
+            // line-height: 40px;
+            // display: block;
+            // position: relative;
+            // // height: 40px;
+            // margin: 0;
+            // overflow: hidden;
+            // padding: 0 32px;
+
+            // text-overflow: ellipsis;
+            // white-space: nowrap;
+            // grid-column: 1 / span 3;
+            // grid-row: 1;
+        }
+    }
+    .create-board-modal-body {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        max-height: 813px;
+        font-weight: 600;
+        margin-top: -15px;
+        .board-example {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 8px;
+            position: relative;
+            .dynamic-board {
+                // position: absolute;
+                width: 225px;
+                height: 145px;
+                border-radius: 5px;
+                top: 50%;
+                left: 50%;
+                // transform: translate(-50%, -50%);
+            }
+            .svg-board {
+                position: absolute;
+                width: 200px;
+                height: 120px;
+                border-radius: 5px;
+                top: 47%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 4;
+            }
+        }
+        .background-picker-container {
+            // padding: 10px;
+            label {
+                font-size: 12px;
+                margin-bottom: 14px;
+                margin-top: 12px;
+            }
+            .background-picker {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 4px;
+                margin-bottom: 4px;
+                gap: 5px;
+                // justify-content: space-between;
+
+                .background-option {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 0;
+                    width: 64px;
+                    height: 40px;
+
+                    img {
+                        width: 64px;
+                        height: 40px;
+
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                    .check-icon {
+                        @include trello-icon($content: $icon-checked, $color: #fff);
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        opacity: 0;
+                    }
+                    &:hover {
+                        filter: brightness(60%);
+                    }
+                    &:focus {
+                        filter: brightness(60%);
+                    }
+                    &:focus .check-icon {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        .new-board-title {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 12px;
+            .title-input {
+                margin-top: 2px;
+                padding: 8px 12px;
+            }
+        }
+        .create-board-btn {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            button {
+                width: 100%;
+                margin-top: 16px;
+                background-color: $clr-background-brand-bold;
+                box-shadow: none;
+                border: none;
+                padding: 8px 12px;
+                color: $clr-text-inverse;
+                cursor: pointer;
+                &:hover {
+                    background-color: $clr-background-brand-bold-hovered;
+                }
+            }
+        }
+    }
+}

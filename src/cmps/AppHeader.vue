@@ -39,9 +39,7 @@
           </span>
         </button>
         <div class="create-menu">
-          <button class="create-menu-button">
-            <p>Create</p>
-          </button>
+          <button class="create-menu-button" ref="createBoardAppHeader" @click="openModal('CreateBoardModal', 'createBoardAppHeader')"><p>Create</p></button>
         </div>
       </div>
       <div class="nav-right-content">
@@ -101,10 +99,16 @@ import { eventBus } from '../services/event-bus.service'
 
 export default {
   name: 'AppHeader',
+  data() {
+    return {
+      bgImg: '',
+    }
+  },
   created() {
-    eventBus.on('backgroundChange', () => {
-      this.getAverageColor()
-    })
+    // eventBus.on('backgroundChange', () => {
+    //   this.getAverageColor()
+    // })
+    this.getAverageColor()
   },
 
   watch: {
@@ -113,12 +117,28 @@ export default {
         this.$refs.header.style.backgroundColor = 'white'
       }
     },
+    board: function (newValue) {
+      if (this.bgImg !== newValue.imgUrl) this.bgImg = newValue.imgUrl
+      this.getAverageColor()
+    },
   },
 
   methods: {
+    openModal(type, elRef) {
+      // const board = JSON.parse(JSON.stringify(this.board))
+      // const info = { board }
+      const el = this.$refs[elRef].getBoundingClientRect()
+      eventBus.emit('modal', { el, type })
+      window.addEventListener('resize', this.handleResize)
+      // document.removeEventListener('click', this.handleClickOutside)
+    },
+    handleResize() {
+      const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
+      eventBus.emit('modal', { el })
+    },
     getAverageColor() {
       const img = new Image()
-      img.src = this.board?.imgUrl
+      img.src = this.bgImg
       img.crossOrigin = 'Anonymous'
 
       img.onload = () => {

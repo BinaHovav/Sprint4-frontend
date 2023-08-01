@@ -69,6 +69,7 @@ function getEmptyBoard() {
   return {
     _id: '',
     title: '',
+    imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg',
     isStarred: false,
     archivedAt: null,
     createdBy: null,
@@ -94,7 +95,11 @@ function getEmptyTask() {
     description: '',
     members: [],
     labels: [],
-    dueDate: null,
+    date: {
+      dueDate: null,
+      startDate: null,
+      isDone: false,
+    },
     checklists: [],
     attachment: null,
     activity: [],
@@ -227,7 +232,11 @@ function getEmptyActivity() {
 //                 description: 'Conduct an in-depth market l107 to identify potential opportunities, target markets, and competitor solutions in the gas station automation industry.',
 //                 members: ['u101', 'u102', 'u103'],
 //                 labels: ['l104', 'l102'],
-//                 dueDate: 1690303727,
+//                 date: {
+//                   dueDate: 1690303727,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [
 //                   {
 //                     id: utilService.makeId(6),
@@ -251,7 +260,11 @@ function getEmptyActivity() {
 //                 description: 'Evaluate existing robotic technologies, sensors, and AI algorithms suitable for automating gas station tasks.',
 //                 members: ['u102', 'u103'],
 //                 labels: ['l106', 'l107', 'l103'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [
 //                   {
 //                     id: utilService.makeId(6),
@@ -287,7 +300,11 @@ function getEmptyActivity() {
 //                 description: 'Research and understand the legal and safety regulations related to deploying robots in gas station environments.',
 //                 members: ['u103'],
 //                 labels: ['l106', 'l107', 'l103'],
-//                 dueDate: 1691661600,
+//                 date: {
+//                   dueDate: 1691661600,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: null,
 //                 activity: [],
@@ -300,7 +317,11 @@ function getEmptyActivity() {
 //                 description: 'Perform a cost-benefit l107 to assess the financial viability and potential return on investment (ROI) of the robot deployment.',
 //                 members: ['u102', 'u103'],
 //                 labels: ['l106', 'l107', 'l102'],
-//                 dueDate: 1691834400,
+//                 date: {
+//                   dueDate: 1691834400,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: null,
 //                 activity: [],
@@ -312,7 +333,11 @@ function getEmptyActivity() {
 //                 description: 'Create a detailed project timeline with key milestones and deadlines for the entire development process.',
 //                 members: ['u101', 'u102', 'u103'],
 //                 labels: ['l110', 'l102'],
-//                 dueDate: 1690884000,
+//                 date: {
+//                   dueDate: 1690884000,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif',
 //                 activity: [],
@@ -333,7 +358,11 @@ function getEmptyActivity() {
 //                 description: 'Design the initial concept and architecture of the gas station robots, considering safety, efficiency, and user-friendliness.',
 //                 members: ['u101', 'u102'],
 //                 labels: ['l106', 'l102', 'l105'],
-//                 dueDate: 1690303727,
+//                 date: {
+//                   dueDate: 1690303727,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [
 //                   {
 //                     id: 'c101',
@@ -356,7 +385,11 @@ function getEmptyActivity() {
 //                 description: 'Select appropriate hardware components, including robotic arms, sensors, cameras, and communication modules.',
 //                 members: ['u101', 'u103'],
 //                 labels: ['l110', 'l103'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: null,
 //                 activity: [],
@@ -372,7 +405,11 @@ function getEmptyActivity() {
 //                 description: 'Develop the software and AI algorithms to enable autonomous navigation, fueling, maintenance, and customer interactions.',
 //                 members: ['u101', 'u102', 'u103'],
 //                 labels: ['l106', 'l103'],
-//                 dueDate: 1691143200,
+//                 date: {
+//                   dueDate: 1691143200,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [
 //                   {
 //                     id: utilService.makeId(6),
@@ -407,7 +444,11 @@ function getEmptyActivity() {
 //                 description: 'Design a user-friendly interface for gas station attendants and customers to interact with the robots seamlessly.',
 //                 members: ['u103'],
 //                 labels: ['l110', 'l102', 'l105'],
-//                 dueDate: 1691834400,
+//                 date: {
+//                   dueDate: 1691834400,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358214/download_wdvxxq.png',
 //                 activity: [],
@@ -420,7 +461,11 @@ function getEmptyActivity() {
 //                 description: 'Build functional prototypes of the gas station robots for testing and validation.',
 //                 members: ['u101'],
 //                 labels: ['l110', 'l102', 'l109'],
-//                 dueDate: 1691056800,
+//                 date: {
+//                   dueDate: 1691056800,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: '',
 //                 activity: [],
@@ -440,7 +485,11 @@ function getEmptyActivity() {
 //                 description: 'Test the gas station robots under various scenarios to evaluate their performance, efficiency, and accuracy.',
 //                 members: ['u101', 'u103'],
 //                 labels: ['l110', 'l103'],
-//                 dueDate: 1692007200,
+//                 date: {
+//                   dueDate: 1692007200,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358903/Picture1-1-768x726_nqbwqi.png',
 //                 activity: [],
@@ -453,7 +502,11 @@ function getEmptyActivity() {
 //                 description: 'Conduct user acceptance testing with gas station staff and customers to gather feedback and make improvements.',
 //                 members: ['u101'],
 //                 labels: ['l106', 'l109', 'l107'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [
 //                   {
 //                     id: utilService.makeId(6),
@@ -477,7 +530,11 @@ function getEmptyActivity() {
 //                 description: 'Continuously improve robots functionality, user interface, and behavior based on user feedback and real-world testing results.',
 //                 members: ['u101', 'u103'],
 //                 labels: ['l106', 'l103', 'l109'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: null,
 //                 activity: [],
@@ -490,7 +547,11 @@ function getEmptyActivity() {
 //                 description: 'Perform a comprehensive security audit to safeguard robots control system from potential cyber threats.',
 //                 members: ['u102'],
 //                 labels: ['l110'],
-//                 dueDate: 1692439200,
+//                 date: {
+//                   dueDate: 1692439200,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: '',
 //                 activity: [],
@@ -510,7 +571,11 @@ function getEmptyActivity() {
 //                 description: 'Deploy a pilot fleet of gas station robots in selected gas stations to assess their performance in real-world conditions.',
 //                 members: ['u101'],
 //                 labels: ['l104', 'l102'],
-//                 dueDate: 1691661600,
+//                 date: {
+//                   dueDate: 1691661600,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: null,
 //                 activity: [],
@@ -523,7 +588,11 @@ function getEmptyActivity() {
 //                 description: 'Provide comprehensive training to gas station attendants and staff for seamless integration with the robot system.',
 //                 members: ['u101', 'u102', 'u103'],
 //                 labels: ['l110', 'l102', 'l109'],
-//                 dueDate: 1691402400,
+//                 date: {
+//                   dueDate: 1691402400,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: null,
 //                 activity: [],
@@ -536,7 +605,11 @@ function getEmptyActivity() {
 //                 description: 'Plan and execute a public relations campaign to create awareness and excitement about the innovative robotic gas station.',
 //                 members: ['u103'],
 //                 labels: ['l110', 'l105', 'l102'],
-//                 dueDate: 1691316000,
+//                 date: {
+//                   dueDate: 1691316000,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [
 //                   {
 //                     id: utilService.makeId(6),
@@ -576,7 +649,11 @@ function getEmptyActivity() {
 //                 description: 'Roll out the robotic system to gas stations across the region, starting with those that were part of the pilot program.',
 //                 members: ['u102', 'u103'],
 //                 labels: ['l110'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360236/large-scale-redundant-setup_d3wkno.png',
 //                 activity: [],
@@ -589,7 +666,11 @@ function getEmptyActivity() {
 //                 description: 'Build functional prototypes of the gas station robots for testing and validation.',
 //                 members: ['u102'],
 //                 labels: ['l110', 'l102', 'l103'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: '',
 //                 activity: [],
@@ -609,7 +690,11 @@ function getEmptyActivity() {
 //                 description: 'Monitor and evaluate robots performance, efficiency, and customer satisfaction post-launch.',
 //                 members: ['u102'],
 //                 labels: ['l104', 'l107'],
-//                 dueDate: 1692698400,
+//                 date: {
+//                   dueDate: 1692698400,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: null,
 //                 activity: [],
@@ -622,7 +707,11 @@ function getEmptyActivity() {
 //                 description: 'Gather feedback from gas station staff and customers to make continuous improvements and updates.',
 //                 members: ['u101', 'u102', 'u103'],
 //                 labels: ['l104', 'l107', 'l109'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [
 //                   {
 //                     id: utilService.makeId(6),
@@ -646,7 +735,11 @@ function getEmptyActivity() {
 //                 description: 'Plan for the expansion of the robotic gas station system to other regions and countries.',
 //                 members: ['u101'],
 //                 labels: ['l106', 'l102'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360672/wedding_table_planner_powerpoint_2_mzgb5g.jpg',
 //                 activity: [],
@@ -659,7 +752,11 @@ function getEmptyActivity() {
 //                 description: 'Regularly update robots software to introduce new features and enhancements.',
 //                 members: ['u101', 'u102', 'u103'],
 //                 labels: ['l106', 'l103'],
-//                 dueDate: null,
+//                 date: {
+//                   dueDate: null,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: '',
 //                 activity: [],
@@ -672,7 +769,11 @@ function getEmptyActivity() {
 //                 description: "Analyze key success metrics, such as customer wait times, fueling efficiency, and cost savings, to assess the project's overall impact.",
 //                 members: ['u102', 'u103'],
 //                 labels: ['l109', 'l107', 'l108'],
-//                 dueDate: 1693476000,
+//                 date: {
+//                   dueDate: 1693476000,
+//                   startDate: null,
+//                   isDone: false,
+//                 },
 //                 checklists: [],
 //                 attachment: '',
 //                 activity: [],

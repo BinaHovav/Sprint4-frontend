@@ -74,7 +74,6 @@ export default {
     },
     methods: {
         removeGroup(groupId) {
-            console.log(groupId);
             this.$emit('removeGroup', groupId)
         },
         addGroup() {

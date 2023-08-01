@@ -130,6 +130,7 @@
                         animation-timing-function: ease-in;
                         animation-fill-mode: forwards;
                     }
+
                     &.labels-open {
                         animation-name: labelsOpen;
                         animation-duration: 450ms;
@@ -167,27 +168,21 @@
             margin-left: -2px;
             max-width: 100%;
 
-            .badge {
-                color: $clr-text-subtle;
-                display: inline-block;
-                margin: 0 4px 4px 0;
-                max-width: 100%;
-                min-height: 20px;
-                overflow: hidden;
-                padding: 2px;
-                position: relative;
-                text-decoration: none;
-                text-overflow: ellipsis;
-                vertical-align: top;
-            }
+            // .date {
+            //     &:hover{
+            //         background-color: $clr-background-neutral-subtle-hovered;
+            //         border-radius: 3px;
+            //         .clock-icon{
+            //             @include trello-icon($icon-empty-checked)
+            //         }
+            //     } 
+            // }
 
             .watch-icon {
                 @include trello-icon($icon-eye)
             }
 
-            .date-icon {
-                @include trello-icon($icon-clock)
-            }
+            
 
             .description-icon {
                 @include trello-icon($icon-description)
