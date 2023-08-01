@@ -118,7 +118,7 @@ function getEmptyActivity() {
       movedCmp: '',
       movedUser: '',
     },
-    date: Date.now(),
+    createdAt: Date.now(),
     by: '',
   }
 }

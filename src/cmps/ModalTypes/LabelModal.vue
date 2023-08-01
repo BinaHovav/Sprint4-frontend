@@ -14,7 +14,8 @@
                     <span class="label-option-span">
                         <div>
                             <div class="label-styles" :class="label.color">{{ label.title }}</div>
-                            <button @click.stop="openEditLabel(label.id)"><span><span v-icon="'pencilEdit'"></span></span></button>
+                            <button @click.stop="openEditLabel(label.id)"><span><span
+                                        v-icon="'pencilEdit'"></span></span></button>
                         </div>
                     </span>
                 </label>
@@ -22,7 +23,8 @@
         </ul>
         <button class="create-label" @click.stop="openEditLabel">Create a new label</button>
     </div>
-    <CreateLabel v-if="showCreate" :currLabelId="currLabelId" :board="info.board" @saveLabel="saveLabel" @removeLabel="removeLabel" />
+    <CreateLabel v-if="showCreate" :currLabelId="currLabelId" :board="info.board" @saveLabel="saveLabel"
+        @removeLabel="removeLabel" />
 </template>
 <script>
 import { eventBus } from '../../services/event-bus.service'
@@ -84,14 +86,16 @@ export default {
             this.showCreate = false
             this.$emit('showBackBtn', this.currLabelId)
         },
-        removeLabel(labelToRemove){
-            if (labelToRemove.id) {
+        removeLabel(labelToRemove) {
+            const labelIdx = this.info.task.labels.findIndex(labelId => labelId === labelToRemove.id)
+            if (labelIdx !== -1) {
+                this.info.task.labels.splice(labelIdx, 1)
                 const idx = this.info.board.labels.findIndex(label => labelToRemove.id === label.id)
                 this.info.board.labels.splice(idx, 1)
+                this.setInfo()
+                this.showCreate = false
+                this.$emit('showBackBtn', this.currLabelId)
             }
-            this.setInfo()
-            this.showCreate = false
-            this.$emit('showBackBtn', this.currLabelId)
 
         }
     },

@@ -10,7 +10,7 @@
                     <label class="start-date-title">Start date</label>
                     <label class="start-date-time-picker">
                         <span @click.stop="isDateRange = !isDateRange" :class="{'checked' : isDateRange}" v-icon="'checkBox'"></span>
-                        <input type="text" class="start-timer" :value="getDateFormat(startDate)" :disabled="isDateRange">
+                        <input type="text" class="start-timer" :value="getDateFormat(startDate)" :disabled="!isDateRange">
                     </label>
                 </div>
             </div>
@@ -24,6 +24,10 @@
                     </label>
                 </div>
             </div>
+        </div>
+        <div class="date-container-btns">
+            <button class="date-btn-save" @click.stop="saveDueDate">Save</button>
+            <button class="date-btn-remove">Remove</button>
         </div>
     </div>
 </template>
@@ -50,16 +54,15 @@ export default {
     },
     mounted(){
         if (this.info.task.date.dueDate){
-            this.dueDate = this.info.task.date.dueDate * 1000
+            this.dueDate = this.info.task.date.dueDate 
         }
         if (this.info.task.date.startDate){
-
-            this.dueDate = this.info.task.date.dueDate * 1000
+            this.startDate = this.info.task.date.startDate
         }
     },
     methods: {
-        getDateFormat(dueDate) {
-            const date = new Date(dueDate)
+        getDateFormat(currDate) {
+            const date = new Date(currDate)
             const day = date.getDay().toString().padStart(2, '0')
             const month = date.getMonth().toString().padStart(2, '0')
             const year = date.getFullYear()
@@ -70,7 +73,20 @@ export default {
             const hour = date.getHours()
             const min = date.getMinutes()
             return (hour > 12) ? `${hour - 12}:${min} PM` : `${hour}:${min} AM`
-        }
+        },
+        saveDueDate(){
+            console.log(this.dueDate);
+            const numDate = parseInt(this.dueDate.getTime() / 1000)
+            console.log(numDate);
+            console.log(Date.now())
+            if (numDate > Date.now()) console.log('tooEarly')
+            this.info.task.date.dueDate = numDate
+            this.$emit('setInfo', this.info)
+        },
+        removeDueDate(){
+            this.info.task.date.dueDate = ''
+            this.$emit('setInfo', this.info)
+        },
     },
     computed: {
     }

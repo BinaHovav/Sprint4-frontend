@@ -165,8 +165,9 @@ export default {
             const formattedDate = `${month} ${day}`
             return formattedDate
         },
-        openEditor() {
-            eventBus.emit('onTaskEditor', { task: this.task, groupId: this.groupId })
+        openEditor(ev) {
+            const cords = ev.target.parentNode.parentNode.getBoundingClientRect()
+            eventBus.emit('onTaskEditor', { task: this.task, groupId: this.groupId, cords })
         }
 
     },
