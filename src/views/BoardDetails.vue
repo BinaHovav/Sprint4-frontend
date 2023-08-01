@@ -12,8 +12,8 @@ import TopNavbar from '../cmps/TopNavbar.vue'
 import GroupList from '../cmps/GroupList.vue'
 import RightMenu from '../cmps/RightMenu.vue'
 
-import { boardService } from '../services/board.service.local'
-// import { boardService } from '../services/board.service'
+// import { boardService } from '../services/board.service.local'
+import { boardService } from '../services/board.service'
 import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { getActionUpdateBoard } from '../store/board.store'
 

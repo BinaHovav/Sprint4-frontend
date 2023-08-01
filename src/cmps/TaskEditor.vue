@@ -160,12 +160,15 @@ export default {
         },
         getPos() {
             const screen = { width: window.innerWidth, height: window.innerHeight }
+            console.log(this.cords);
             const clickPos = this.cords
-            const left = clickPos.left - 256 + 32 + 'px'
-            var top = clickPos.top - 2
-            if (screen.height - clickPos.bottom <= 200) top -= 200
+            // const left = clickPos.left - 256 + 32 + 'px'
+            const left = clickPos.left + 'px'
+            const width = this.cords.width + 'px'
+            var top = clickPos.top
+            if (screen.height - clickPos.bottom <= 200) top -= 180
             top += 'px'
-            return { left, top }
+            return { left, top, width }
         }
     },
     created() { },

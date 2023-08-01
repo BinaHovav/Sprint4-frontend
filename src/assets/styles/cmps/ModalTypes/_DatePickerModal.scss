@@ -231,8 +231,14 @@
                         margin: 0;
                         background-color: $clr-background-input;
                         box-shadow: inset 0 0 0 2px $clr-border-focused;
-                        &.start-timer {
-                            margin-inline-end: 8px;
+                        &:disabled {
+                            background-color: $clr-background-disabled;
+                            box-shadow: none;
+                            color: $clr-text-disabled;
+                            cursor: not-allowed;
+                            -webkit-user-select: none;
+                            user-select: none;
+                            cursor: not-allowed;
                         }
                     }
                 }
@@ -314,6 +320,25 @@
                     }
                 }
             }
+        }
+    }
+    .date-container-btns {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 8px;
+        button {
+            cursor: pointer;
+        }
+        .date-btn-save {
+            background-color: $clr-background-brand-bold;
+            box-shadow: none;
+            border: none;
+            color: $clr-text-inverse;
+            width: 100%;
+            flex: 1;
+            overflow: hidden;
+            margin-right: 8px;
         }
     }
 }

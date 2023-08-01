@@ -166,8 +166,7 @@ export default {
             return formattedDate
         },
         openEditor(ev) {
-            // console.log(ev.target.getBoundingClientRect());
-            const cords = ev.target.getBoundingClientRect()
+            const cords = ev.target.parentNode.parentNode.getBoundingClientRect()
             eventBus.emit('onTaskEditor', { task: this.task, groupId: this.groupId, cords })
         }
 

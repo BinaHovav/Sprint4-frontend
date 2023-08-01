@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { boardService } from '../services/board.service.local'
+// import { boardService } from '../services/board.service.local'
+import { boardService } from '../services/board.service'
 import TaskList from './TaskList.vue'
 import { eventBus } from '../services/event-bus.service'
 export default {
