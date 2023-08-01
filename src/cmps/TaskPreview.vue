@@ -22,18 +22,30 @@
             <div class="badges">
                 <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
                 <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
-                <div @click.stop="this.$emit('onTaskIsDone',task.id)" v-if="task.date.dueDate" class="badge"
-                    :class="dateClass">
+                <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id)" class="badge"
+                    :class="dateClass" :title="dateTitle">
                     <span class="clock-icon"></span>
                     <span class="badge-text">{{ dueDate() }}</span>
                 </div>
-                <div v-if="task.description" class="badge description"><span class="description-icon"></span></div>
-                <div v-if="task.checklists?.length" class="badge checklist"><span class="checklist-icon"></span></div>
-                <div v-if="task.comments?.length" class="badge comments"><span class="comments-icon"></span></div>
-                <div v-if="task.attachment" class="badge attachment"><span class="attachment-icon"></span></div>
+                <div v-if="task.description" class="badge description" title="This card has a description">
+                    <span class="description-icon"></span>
+                </div>
+                <div v-if="task.comments?.length" class="badge comments" title="Comments">
+                    <span class="comments-icon"></span>
+                    <span class="badge-text">{{ task.comments.length }}</span>
+                </div>
+                <div v-if="task.checklists?.length" class="badge checklist" title="checklist items" :class="checklistClass">
+                    <span class="checklist-icon"></span>
+                    <span class="badge-text">{{ checklistCount }}</span>
+                </div>
+                <div v-if="task.attachments" class="badge attachment">
+                    <span class="attachment-icon"></span>
+                    <span class="badge-text">{{ task.attachments.length }}</span>
+                </div>
             </div>
-            <div class="task-members" v-for="memberId in task.members">
-                <div><img :src="getMemberById(memberId).imgUrl" alt="member" :title="getMemberById(memberId).fullname" />
+            <div class="task-members">
+                <div v-for="memberId in task.members">
+                    <img :src="getMemberById(memberId).imgUrl" alt="member" :title="getMemberById(memberId).fullname" />
                 </div>
             </div>
         </div>
@@ -49,6 +61,8 @@ export default {
     data() {
         return {
             calculatedHeight: 0,
+            dateTitle: '',
+            checklistClass: ''
         }
     },
     computed: {
@@ -64,12 +78,36 @@ export default {
         dateClass() {
             const dateObj = this.task.date.dueDate * 1000
             const now = Date.now()
-            let classDisplay = dateObj > now ? 'due' : 'is-due-past'
+            let classDisplay = ''
+            if (dateObj > now) {
+                classDisplay = 'due'
+                this.dateTitle = 'This card is due later.'
+            } else {
+                classDisplay = 'is-due-past'
+                this.dateTitle = 'This card is past due.'
+            }
             const oneDay = 60 * 60 * 24 * 1000
-            if (dateObj - now <= oneDay && dateObj - now > 0) classDisplay = 'is-due-soon'
-            if (this.task.date.isDone) classDisplay = 'is-due-complete'
+            if (dateObj - now <= oneDay && dateObj - now > 0) {
+                classDisplay = 'is-due-soon'
+                this.dateTitle = 'This card is due in less then twenty-four hours.'
+            }
+            if (this.task.date.isDone) {
+                classDisplay = 'is-due-complete'
+                this.dateTitle = 'This card is complete.'
+            }
             return classDisplay
-
+        },
+        checklistCount() {
+            let sum = 0
+            let doneCount = 0
+            this.task.checklists.forEach(checklist => {
+                sum += checklist.todos.length
+                checklist.todos.forEach(todo => {
+                    doneCount += todo.isDone ? 1 : 0
+                })
+            })
+            this.checklistClass = doneCount === sum ? 'is-checklist-complete' : ''
+            return `${doneCount}/${sum}`
         }
     },
     created() { },

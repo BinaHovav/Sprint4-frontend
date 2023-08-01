@@ -11,6 +11,7 @@
         width: calc(100% - 23px);
         align-items: center;
         padding: 12px 10px 12px 16px;
+        backdrop-filter: blur(4px);
         .left-board-header {
             position: relative;
             display: flex;
@@ -19,19 +20,33 @@
             flex-wrap: nowrap;
             max-width: 100%;
             .board-title {
-                border-radius: 3px;
+                // width: 240px;
                 cursor: default;
                 display: inline-flex;
                 position: relative;
                 white-space: nowrap;
                 height: 32px;
-                line-height: 32px;
-                margin-right: 4px;
                 margin-bottom: 0;
                 max-width: 100%;
                 color: $clr-text;
-                h1 {
-                    line-height: 32px;
+                font-weight: bold;
+                font-size: rem(18px);
+                background-color: transparent;
+                overflow: hidden;
+                // margin-bottom: 12px;
+                // padding: 0;
+                box-shadow: none;
+                resize: none;
+                // padding: 5px 12px;
+
+                &:focus {
+                    overflow: hidden;
+                    overflow-wrap: break-word;
+                    background-color: #fff;
+                    box-shadow: inset 0 0 0 2px #0079bf;
+                }
+                &::selection {
+                    background-color: #0079bf;
                 }
             }
             .btn-star-container {
@@ -39,7 +54,6 @@
                 height: 32px;
                 width: 32px;
                 line-height: 32px;
-                margin-left: 10px;
                 margin-bottom: 0;
                 flex-shrink: 0;
                 transition: 0.2s ease;
@@ -49,17 +63,21 @@
                 &:hover {
                     background-color: $dynamic-button-hovered;
                 }
-                .starred {
-                    @include trello-icon($icon-full-star);
-                    &:hover {
-                        transform: scale(1.1);
-                    }
-                }
-                .unstarred {
-                    @include trello-icon($icon-star);
 
+                .star-icon {
+                    display: inline-block;
+                    .starred {
+                        @include trello-icon($icon-full-star);
+                        &:hover {
+                            @include trello-icon($icon-star);
+                        }
+                    }
+                    .unstarred {
+                        @include trello-icon($icon-star);
+                    }
                     &:hover {
-                        transform: scale(1.1);
+                        transition: 0.2 ease;
+                        transform: scale(1.2);
                     }
                 }
             }

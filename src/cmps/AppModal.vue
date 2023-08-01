@@ -22,18 +22,20 @@ import ChecklistModal from './ModalTypes/ChecklistModal.vue'
 import CoverModal from './ModalTypes/CoverModal.vue'
 import DatePickerModal from './ModalTypes/DatePickerModal.vue'
 
+import CreateBoardModal from './ModalTypes/CreateBoardModal.vue'
+
 export default {
-    name: 'AppModal',
-    data() {
-        return {
-            isVisible: false,
-            modalPlace: {},
-            info: {},
-            type: '',
-            backBtn: false,
-            edit: false
-        }
-    },
+  name: 'AppModal',
+  data() {
+    return {
+      isVisible: false,
+      modalPlace: {},
+      info: {},
+      type: '',
+      backBtn: false,
+      edit: false,
+    }
+  },
 
     created() {
         eventBus.on('modal', ({ el, type, info }) => {
@@ -112,4 +114,3 @@ export default {
     }
 }
 </script>
-  

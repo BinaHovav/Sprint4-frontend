@@ -32,6 +32,8 @@
         &.unstarred {
             @include trello-icon($icon-star, $type: sm, $color: white);
             opacity: 0;
+            right: -10px;
+
             transition: transform 0.3s ease;
             &:hover {
                 opacity: 1;

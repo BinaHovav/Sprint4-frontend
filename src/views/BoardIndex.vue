@@ -1,16 +1,23 @@
 <template>
-  <section class="container board-index" v-if="boards">
-    <div class="board-category-title">
-      <span class="star"></span>
-      <h3>Starred boards</h3>
+  <div class="home-container" v-if="boards">
+    <div class="home-sticky-container">
+      <nav class="home-left-sidebar-container"></nav>
+      <div class="all-boards">
+        <div class="content-all-boards">
+          <div class="board-category-title">
+            <span class="star"></span>
+            <h3>Starred boards</h3>
+          </div>
+          <BoardList :boards="starredBoards" :showCreateBoard="false" />
+          <div class="board-category-title">
+            <span class="clock"></span>
+            <h3>Recently viewed</h3>
+          </div>
+        </div>
+        <BoardList :boards="boards" :showCreateBoard="true" />
+      </div>
     </div>
-    <BoardList :boards="starredBoards" :showCreateBoard="false" />
-    <div class="board-category-title">
-      <span class="clock"></span>
-      <h3>Recently viewed</h3>
-    </div>
-    <BoardList :boards="boards" :showCreateBoard="true" />
-  </section>
+  </div>
 </template>
 
 <script>

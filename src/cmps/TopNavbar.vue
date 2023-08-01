@@ -3,10 +3,16 @@
     <nav>
       <span class="left-board-header">
         <div class="board-title">
-          <h1 class="fs18">{{ boardToDisplay?.title }}</h1>
+          <form action="">
+            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title" @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
+          </form>
+
+          <!-- <h1 class="fs18">{{ boardToDisplay?.title }}</h1> -->
         </div>
         <button class="btn-star-container" @click.prevent="updateBoard(board)">
-          <span :class="boardClass"></span>
+          <span class="star-icon">
+            <span :class="boardClass"></span>
+          </span>
         </button>
       </span>
 
@@ -37,6 +43,11 @@ export default {
       this.board.isStarred = !this.board.isStarred
       this.$emit('updateBoard', board)
     },
+    updateBoardTitle(board) {
+      this.$emit('updateBoard', board)
+      this.$refs.boardNameInput.blur()
+    },
+
     openRightNav() {
       this.$emit('openMenu')
     },
