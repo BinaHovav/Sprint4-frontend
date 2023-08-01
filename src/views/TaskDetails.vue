@@ -166,11 +166,9 @@ export default {
         this.task = info.task
         this.board = info.board
         this.onSaveTask()
-        console.log('isOpen?',this.modalOpen);
       } else {
         setTimeout(() => {
           this.modalOpen = false
-          console.log('isOpen?',this.modalOpen);
           window.removeEventListener('resize', this.handleResize)
         }, 200);
       }

@@ -75,7 +75,6 @@ export default {
             if (info) {
                 eventBus.emit('setInfo', info)
             } else {
-                console.log('test');
                 eventBus.emit('setInfo')
                 this.isVisible = false
             }

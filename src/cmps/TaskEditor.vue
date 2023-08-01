@@ -56,7 +56,7 @@
 
                 <!-- <textarea>{{ task.title }}</textarea> -->
             </section>
-            <button class="btn-save" @click="updateTask">Save</button>
+            <button class="btn-save" @click="onSave">Save</button>
             <div class="quick-card-editor-buttons">
                 <div class="quick-card-editor-btn" ref="">
                     <span class="btn-card"></span>
@@ -110,7 +110,8 @@ export default {
             isVisible: false,
             group: null,
             elRef: '',
-            cords
+            cords: {},
+            isModalOpen: false,
         }
     },
     computed: {
@@ -157,7 +158,7 @@ export default {
             this.checklistClass = doneCount === sum ? 'is-checklist-complete' : ''
             return `${doneCount}/${sum}`
         },
-        getPos(){
+        getPos() {
             // return {right: '30px'}
         }
     },
@@ -171,17 +172,7 @@ export default {
             this.isVisible = true
             this.task = JSON.parse(JSON.stringify(task))
             this.group = JSON.parse(JSON.stringify(this.currBoard.groups.find(group => group.id === groupId)))
-            eventBus.on('setInfo', (info) => {
-                if (info) {
-                    this.task = info.task
-                    this.updateTask(info.board)
-                } else {
-                    setTimeout(() => {
-                        eventBus.off('setInfo')
-                    }, 200);
-    
-                }
-            })
+
         })
     },
     beforeUnmount() {
@@ -197,11 +188,14 @@ export default {
             board.groups.splice(groupIdx, 1, this.group)
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
-                this.isVisible = false
             }
             catch {
                 console.log('cant update task');
             }
+        },
+        onSave() {
+            this.updateTask()
+            this.isVisible = false
         },
         onTaskDetails() {
             const boardId = this.$route.params.id
@@ -246,7 +240,8 @@ export default {
             return formattedDate
         },
         closeEditor() {
-            this.isVisible = false
+            console.log(this.isModalOpen);
+            if (!this.isModalOpen) this.isVisible = false
         },
         openModal(type, elRef) {
             this.elRef = elRef
@@ -254,8 +249,21 @@ export default {
             const info = { task: this.task, board }
             const el = this.$refs[elRef].getBoundingClientRect()
             eventBus.emit('modal', { el, type, info })
+            this.isModalOpen = true
+            eventBus.on('setInfo', (info) => {
+                if (info) {
+                    this.task = info.task
+                    this.updateTask(info.board)
+                } else {
+                    setTimeout(() => {
+                        eventBus.off('setInfo')
+                        this.isModalOpen = false
+                    }, 200);
+
+                }
+            })
         },
-        
+
 
     },
     components: {

@@ -87,12 +87,9 @@ export default {
             this.$emit('showBackBtn', this.currLabelId)
         },
         removeLabel(labelToRemove) {
-            console.log('labelToRemove',labelToRemove);
             const labelIdx = this.info.task.labels.findIndex(labelId => labelId === labelToRemove.id)
-            console.log('this.info.task',this.info.task);
             if (labelIdx !== -1) {
                 this.info.task.labels.splice(labelIdx, 1)
-                console.log(this.info.task);
                 const idx = this.info.board.labels.findIndex(label => labelToRemove.id === label.id)
                 this.info.board.labels.splice(idx, 1)
                 this.setInfo()
