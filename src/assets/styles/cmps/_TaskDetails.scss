@@ -97,6 +97,15 @@
                 background-origin: content-box;
                 box-sizing: border-box;
                 background-position: left center;
+                &.task-cover-img {
+                    background-size: contain;
+                    background-color: #fcfcfb;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    border-radius: 8px 8px 0 0;
+                    min-height: em(200px);
+                    width: 100%;
+                }
                 .task-cover-menu {
                     align-items: center;
                     bottom: 0;
@@ -785,6 +794,15 @@
                             h6:not(:first-child) {
                                 margin-top: 0.75rem;
                             }
+                            & > h1,
+                            h2,
+                            h3,
+                            h4,
+                            h5,
+                            h6 {
+                                color: $ds-text;
+                                font-weight: 600;
+                            }
                             & h1 {
                                 font-size: 2em;
                             }
@@ -813,7 +831,6 @@
                                 position: relative;
                                 width: 100%;
                                 height: 100%;
-                                box-shadow: 0 0 0 2px inset $clr-border-brand;
                                 background-color: $clr-background-input;
                                 display: flex;
                                 flex-direction: column;
@@ -833,7 +850,6 @@
                                     align-items: center;
                                     display: flex;
                                     height: auto;
-                                    background-color: $clr-surface;
                                     box-shadow: none;
                                     padding-left: 20px;
                                     position: sticky;
@@ -857,7 +873,7 @@
                                     -webkit-box-flex: 1;
                                     flex-grow: 1;
                                     height: auto;
-                                    min-height: 223px;
+                                    min-height: 275px;
                                     cursor: text;
                                     .ql-editor {
                                         -webkit-box-flex: 1;
@@ -902,6 +918,9 @@
                                             line-height: 1.45455;
                                         }
                                     }
+                                }
+                                .quill {
+                                    box-shadow: 0 0 0 2px inset $clr-border-brand;
                                 }
                             }
                             .description-save-cancel {
@@ -1332,7 +1351,6 @@
                                     min-height: 32px;
                                     text-align: initial;
                                     text-decoration: none;
-                                    display: block;
                                     padding-bottom: 9px;
                                     z-index: 50;
                                     background-color: $clr-background-input;
@@ -1342,6 +1360,7 @@
                                     float: none;
                                     resize: vertical;
                                     width: 100%;
+                                    display: none;
                                     &:focus {
                                         background-color: $clr-background-input, #fff;
                                         box-shadow: inset 0 0 0 2px $clr-border-focused;

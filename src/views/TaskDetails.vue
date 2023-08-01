@@ -1,12 +1,13 @@
 <template>
   <section class="backdrop">
-    <div v-if="task" ref="taskDetails" class="task-details">
+    <div v-if="task" ref="taskDetails" class="task-details" v-clickOutside="closeModal">
       <div class="task-details-container">
         <a class="btn-icon-close" @click="closeModal"></a>
         <div class="task-details-container-two">
-          <div v-if="task.cover" class="task-cover" :class="task.cover">
+          <div v-if="task.cover.background" class="task-cover" :class="isCoverImg ? task.cover.background : 'task-cover-img'"
+            :style="isCoverImg ? '' : getCoverImgStyle()">
             <div class="task-cover-menu">
-              <a class="task-cover-btn">
+              <a class="task-cover-btn" ref="coversTop" @click="openModal('CoverModal', 'coversTop')">
                 <span class="btn-icon-cover"></span>
                 Cover
               </a>
@@ -16,7 +17,8 @@
             <span class="btn-title-icon"></span>
             <div class="task-header-title">
               <h2 v-if="!showTaskTitle" @click="showTaskTitle = true">{{ task.title }}</h2>
-              <textarea v-if="showTaskTitle" @blur="onSaveTask, showTaskTitle = false" v-model="task.title" v-focus></textarea>
+              <textarea v-if="showTaskTitle" @blur="onSaveTask, showTaskTitle = false" v-model="task.title"
+                v-focus></textarea>
             </div>
             <div class="task-header-group">
               <p>in list
@@ -67,7 +69,8 @@
               <div class="task-details-item">
                 <h3>Due date</h3>
                 <div class="task-details-due-date">
-                  <a @click="dueDateChecked = !dueDateChecked" class="due-date-complete" :class="{'checked': dueDateChecked}" v-icon="'checkBox'"></a>
+                  <a @click="dueDateChecked = !dueDateChecked" class="due-date-complete"
+                    :class="{ 'checked': dueDateChecked }" v-icon="'checkBox'"></a>
                   <div class="due-date-time-container">
                     <div>
                       <button class="due-date-btn">
@@ -86,27 +89,28 @@
           <div class="task-sidebar">
             <div class="task-sidebar-add">
               <h3 class="sidebar-add-txt">Add to card</h3>
-              <a ref="members" class="task-btn-link" @click="openModal('MemberModal', 'members')">
+              <a ref="members" class="task-btn-link" @click.stop="openModal('MemberModal', 'members')">
                 <span class="btn-link-members"></span>
                 <span class="">Members</span>
               </a>
-              <a ref="labels" class="task-btn-link" @click="openModal('LabelModal', 'labels')">
+              <a ref="labels" class="task-btn-link" @click.stop="openModal('LabelModal', 'labels')">
                 <span class="btn-link-labels"></span>
                 <span class="">Labels</span>
               </a>
-              <a ref="checklists" class="task-btn-link" @click="openModal('ChecklistModal', 'checklists')">
+              <a ref="checklists" class="task-btn-link" @click.stop="openModal('ChecklistModal', 'checklists')">
                 <span class="btn-link-checklist"></span>
                 <span class="">Checklist</span>
               </a>
-              <a class="task-btn-link" @click="openModal()">
+              <a ref="datePickerSide" class="task-btn-link" @click.stop="openModal('DatePickerModal', 'datePickerSide')">
                 <span class="btn-link-dates"></span>
                 <span class="">Dates</span>
               </a>
-              <a class="task-btn-link" @click="openModal()">
+              <a class="task-btn-link" @click.stop="openModal()">
                 <span class="btn-link-attachment"></span>
                 <span class="">Attachment</span>
               </a>
-              <a v-if="!task.cover" class="task-btn-link" @click="openModal()">
+              <a v-if="!task.cover.background" ref="covers" class="task-btn-link"
+                @click="openModal('CoverModal', 'covers')">
                 <span class="btn-link-cover"></span>
                 <span class="">Cover</span>
               </a>
@@ -132,7 +136,9 @@ export default {
       board: null,
       isWatching: false,
       showTaskTitle: false,
-      dueDateChecked: false
+      dueDateChecked: false,
+      modalRef: 'labels',
+      modalOpen: false
     }
   },
   computed: {
@@ -160,18 +166,16 @@ export default {
         this.task = info.task
         this.board = info.board
         this.onSaveTask()
+        this.modalOpen = true
       } else {
         setTimeout(() => {
-          document.addEventListener('click', this.handleClickOutside)
+          this.modalOpen = false
+          window.removeEventListener('resize', this.handleResize)
         }, 200);
       }
     })
   },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside)
-  },
   unmounted() {
-    document.removeEventListener('click', this.handleClickOutside)
     window.removeEventListener('resize', this.handleResize)
     eventBus.off('setInfo')
   },
@@ -205,28 +209,28 @@ export default {
       this.$emit('updateBoard', this.board)
     },
     closeModal() {
-      this.$router.push(`/board/${this.board._id}`)
+      if (!this.modalOpen) this.$router.push(`/board/${this.board._id}`)
     },
     openModal(type, elRef) {
+      this.modalRef = elRef
       const board = JSON.parse(JSON.stringify(this.board))
       const info = { task: this.task, board }
-      const el = this.$refs[elRef].getBoundingClientRect()
+      const el = this.$refs[this.modalRef].getBoundingClientRect()
       eventBus.emit('modal', { el, type, info })
+      this.modalOpen = true
       window.addEventListener('resize', this.handleResize)
-      document.removeEventListener('click', this.handleClickOutside)
     },
     handleResize() {
-      const el = this.$refs.labels.getBoundingClientRect()
+      const el = this.$refs[this.modalRef].getBoundingClientRect()
       eventBus.emit('modal', { el })
     },
-    
-    handleClickOutside(event) {
-      try {
-        const ele = this.$refs.taskDetails.getBoundingClientRect()
-        if (!(ele.left < event.x && ele.right > event.x && ele.top < event.y && ele.bottom > event.y)) this.closeModal()
-      } catch { }
+    isCoverImg() {
+      return this.task.cover.background?.startsWith('https')
     },
-    
+    getCoverImgStyle() {
+      return { height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }
+    }
+
   },
   components: {
     TaskChecklistDetails,
