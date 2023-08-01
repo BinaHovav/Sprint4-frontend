@@ -1,7 +1,7 @@
 <template>
     <div class="quick-card-editor" v-if="isVisible" @click="closeEditor">
         <span class="icon-close" @click="closeEditor"> </span>
-        <div class="editor-wrapper" @click.stop="">
+        <div :style="getPos" class="editor-wrapper" @click.stop="">
             <section class="task-preview-container">
                 <!-- <div class="btn-edit" @click.stop="removeTask(task.id)"> -->
                 <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span
@@ -109,7 +109,8 @@ export default {
             task: null,
             isVisible: false,
             group: null,
-            elRef: ''
+            elRef: '',
+            cords
         }
     },
     computed: {
@@ -155,6 +156,9 @@ export default {
             })
             this.checklistClass = doneCount === sum ? 'is-checklist-complete' : ''
             return `${doneCount}/${sum}`
+        },
+        getPos(){
+            // return {right: '30px'}
         }
     },
     created() { },
@@ -162,7 +166,8 @@ export default {
         this.calculateHeight()
         // You can also add a listener for window resize if needed
         window.addEventListener('resize', this.calculateHeight)
-        eventBus.on('onTaskEditor', ({ task, groupId }) => {
+        eventBus.on('onTaskEditor', ({ task, groupId, cords }) => {
+            this.cords = cords
             this.isVisible = true
             this.task = JSON.parse(JSON.stringify(task))
             this.group = JSON.parse(JSON.stringify(this.currBoard.groups.find(group => group.id === groupId)))
