@@ -11,7 +11,7 @@
         <div class="colors-options">
             <div class="color-option" v-for="color in labels">
                 <div class="this-color" :ref="color" :class="color, { 'selected': editableLabel.color === color }"
-                    :title="color" @click="setEditableLabel(color)"></div>
+                    :title="color" @click.stop="setEditableLabel(color)"></div>
             </div>
         </div>
         <button class="remove-label" @click="editableLabel.color = ''" :disabled="!editableLabel.color">
@@ -21,7 +21,7 @@
         <hr>
         <div class="create-label-btn">
             <button @click="saveLabel">{{ editableLabel?.id ? 'Save' : 'Create' }}</button>
-            <button v-if="editableLabel.id" @click="removeLabel" class="remove-label-btn">Delete</button>
+            <button v-if="editableLabel.id" @click.stop="removeLabel" class="remove-label-btn">Delete</button>
         </div>
     </div>
 </template>
@@ -60,6 +60,7 @@ export default {
             this.$emit('saveLabel', this.editableLabel)
         },
         removeLabel() {
+            console.log(this.editableLabel);
             this.$emit('removeLabel', this.editableLabel)
         }
     },
