@@ -1,10 +1,11 @@
 <template>
     <div class="quick-card-editor" v-if="isVisible" @click="closeEditor">
         <span class="icon-close" @click="closeEditor"> </span>
-        <div class="editor-wrapper" @click.stop="">
+        <div :style="getPos" class="editor-wrapper" @click.stop="">
             <section class="task-preview-container">
                 <!-- <div class="btn-edit" @click.stop="removeTask(task.id)"> -->
-                <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span class="edit"></span></div>
+                <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span
+                        class="edit"></span></div>
                 <div v-else-if="task?.cover" class="task-cover-img"
                     :style="{ height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }">
                     <span class="edit"></span>
@@ -55,11 +56,39 @@
 
                 <!-- <textarea>{{ task.title }}</textarea> -->
             </section>
-            <button class="btn-save" @click="updateTask">Save</button>
+            <button class="btn-save" @click="onSave">Save</button>
             <div class="quick-card-editor-buttons">
-                <div class="quick-card-editor-btn">
+                <div class="quick-card-editor-btn" ref="" @click="onTaskDetails">
                     <span class="btn-card"></span>
                     <span class="btn-text">Open card</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorLabels" @click="openModal('LabelModal', 'editorLabels')">
+                    <span class="btn-label"></span>
+                    <span class="btn-text">Edit labels</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorMembers" @click="openModal('MemberModal', 'editorMembers')">
+                    <span class="btn-member"></span>
+                    <span class="btn-text">Change members</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorCovers" @click="openModal('CoverModal', 'editorCovers')">
+                    <span class="btn-cover"></span>
+                    <span class="btn-text">Change cover</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorMove">
+                    <span class="btn-arrow"></span>
+                    <span class="btn-text">Move</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorCopy">
+                    <span class="btn-card"></span>
+                    <span class="btn-text">Copy</span>
+                </div>
+                <div class="quick-card-editor-btn" ref="editorDate" @click="openModal('DatePickerModal', 'editorDate')">
+                    <span class="btn-clock"></span>
+                    <span class="btn-text">Edit dates</span>
+                </div>
+                <div class="quick-card-editor-btn" @click="removeTask(task.id)">
+                    <span class="btn-archive"></span>
+                    <span class="btn-text">Archive</span>
                 </div>
             </div>
         </div>
@@ -79,7 +108,10 @@ export default {
             checklistClass: '',
             task: null,
             isVisible: false,
-            group: null
+            group: null,
+            elRef: '',
+            cords: {},
+            isModalOpen: false,
         }
     },
     computed: {
@@ -125,6 +157,18 @@ export default {
             })
             this.checklistClass = doneCount === sum ? 'is-checklist-complete' : ''
             return `${doneCount}/${sum}`
+        },
+        getPos() {
+            const screen = { width: window.innerWidth, height: window.innerHeight }
+            console.log(this.cords);
+            const clickPos = this.cords
+            // const left = clickPos.left - 256 + 32 + 'px'
+            const left = clickPos.left + 'px'
+            const width = this.cords.width + 'px'
+            var top = clickPos.top
+            if (screen.height - clickPos.bottom <= 200) top -= 180
+            top += 'px'
+            return { left, top, width }
         }
     },
     created() { },
@@ -132,10 +176,12 @@ export default {
         this.calculateHeight()
         // You can also add a listener for window resize if needed
         window.addEventListener('resize', this.calculateHeight)
-        eventBus.on('onTaskEditor', ({ task, groupId }) => {
+        eventBus.on('onTaskEditor', ({ task, groupId, cords }) => {
+            this.cords = cords
             this.isVisible = true
             this.task = JSON.parse(JSON.stringify(task))
             this.group = JSON.parse(JSON.stringify(this.currBoard.groups.find(group => group.id === groupId)))
+
         })
     },
     beforeUnmount() {
@@ -143,26 +189,36 @@ export default {
         window.removeEventListener('resize', this.calculateHeight)
     },
     methods: {
-        async updateTask() {
-            const board = JSON.parse(JSON.stringify(this.currBoard))
+        async updateTask(updatedBoard) {
+            const board = updatedBoard ? updatedBoard : JSON.parse(JSON.stringify(this.currBoard))
             const idx = this.group.tasks.findIndex(task => task.id === this.task.id)
             this.group.tasks.splice(idx, 1, this.task)
             const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
             board.groups.splice(groupIdx, 1, this.group)
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
-                this.isVisible = false
             }
             catch {
-                console.log('cant update task');
+                console.log('Cannot update task');
             }
         },
-        onTaskDetails() {
-            const boardId = this.$route.params.id
-            this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
+        onSave() {
+            this.updateTask()
+            this.isVisible = false
         },
-        removeTask(taskId) {
-            this.$emit('removeTask', taskId)
+        async removeTask(taskId) {
+            const board = JSON.parse(JSON.stringify(this.currBoard))
+            const idx = this.group.tasks.findIndex(task => task.id === taskId)
+            this.group.tasks.splice(idx, 1)
+            const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
+            board.groups.splice(groupIdx, 1, this.group)
+            this.closeEditor()
+            try {
+                await this.$store.dispatch(getActionUpdateBoard(board))
+            }
+            catch {
+                console.log('Cannot remove task');
+            }
         },
         getLabelById(labelId) {
             return this.currBoard.labels?.find((label) => label.id === labelId)
@@ -199,8 +255,36 @@ export default {
             return formattedDate
         },
         closeEditor() {
-            this.isVisible = false
-        }
+            if (!this.isModalOpen) this.isVisible = false
+        },
+        openModal(type, elRef) {
+            this.elRef = elRef
+            const board = JSON.parse(JSON.stringify(this.currBoard))
+            const info = { task: this.task, board }
+            const el = this.$refs[elRef].getBoundingClientRect()
+            eventBus.emit('modal', { el, type, info })
+            this.isModalOpen = true
+            eventBus.on('setInfo', (info) => {
+                if (info) {
+                    this.task = info.task
+                    this.updateTask(info.board)
+                } else {
+                    setTimeout(() => {
+                        eventBus.off('setInfo')
+                        this.isModalOpen = false
+                    }, 200);
+
+                }
+            })
+        },
+        onTaskDetails() {
+            const boardId = this.currBoard._id
+            const groupId = this.group.id
+            const taskId = this.task.id
+            this.closeEditor()
+            this.$router.push(`/board/${boardId}/group/${groupId}/task/${taskId}`)
+        },
+
 
     },
     components: {
