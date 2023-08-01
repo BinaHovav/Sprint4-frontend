@@ -11,11 +11,23 @@
     text-overflow: ellipsis;
     vertical-align: top;
 
+    .badge-text {
+        font-size: 12px;
+        padding: 0 4px 0 2px;
+        vertical-align: top;
+        white-space: nowrap;
+    }
 
+    //notificaiton
     .is-unread-notification {
         background-color: $clr-background-danger-bold;
         border-radius: 3px;
         color: $clr-text-inverse;
+    }
+
+    //watch
+    .watch-icon {
+        @include trello-icon($icon-eye)
     }
 
     //date
@@ -34,6 +46,7 @@
         }
 
     }
+
     &.is-due-past {
         background-color: $clr-background-danger;
         border-radius: 3px;
@@ -56,6 +69,7 @@
         }
 
     }
+
     &.is-due-complete {
         background-color: $clr-background-success-bold;
         border-radius: 3px;
@@ -77,6 +91,7 @@
             }
         }
     }
+
     &.is-due-soon {
         background-color: $clr-background-warning-bold;
         border-radius: 3px;
@@ -99,11 +114,41 @@
         }
     }
 
-    .badge-text {
-        font-size: 12px;
-        padding: 0 4px 0 2px;
-        vertical-align: top;
-        white-space: nowrap;
+    //description
+    .description-icon {
+        padding: 2px;
+        @include trello-icon($icon-description)
+    }
+
+    //comments
+    .comments-icon {
+        padding: 2px;
+        @include trello-icon($icon-comment)
+    }
+
+    //checklist
+    .checklist-icon {
+        @include trello-icon($icon-checklist);
+        padding: 2px;
+    }
+
+    &.is-checklist-complete {
+        background-color: $clr-background-success-bold;
+        border-radius: 3px;
+        color: $clr-text-inverse;
+
+        .checklist-icon {
+            @include trello-icon($icon-checklist);
+            padding: 2px;
+            color: $clr-icon-inverse;
+        }
+    }
+
+
+    //attachment
+    .attachment-icon {
+        padding: 2px;
+        @include trello-icon($icon-attachment)
     }
 
 }

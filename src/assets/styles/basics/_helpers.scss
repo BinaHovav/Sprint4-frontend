@@ -160,14 +160,17 @@
     background-color: $clr-background-accent-blue-bolder;
     color: $ds-text-inverse;
 }
+
 .sky {
     background-color: $clr-background-accent-teal-subtle;
     color: $clr-text-accent-teal-bolder;
 }
+
 .subtle-sky {
     background-color: $clr-background-accent-teal-subtler;
     color: $clr-text-accent-teal-bolder;
 }
+
 .bold-sky {
     background-color: $clr-background-accent-teal-bolder;
     color: $ds-text-inverse;
@@ -273,4 +276,17 @@
             color: $clr-text;
         }
     }
+}
+
+//scroll bar
+.u-fancy-scrollbar {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    -webkit-transform: translateZ(0);
+
+   
+    
+   
+
+
 }

@@ -17,6 +17,31 @@
 
     // overflow-y: scroll;
     // max-height: calc($board-hight-$board-header-hight);
+    &.u-fancy-scrollbar {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        -webkit-transform: translateZ(0);
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #c4c8d0;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track-piece {
+            
+            background-color: #e3e5e9;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            margin: 0 7px 0 2px;
+
+        }
+    }
+
     .ghost-task {
         background-color: $clr-shadow-overflow-spread;
 
