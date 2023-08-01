@@ -38,12 +38,12 @@ async function remove(boardId) {
 }
 
 async function save(board) {
+  console.log(board)
   var savedBoard
   if (board._id) {
     savedBoard = await storageService.put(STORAGE_KEY, board)
   } else {
     // Later, owner is set by the backend
-    // board.owner = userService.getLoggedinUser()
     savedBoard = await storageService.post(STORAGE_KEY, board)
   }
   return savedBoard
@@ -251,7 +251,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'green', isFull: false} ,
+//                 cover: { background: 'green', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -291,7 +291,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: '', isFull: false},
+//                 cover: { background: '', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -308,7 +308,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'orange', isFull: false} ,
+//                 cover: { background: 'orange', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -325,7 +325,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: '', isFull: false},
+//                 cover: { background: '', isFull: false },
 //               },
 //               {
 //                 id: utilService.makeId(6),
@@ -341,7 +341,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachments: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif',
 //                 activity: [],
-//                 cover: {background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif', isFull: false} ,
+//                 cover: { background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690354268/basic_project_timeline_template_from_PowerSlides_ecbxoh.avif', isFull: false },
 //                 comments: [],
 //               },
 //             ],
@@ -376,7 +376,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'sky', isFull: false},
+//                 cover: { background: 'sky', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -393,7 +393,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'red', isFull: false},
+//                 cover: { background: 'red', isFull: false },
 //                 comments: [
 //                   { byUser: 'Bina Hovav', txt: 'This is very urgent', createdAt: null },
 //                   { byUser: 'Meitar Mor', txt: 'We need to meet on zoom about this', createdAt: null },
@@ -435,7 +435,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: '', isFull: false},
+//                 cover: { background: '', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -452,7 +452,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: ['https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358214/download_wdvxxq.png'],
 //                 activity: [],
-//                 cover: {background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358214/download_wdvxxq.png', isFull: false} ,
+//                 cover: { background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358214/download_wdvxxq.png', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -469,7 +469,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'green', isFull: false} ,
+//                 cover: { background: 'green', isFull: false },
 //                 comments: [],
 //               },
 //             ],
@@ -493,7 +493,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachments: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358903/Picture1-1-768x726_nqbwqi.png',
 //                 activity: [],
-//                 cover: {background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358903/Picture1-1-768x726_nqbwqi.png', isFull: false},
+//                 cover: { background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690358903/Picture1-1-768x726_nqbwqi.png', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -521,7 +521,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: '', isFull: false},
+//                 cover: { background: '', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -538,7 +538,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'orange', isFull: false} ,
+//                 cover: { background: 'orange', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -555,7 +555,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'purple', isFull: false} ,
+//                 cover: { background: 'purple', isFull: false },
 //                 comments: [],
 //               },
 //             ],
@@ -579,7 +579,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'lime', isFull: false},
+//                 cover: { background: 'lime', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -596,7 +596,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'pink', isFull: false} ,
+//                 cover: { background: 'pink', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -640,7 +640,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: '', isFull: false},
+//                 cover: { background: '', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -657,7 +657,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachments: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360236/large-scale-redundant-setup_d3wkno.png',
 //                 activity: [],
-//                 cover: {background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360236/large-scale-redundant-setup_d3wkno.png', isFull: false} ,
+//                 cover: { background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360236/large-scale-redundant-setup_d3wkno.png', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -674,7 +674,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'orange', isFull: false} ,
+//                 cover: { background: 'orange', isFull: false },
 //                 comments: [],
 //               },
 //             ],
@@ -698,7 +698,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: '', isFull: false},
+//                 cover: { background: '', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -726,7 +726,7 @@ function getEmptyActivity() {
 //                 ],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'sky', isFull: false},
+//                 cover: { background: 'sky', isFull: false },
 //                 comments: [[{ byUser: 'Bina Hovav', txt: 'We should meet weekly about this', createdAt: null }]],
 //               },
 //               {
@@ -743,7 +743,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachments: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360672/wedding_table_planner_powerpoint_2_mzgb5g.jpg',
 //                 activity: [],
-//                 cover: {background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360672/wedding_table_planner_powerpoint_2_mzgb5g.jpg', isFull: false} ,
+//                 cover: { background: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690360672/wedding_table_planner_powerpoint_2_mzgb5g.jpg', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -760,7 +760,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: 'purple', isFull: false} ,
+//                 cover: { background: 'purple', isFull: false },
 //                 comments: [],
 //               },
 //               {
@@ -777,7 +777,7 @@ function getEmptyActivity() {
 //                 checklists: [],
 //                 attachment: [],
 //                 activity: [],
-//                 cover: {background: '', isFull: false},
+//                 cover: { background: '', isFull: false },
 //                 comments: [],
 //               },
 //             ],

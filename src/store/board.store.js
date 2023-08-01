@@ -1,5 +1,5 @@
-import { boardService } from '../services/board.service.local'
-// import { boardService } from '../services/board.service'
+// import { boardService } from '../services/board.service.local'
+import { boardService } from '../services/board.service.js'
 
 export function getActionSetCurrBoard(boardId) {
   return {
@@ -68,9 +68,9 @@ export const boardStore = {
     boardImgUrl({ boards, currBoardId }) {
       return boards.find((board) => board._id === currBoardId)?.imgUrl
     },
-    taskQEId({taskQEId}){
+    taskQEId({ taskQEId }) {
       return taskQEId
-    }
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -105,7 +105,7 @@ export const boardStore = {
     },
     onQuickEditor(state, { taskId }) {
       state.taskQEId = taskId
-    }
+    },
   },
   actions: {
     async addBoard(context, { board }) {
