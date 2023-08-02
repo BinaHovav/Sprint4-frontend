@@ -9,7 +9,7 @@
         </template>
         <template #footer>
 
-            <div class="card-compose" v-if="add">
+            <div class="card-compose" v-if="add" v-clickOutside="toggleAdd">
                 <div class="input-title">
                     <div>
                         <textarea ref="textarea" dir="auto" placeholder="Enter a title for this card..."
@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div class="controls">
-                    <div @click="addTask" class="btn-add">Add card</div>
-                    <span @click="this.$emit('changeAdd')" class="btn-close"></span>
+                    <div @click.stop="addTask" class="btn-add">Add card</div>
+                    <span @click.stop="toggleAdd" class="btn-close"></span>
                 </div>
             </div>
         </template>
@@ -76,6 +76,10 @@ export default {
         },
         onTaskIsDone(taskId) {
             this.$emit('onTaskIsDone', taskId)
+        },
+        toggleAdd() {
+            this.$emit('changeAdd')
+            this.title = ''
         }
     },
     components: {

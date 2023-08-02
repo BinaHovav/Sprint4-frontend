@@ -237,21 +237,27 @@
         background-clip: padding-box;
         background-color: $clr-surface-raised-hovered;
         background-origin: initial;
-        border-radius: 8px;
-        opacity: .8;
-        padding: 6px;
+        visibility: hidden;
         position: absolute;
+        border-radius: 8px;
         right: 2px;
         top: 2px;
-        visibility: hidden;
         z-index: 40;
-
+        opacity: .8;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
         .edit-icon {
-            @include trello-icon($icon-edit)
+            @include trello-icon($icon-edit);
+           
         }
 
         &:hover {
             background-color: $clr-surface-raised-pressed;
+            opacity: 1;
         }
 
     }
