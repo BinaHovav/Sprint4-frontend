@@ -2,7 +2,7 @@
   <div class="members-container">
     <div>
       <div>
-        <input class="members-search" type="text" placeholder="Search members" autofocus>
+        <input class="members-search" type="text" placeholder="Search members" v-focus>
         <div class="members-list">
           <h4>Board members</h4>
           <ul>

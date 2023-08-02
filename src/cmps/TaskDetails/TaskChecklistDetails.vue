@@ -7,7 +7,7 @@
                     <h3>{{ checklist?.title }}</h3>
                     <div class="checklist-options">
                         <a v-if="isTaskChecked(checklist)" @click.stop="toggleItemDone = !toggleItemDone"
-                            class="show-checked">{{ toggleItemDone ? 'Hide' : 'Show' }} checked items</a>
+                            class="show-checked">{{ toggleItemDone ? 'Show' : 'Hide' }} checked items {{ toggleItemDone ? `(${contItemDone(checklist)})` : '' }}</a>
                         <a class="checklist-remove-btn" @click.stop="removeChecklist(checklist.id)">Delete</a>
                     </div>
                 </div>
@@ -120,6 +120,13 @@ export default {
         showItemList(item) {
             if (item.isDone && this.toggleItemDone) return false
             else return true
+        },
+        contItemDone(checklist) {
+            let count = 0
+            checklist.todos?.forEach(todo => {
+                if (todo.isDone) count++
+            })
+            return count
         }
     },
     computed: {
