@@ -16,9 +16,9 @@
             <div class="task-details-container">
                 <div v-if="task.labels" class="task-labels">
 
-                    <button v-for="label in task.labels" @click.stop="animateLabels"
+                    <button v-for="label in task.labels" ref="labels" @click.stop="animateLabels"
                         :class="[getLabelById(label)?.color, currBoard.labelAnimation]">
-                        {{ getLabelById(label)?.title }}
+                        {{ currBoard.labelAnimation === 'labels-open' ? getLabelById(label)?.title : '' }}
                     </button>
 
                 </div>
@@ -73,7 +73,8 @@ export default {
         return {
             calculatedHeight: 0,
             dateTitle: '',
-            checklistClass: ''
+            checklistClass: '',
+            labelState: 'labels-close'
         }
     },
     computed: {
@@ -121,7 +122,9 @@ export default {
             return `${doneCount}/${sum}`
         }
     },
-    created() { },
+    created() {
+        this.labelState = this.currBoard.labelAnimation
+    },
     mounted() {
         this.calculateHeight()
         // You can also add a listener for window resize if needed
@@ -152,18 +155,32 @@ export default {
 
             this.calculatedHeight = (containerWidth / imageWidth) * imageHeight + 'px'
         },
-        animateLabels(ev) {
+        async animateLabels(ev) {
             // Assuming you have a variable or some logic to determine whether the labels are open or closed
             // Replace this with your actual logic
-            const board = JSON.parse(JSON.stringify(this.currBoard))
             // Update the animation class for each task label based on the labels state
             // board.labels.forEach((label) => {
             //     label.animationClass = label.animationClass === "labels-close" ? "labels-open" : "labels-close";
             // });
-            console.log(board.labelAnimation);
-
+            // console.log(board.labelAnimation);
+            // this.labelState = "labels-close" ? "labels-open" : "labels-close"
+            const board = JSON.parse(JSON.stringify(this.currBoard))
             board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
-            this.$store.dispatch({ type: 'updateBoard', board })
+            await this.$store.dispatch({ type: 'updateBoard', board })
+           
+                // this.updateMinWidth(); // Call the function to update min-width after the animation state is updated
+        
+        },
+        updateMinWidth() {
+            const buttons = this.$refs.labels; // Get the button elements using the ref
+            buttons.forEach((button) => {
+                if (this.labelState === "labels-open") {
+                    const width = button.offsetWidth + 10; // Add some padding (adjust as needed)
+                    button.style.minWidth = `${width}px`; // Set the calculated min-width in pixels
+                } else {
+                    button.style.minWidth = "2.5em"; // Set the default min-width when closing the labels
+                }
+            });
         },
         dueDate() {
             const months = [
