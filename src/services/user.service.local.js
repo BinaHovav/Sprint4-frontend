@@ -78,8 +78,32 @@ function getLoggedinUser() {
 }
 
 // Initial data
-// ;(async () => {
-//   await userService.signup({ fullname: 'Puki Norma', username: 'puki', password: '123', score: 10000, isAdmin: false })
-//   await userService.signup({ fullname: 'Master Adminov', username: 'admin', password: '123', score: 10000, isAdmin: true })
-//   await userService.signup({ fullname: 'Muki G', username: 'muki', password: '123', score: 10000 })
+// ; (async () => {
+//   await userService.signup({
+//     fullname: 'Tomer Appelman',
+//     username: 'tomer123',
+//     password: '123',
+//     score: 10000,
+//     isAdmin: false,
+//     imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690444315/Untitled_jx0ppe.png',
+//     activity: []
+//   })
+//   await userService.signup({
+//     fullname: 'Meitar Mor',
+//     username: 'meitar123',
+//     password: '123',
+//     score: 10000,
+//     isAdmin: true,
+//     imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690444042/290515844_760005839156054_4788470373949981322_n_ouudqs.jpg',
+//     activity: []
+//   })
+//   await userService.signup({
+//     fullname: 'Bina Hovav',
+//     username: 'bina123',
+//     password: '123',
+//     score: 10000,
+//     isAdmin: false,
+//     imgUrl: 'https://ca.slack-edge.com/T04U05NLZ2M-U0579PGBRFS-4cc9b9703df7-512',
+//     activity: []
+//   })
 // })()

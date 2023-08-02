@@ -74,6 +74,33 @@
         width: 100%;
     }
 
+    .task-cover-full {
+        display: flex;
+        flex-direction: row;
+        min-height: 56px;
+        border-radius: 8px;
+        flex-shrink: 0;
+        margin-bottom: 1px;
+        box-shadow: $clr-shadow-raised;
+        position: relative;
+        scroll-margin: 8px;
+        z-index: 0;
+        box-sizing: border-box;
+        align-items: end;
+
+        .task-title {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 20px;
+            padding: 8px 8px 8px 12px;
+            word-wrap: break-word;
+            clear: both;
+            display: block;
+            overflow: hidden;
+            text-decoration: none;
+        }
+    }
+
 
 
     .task-details-container {
@@ -229,5 +256,5 @@
 
     }
 
-    
+
 }
