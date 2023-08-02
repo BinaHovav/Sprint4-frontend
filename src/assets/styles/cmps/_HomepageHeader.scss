@@ -26,6 +26,7 @@
         margin: 0;
         padding: 0;
         a {
+            text-decoration: none;
             padding: 1em;
             cursor: pointer;
             font-size: 0.9rem;
@@ -33,11 +34,14 @@
             align-items: center;
             color: #121e30;
         }
-        .nav-link-sign-up {
+        .nav-link-signup {
             padding: 0.5rem 1rem;
             cursor: pointer;
-            background-color: $clr-background-accent-blue-subtle;
+            background-color: $clr-background-brand-bold;
             color: #fff;
+            &:hover {
+                background-color: $clr-background-brand-bold-hovered;
+            }
         }
     }
 }

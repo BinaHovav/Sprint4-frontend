@@ -54,7 +54,8 @@ export default {
     openModal(type, elRef) {
       // const board = JSON.parse(JSON.stringify(this.board))
       // const info = { board }
-      const el = this.$refs[elRef].getBoundingClientRect()
+      const el = this.$refs.createBoard.getBoundingClientRect()
+      console.log(el);
       eventBus.emit('modal', { el, type })
       window.addEventListener('resize', this.handleResize)
       // document.removeEventListener('click', this.handleClickOutside)
