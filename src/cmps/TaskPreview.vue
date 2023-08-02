@@ -15,12 +15,12 @@
             </div>
             <div class="task-details-container">
                 <div v-if="task.labels" class="task-labels">
-                    <div v-for="label in task.labels" class="task-label">
-                        <button @click.stop="animateLabels"
-                            :class="[getLabelById(label)?.color, currBoard.labelAnimation]">
-                            {{ getLabelById(label)?.title }}
-                        </button>
-                    </div>
+
+                    <button v-for="label in task.labels" @click.stop="animateLabels"
+                        :class="[getLabelById(label)?.color, currBoard.labelAnimation]">
+                        {{ getLabelById(label)?.title }}
+                    </button>
+
                 </div>
 
                 <span class="task-title">{{ task.title }}</span>
@@ -161,7 +161,7 @@ export default {
             //     label.animationClass = label.animationClass === "labels-close" ? "labels-open" : "labels-close";
             // });
             console.log(board.labelAnimation);
-            
+
             board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
             this.$store.dispatch({ type: 'updateBoard', board })
         },

@@ -13,7 +13,7 @@
                 <div class="input-title">
                     <div>
                         <textarea ref="textarea" dir="auto" placeholder="Enter a title for this card..."
-                            data-autosize="true" v-model="title"></textarea>
+                            data-autosize="true" v-model="title" @keyup.enter="addTask"></textarea>
                     </div>
                 </div>
                 <div class="controls">
@@ -75,7 +75,10 @@ export default {
             this.title = ''
         },
         onTaskIsDone(taskId) {
-            this.$emit('onTaskIsDone', taskId)
+            const tasks = JSON.parse(JSON.stringify(this.tasks))
+            const idx = tasks.findIndex(task=>task.id===taskId)
+            tasks[idx].date.isDone = !tasks[idx].date.isDone
+            this.$emit('updateTasks', tasks , this.groupId)
         },
         toggleAdd() {
             this.$emit('changeAdd')

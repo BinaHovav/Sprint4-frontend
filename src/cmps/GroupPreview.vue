@@ -52,7 +52,7 @@ export default {
       this.$refs.groupNameInput.blur()
     },
     addTask(title) {
-      this.add = false
+      // this.add = false
       const newTask = boardService.getEmptyTask()
       newTask.title = title
       this.clonedGroup.tasks.push(newTask)
