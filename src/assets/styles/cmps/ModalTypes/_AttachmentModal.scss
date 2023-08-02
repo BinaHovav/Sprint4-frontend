@@ -1,0 +1,45 @@
+.attachment-container {
+    padding: 8px 12px 12px;
+    h5 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        color: $clr-text;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.003em;
+        line-height: 16px;
+    }
+    p {
+        color: $clr-text-subtlest;
+        font-size: 12px;
+        margin: 8px 0 12px;
+        padding: 2px;
+    }
+    label {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 6px 12px;
+        text-decoration: none;
+        white-space: normal;
+        background-color: $clr-background-neutral;
+        box-shadow: none;
+        border: none;
+        color: $clr-text;
+        transition-property: background-color, border-color, box-shadow;
+        transition-duration: 85ms;
+        transition-timing-function: ease;
+        display: flex;
+        margin-bottom: 15px;
+    }
+    input {
+        display: none;
+        margin-bottom: 16px;
+    }
+}

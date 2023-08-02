@@ -6,8 +6,9 @@
                 <div class="checklist-title">
                     <h3>{{ checklist?.title }}</h3>
                     <div class="checklist-options">
-                        <a class="show-checked">Show checked items</a>
-                        <a class="checklist-remove-btn" @click="removeChecklist(checklist.id)">Delete</a>
+                        <a v-if="isTaskChecked(checklist)" @click.stop="toggleItemDone = !toggleItemDone"
+                            class="show-checked">{{ toggleItemDone ? 'Hide' : 'Show' }} checked items</a>
+                        <a class="checklist-remove-btn" @click.stop="removeChecklist(checklist.id)">Delete</a>
                     </div>
                 </div>
             </div>
@@ -20,27 +21,28 @@
                 </div>
             </div>
             <div class="checklist-list">
-                <div v-for="item in checklist?.todos" class="checklist-item">
-                    <div @click="setItemDone(checklist.id, item.id)" class="checklist-checkbox" :class="{ 'checked': item.isDone }" v-icon="'checkBox'"></div>
-                    <div class="checklist-item-details">
+                <div v-for="item in checklist?.todos" class="checklist-item" >
+                    <div v-if="showItemList(item)" @click.stop="setItemDone(checklist.id, item.id)" class="checklist-checkbox"
+                        :class="{ 'checked': item.isDone }" v-icon="'checkBox'"></div>
+                    <div v-if="showItemList(item)" class="checklist-item-details">
                         <div class="checklist-item-row">
                             <div class="checklist-text">
-                                <span :class="{ 'checked': item.isDone }">{{ item.txt }}</span>
+                                <span :class="{ 'checked': item.isDone }">{{ item.txt
+                                }}</span>
                                 <div class="checklist-text-options">
                                     <div class="checklist-text-item-actions">
-                                        <a><span @click="removeTodo(item.id,checklist.id)"></span></a>
+                                        <a><span @click.stop="removeTodo(item.id, checklist.id)"></span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="checklist-add-item" @blue="toggleAddTodo($event, checklist.id)">
+                <div class="checklist-add-item" @blur="toggleAddTodo($event, checklist.id)">
                     <button @click.stop="toggleAddTodo($event, checklist.id)">Add an item</button>
-                    <textarea @keyup.enter="addTodo(checklist?.todos, checklist.id)" :ref="checklist.id"
-                        class="add-item" placeholder="Add an item" v-focus></textarea>
-                    <form @keyup.enter="addTodo(checklist?.todos, checklist.id)"
-                        class="add-item-options">
+                    <textarea @keyup.enter="addTodo(checklist?.todos, checklist.id)" :ref="checklist.id" class="add-item"
+                        placeholder="Add an item" v-focus></textarea>
+                    <form @keyup.enter="addTodo(checklist?.todos, checklist.id)" class="add-item-options">
                         <input @click.stop="addTodo(checklist?.todos, checklist.id)" type="submit" value="Add">
                         <a @click.stop="toggleAddTodo($event, checklist.id)" class="add-item-cancel">Cancel</a>
                         <div class="add-item-spacer"></div>
@@ -62,7 +64,8 @@ export default {
     },
     data() {
         return {
-            addItem:false
+            addItem: false,
+            toggleItemDone: false
         }
     },
     created() {
@@ -77,7 +80,7 @@ export default {
         getTaskProgress(todos) {
             const todoDone = todos.filter(todo => todo.isDone)
             const precent = parseInt((todoDone.length / todos.length) * 100)
-            return precent ? precent+'%' : '0%'
+            return precent ? precent + '%' : '0%'
         },
         removeChecklist(checklistId) {
             const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistId)
@@ -101,14 +104,22 @@ export default {
             const todo = { id: utilService.makeId(4), txt: '', isDone: false }
             todo.txt = this.$refs[checklistRef][0].value
             this.$refs[checklistRef][0].value = ''
+            this.$refs[checklistRef][0].focus()
             todos.push(todo)
             this.$emit('onSaveTask')
         },
         removeTodo(todoId, checklistId) {
             const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistId)
             const todoIdx = this.task.checklists[idx].todos.findIndex(todo => todo.id === todoId)
-            this.task.checklists[idx].todos.splice(todoIdx,1)
+            this.task.checklists[idx].todos.splice(todoIdx, 1)
             this.$emit('onSaveTask')
+        },
+        isTaskChecked(checklist) {
+            return checklist.todos.some(todo => todo.isDone === true)
+        },
+        showItemList(item) {
+            if (item.isDone && this.toggleItemDone) return false
+            else return true
         }
     },
     computed: {

@@ -59,19 +59,6 @@ export default {
             }
         },
     },
-    // watch: {
-    //     drag: {
-    //         handler() {
-    //             // console.log(this.drag);
-    //             this.dragGroup = this.dragGroup === '' ? 'dragGroup' : ''
-    //             // console.log(this.dragGroup);
-    //         }
-    //     }
-    // },
-
-    created() {
-        // console.log('this.dragGroup', this.dragGroup);
-    },
     methods: {
         removeGroup(groupId) {
             this.$emit('removeGroup', groupId)
