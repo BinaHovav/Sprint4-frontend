@@ -38,7 +38,6 @@ async function save(board) {
 
 function getEmptyBoard() {
   return {
-    _id: '',
     title: '',
     imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg',
     isStarred: false,

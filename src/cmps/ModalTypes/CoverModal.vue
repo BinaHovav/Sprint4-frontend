@@ -3,7 +3,7 @@
         <div class="cover-size">
             <h4 class="first-h4">Size</h4>
             <div class="cover-layout-options">
-                <div class="cover-layout-top checked">
+                <div class="cover-layout-top" @click.stop="this.info.task.cover.isFull = false" :class="{'checked' : !this.info.task.cover.isFull}">
                     <div class="cover-top green"></div>
                     <div class="cover-top-text">
                         <div class="cover-top-text-1"></div>
@@ -15,14 +15,14 @@
                         <div class="cover-top-text-4"></div>
                     </div>
                 </div>
-                <div class="cover-layout-full">
+                <div class="cover-layout-full" @click.stop="this.info.task.cover.isFull = true" :class="{'checked' : this.info.task.cover.isFull}">
                     <div class="cover-full-text">
                         <div class="cover-full-text-1"></div>
                         <div class="cover-full-text-2"></div>
                     </div>
                 </div>
             </div>
-            <button class="remove-cover">Remove cover</button>
+            <button class="remove-cover" @click.stop="this.info.task.cover.background=''">Remove cover</button>
             <h4>Colors</h4>
             <div class="covers-list">
                 <button v-for="cover in covers" @click.stop="updateCover(cover)" :class="[cover ,{ 'picked' : coverSelected(cover) }]"></button>

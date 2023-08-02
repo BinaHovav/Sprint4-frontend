@@ -9,7 +9,7 @@
                         <button><span><span v-icon="'descriptionInfo'"></span></span></button>
                     </div>
                     <div class="description-edit-btn">
-                        <button @click="openDescriptionEdit">Edit</button>
+                        <button @click.stop="openDescriptionEdit">Edit</button>
                     </div>
                 </div>
             </div>
@@ -24,8 +24,8 @@
                             <button class="description-cancel" @click.stop="saveDescription('cancel')">Cancel</button>
                         </div>
                     </div>
-                    <div v-if="!isEditable && !task.description" @click="openDescriptionEdit">Add a more detailed description...</div>
-                    <div v-if="!isEditable" class="all" @click="openDescriptionEdit" dir="auto" v-html="task.description"></div>
+                    <div v-if="!isEditable && !task.description" @click.stop="openDescriptionEdit">Add a more detailed description...</div>
+                    <div v-if="!isEditable" class="all" @click.stop="openDescriptionEdit" dir="auto" v-html="task.description"></div>
                 </div>
             </div>
         </div>

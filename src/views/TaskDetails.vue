@@ -24,6 +24,9 @@
                 <a>{{ group.title }}</a>
               </p>
             </div>
+            <div v-if="isWatching" class="task-header-watch">
+              <span class="task-watch-icon"></span>
+            </div>
           </div>
           <div class="task-main">
             <div class="task-details-data">
@@ -67,7 +70,10 @@
                   <div class="due-date-time-container">
                     <div>
                       <button class="due-date-btn">
-                        <span> {{ dueDate }} <span v-if="dueDateProgress === 'soon'">Due soon</span><span v-if="dueDateProgress === 'over'">Overdue</span></span>
+                        <span ref="datePicker" @click.stop="openModal('DatePickerModal', 'datePicker')"> {{ dueDate }} <span class="soon" v-if="dueDateProgress === 'soon'">Due soon</span>
+                        <span class="over" v-if="dueDateProgress === 'over'">Overdue</span>
+                        <span class="complete" v-if="dueDateProgress === 'complete'">Complete</span>
+                      </span>
                         <span class="due-date-icon"><span class="due-date-icon-span" v-icon="'arrowDown'"></span></span>
                       </button>
                     </div>
@@ -75,10 +81,20 @@
                 </div>
               </div>
             </div>
-            <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask"></TaskDescriptionDetails>
-            <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask"></TaskChecklistDetails>
+            <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask"/>
+            <TaskAttachmentDetails v-if="false" :task="task" @onSaveTask="onSaveTask"/>
+            <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask"/>
           </div>
           <div class="task-sidebar">
+            <div v-if="!task.members.length" class="task-sidebar-suggested">
+              <h3 class="task-side-suggested-title">Suggested</h3>
+              <div class="task-join-members">
+                  <a @click.stop="task.members.push('u101')">
+                    <span class="task-join-icon"></span>
+                    <span class="task-join-text">Join</span>
+                  </a>
+              </div>
+            </div>
             <div class="task-sidebar-add">
               <h3 class="sidebar-add-txt">Add to card</h3>
               <a ref="members" class="task-btn-link" @click.stop="openModal('MemberModal', 'members')">
@@ -97,7 +113,7 @@
                 <span class="btn-link-dates"></span>
                 <span class="">Dates</span>
               </a>
-              <a class="task-btn-link" @click.stop="openModal()">
+              <a ref="attachmentSide" class="task-btn-link" @click.stop="openModal('AttachmentModal', 'attachmentSide')">
                 <span class="btn-link-attachment"></span>
                 <span class="">Attachment</span>
               </a>
@@ -153,9 +169,12 @@ export default {
     dueDateProgress(){
       const taskDate = this.task.date.dueDate * 1000
       const now = Date.now()
-      // let timeProgress = 
+      const tomorrow = now + 1000 * 60 * 60 * 24
+      let timeProgress = ''
+      if (tomorrow > taskDate) timeProgress = 'soon'
       if (now > taskDate) timeProgress = 'over'
-      return 'soon'
+      if (this.task.date.isDone) timeProgress = 'complete'
+      return timeProgress
     }
   },
   created() {
