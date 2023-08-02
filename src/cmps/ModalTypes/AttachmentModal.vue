@@ -31,11 +31,12 @@ export default {
     methods: {
         async uploadFile(ev) {
             this.isUploading = true
+            const name = ev.target.files[0].name
             const type = ev.target.files[0].type
             const { secure_url } = await uploadService.uploadFile(ev)
             this.isUploading = false
             const fileUrl = secure_url
-            const attachment = { id: utilService.makeId(5), type, fileUrl, createdAt: Date.now() }
+            const attachment = { id: utilService.makeId(5), type, name, fileUrl, createdAt: Date.now() }
             this.info.task.attachment.unshift(attachment)
             this.$emit('setInfo', this.info)
         }

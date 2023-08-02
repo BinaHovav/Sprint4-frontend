@@ -82,7 +82,7 @@
               </div>
             </div>
             <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask"/>
-            <TaskAttachmentDetails v-if="task.attachment.length" :task="task" @onSaveTask="onSaveTask"/>
+            <TaskAttachmentDetails v-if="task.attachment?.length" :task="task" @onSaveTask="onSaveTask"/>
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask"/>
           </div>
           <div class="task-sidebar">
