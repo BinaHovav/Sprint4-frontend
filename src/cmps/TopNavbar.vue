@@ -1,10 +1,11 @@
 <template>
   <section class="board-header">
-    <nav>
+    <nav :class="isMenuOpen">
       <span class="left-board-header">
         <div class="board-title">
           <form action="">
-            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title" @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
+            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title"
+              @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
           </form>
 
           <!-- <h1 class="fs18">{{ boardToDisplay?.title }}</h1> -->
@@ -22,7 +23,7 @@
             <img :src="member.imgUrl" alt="member" />
           </div>
         </div>
-        <button class="open-menu-btn" @click="openRightNav"></button>
+        <button class="open-menu-btn" :class="isMenuOpen" @click="openRightNav"></button>
       </span>
     </nav>
   </section>
@@ -33,8 +34,12 @@ import RightMenu from './RightMenu.vue'
 
 export default {
   name: 'TopNavbar',
-  props: ['board'],
-
+  props: ['board', 'isMenuOpen'],
+  data() {
+    return {
+      
+    }
+  },
   created() {
     this.getAverageColor()
   },

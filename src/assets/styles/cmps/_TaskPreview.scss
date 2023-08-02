@@ -113,67 +113,106 @@
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
-            margin-bottom: 4px;
+            // margin-bottom: 4px;
 
             .task-label {
                 display: inline-flex;
-                max-width: calc(100% - 4px);
 
+            }
 
+            button {
+                // display: inline-block;
+                // display: inline-flex;
+                // position: relative;
+                // max-width: calc(100% - 4px);
+                // max-width: 100%;
+                // min-width: em(12px);
+                // min-height: em(8px);
 
+                // transition: width height 2s;
 
-                button {
-                    display: inline-block;
-                    position: relative;
-                    min-height: 8px;
-                    min-width: 40px;
-                    max-width: 100%;
+                // margin-top: 0;
+                margin-bottom: 0;
+                // padding-right: 0;
+                // padding-left: 0;
+                // padding: 0 8px;
 
-                    transition: width height 2s;
+                // border-radius: 4px;
+                // background-color: var(--label-background-color);
+                // color: var(--label-text-color);
+                // color: transparent;
 
-                    margin-top: 0;
-                    margin-bottom: 0;
-                    padding-right: 0;
-                    padding-left: 0;
-                    padding: 0 8px;
+                // line-height: 16px;
+                // font-size: 12px;
+                // font-weight: 500;
+                // text-align: left;
+                // vertical-align: middle;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                // white-space: nowrap;
+                // height: 100%;
+                // width: fit-content;
+                // transition: min-width 300ms ease-in, min-height 320ms ease-in;
+                // transition: all 250ms ease-in;
+                font-size: 16px;
+                min-width: 2.5em;
+                min-height: 0.5em;
+                border-radius: 555px;
+                padding: 0;
+                // margin: 0em 0;
+                max-height: 0.5rem;
+                // color: transparent;
+                width: fit-content;
+                transition: min-width .22s ease-in, height .22s ease-in .28s, width .22s ease-in;
 
-                    border-radius: 4px;
-                    // background-color: var(--label-background-color);
-                    // color: var(--label-text-color);
+                &.labels-close {
+                    // animation-name: labelsClose;
+                    // animation-duration: 450ms;
+                    // animation-timing-function: ease-in;
+                    // animation-fill-mode: forwards;
+                    // transform: scaleY(0.5);
+                    // color: transparent;
+                    // padding-right: 0;
+                    // padding-left: 0;
+                    // min-width: 40px;
+                    // transition: all 250ms ease-in;
+                    // min-height: 8px;
                     // color: transparent;
 
-                    line-height: 16px;
-                    font-size: 12px;
-                    font-weight: 500;
-                    text-align: left;
-                    vertical-align: middle;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-
-                    &.labels-close {
-                        animation-name: labelsClose;
-                        animation-duration: 450ms;
-                        animation-timing-function: ease-in;
-                        animation-fill-mode: forwards;
-                    }
-
-                    &.labels-open {
-                        animation-name: labelsOpen;
-                        animation-duration: 450ms;
-                        animation-timing-function: ease-in;
-                        animation-fill-mode: forwards;
-                    }
-
-
-
-
-                    &:hover {
-                        cursor: pointer;
-                        filter: saturate(85%) brightness(85%);
-                    }
-
+                    // button {
+                    //     height: 8px;
+                    // }
                 }
+
+                &.labels-open {
+                    // animation-name: labelsOpen;
+                    // animation-duration: 450ms;
+                    // animation-timing-function: ease-in;
+                    // animation-fill-mode: forwards;
+                    // min-width: em(40px);
+                    // min-height: em(20px);
+                    // color: currentColor;
+                    // transform: scaleY(1);
+
+                    max-height: 1rem;
+                    min-width: 4rem;
+                    // width: calc(100% + 4px);
+                    border-radius: 0.25em;
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 14px;
+                    padding: 0 6px 0 6px;
+                    margin: 0;
+                }
+
+
+
+
+                &:hover {
+                    cursor: pointer;
+                    filter: saturate(85%) brightness(85%);
+                }
+
             }
         }
 
@@ -237,21 +276,27 @@
         background-clip: padding-box;
         background-color: $clr-surface-raised-hovered;
         background-origin: initial;
-        border-radius: 8px;
-        opacity: .8;
-        padding: 6px;
+        visibility: hidden;
         position: absolute;
+        border-radius: 8px;
         right: 2px;
         top: 2px;
-        visibility: hidden;
         z-index: 40;
+        opacity: .8;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .edit-icon {
-            @include trello-icon($icon-edit)
+            @include trello-icon($icon-edit);
+
         }
 
         &:hover {
             background-color: $clr-surface-raised-pressed;
+            opacity: 1;
         }
 
     }

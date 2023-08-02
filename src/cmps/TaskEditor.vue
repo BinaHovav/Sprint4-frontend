@@ -14,7 +14,7 @@
                     <div v-if="task.labels" class="task-labels">
                         <div v-for="label in task.labels" class="task-label">
                             <button @click.stop="animateLabels"
-                                :class="[getLabelById(label)?.color, getLabelById(label)?.animationClass]">
+                                :class="[getLabelById(label)?.color, currBoard.labelAnimation]">
                                 {{ getLabelById(label)?.title }}
                             </button>
                         </div>
@@ -237,9 +237,7 @@ export default {
             // Replace this with your actual logic
             const board = JSON.parse(JSON.stringify(this.currBoard))
             // Update the animation class for each task label based on the labels state
-            board.labels.forEach((label) => {
-                label.animationClass = label.animationClass === "labels-close" ? "labels-open" : "labels-close";
-            });
+            board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
             this.$store.dispatch({ type: 'updateBoard', board })
         },
         dueDate() {

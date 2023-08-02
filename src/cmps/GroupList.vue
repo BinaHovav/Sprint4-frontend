@@ -1,13 +1,13 @@
 <template>
-    <draggable v-model="groupList" group="groups" ghost-class="ghost-group" class="group-list-container flex u-fancy-scrollbar"
-        @start="drag = true" @end="drag = false" @change="handleDragChange" @click.right.prevent item-key="name"
-        handle=".drag-me" drag-class="drag-group">
+    <draggable v-model="groupList" group="groups" ghost-class="ghost-group"
+        class="group-list-container flex u-fancy-scrollbar" @start="drag = true" @end="drag = false"
+        @change="handleDragChange"  item-key="name" handle=".drag-me" drag-class="drag-group">
         <template #item="{ element }">
             <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
-                @updateTasks="updateTasks"  />
+                @updateTasks="updateTasks" @click.right.prevent/>
         </template>
         <template #footer>
-            <div @click="addList = !addList" v-if="!addList" class="add-group-before">
+            <div @click="toggleAdd" v-if="!addList" class="add-group-before">
                 <div>
                     <span class="plus-icon"> </span>
                 </div>
@@ -15,13 +15,13 @@
 
 
             </div>
-            <div v-else class="add-group">
+            <div v-else class="add-group" v-clickOutside="toggleAdd">
                 <form @submit.prevent="addGroup">
                     <input type="text" name="name" v-model="title" placeholder="Enter list title" autocomplete="off"
                         dir="auto" maxlength="512" required ref="addGroupRef" v-focus>
                     <div class="controls">
                         <button class="btn-add">Add list</button>
-                        <span @click="addList = !addList" class="btn-close"> </span>
+                        <span @click.stop="toggleAdd" class="btn-close"> </span>
                     </div>
                 </form>
             </div>
@@ -116,6 +116,9 @@ export default {
                 draggedElement.style.transform = '';
             }
         },
+        toggleAdd() {
+            this.addList = !this.addList
+        }
     },
     components: {
         GroupPreview,
