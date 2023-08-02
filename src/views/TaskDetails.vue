@@ -82,7 +82,7 @@
               </div>
             </div>
             <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask"/>
-            <TaskAttachmentDetails v-if="false" :task="task" @onSaveTask="onSaveTask"/>
+            <TaskAttachmentDetails v-if="task.attachment?.length" :task="task" @onSaveTask="onSaveTask"/>
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask"/>
           </div>
           <div class="task-sidebar">
@@ -135,6 +135,8 @@ import { boardService } from '../services/board.service.js'
 import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import TaskChecklistDetails from '../cmps/TaskDetails/TaskChecklistDetails.vue'
 import TaskDescriptionDetails from '../cmps/TaskDetails/TaskDescriptionDetails.vue'
+import TaskAttachmentDetails from '../cmps/TaskDetails/TaskAttachmentDetails.vue'
+
 export default {
   name: 'TaskDetails',
   data() {
@@ -252,6 +254,7 @@ export default {
   components: {
     TaskChecklistDetails,
     TaskDescriptionDetails,
+    TaskAttachmentDetails
   },
 }
 </script>

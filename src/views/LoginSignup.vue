@@ -24,7 +24,7 @@
         /> -->
         <button>Login</button>
       </form>
-      <p class="mute">user1 or admin, pass:123</p>
+      <p class="mute">tomer123 or meitar123 for admin, pass:123</p>
       <form @submit.prevent="doSignup">
         <h2>Signup</h2>
         <input type="text" v-model="signupCred.fullname" placeholder="Your full name" />

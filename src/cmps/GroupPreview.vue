@@ -2,7 +2,7 @@
   <div class="group-preview-container">
     <div class="group-header drag-me">
       <form action="">
-        <textarea v-model="clonedGroup.title" rows="1" ref="groupNameInput" class="task-title" @blur="updateGroup" @keydown.enter.prevent="updateGroup"></textarea>
+        <textarea v-model="clonedGroup.title"  ref="groupNameInput" class="task-title" @blur="updateGroup" @keydown.enter.prevent="updateGroup"></textarea>
       </form>
       <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span class="three-dots"></span></button>
     </div>

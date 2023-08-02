@@ -30,7 +30,7 @@
         </div>
         <div class="date-container-btns">
             <button class="date-btn-save" @click.stop="saveDueDate">Save</button>
-            <button class="date-btn-remove">Remove</button>
+            <button class="date-btn-remove" @click.stop="removeDueDate">Remove</button>
         </div>
     </div>
 </template>

@@ -10,6 +10,7 @@
 </template>
 <script>
 import { uploadService } from '../../services/upload.service.js'
+import { utilService } from '../../services/util.service'
 
 export default {
     name: 'ListAction',
@@ -25,22 +26,19 @@ export default {
         return {
             isUploading: false,
             fileUrl: null,
-            height: 500,
-            width: 500,
         }
     },
     methods: {
         async uploadFile(ev) {
-            console.log(ev.target.files[0].type);
-            if (ev.target.files[0].type.includes('image/')) this.type = 'image'
-            if (ev.target.files[0].type.includes('text/')) this.type = 'text/plain'
             this.isUploading = true
-            const { secure_url, height, width } = await uploadService.uploadImg(ev, this.type)
+            const name = ev.target.files[0].name
+            const type = ev.target.files[0].type
+            const { secure_url } = await uploadService.uploadFile(ev)
             this.isUploading = false
-            this.fileUrl = secure_url
-            this.height = height
-            this.width = width
-            console.log(this.fileUrl);
+            const fileUrl = secure_url
+            const attachment = { id: utilService.makeId(5), type, name, fileUrl, createdAt: Date.now() }
+            this.info.task.attachment.unshift(attachment)
+            this.$emit('setInfo', this.info)
         }
     },
     computed: {

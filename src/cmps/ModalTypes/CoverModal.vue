@@ -3,7 +3,7 @@
         <div class="cover-size">
             <h4 class="first-h4">Size</h4>
             <div class="cover-layout-options">
-                <div class="cover-layout-top" @click.stop="this.info.task.cover.isFull = false" :class="{'checked' : !this.info.task.cover.isFull}">
+                <div class="cover-layout-top" @click.stop="setCoverFull(false)" :class="{'checked' : !this.info.task.cover.isFull}">
                     <div class="cover-top green"></div>
                     <div class="cover-top-text">
                         <div class="cover-top-text-1"></div>
@@ -15,7 +15,7 @@
                         <div class="cover-top-text-4"></div>
                     </div>
                 </div>
-                <div class="cover-layout-full" @click.stop="this.info.task.cover.isFull = true" :class="{'checked' : this.info.task.cover.isFull}">
+                <div class="cover-layout-full" @click.stop="setCoverFull(true)" :class="{'checked' : this.info.task.cover.isFull}">
                     <div class="cover-full-text">
                         <div class="cover-full-text-1"></div>
                         <div class="cover-full-text-2"></div>
@@ -70,6 +70,10 @@ export default {
         },
         updateCover(cover) {
             this.info.task.cover.background = cover
+            this.$emit('setInfo', this.info)
+        },
+        setCoverFull(full){
+            this.info.task.cover.isFull = full
             this.$emit('setInfo', this.info)
         }
     },

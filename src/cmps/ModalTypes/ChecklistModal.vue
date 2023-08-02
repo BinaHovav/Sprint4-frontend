@@ -33,7 +33,7 @@ export default {
             const title = this.$refs.checklist.value
             this.info.task.checklists.push({ id, title, todos: [] })
             this.$emit('setInfo', this.info)
-            this.$emit('closeModal')
+            this.$emit('setInfo')
         }
     },
     computed: {
