@@ -14,16 +14,28 @@
         <div class="background-picker">
           <!-- <span ></span> -->
           <!-- <div class="background-option"></div> -->
-          <button class="background-option" v-for="background in backgroundOptions" :key="background">
-            <img :src="background" alt="Background" @click="setBackground(background)" />
-            <span class="check-icon"></span>
-          </button>
+          <div class="background-options">
+            <button class="background-option" v-for="background in backgroundOptions" :key="background">
+              <img :src="background" alt="Background" @click="setBackground(background)" />
+              <span class="check-icon"></span>
+            </button>
+          </div>
+          <div class="background-color-options">
+            <button class="background-color-option" v-for="backgroundColor in backgroundColorOptions" :key="backgroundColor">
+              <img :src="backgroundColor" alt="BackgroundColor" @click="setBackgroundColor(backgroundColor)" />
+              <span class="check-icon"></span>
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="new-board-title">
-        <label>Board title</label>
+        <label
+          >Board title
+          <span>*</span>
+        </label>
         <input type="text" class="title-input" v-model="newBoardTitle" />
+        <p>👋 Board title is required</p>
       </div>
 
       <div class="create-board-btn">
@@ -55,12 +67,7 @@ export default {
     },
   },
 
-  created() {
-    // this.getLabel()
-    // setTimeout(() => {
-    //   this.$refs.titleInput.focus()
-    // }, 200)
-  },
+  created() {},
   methods: {
     async createBoard() {
       if (this.isTitleInputEmpty) return
@@ -78,6 +85,9 @@ export default {
       }
     },
     setBackground(chosenBackground) {
+      this.chosenBackground = chosenBackground
+    },
+    setBackgroundColor(chosenBackground) {
       this.chosenBackground = chosenBackground
     },
   },
@@ -98,8 +108,20 @@ export default {
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446242/marek-piwnicki-FFofrEuXsL4-unsplash_vnnykd.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446239/javier-miranda-kBU5APay4T0-unsplash_iscwqp.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446244/marek-piwnicki-5MVnLlI3Flg-unsplash_cyqyb6.jpg',
-        'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446241/marek-piwnicki-pjf3gGDvTeM-unsplash_ww11qq.jpg',
-        'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg',
+        // 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446241/marek-piwnicki-pjf3gGDvTeM-unsplash_ww11qq.jpg',
+        // 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg',
+      ]
+    },
+    backgroundColorOptions() {
+      return [
+        'https://a.trellocdn.com/prgb/assets/1cbae06b1a428ad6234a.svg',
+        'https://a.trellocdn.com/prgb/assets/d106776cb297f000b1f4.svg',
+        'https://a.trellocdn.com/prgb/assets/8ab3b35f3a786bb6cdac.svg',
+        'https://a.trellocdn.com/prgb/assets/a7c521b94eb153008f2d.svg',
+        'https://a.trellocdn.com/prgb/assets/aec98becb6d15a5fc95e.svg',
+        'https://a.trellocdn.com/prgb/assets/b75536d1afb40980ca57.svg',
+        // 'https://a.trellocdn.com/prgb/assets/92e67a71aaaa98dea5ad.svg',
+        // 'https://a.trellocdn.com/prgb/assets/941e9fef7b1b1129b904.svg',
       ]
     },
   },

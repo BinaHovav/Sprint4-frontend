@@ -22,7 +22,7 @@
                   <a @click="openMenuOption('about')">About this board</a>
                 </button>
               </li>
-              <li class="board-menu-navigation-item">
+              <li class="board-menu-navigation-item change-bg">
                 <button class="board-menu-navigation-item-link">
                   <img :src="board.imgUrl" />
                   <a @click="openMenuOption('changeBackground')">Change background</a>
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { eventBus } from '../services/event-bus.service'
+// import { Unsplash } from '../services/unsplash'
 
 export default {
   name: 'RightMenu',
@@ -121,6 +121,14 @@ export default {
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446244/marek-piwnicki-5MVnLlI3Flg-unsplash_cyqyb6.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446241/marek-piwnicki-pjf3gGDvTeM-unsplash_ww11qq.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg',
+        'https://a.trellocdn.com/prgb/assets/1cbae06b1a428ad6234a.svg',
+        'https://a.trellocdn.com/prgb/assets/d106776cb297f000b1f4.svg',
+        'https://a.trellocdn.com/prgb/assets/8ab3b35f3a786bb6cdac.svg',
+        'https://a.trellocdn.com/prgb/assets/a7c521b94eb153008f2d.svg',
+        'https://a.trellocdn.com/prgb/assets/aec98becb6d15a5fc95e.svg',
+        'https://a.trellocdn.com/prgb/assets/b75536d1afb40980ca57.svg',
+        'https://a.trellocdn.com/prgb/assets/92e67a71aaaa98dea5ad.svg',
+        'https://a.trellocdn.com/prgb/assets/941e9fef7b1b1129b904.svg',
       ]
     },
   },

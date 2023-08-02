@@ -78,6 +78,7 @@
             padding: 0;
             width: 100%;
             .board-menu-content-frame {
+                overflow: scroll;
                 box-sizing: border-box;
                 flex: 1 auto;
                 padding: 12px 12px 8px;
@@ -90,7 +91,11 @@
                     margin: 4px 0;
                     list-style: none;
                     padding: 0;
+
                     .board-menu-navigation-item {
+                        &.change-bg {
+                            border-bottom: 1px solid lightgray;
+                        }
                         .board-menu-navigation-item-link,
                         .board-menu-navigation-item-link-about,
                         .board-menu-navigation-item-link-activity {
@@ -116,10 +121,14 @@
                                 // object-fit: contain;
                             }
                         }
+
                         .board-menu-navigation-item-link-about {
                             padding: 6px 10px;
                         }
+
                         .board-menu-navigation-item-link-activity {
+                            margin-top: 60px;
+
                             @include trello-icon($content: $icon-activity, $type: md);
                             a {
                                 font-weight: 600;
@@ -140,7 +149,7 @@
                     justify-content: center;
                     img {
                         border-radius: 15px;
-                        width: 150px;
+                        width: 140px;
                         aspect-ratio: 3/2;
                         cursor: pointer;
                     }

@@ -10,12 +10,14 @@
           </div>
           <BoardList :boards="starredBoards" :showCreateBoard="false" />
           <div class="board-category-title">
-            <span class="clock"></span>
-            <h3>Recently viewed</h3>
+            <!-- <span class="clock"></span> -->
+            <!-- <h3>Recently viewed</h3> -->
+            <h3>All boards</h3>
           </div>
         </div>
         <BoardList :boards="boards" :showCreateBoard="true" />
       </div>
+      <nav class="home-right-sidebar-container"></nav>
     </div>
   </div>
 </template>
@@ -36,7 +38,7 @@ export default {
     },
 
     boards() {
-      return this.$store.getters.boards.filter((board) => !board.isStarred)
+      return this.$store.getters.boards
     },
   },
 
