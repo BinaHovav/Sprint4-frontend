@@ -4,54 +4,62 @@
         <div class="btn-edit" @click.stop="openEditor">
             <span class="edit-icon"></span>
         </div>
-        <div v-if="task?.cover && cover" :class="task.cover.background" class="task-cover"><span class="edit"></span></div>
-        <div v-else-if="task?.cover" class="task-cover-img"
-            :style="{ height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }">
+        <section v-if="!task?.cover.isFull">
+            <div v-if="task?.cover.background && cover && !task.cover.isFull" :class="task.cover.background"
+                class="task-cover">
+                <span class="edit"></span>
+            </div>
+            <div v-else-if="task?.cover.background && !cover && !task.cover.isFull" class="task-cover-img"
+                :style="{ height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }">
+                <span class="edit"></span>
+            </div>
+            <div class="task-details-container">
+                <div v-if="task.labels" class="task-labels">
+                    <div v-for="label in task.labels" class="task-label">
+                        <button @click.stop="animateLabels"
+                            :class="[getLabelById(label)?.color, getLabelById(label)?.animationClass]">
+                            {{ getLabelById(label)?.title }}
+                        </button>
+                    </div>
+                </div>
+
+                <span class="task-title">{{ task.title }}</span>
+                <div class="badges">
+                    <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
+                    <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
+                    <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id)" class="badge"
+                        :class="dateClass" :title="dateTitle">
+                        <span class="clock-icon"></span>
+                        <span class="badge-text">{{ dueDate() }}</span>
+                    </div>
+                    <div v-if="task.description" class="badge description" title="This card has a description">
+                        <span class="description-icon"></span>
+                    </div>
+                    <div v-if="task.comments?.length" class="badge comments" title="Comments">
+                        <span class="comments-icon"></span>
+                        <span class="badge-text">{{ task.comments.length }}</span>
+                    </div>
+                    <div v-if="task.checklists?.length" class="badge checklist" title="checklist items"
+                        :class="checklistClass">
+                        <span class="checklist-icon"></span>
+                        <span class="badge-text">{{ checklistCount }}</span>
+                    </div>
+                    <div v-if="task.attachments" class="badge attachment">
+                        <span class="attachment-icon"></span>
+                        <span class="badge-text">{{ task.attachments.length }}</span>
+                    </div>
+                </div>
+                <div class="task-members">
+                    <div v-for="memberId in task.members">
+                        <img :src="getMemberById(memberId).imgUrl" alt="member" :title="getMemberById(memberId).fullname" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div v-else class="task-cover-full" :class="task.cover.background">
             <span class="edit"></span>
-        </div>
-        <div class="task-details-container">
-            <div v-if="task.labels" class="task-labels">
-                <div v-for="label in task.labels" class="task-label">
-                    <button @click.stop="animateLabels"
-                        :class="[getLabelById(label)?.color, getLabelById(label)?.animationClass]">
-                        {{ getLabelById(label)?.title }}
-                    </button>
-                </div>
-            </div>
-
             <span class="task-title">{{ task.title }}</span>
-            <div class="badges">
-                <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
-                <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
-                <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id)" class="badge"
-                    :class="dateClass" :title="dateTitle">
-                    <span class="clock-icon"></span>
-                    <span class="badge-text">{{ dueDate() }}</span>
-                </div>
-                <div v-if="task.description" class="badge description" title="This card has a description">
-                    <span class="description-icon"></span>
-                </div>
-                <div v-if="task.comments?.length" class="badge comments" title="Comments">
-                    <span class="comments-icon"></span>
-                    <span class="badge-text">{{ task.comments.length }}</span>
-                </div>
-                <div v-if="task.checklists?.length" class="badge checklist" title="checklist items" :class="checklistClass">
-                    <span class="checklist-icon"></span>
-                    <span class="badge-text">{{ checklistCount }}</span>
-                </div>
-                <div v-if="task.attachments" class="badge attachment">
-                    <span class="attachment-icon"></span>
-                    <span class="badge-text">{{ task.attachments.length }}</span>
-                </div>
-            </div>
-            <div class="task-members">
-                <div v-for="memberId in task.members">
-                    <img :src="getMemberById(memberId).imgUrl" alt="member" :title="getMemberById(memberId).fullname" />
-                </div>
-            </div>
         </div>
-
-        <!-- <textarea>{{ task.title }}</textarea> -->
     </section>
 </template>
 
