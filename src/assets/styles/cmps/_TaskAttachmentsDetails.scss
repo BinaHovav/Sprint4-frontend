@@ -47,6 +47,74 @@
             min-height: 18px;
             min-width: 40px;
             width: auto;
+            font-weight: 600;
+        }
+    }
+    .task-attachment-content {
+        margin-left: 40px;
+        .task-attachment-item {
+            border-radius: 3px;
+            margin: 0 0 8px;
+            min-height: 80px;
+            overflow: hidden;
+            position: relative;
+            a {
+                background-color: $clr-background-neutral;
+                background-position: 50%;
+                background-repeat: no-repeat;
+                background-size: contain;
+                border-radius: 3px;
+                height: 80px;
+                left: 0;
+                margin-top: -40px;
+                position: absolute;
+                text-align: center;
+                text-decoration: none;
+                top: 50%;
+                width: 112px;
+                z-index: 1;
+                span {
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 700;
+                    height: 100%;
+                    line-height: 80px;
+                    text-align: center;
+                    text-decoration: none;
+                    width: 100%;
+                    color: $clr-text-subtle;
+                }
+            }
+            .attachment-details {
+                box-sizing: border-box;
+                cursor: pointer;
+                margin: 0;
+                min-height: 80px;
+                padding: 8px 8px 8px 128px;
+                .attach-name {
+                    word-wrap: break-word;
+                    font-weight: 700;
+                }
+                a {
+                    padding-left: 3px;
+                    span {
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        display: inline-block;
+                        font-family: trellicons;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1;
+                        text-align: center;
+                        text-decoration: none;
+                        vertical-align: bottom;
+                        font-size: 16px;
+                        height: 20px;
+                        line-height: 20px;
+                        width: 20px;
+                    }
+                }
+            }
         }
     }
 }

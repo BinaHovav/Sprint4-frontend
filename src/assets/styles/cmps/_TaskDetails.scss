@@ -655,16 +655,19 @@
                                         color: $clr-text-warning-inverse;
                                         background-color: $clr-background-warning-bold;
                                         font-size: 12px;
+                                        padding-inline: 4px;
                                     }
                                     .complete {
                                         color: $clr-text-inverse;
                                         background-color: $clr-background-success-bold;
                                         font-size: 12px;
+                                        padding-inline: 4px;
                                     }
                                     .over {
-                                        color: $clr-text-inverse;
-                                        background-color: $clr-background-danger-bold;
+                                        color: $clr-text-danger;
+                                        background-color: $clr-background-danger;
                                         font-size: 12px;
+                                        padding-inline: 4px;
                                     }
                                 }
                             }
