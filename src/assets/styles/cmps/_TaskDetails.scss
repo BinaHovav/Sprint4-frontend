@@ -90,22 +90,29 @@
                 position: relative;
                 transition: opacity 85ms;
                 width: 100%;
-                height: 116px;
-                min-height: 116px;
                 padding: 0px;
                 background-size: initial;
                 background-origin: content-box;
                 box-sizing: border-box;
                 background-position: left center;
-                &.task-cover-img {
-                    background-size: contain;
-                    background-color: #fcfcfb;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    border-radius: 8px 8px 0 0;
-                    min-height: em(200px);
-                    width: 100%;
+                &.task-cover-color {
+                    height: 116px;
+                    min-height: 116px;
                 }
+                &.task-cover-img {
+                    background-color: #fcfcfb;
+                    height: 160px;
+                    min-height: 160px;
+                    background-size: contain;
+                    background-origin: content-box;
+                    padding: 0px;
+                    box-sizing: border-box;
+                    background-position: center center;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+
                 .task-cover-menu {
                     align-items: center;
                     bottom: 0;
@@ -427,7 +434,7 @@
                                     justify-content: center;
                                     border-radius: 3px;
                                     cursor: pointer;
-                                    padding: 6px 12px;
+                                    // padding: 6px 12px;
                                     text-decoration: none;
                                     white-space: normal;
                                     background-color: $clr-background-neutral;
@@ -437,6 +444,8 @@
                                     transition-property: background-color, border-color, box-shadow;
                                     transition-duration: 85ms;
                                     transition-timing-function: ease;
+                                    // width: 16px;
+                                    // height: 16px;
                                     &:hover {
                                         background-color: var(--ds-background-neutral-hovered, #091e4224);
                                         box-shadow: none;
@@ -448,8 +457,7 @@
                                         @include trello-icon($content: $icon-plus, $type: lg, $color: #44546f);
                                         display: inline-block;
                                         line-height: 1;
-                                        font-size: 14px;
-                                        line-height: 20px;
+                                        font-size: 16px;
                                         font-weight: 400;
                                     }
                                 }

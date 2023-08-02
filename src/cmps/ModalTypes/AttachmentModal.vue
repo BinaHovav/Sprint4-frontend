@@ -30,15 +30,19 @@ export default {
     },
     methods: {
         async uploadFile(ev) {
-            this.isUploading = true
             const name = ev.target.files[0].name
-            const type = ev.target.files[0].type
+            const type = this.checkFileType(ev.target.files[0].type)
+            const size = ev.target.files[0].size
             const { secure_url } = await uploadService.uploadFile(ev)
-            this.isUploading = false
             const fileUrl = secure_url
-            const attachment = { id: utilService.makeId(5), type, name, fileUrl, createdAt: Date.now() }
+            const attachment = { id: utilService.makeId(5), type, name, size, fileUrl, createdAt: Date.now() }
             this.info.task.attachment.unshift(attachment)
             this.$emit('setInfo', this.info)
+        },
+        checkFileType(fileType) {
+            if (fileType === 'text/plain') return 'txt'
+            else if (fileType.startsWith('image/')) return 'image'
+            else return 'raw'
         }
     },
     computed: {

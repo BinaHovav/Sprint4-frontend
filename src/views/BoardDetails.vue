@@ -1,6 +1,6 @@
 <template>
   <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${board?.imgUrl})` }">
-    <TopNavbar :board="this.board" @openMenu="onShowMenu" @updateBoard="updateBoard" />
+    <TopNavbar :board="this.board" @openMenu="onShowMenu" @updateBoard="updateBoard" :isMenuOpen="isMenuOpen"/>
     <RightMenu @closeMenu="onCloseMenu" :showMenu="showMenu" :board="this.board" @updateBoard="updateBoard" />
     <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
   </section>
@@ -23,6 +23,7 @@ export default {
     return {
       board: null,
       showMenu: false,
+      isMenuOpen: ''
     }
   },
   computed: {
@@ -35,9 +36,11 @@ export default {
   },
   methods: {
     onShowMenu() {
+      this.isMenuOpen= 'menu-open'
       this.showMenu = true
     },
     onCloseMenu() {
+      this.isMenuOpen= ''
       this.showMenu = false
     },
 

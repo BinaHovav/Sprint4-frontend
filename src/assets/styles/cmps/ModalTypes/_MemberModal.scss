@@ -55,16 +55,14 @@
                     border-radius: 3px;
                     color: $clr-text;
                     display: block;
-                    height: 40px;
+                    height: 32px;
                     line-height: 32px;
-                    margin-bottom: 2px;
                     overflow: hidden;
                     padding: 4px;
                     position: relative;
                     text-decoration: none;
                     text-overflow: ellipsis;
                     white-space: nowrap;
-                    padding-right: 28px;
                     cursor: pointer;
                     .member-img {
                         border-radius: 25em;
@@ -119,7 +117,7 @@
                         background-origin: content-box;
                         padding: 11px;
                         position: absolute;
-                        right: 17px;
+                        right: 0px;
                         top: 0;
                         display: block;
                     }

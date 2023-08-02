@@ -19,6 +19,7 @@ import CoverModal from './ModalTypes/CoverModal.vue'
 import DatePickerModal from './ModalTypes/DatePickerModal.vue'
 import CreateBoardModal from './ModalTypes/CreateBoardModal.vue'
 import AttachmentModal from './ModalTypes/AttachmentModal.vue'
+import AttachNameModal from './ModalTypes/AttachNameModal.vue'
 
 export default {
   name: 'AppModal',
@@ -79,6 +80,7 @@ export default {
       } else {
         eventBus.emit('setInfo')
         this.isVisible = false
+        this.backBtn = false
       }
     },
     changeBackBtn(labelId) {
@@ -111,6 +113,8 @@ export default {
           return 'Create board'
         case 'AttachmentModal':
           return 'Attach'
+        case 'AttachNameModal':
+          return 'Edit attachment'
         default:
           break
       }
@@ -125,6 +129,7 @@ export default {
     DatePickerModal,
     CreateBoardModal,
     AttachmentModal,
+    AttachNameModal
   },
 }
 </script>
