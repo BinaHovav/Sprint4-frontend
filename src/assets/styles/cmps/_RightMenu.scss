@@ -127,7 +127,7 @@
                         }
 
                         .board-menu-navigation-item-link-activity {
-                            margin-top: 60px;
+                            margin-top: 10px;
 
                             @include trello-icon($content: $icon-activity, $type: md);
                             a {
@@ -141,22 +141,65 @@
                         }
                     }
                 }
-                .background-options {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 10px;
-                    margin-top: 15px;
-                    justify-content: center;
-                    img {
-                        border-radius: 15px;
-                        width: 140px;
-                        aspect-ratio: 3/2;
-                        cursor: pointer;
+                .sub-options {
+                    .background-options {
+                        display: flex;
+                        // flex-wrap: wrap;
+                        gap: 10px;
+                        margin-top: 15px;
+                        justify-content: center;
+                        text-align: center;
+
+                        .photos-option,
+                        .colors-option {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 5px;
+
+                            h3 {
+                                font-weight: 400;
+                                line-height: 20px;
+                            }
+                        }
+
+                        img {
+                            border-radius: 15px;
+                            width: 153px;
+                            aspect-ratio: 3/2;
+                            cursor: pointer;
+                        }
                     }
-                }
-                p {
-                    margin-left: 10px;
-                    line-height: 2.5;
+
+                    p {
+                        margin-left: 10px;
+                        line-height: 2.5;
+                    }
+                    .photo-option {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        .photo-option-list {
+                            img {
+                                border-radius: 15px;
+                                width: 153px;
+                                aspect-ratio: 3/2;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    .color-option {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        .color-option-list {
+                            img {
+                                border-radius: 15px;
+                                width: 153px;
+                                aspect-ratio: 3/2;
+                                cursor: pointer;
+                            }
+                        }
+                    }
                 }
             }
         }
