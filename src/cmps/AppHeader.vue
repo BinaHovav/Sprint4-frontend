@@ -2,7 +2,7 @@
   <header ref="header" class="header-container">
     <nav>
       <RouterLink to="/board">
-        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690737168/Screenshot_2023-07-30_at_20.10.58-removebg-preview_fqwvr0.png" alt="logo" />
+        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690958863/Screenshot_2023-08-02_at_9.35.41-removebg-preview_vejw3s.png" alt="logo" />
       </RouterLink>
       <div class="nav-left-content">
         <button class="nav-button">

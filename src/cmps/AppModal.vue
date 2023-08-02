@@ -1,9 +1,9 @@
 <template>
-  <div ref="appmodal" v-if="isVisible" :style="modalPlace" class="app-modal" v-clickOutside="setInfo" @click.stop="">
+  <div ref="appmodal" v-if="isVisible" :style="modalPlace" class="app-modal" v-clickOutside="setInfo">
     <header class="modal-header">
       <button v-if="backBtn" @click.stop="changeBackBtn" class="header-back"><span v-icon="'arrowLeft'"></span></button>
       <span class="header-title">{{ headerTitle }}</span>
-      <a class="close-modal" @click.stop="closeModal"> </a>
+      <a class="close-modal" @click="isVisible = false"> </a>
     </header>
     <Component :is="type" :info="info" @closeModal="isVisible = false" @setInfo="setInfo" :backBtn="backBtn" @showBackBtn="changeBackBtn" />
   </div>
@@ -79,10 +79,6 @@ export default {
       this.backBtn = !this.backBtn
       eventBus.emit('showBackBtn', this.backBtn)
     },
-    closeModal() {
-      eventBus.emit('setInfo')
-      this.isVisible = false
-    },
   },
   computed: {
     headerTitle() {
@@ -100,6 +96,8 @@ export default {
           return 'Cover'
         case 'DatePickerModal':
           return 'Dates'
+        case 'CreateBoardModal':
+          return 'Create board'
         default:
           break
       }

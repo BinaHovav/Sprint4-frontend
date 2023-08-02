@@ -787,51 +787,51 @@ function getEmptyActivity() {
 //         activitys: [],
 //       },
 
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Project Management',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460257/gradient_wresqa.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Kanban Template',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460260/Screenshot_2023-07-27_at_15.16.27_dziz4h.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Simple Project Board',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460839/ren-ran-Jy6luiLBsrk-unsplash_f92t1z.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Remote Team Hub',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460927/ankush-minda-7KKQG0eB_TI-unsplash_u7drj5.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Smart Health Devices',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446239/martin-martz-voOla3T8TAM-unsplash_uwhvl2.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'AI-Powered Learning',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446242/marek-piwnicki-FFofrEuXsL4-unsplash_vnnykd.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Enhanced Online Security',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446239/javier-miranda-kBU5APay4T0-unsplash_iscwqp.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Mobile Payment Solutions',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446244/marek-piwnicki-5MVnLlI3Flg-unsplash_cyqyb6.jpg',
-//       },
-//       {
-//         _id: utilService.makeId(6),
-//         title: 'Intelligent Chat Support',
-//         imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446241/marek-piwnicki-pjf3gGDvTeM-unsplash_ww11qq.jpg',
-//       },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Project Management',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460257/gradient_wresqa.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Kanban Template',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460260/Screenshot_2023-07-27_at_15.16.27_dziz4h.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Simple Project Board',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460839/ren-ran-Jy6luiLBsrk-unsplash_f92t1z.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Remote Team Hub',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690460927/ankush-minda-7KKQG0eB_TI-unsplash_u7drj5.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Smart Health Devices',
+// imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446239/martin-martz-voOla3T8TAM-unsplash_uwhvl2.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'AI-Powered Learning',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446242/marek-piwnicki-FFofrEuXsL4-unsplash_vnnykd.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Enhanced Online Security',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446239/javier-miranda-kBU5APay4T0-unsplash_iscwqp.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Mobile Payment Solutions',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446244/marek-piwnicki-5MVnLlI3Flg-unsplash_cyqyb6.jpg',
+// },
+// {
+//   _id: utilService.makeId(6),
+//   title: 'Intelligent Chat Support',
+//   imgUrl: 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690446241/marek-piwnicki-pjf3gGDvTeM-unsplash_ww11qq.jpg',
+// },
 //     ])
 //   )
 // })()
