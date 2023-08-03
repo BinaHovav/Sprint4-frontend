@@ -23,10 +23,22 @@ import AppModal from './cmps/AppModal.vue'
 import TaskEditor from './cmps/TaskEditor.vue'
 
 export default {
+  data() {
+    return {
+      loaded: false
+    }
+  },
   created() {
-    this.$store.dispatch({ type: 'loadBoards' })
+    this.loadBoard()
     // const user = userService.getLoggedinUser()
     // if (user) store.commit({ type: 'setLoggedinUser', user })
+  },
+  methods: {
+    async loadBoard() {
+      await this.$store.dispatch({ type: 'loadBoards' })
+      this.loaded = true
+
+    }
   },
 
   computed: {
