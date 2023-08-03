@@ -55,11 +55,11 @@ export default {
             this.setModalLocation(el)
           }
         } else if (type === 'CreateBoardModal') {
-          this.setModalLocationBoard(el)
           this.isVisible = true
           this.info = info
           this.type = type
           this.elLocation = el
+          this.setModalLocationBoard(el)
         }
       }
     })
