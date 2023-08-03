@@ -2,11 +2,14 @@
   <div class="group-preview-container">
     <div class="group-header drag-me">
       <form action="">
-        <textarea v-model="clonedGroup.title"  ref="groupNameInput" class="task-title" @blur="updateGroup" @keydown.enter.prevent="updateGroup"></textarea>
+        <textarea v-model="clonedGroup.title" :rows="autosize" ref="groupNameInput" class="task-title" @blur="updateGroup"
+          @keydown.enter.prevent="updateGroup"></textarea>
       </form>
-      <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span class="three-dots"></span></button>
+      <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
+          class="three-dots"></span></button>
     </div>
-    <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" :add="add" @changeAdd="add = !add" @addTask="addTask" />
+    <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" :add="add"
+      @changeAdd="add = !add" @addTask="addTask" />
 
     <div v-if="!add" class="open-card-compose">
       <a @click="openadd">
@@ -36,8 +39,20 @@ export default {
     board() {
       return this.$store.getters.getCurrBoard
     },
+    autosize() {
+      setTimeout(() => {
+        var elTextArea = this.$refs.groupNameInput
+        var lines = Math.floor(elTextArea.value.length / 13);
+        if (lines < 1) {
+          elTextArea.rows = "1";
+        } else {
+          elTextArea.rows = lines.toString();
+        }
+
+      }, 50)
+    }
   },
-  created() {},
+  created() { },
   watch: {
     group: {
       handler() {

@@ -1,5 +1,5 @@
 <template>
-    <div class="quick-card-editor" v-if="isVisible" @click="closeEditor">
+    <div class="quick-card-editor" v-if="currBoard && task && isVisible" @click="closeEditor">
         <span class="icon-close" @click="closeEditor"> </span>
         <div :style="getPos" class="editor-wrapper" @click.stop="">
             <section class="task-preview-container">
@@ -11,13 +11,11 @@
                     <span class="edit"></span>
                 </div>
                 <div class="task-details-container">
-                    <div v-if="task.labels" class="task-labels">
-                        <div v-for="label in task.labels" class="task-label">
-                            <button @click.stop="animateLabels"
-                                :class="[getLabelById(label)?.color, currBoard.labelAnimation]">
-                                {{ getLabelById(label)?.title }}
-                            </button>
-                        </div>
+                    <div v-if="task?.labels" class="task-labels">
+                        <button v-for="label in task.labels" ref="labels" @click.stop="animateLabels"
+                            :class="[getLabelById(label)?.color, currBoard?.labelAnimation]">
+                            {{ currBoard?.labelAnimation === 'labels-open' ? getLabelById(label)?.title : '' }}
+                        </button>
                     </div>
 
                     <textarea class="task-title" v-model="task.title" dir="auto" ref="textarea"></textarea>
@@ -112,6 +110,7 @@ export default {
             elRef: '',
             cords: {},
             isModalOpen: false,
+            labelState: 'labels-close',
         }
     },
     computed: {
@@ -170,7 +169,9 @@ export default {
             return { left, top, width }
         }
     },
-    created() { },
+    created() {
+        // this.labelState = this.currBoard.labelAnimation
+    },
     mounted() {
         this.calculateHeight()
         // You can also add a listener for window resize if needed
@@ -178,6 +179,7 @@ export default {
         eventBus.on('onTaskEditor', ({ task, groupId, cords }) => {
             this.cords = cords
             this.isVisible = true
+            // this.$refs.textarea.select()
             this.task = JSON.parse(JSON.stringify(task))
             this.group = JSON.parse(JSON.stringify(this.currBoard.groups.find(group => group.id === groupId)))
 
@@ -232,13 +234,32 @@ export default {
 
             this.calculatedHeight = (containerWidth / imageWidth) * imageHeight + 'px'
         },
-        animateLabels(ev) {
+        async animateLabels(ev) {
             // Assuming you have a variable or some logic to determine whether the labels are open or closed
             // Replace this with your actual logic
-            const board = JSON.parse(JSON.stringify(this.currBoard))
             // Update the animation class for each task label based on the labels state
+            // board.labels.forEach((label) => {
+            //     label.animationClass = label.animationClass === "labels-close" ? "labels-open" : "labels-close";
+            // });
+            // console.log(board.labelAnimation);
+            // this.labelState = "labels-close" ? "labels-open" : "labels-close"
+            const board = JSON.parse(JSON.stringify(this.currBoard))
             board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
-            this.$store.dispatch({ type: 'updateBoard', board })
+            await this.$store.dispatch({ type: 'updateBoard', board })
+
+            // this.updateMinWidth(); // Call the function to update min-width after the animation state is updated
+
+        },
+        updateMinWidth() {
+            const buttons = this.$refs.labels; // Get the button elements using the ref
+            buttons.forEach((button) => {
+                if (this.currBoard.labelAnimation === "labels-open") {
+                    const width = button.offsetWidth + 10; // Add some padding (adjust as needed)
+                    button.style.minWidth = `${width}px`; // Set the calculated min-width in pixels
+                } else {
+                    button.style.minWidth = "2.5em"; // Set the default min-width when closing the labels
+                }
+            });
         },
         dueDate() {
             const months = [
