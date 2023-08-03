@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     toggleTaskMember(member) {
-      console.log(this.loggedinUser);
       if (this.info.task.members.includes(member._id)) {
         var action = { type: 'removed', txt: `${member.fullname} from ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
         if (this.loggedinUser._id === member._id) action = { type: 'left', txt: `${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
