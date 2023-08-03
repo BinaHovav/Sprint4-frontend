@@ -98,9 +98,9 @@ export default {
       }, 200)
     },
     setInfo(info, action) {
-      console.log(action);
       if (info) {
-        eventBus.emit('setInfo', info, action)
+        info.action = action
+        eventBus.emit('setInfo', info)
       } else {
         this.info = {}
         this.type = ''
