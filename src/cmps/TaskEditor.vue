@@ -217,7 +217,7 @@ export default {
             board.groups.splice(groupIdx, 1, this.group)
             this.closeEditor()
 
-            const action = { type: 'archived', txt: `${task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            const action = { type: 'archived', txt: `${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
             board.activities.unshift(action)
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
