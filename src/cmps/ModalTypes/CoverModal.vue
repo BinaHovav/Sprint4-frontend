@@ -35,7 +35,7 @@
             <h4>Photos from Unsplash</h4>
             <div class="covers-img-list">
                 <div>
-                    <button v-for="test in coverImg" :style="{ 'background-image': 'url(' + test + ')' }"></button>
+                    <button v-for="imgCover in coverImgs" :style="{ 'background-image': 'url(' + imgCover + ')' }" @click.stop="updateCover(imgCover)"></button>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             covers: ['green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'lime', 'pink', 'black'],
-            coverImg: ['https://images.unsplash.com/photo-1689631857988-a46ee3adf86b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDZ8MzE3MDk5fHx8fHwyfHwxNjkwODExODY0fA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=200',
+            coverImgs: ['https://images.unsplash.com/photo-1689631857988-a46ee3adf86b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDZ8MzE3MDk5fHx8fHwyfHwxNjkwODExODY0fA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=200',
                 'https://images.unsplash.com/photo-1690055899078-63be27a01cdc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDV8MzE3MDk5fHx8fHwyfHwxNjkwODExODY0fA&ixlib=rb-4.0.3&q=80&w=200',
                 'https://images.unsplash.com/photo-1690068867587-d7572f95ff33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjkwODExODY0fA&ixlib=rb-4.0.3&q=80&w=200',
                 'https://images.unsplash.com/photo-1690046793092-f8d634523264?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjkwODExODY0fA&ixlib=rb-4.0.3&q=80&w=200',

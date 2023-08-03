@@ -2,11 +2,11 @@
   <section class="backdrop">
     <div v-if="task" ref="taskDetails" class="task-details" v-clickOutside="closeModal">
       <div class="task-details-container">
-        <a class="btn-icon-close" @click="closeModal"></a>
+        <a class="btn-icon-close" @click.stop="closeModal"></a>
         <div class="task-details-container-two">
-          <div v-if="task.cover.background" class="task-cover" :class="isCoverImg ? task.cover.background : 'task-cover-img'" :style="isCoverImg ? '' : getCoverImgStyle()">
+          <div v-if="task.cover.background" class="task-cover" :class="getTaskCoverClass()" :style="getTaskCoverStyle()">
             <div class="task-cover-menu">
-              <a class="task-cover-btn" ref="coversTop" @click="openModal('CoverModal', 'coversTop')">
+              <a class="task-cover-btn" ref="coversTop" @click.stop="openModal('CoverModal', 'coversTop')">
                 <span class="btn-icon-cover"></span>
                 Cover
               </a>
@@ -15,8 +15,9 @@
           <div class="task-header">
             <span class="btn-title-icon"></span>
             <div class="task-header-title">
-              <h2 v-if="!showTaskTitle" @click="showTaskTitle = true">{{ task.title }}</h2>
-              <textarea v-if="showTaskTitle" @blur="onSaveTask, (showTaskTitle = false)" v-model="task.title" v-focus></textarea>
+              <h2 v-if="!showTaskTitle" @click.stop="showTaskTitle = true">{{ task.title }}</h2>
+              <textarea v-if="showTaskTitle" @blur="onSaveTask, (showTaskTitle = false)" v-model="task.title"
+                v-focus></textarea>
             </div>
             <div class="task-header-group">
               <p>
@@ -34,10 +35,12 @@
                 <h3>Members</h3>
                 <div class="">
                   <div v-for="memberId in task.members" class="task-details-members">
-                    <img class="task-member-img" :src="getMemberById(memberId).imgUrl" :title="getMemberById(memberId).fullname" />
+                    <img class="task-member-img" :src="getMemberById(memberId).imgUrl"
+                      :title="getMemberById(memberId).fullname" />
                   </div>
                   <a class="task-member-add">
-                    <span class="task-member-btn-add" ref="membersAdd" @click="openModal('MemberModal', 'membersAdd')"></span>
+                    <span class="task-member-btn-add" ref="membersAdd"
+                      @click="openModal('MemberModal', 'membersAdd')"></span>
                   </a>
                 </div>
               </div>
@@ -47,8 +50,10 @@
                     <h3>Labels</h3>
                     <div class="">
                       <div class="task-labels flex">
-                        <button v-for="label in task.labels" class="task-btn-label" :ref="label" :class="getLabelById(label)?.color">{{ getLabelById(label)?.title }}</button>
-                        <button ref="labelAdd" class="task-btn-add-label" @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
+                        <button v-for="label in task.labels" class="task-btn-label" :ref="label"
+                          :class="getLabelById(label)?.color">{{ getLabelById(label)?.title }}</button>
+                        <button ref="labelAdd" class="task-btn-add-label"
+                          @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
                       </div>
                     </div>
                   </div>
@@ -56,7 +61,8 @@
               </div>
               <div class="task-details-item">
                 <h3>Notifications</h3>
-                <a class="task-btn-watch" :style="{ width: isWatching ? '138px' : 'auto' }" @click="isWatching = !isWatching">
+                <a class="task-btn-watch" :style="{ width: isWatching ? '138px' : 'auto' }"
+                  @click="isWatching = !isWatching">
                   <span class="task-icon-watch"></span>
                   <span class="task-txt-watch">{{ isWatching ? 'Watching' : 'Watch' }}</span>
                   <span class="is-watching" v-if="isWatching"><span class="is-watching-icon"></span></span>
@@ -70,10 +76,11 @@
                   <div class="due-date-time-container">
                     <div>
                       <button class="due-date-btn">
-                        <span ref="datePicker" @click.stop="openModal('DatePickerModal', 'datePicker')"> {{ dueDate }} <span class="soon" v-if="dueDateProgress === 'soon'">Due soon</span>
-                        <span class="over" v-if="dueDateProgress === 'over'">Overdue</span>
-                        <span class="complete" v-if="dueDateProgress === 'complete'">Complete</span>
-                      </span>
+                        <span ref="datePicker" @click.stop="openModal('DatePickerModal', 'datePicker')"> {{ dueDate }}
+                          <span class="soon" v-if="dueDateProgress === 'soon'">Due soon</span>
+                          <span class="over" v-if="dueDateProgress === 'over'">Overdue</span>
+                          <span class="complete" v-if="dueDateProgress === 'complete'">Complete</span>
+                        </span>
                         <span class="due-date-icon"><span class="due-date-icon-span" v-icon="'arrowDown'"></span></span>
                       </button>
                     </div>
@@ -81,18 +88,19 @@
                 </div>
               </div>
             </div>
-            <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask"/>
-            <TaskAttachmentDetails v-if="task.attachment?.length" :task="task" @onSaveTask="onSaveTask"/>
-            <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask"/>
+            <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask" />
+            <TaskAttachmentDetails v-if="task.attachment?.length" @toggleModalOpen="modalOpen = !modalOpen" :board="board"
+              :task="task" @onSaveTask="onSaveTask" />
+            <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" />
           </div>
           <div class="task-sidebar">
             <div v-if="!task.members.length" class="task-sidebar-suggested">
               <h3 class="task-side-suggested-title">Suggested</h3>
               <div class="task-join-members">
-                  <a @click.stop="task.members.push('u101')">
-                    <span class="task-join-icon"></span>
-                    <span class="task-join-text">Join</span>
-                  </a>
+                <a @click.stop="task.members.push('u101')">
+                  <span class="task-join-icon"></span>
+                  <span class="task-join-text">Join</span>
+                </a>
               </div>
             </div>
             <div class="task-sidebar-add">
@@ -117,7 +125,8 @@
                 <span class="btn-link-attachment"></span>
                 <span class="">Attachment</span>
               </a>
-              <a v-if="!task.cover.background" ref="covers" class="task-btn-link" @click="openModal('CoverModal', 'covers')">
+              <a v-if="!task.cover.background" ref="covers" class="task-btn-link"
+                @click="openModal('CoverModal', 'covers')">
                 <span class="btn-link-cover"></span>
                 <span class="">Cover</span>
               </a>
@@ -157,7 +166,7 @@ export default {
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
       ]
-      const dateObj = new Date(this.task.date.dueDate*1000)
+      const dateObj = new Date(this.task.date.dueDate * 1000)
       const month = months[dateObj.getMonth()]
       const day = dateObj.getDate()
       const hours = dateObj.getHours()
@@ -168,7 +177,7 @@ export default {
       const formattedDate = `${month} ${day} at ${displayHours}:${displayMinutes} ${ampm}`
       return formattedDate
     },
-    dueDateProgress(){
+    dueDateProgress() {
       const taskDate = this.task.date.dueDate * 1000
       const now = Date.now()
       const tomorrow = now + 1000 * 60 * 60 * 24
@@ -208,7 +217,8 @@ export default {
     getMemberById(memberId) {
       return this.board.members?.find((member) => member._id === memberId)
     },
-    onSaveTask() {
+    onSaveTask(task) {
+      if (task) this.task = task
       let idx = this.group.tasks.findIndex((gTask) => gTask.id === this.task.id)
       this.group.tasks.splice(idx, 1, this.task)
       idx = this.board.groups.findIndex((gGroup) => gGroup.id === this.group.id)
@@ -245,10 +255,19 @@ export default {
       eventBus.emit('modal', { el })
     },
     isCoverImg() {
+      console.log(this.task.cover.background?.startsWith('https'))
       return this.task.cover.background?.startsWith('https')
     },
     getCoverImgStyle() {
-      return { height: calculatedHeight, backgroundImage: `url(${task.cover.background})` }
+      return { backgroundImage: `url(${task.cover.background})` }
+    },
+    getTaskCoverClass() {
+      const task = this.task
+      return (this.task.cover.background?.startsWith('https')) ? 'task-cover-img' : `task-cover-color ${task.cover.background}`
+    },
+    getTaskCoverStyle() {
+      const task = this.task
+      return (this.task.cover.background?.startsWith('https')) ? { backgroundImage: `url(${task.cover.background})` } : ''
     },
   },
   components: {
@@ -257,4 +276,5 @@ export default {
     TaskAttachmentDetails
   },
 }
+
 </script>

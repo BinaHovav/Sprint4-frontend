@@ -38,7 +38,10 @@ const routes = [
       {
         path: 'group/:groupId/task/:taskId',
         name: 'TaskDetails',
-        component: TaskDetails,
+        components: {
+          header: AppHeader, // Use the AppHeader component for the '/board/:id' route
+          default: TaskDetails,
+        },
       },
     ],
   },

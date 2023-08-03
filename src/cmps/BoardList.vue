@@ -4,14 +4,6 @@
       <BoardTile :board="board" :isStarred="board.isStarred" @updateBoard="updateBoard" @loadBoard="loadBoard" />
     </li>
     <div v-if="showCreateBoard" ref="createBoard" class="create-new-board" @click="openModal('CreateBoardModal', 'createBoard')">Create new board</div>
-    <!-- <div class="create-board-modal"> -->
-    <!-- <div class="create-modal-content"> -->
-    <!-- <button @click="closeModal" class="exit-btn">X</button> -->
-    <!--TODO: hey bina its tomer (: i think this should be a form and u cannot submit it until input is entered (required) -->
-    <!-- <input v-model="newBoardTitle" type="text" placeholder="Board title" /> -->
-    <!-- <button @click="addBoard" class="create-btn">Create</button> -->
-    <!-- </div> -->
-    <!-- </div> -->
   </ul>
 </template>
 
@@ -55,7 +47,7 @@ export default {
       // const board = JSON.parse(JSON.stringify(this.board))
       // const info = { board }
       const el = this.$refs.createBoard.getBoundingClientRect()
-      console.log(el);
+      console.log(el)
       eventBus.emit('modal', { el, type })
       window.addEventListener('resize', this.handleResize)
       // document.removeEventListener('click', this.handleClickOutside)
