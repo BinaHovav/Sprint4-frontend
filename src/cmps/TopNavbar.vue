@@ -37,7 +37,7 @@ export default {
   props: ['board', 'isMenuOpen'],
   data() {
     return {
-      
+
     }
   },
   created() {
@@ -49,7 +49,8 @@ export default {
       this.$emit('updateBoard', board)
     },
     updateBoardTitle(board) {
-      this.$emit('updateBoard', board)
+      const action = { type: 'renamed', txt: `this board (from ${board.title})`, componentId: '', movedCmp: '', movedUser: '' }
+      this.$emit('updateBoard', board, action)
       this.$refs.boardNameInput.blur()
     },
 

@@ -1,10 +1,10 @@
 <template>
     <draggable v-model="groupList" group="groups" ghost-class="ghost-group"
         class="group-list-container flex u-fancy-scrollbar" @start="drag = true" @end="drag = false"
-        @change="handleDragChange"  item-key="name" handle=".drag-me" drag-class="drag-group">
+        @change="handleDragChange" item-key="name" handle=".drag-me" drag-class="drag-group">
         <template #item="{ element }">
             <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateGroup="updateGroup"
-                @updateTasks="updateTasks" @click.right.prevent/>
+                @updateTasks="updateTasks" @click.right.prevent />
         </template>
         <template #footer>
             <div @click="toggleAdd" v-if="!addList" class="add-group-before">
@@ -58,6 +58,9 @@ export default {
                 this.$emit('updateGroups', groups)
             }
         },
+        loggedinUser() {
+            return this.$store.getters.loggedinUser
+        }
     },
     methods: {
         removeGroup(groupId) {
@@ -66,16 +69,15 @@ export default {
         addGroup() {
             if (!this.title) return
             this.$emit('addGroup', this.title)
-            eventBus.emit('boardActivity',)
             this.title = null
         },
-        updateGroup(group) {
-            this.$emit('updateGroup', group)
+        updateGroup(group, action) {
+            this.$emit('updateGroup', group, action)
         },
-        updateTasks(tasks, groupId) {
+        updateTasks(tasks, groupId, action) {
             const clonedGroup = JSON.parse(JSON.stringify(this.groups.find(group => group.id === groupId)))
             clonedGroup.tasks = tasks
-            this.updateGroup(clonedGroup)
+            this.updateGroup(clonedGroup, action)
         },
         // onDragStart(event) {
         //     // Apply the custom drag styles when dragging starts

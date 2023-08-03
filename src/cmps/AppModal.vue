@@ -74,12 +74,12 @@ export default {
         }
       }
     },
-    setInfo(info) {
+    setInfo(info, action) {
       if (info) {
-        eventBus.emit('setInfo', info)
+        eventBus.emit('setInfo', info, action)
       } else {
         this.info = {}
-        eventBus.emit('setInfo')
+        eventBus.emit('setInfo', action)
         this.isVisible = false
         this.backBtn = false
       }

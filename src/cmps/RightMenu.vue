@@ -125,7 +125,8 @@ export default {
     },
     changeBackground(backgroundImg) {
       this.board.imgUrl = backgroundImg
-      this.$emit('updateBoard', this.board)
+      const action= { type: 'changed', txt: 'the background of this board', componentId: '', movedCmp: '', movedUser: '' }
+      this.$emit('updateBoard', this.board , action)
     },
     closeRightNav() {
       this.$emit('closeMenu')
