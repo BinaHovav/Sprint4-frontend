@@ -98,12 +98,13 @@ export default {
       }, 200)
     },
     setInfo(info, action) {
+      console.log(action);
       if (info) {
         eventBus.emit('setInfo', info, action)
       } else {
         this.info = {}
         this.type = ''
-        eventBus.emit('setInfo', action)
+        eventBus.emit('setInfo')
         this.isVisible = false
         this.backBtn = false
       }

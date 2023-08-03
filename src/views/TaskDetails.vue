@@ -234,6 +234,7 @@ export default {
 
       const activity = boardService.getEmptyActivity()
       activity.action = action
+      console.log(action);
       activity.by = this.loggedinUser
       this.board.activities.unshift(activity)
       this.$emit('updateBoard', this.board)
@@ -250,6 +251,7 @@ export default {
       this.type = type
       window.addEventListener('resize', this.handleResize)
       eventBus.on('setInfo', (info, action) => {
+        console.log(action);
         if (info) {
           this.task = info.task
           this.board = info.board
