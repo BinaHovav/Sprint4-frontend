@@ -35,7 +35,8 @@ export default {
         removeGroup() {
             setTimeout(() => {
                 this.info.removeGroup = this.info.group.id
-                this.$emit('setInfo', this.info)
+                const action = { type: 'archived', txt: `list ${this.info.group.title}`, componentId: '', movedCmp: '', movedUser: '' }
+                this.$emit('setInfo', this.info, action)
                 this.$emit('closeModal')
 
             }, 300)

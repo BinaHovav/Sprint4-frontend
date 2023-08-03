@@ -22,8 +22,8 @@
                     <div class="badges">
                         <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
                         <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
-                        <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id, task.title)" class="badge"
-                            :class="dateClass" :title="dateTitle">
+                        <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id, task.title)"
+                            class="badge" :class="dateClass" :title="dateTitle">
                             <span class="clock-icon"></span>
                             <span class="badge-text">{{ dueDate() }}</span>
                         </div>
@@ -96,6 +96,7 @@
 <script>
 import { eventBus } from '../services/event-bus.service'
 import { getActionUpdateBoard } from '../store/board.store'
+import { boardService } from '../services/board.service.local'
 
 export default {
     name: 'TaskEditor',
@@ -144,6 +145,9 @@ export default {
                 this.dateTitle = 'This card is complete.'
             }
             return classDisplay
+        },
+        loggedinUser() {
+            return this.$store.getters.loggedinUser
         },
         checklistCount() {
             let sum = 0
@@ -197,7 +201,10 @@ export default {
             const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
             board.groups.splice(groupIdx, 1, this.group)
 
-            board.activities.unshift(action)
+            const activity = boardService.getEmptyActivity()
+            activity.by = this.loggedinUser
+            activity.action = action
+            board.activities.unshift(activity)
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
             }
@@ -218,7 +225,10 @@ export default {
             this.closeEditor()
 
             const action = { type: 'archived', txt: `${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
-            board.activities.unshift(action)
+            const activity = boardService.getEmptyActivity()
+            activity.by = this.loggedinUser
+            activity.action = action
+            board.activities.unshift(activity)
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
             }

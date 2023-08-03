@@ -79,7 +79,7 @@ export default {
         eventBus.emit('setInfo', info, action)
       } else {
         this.info = {}
-        eventBus.emit('setInfo', action)
+        eventBus.emit('setInfo')
         this.isVisible = false
         this.backBtn = false
       }
