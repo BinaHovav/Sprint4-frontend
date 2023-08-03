@@ -118,7 +118,10 @@ export default {
       const idx = this.board.groups.findIndex((group) => group.id === groupToEdit.id)
       this.board.groups.splice(idx, 1, groupToEdit)
 
-      if (action) this.board.activities.unshift(action)
+      if (action) {
+        const activity = this.getActivity(action)
+        this.board.activities.unshift(activity)
+      }
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
       } catch (err) {

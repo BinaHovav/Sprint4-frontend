@@ -60,7 +60,11 @@
               </div>
             </div>
             <div v-else-if="currentMenuOption === 'activity'">
-              <pre v-for="activity in board.activities">{{ activity }} bla</pre>
+              <div v-for="activity in board.activities">
+                <!-- <div class="user-img">
+                  <img :src="activity.by.imgUrl" alt="">
+                </div>  -->
+              </div>
             </div>
             <div class="sub-options" v-else-if="currentMenuOption === 'changeBackground'">
               <div v-if="currentSubmenu === null">

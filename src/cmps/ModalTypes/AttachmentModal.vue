@@ -37,7 +37,9 @@ export default {
             const fileUrl = secure_url
             const attachment = { id: utilService.makeId(5), type, name, size, fileUrl, createdAt: Date.now() }
             this.info.task.attachments.unshift(attachment)
-            this.$emit('setInfo', this.info)
+
+            const action = { type: 'attached', txt: `${attachment.name} to ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            this.$emit('setInfo', this.info, action)
             this.$emit('setInfo')
         },
         checkFileType(fileType) {

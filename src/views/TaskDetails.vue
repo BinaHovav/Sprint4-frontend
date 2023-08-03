@@ -190,6 +190,9 @@ export default {
       if (now > taskDate) timeProgress = 'over'
       if (this.task.date.isDone) timeProgress = 'complete'
       return timeProgress
+    },
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
     }
   },
   created() {
@@ -229,7 +232,11 @@ export default {
       idx = this.board.groups.findIndex((gGroup) => gGroup.id === this.group.id)
       this.board.groups.splice(idx, 1, this.group)
 
-      this.board.activities.unshift(action)
+      const activity = boardService.getEmptyActivity()
+      activity.action = action
+      console.log(action);
+      activity.by = this.loggedinUser
+      this.board.activities.unshift(activity)
       this.$emit('updateBoard', this.board)
     },
     closeModal() {
@@ -244,10 +251,11 @@ export default {
       this.type = type
       window.addEventListener('resize', this.handleResize)
       eventBus.on('setInfo', (info, action) => {
+        console.log(action);
         if (info) {
           this.task = info.task
           this.board = info.board
-          this.onSaveTask(action)
+          this.onSaveTask('', action)
         } else {
           setTimeout(() => {
             this.modalOpen = false
