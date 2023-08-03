@@ -2,7 +2,7 @@
   <header ref="header" class="header-container">
     <nav>
       <RouterLink to="/board">
-        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690982880/Screenshot_2023-08-02_at_16.27.27_t0v0qv.png" alt="logo" />
+        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691058928/image-removebg-preview_thzggs.png" alt="logo" />
       </RouterLink>
       <div class="nav-left-content">
         <button class="nav-button">
@@ -71,7 +71,7 @@
               ></path>
             </svg>
           </span>
-          <span class="user-account-button">
+          <span v-if="!loggedInUser" class="user-account-button" @click="toggleUserDetails">
             <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
@@ -81,42 +81,48 @@
               ></path>
             </svg>
           </span>
+          <span v-else class="user-account-button" @click="toggleUserDetails">
+            <img :src="loggedInUser.imgUrl" alt="user" />
+          </span>
         </div>
       </div>
       <!-- <RouterLink to="/login">Login / Signup</RouterLink>
-      <section class="loggedin-user" v-if="loggedInUser">
-        <RouterLink :to="`/user/${loggedInUser._id}`">
-          {{ loggedInUser.fullname }}
-        </RouterLink>
-        <span>{{ loggedInUser.score?.toLocaleString() }}</span>
-        <img :src="loggedInUser.imgUrl" /> -->
+        <section class="loggedin-user" v-if="loggedInUser">
+          <RouterLink :to="`/user/${loggedInUser._id}`">
+            {{ loggedInUser.fullname }}
+          </RouterLink>
+          <span>{{ loggedInUser.score?.toLocaleString() }}</span>
+          <img :src="loggedInUser.imgUrl" /> -->
       <!-- </section> -->
     </nav>
   </header>
+  <UserDetails v-if="showUserDetails" @toggleUserDetails="toggleUserDetails" />
 </template>
 <script>
 import { eventBus } from '../services/event-bus.service'
+import UserDetails from './ModalTypes/UserDetails.vue'
 
 export default {
   name: 'AppHeader',
   data() {
     return {
       bgImg: '',
+      showUserDetails: false,
       elRef: '',
       type: ''
     }
   },
   created() {
-    // eventBus.on('backgroundChange', () => {
-    //   this.getAverageColor()
-    // })
+    eventBus.on('backgroundChange', () => {
+      this.getAverageColor()
+    })
     this.getAverageColor()
   },
 
   watch: {
     '$route.path'(newPath) {
       if (newPath === '/board') {
-        this.$refs.header.style.backgroundColor = 'red'
+        this.$refs.header.style.backgroundColor = 'white'
         this.$refs.input.style.backgroundColor = 'lightgray'
       }
     },
@@ -176,6 +182,9 @@ export default {
         this.$refs.header.style.backgroundColor = rgbColor
       }
     },
+    toggleUserDetails() {
+      this.showUserDetails = !this.showUserDetails
+    },
   },
   computed: {
     loggedInUser() {
@@ -185,6 +194,8 @@ export default {
       return this.$store.getters.getCurrBoard
     },
   },
-  components: {},
+  components: {
+    UserDetails,
+  },
 }
 </script>

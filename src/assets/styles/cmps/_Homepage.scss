@@ -44,6 +44,18 @@
                 &:hover {
                     background-color: $clr-background-brand-boldest-hovered;
                 }
+                .arrow {
+                    @include trello-icon($content: $icon-arrow-right, $color: white);
+                }
+                .arrow-icons {
+                    margin-left: 18px;
+                    margin-top: 7px;
+                    span {
+                        svg {
+                            margin-left: -10px;
+                        }
+                    }
+                }
             }
         }
         .right-box {

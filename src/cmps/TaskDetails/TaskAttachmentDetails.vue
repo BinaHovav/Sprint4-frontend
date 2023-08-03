@@ -80,9 +80,9 @@ export default {
             eventBus.emit('modal', { el, type, info })
             this.$emit('toggleModalOpen')
             window.addEventListener('resize', this.handleResize)
-            eventBus.on('setInfo', (info) => {
+            eventBus.on('setInfo', (info, action) => {
                 if (info) {
-                    this.$emit('onSaveTask', info.task)
+                    this.$emit('onSaveTask', info.task, action)
                 }
                 setTimeout(() => {
                     window.removeEventListener('resize', this.handleResize)

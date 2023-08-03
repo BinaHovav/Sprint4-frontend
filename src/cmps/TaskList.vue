@@ -4,8 +4,7 @@
         group="tasks">
         <!-- <transition-group> -->
         <template #item="{ element }">
-            <TaskPreview :key="element.id" :groupId="groupId" :task="element" @removeTask="removeTask"
-                @onTaskIsDone="onTaskIsDone" />
+            <TaskPreview :key="element.id" :groupId="groupId" :task="element" @onTaskIsDone="onTaskIsDone" />
         </template>
         <template #footer>
 
@@ -65,20 +64,19 @@ export default {
         }
     },
     methods: {
-        removeTask(taskId) {
-            this.$emit('removeTask', taskId)
-        },
         addTask() {
             this.$refs.textarea.focus()
             if (!this.title) return
             this.$emit('addTask', this.title)
             this.title = ''
         },
-        onTaskIsDone(taskId) {
+        onTaskIsDone(taskId, title) {
             const tasks = JSON.parse(JSON.stringify(this.tasks))
-            const idx = tasks.findIndex(task=>task.id===taskId)
+            const idx = tasks.findIndex(task => task.id === taskId)
             tasks[idx].date.isDone = !tasks[idx].date.isDone
-            this.$emit('updateTasks', tasks , this.groupId)
+
+            const action = { type: 'marked', txt: `the due date on ${title} complete`, componentId: '', movedCmp: '', movedUser: '' }
+            this.$emit('updateTasks', tasks, this.groupId, action)
         },
         toggleAdd() {
             this.$emit('changeAdd')

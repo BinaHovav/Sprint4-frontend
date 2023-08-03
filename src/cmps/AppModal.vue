@@ -97,9 +97,9 @@ export default {
         }
       }, 200)
     },
-    setInfo(info) {
+    setInfo(info, action) {
       if (info) {
-        eventBus.emit('setInfo', info)
+        eventBus.emit('setInfo', info, action)
       } else {
         this.info = {}
         this.type = ''

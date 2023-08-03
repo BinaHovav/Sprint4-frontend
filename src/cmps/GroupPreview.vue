@@ -62,8 +62,8 @@ export default {
     },
   },
   methods: {
-    updateGroup() {
-      this.$emit('updateGroup', this.clonedGroup)
+    updateGroup(action = '') {
+      this.$emit('updateGroup', this.clonedGroup, action)
       this.$refs.groupNameInput.blur()
     },
     addTask(title) {
@@ -71,15 +71,19 @@ export default {
       const newTask = boardService.getEmptyTask()
       newTask.title = title
       this.clonedGroup.tasks.push(newTask)
-      this.updateGroup()
+
+      const action = { type: 'added', txt: `${title} to ${this.clonedGroup.title}`, componentId: '', movedCmp: '', movedUser: '' }
+
+      this.updateGroup(action)
     },
-    removeTask(taskId) {
+    removeTask(taskId, action) {
       const idx = this.clonedGroup.tasks.findIndex((task) => task.id === taskId)
       this.clonedGroup.tasks.splice(idx, 1)
-      this.updateGroup()
+
+      this.updateGroup(action)
     },
-    updateTasks(tasks, groupId) {
-      this.$emit('updateTasks', tasks, groupId)
+    updateTasks(tasks, groupId, action) {
+      this.$emit('updateTasks', tasks, groupId, action)
     },
     openadd() {
       this.add = true

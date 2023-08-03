@@ -1,8 +1,9 @@
 <template>
   <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${board?.imgUrl})` }">
-    <TopNavbar :board="this.board" @openMenu="onShowMenu" @updateBoard="updateBoard" :isMenuOpen="isMenuOpen"/>
+    <TopNavbar :board="this.board" @openMenu="onShowMenu" @updateBoard="updateBoard" :isMenuOpen="isMenuOpen" />
     <RightMenu @closeMenu="onCloseMenu" :showMenu="showMenu" :board="this.board" @updateBoard="updateBoard" />
-    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup" @updateGroups="updateGroups" />
+    <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
+      @updateGroups="updateGroups" />
   </section>
   <RouterView @updateBoard="updateBoard" />
 </template>
@@ -30,17 +31,33 @@ export default {
     boardToDisplay() {
       return this.$store.getters.getCurrBoard
     },
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
+    }
   },
   created() {
     this.setBoard()
+    eventBus.on('setActivity', (action = { type: '', txt: '', componentId: '', movedCmp: '', movedUser: '' }) => {
+      console.log(action);
+      const activity = boardService.getEmptyActivity()
+      activity.action = action
+      activity.by = this.loggedinUser.fullname
+      this.board.activities.unshift(activity)
+      this.updateBoard()
+      console.log(this.board.activities);
+    })
+
+  },
+  unmounted() {
+    eventBus.off('setActivity')
   },
   methods: {
     onShowMenu() {
-      this.isMenuOpen= 'menu-open'
+      this.isMenuOpen = 'menu-open'
       this.showMenu = true
     },
     onCloseMenu() {
-      this.isMenuOpen= ''
+      this.isMenuOpen = ''
       this.showMenu = false
     },
 
@@ -55,7 +72,11 @@ export default {
         showErrorMsg('Cannot load board')
       }
     },
-    async updateBoard(updatedBoard = this.board) {
+    async updateBoard(updatedBoard = this.board, action = '') {
+      if (action) {
+        const activity = this.getActivity(action)
+        updatedBoard.activities.unshift(activity)
+      }
       try {
         await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
         this.board = updatedBoard
@@ -64,11 +85,12 @@ export default {
       }
     },
     async removeGroup(groupId) {
+      const group = this.board.groups.find(group => groupId === group.id)
+      const action = { type: 'archived', txt: `list ${group.title}`, componentId: '', movedCmp: '', movedUser: '' }
+      const activity = this.getActivity(action)
+      this.board.activities.unshift(activity)
+
       const idx = this.board.groups.findIndex((group) => group.id === groupId)
-      // const activity = this.$store.getters.getEmptyActivity
-      // activity.action.type='removed-group'
-      // activity.action.txt=`removed group ${this.board.groups[idx].title}`
-      // this.board.activitys.unshift(activity)
       this.board.groups.splice(idx, 1)
 
       try {
@@ -81,15 +103,22 @@ export default {
       const newGroup = boardService.getEmptyGroup()
       newGroup.title = title
       this.board.groups.push(newGroup)
+
+      const action = { type: 'added', txt: `${title} to this board`, componentId: '', movedCmp: '', movedUser: '' }
+      const activity = this.getActivity(action)
+      this.board.activities.unshift(activity)
+
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
       } catch (err) {
         showErrorMsg('Cannot add group')
       }
     },
-    async updateGroup(groupToEdit) {
+    async updateGroup(groupToEdit, action = '') {
       const idx = this.board.groups.findIndex((group) => group.id === groupToEdit.id)
       this.board.groups.splice(idx, 1, groupToEdit)
+
+      if (action) this.board.activities.unshift(action)
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
       } catch (err) {
@@ -100,6 +129,12 @@ export default {
       this.board.groups = groups
       await this.updateBoard()
     },
+    getActivity(action) {
+      const activity = boardService.getEmptyActivity()
+      activity.by = this.loggedinUser
+      activity.action = action
+      return activity
+    }
   },
 
   components: {

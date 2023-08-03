@@ -22,7 +22,7 @@
                     <div class="badges">
                         <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
                         <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
-                        <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id)" class="badge"
+                        <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id, task.title)" class="badge"
                             :class="dateClass" :title="dateTitle">
                             <span class="clock-icon"></span>
                             <span class="badge-text">{{ dueDate() }}</span>
@@ -190,12 +190,14 @@ export default {
         window.removeEventListener('resize', this.calculateHeight)
     },
     methods: {
-        async updateTask(updatedBoard) {
+        async updateTask(updatedBoard, action) {
             const board = updatedBoard ? updatedBoard : JSON.parse(JSON.stringify(this.currBoard))
             const idx = this.group.tasks.findIndex(task => task.id === this.task.id)
             this.group.tasks.splice(idx, 1, this.task)
             const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
             board.groups.splice(groupIdx, 1, this.group)
+
+            board.activities.unshift(action)
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
             }
@@ -214,6 +216,9 @@ export default {
             const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
             board.groups.splice(groupIdx, 1, this.group)
             this.closeEditor()
+
+            const action = { type: 'archived', txt: `${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            board.activities.unshift(action)
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
             }
@@ -282,10 +287,10 @@ export default {
             const el = this.$refs[elRef].getBoundingClientRect()
             eventBus.emit('modal', { el, type, info })
             this.isModalOpen = true
-            eventBus.on('setInfo', (info) => {
+            eventBus.on('setInfo', (info, action) => {
                 if (info) {
                     this.task = info.task
-                    this.updateTask(info.board)
+                    this.updateTask(info.board, action)
                 } else {
                     setTimeout(() => {
                         eventBus.off('setInfo')
