@@ -2,7 +2,7 @@
   <header ref="header" class="header-container">
     <nav>
       <RouterLink to="/board">
-        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690982880/Screenshot_2023-08-02_at_16.27.27_t0v0qv.png" alt="logo" />
+        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691058928/image-removebg-preview_thzggs.png" alt="logo" />
       </RouterLink>
       <div class="nav-left-content">
         <button class="nav-button">
@@ -105,16 +105,16 @@ export default {
     }
   },
   created() {
-    // eventBus.on('backgroundChange', () => {
-    //   this.getAverageColor()
-    // })
+    eventBus.on('backgroundChange', () => {
+      this.getAverageColor()
+    })
     this.getAverageColor()
   },
 
   watch: {
     '$route.path'(newPath) {
       if (newPath === '/board') {
-        this.$refs.header.style.backgroundColor = 'red'
+        this.$refs.header.style.backgroundColor = 'white'
         this.$refs.input.style.backgroundColor = 'lightgray'
       }
     },

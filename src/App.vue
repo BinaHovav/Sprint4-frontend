@@ -2,8 +2,8 @@
   <section class="main-container">
     <AppHeader v-if="showAppHeader" />
     <HomepageHeader v-else />
-
     <RouterView />
+
     <UserMsg />
     <AppModal />
     <TaskEditor />

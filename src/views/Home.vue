@@ -4,7 +4,13 @@
       <div class="left-box">
         <h1>Mellow brings all your tasks, teammates, and tools together</h1>
         <p>Keep everything in the same place - even if your team isn’t.</p>
-        <RouterLink to="/board" class="btn-try">Start Mellow >></RouterLink>
+        <RouterLink to="/board" class="btn-try"
+          >Start Mellow
+          <div class="arrow-icons">
+            <span v-icon="'arrowRight'"></span>
+            <span v-icon="'arrowRight'"></span>
+          </div>
+        </RouterLink>
       </div>
       <div></div>
       <div class="right-box">
