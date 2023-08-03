@@ -7,7 +7,8 @@
                     <h3>{{ checklist?.title }}</h3>
                     <div class="checklist-options">
                         <a v-if="isTaskChecked(checklist)" @click.stop="toggleItemDone = !toggleItemDone"
-                            class="show-checked">{{ toggleItemDone ? 'Show' : 'Hide' }} checked items {{ toggleItemDone ? `(${contItemDone(checklist)})` : '' }}</a>
+                            class="show-checked">{{ toggleItemDone ? 'Show' : 'Hide' }} checked items {{ toggleItemDone ?
+                                `(${contItemDone(checklist)})` : '' }}</a>
                         <a class="checklist-remove-btn" @click.stop="removeChecklist(checklist.id)">Delete</a>
                     </div>
                 </div>
@@ -21,9 +22,9 @@
                 </div>
             </div>
             <div class="checklist-list">
-                <div v-for="item in checklist?.todos" class="checklist-item" >
-                    <div v-if="showItemList(item)" @click.stop="setItemDone(checklist.id, item.id)" class="checklist-checkbox"
-                        :class="{ 'checked': item.isDone }" v-icon="'checkBox'"></div>
+                <div v-for="item in checklist?.todos" class="checklist-item">
+                    <div v-if="showItemList(item)" @click.stop="setItemDone(checklist.id, item.id)"
+                        class="checklist-checkbox" :class="{ 'checked': item.isDone }" v-icon="'checkBox'"></div>
                     <div v-if="showItemList(item)" class="checklist-item-details">
                         <div class="checklist-item-row">
                             <div class="checklist-text">
@@ -75,7 +76,10 @@ export default {
             const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistId)
             const todoIdx = this.task.checklists[idx].todos.findIndex(task => task.id === itemId)
             this.task.checklists[idx].todos[todoIdx].isDone = !this.task.checklists[idx].todos[todoIdx].isDone
-            this.$emit('onSaveTask')
+            
+            const todoTitle = this.task.checklists[idx].todos[todoIdx]
+            const action = { type: 'completed', txt: `${todoTitle} on ${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            this.$emit('onSaveTask', '', action)
         },
         getTaskProgress(todos) {
             const todoDone = todos.filter(todo => todo.isDone)
@@ -83,9 +87,13 @@ export default {
             return precent ? precent + '%' : '0%'
         },
         removeChecklist(checklistId) {
+            const checklist = this.task.checklists.find(checklist => checklist.id === checklistId)
+            const action = { type: 'removed', txt: `${checklist.title} from ${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+
             const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistId)
             this.task.checklists.splice(idx, 1)
-            this.$emit('onSaveTask')
+
+            this.$emit('onSaveTask', '', action)
         },
         toggleAddTodo(ev, checklistRef) {
             if (ev.target.nodeName === 'BUTTON') {

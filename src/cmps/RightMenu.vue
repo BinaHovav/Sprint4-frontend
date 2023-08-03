@@ -59,7 +59,9 @@
                 <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
               </div>
             </div>
-
+            <div v-else-if="currentMenuOption === 'activity'">
+              <pre v-for="activity in board.activities">{{ activity }} bla</pre>
+            </div>
             <div class="sub-options" v-else-if="currentMenuOption === 'changeBackground'">
               <div v-if="currentSubmenu === null">
                 <div class="background-options">
@@ -136,15 +138,12 @@ export default {
     },
     goBack() {
       if (this.currentSubmenu !== null) {
-        // If the user is in a submenu (photos or colors), go back to the "Change background" page
         this.currentSubmenu = null
       } else if (this.prevMenuOption !== null) {
-        // If the user is in the "Change background" page, go back to the previous menu option
         this.currMenuOption = this.prevMenuOption
         this.prevMenuOption = null
         this.menuText = this.menuOptions[this.currMenuOption]
       } else {
-        // If the user is in the "Default" page, go back to the "Change background" page
         this.currMenuOption = 'changeBackground'
         this.menuText = this.menuOptions[this.currMenuOption]
       }
@@ -154,7 +153,8 @@ export default {
     },
     changeBackground(backgroundImg) {
       this.board.imgUrl = backgroundImg
-      this.$emit('updateBoard', this.board)
+      const action = { type: 'changed', txt: 'the background of this board', componentId: '', movedCmp: '', movedUser: '' }
+      this.$emit('updateBoard', this.board, action)
     },
     closeRightNav() {
       this.$emit('closeMenu')
@@ -162,14 +162,20 @@ export default {
   },
   computed: {
     currentMenuOption() {
-      if (this.currMenuOption === 'default') {
-        return 'default'
-      } else if (this.currMenuOption === 'about') {
-        return 'about'
-      } else if (this.currMenuOption === 'changeBackground') {
-        return 'changeBackground'
+      switch (this.currMenuOption) {
+        case 'default':
+          return 'default'
+        case 'about':
+          return 'about'
+        case 'changeBackground':
+          return 'changeBackground'
+        case 'activity':
+          return 'activity'
+        default:
+          return 'default'
       }
     },
+
     showBackIcon() {
       return this.currMenuOption !== 'default' && this.prevMenuOption !== null
     },

@@ -16,8 +16,9 @@
             <span class="btn-title-icon"></span>
             <div class="task-header-title">
               <h2 v-if="!showTaskTitle" @click.stop="showTaskTitle = true">{{ task.title }}</h2>
-              <textarea v-if="showTaskTitle" @blur="onSaveTask, (showTaskTitle = false)" v-model="task.title"
-                v-focus></textarea>
+              <textarea v-if="showTaskTitle"
+                @blur="onSaveTask('', { type: 'added', txt: `${task.title} to ${group.title}`, componentId: '', movedCmp: '', movedUser: '' }), (showTaskTitle = false)"
+                v-model="task.title" v-focus></textarea>
             </div>
             <div class="task-header-group">
               <p>
@@ -89,8 +90,8 @@
               </div>
             </div>
             <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask" />
-            <TaskAttachmentDetails v-if="task.attachment?.length" @toggleModalOpen="modalOpen = !modalOpen" :board="board"
-              :task="task" @onSaveTask="onSaveTask" />
+            <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen"
+              :board="board" :task="task" @onSaveTask="onSaveTask" />
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" />
           </div>
           <div class="task-sidebar">
@@ -192,11 +193,13 @@ export default {
     this.getTask()
   },
   unmounted() {
+    this.task = ''
     window.removeEventListener('resize', this.handleResize)
     eventBus.off('setInfo')
   },
   methods: {
     async getTask() {
+      console.log('now?');
       try {
         const boardId = this.$route.params.id
         const board = await boardService.getById(boardId)
@@ -217,12 +220,14 @@ export default {
     getMemberById(memberId) {
       return this.board.members?.find((member) => member._id === memberId)
     },
-    onSaveTask(task) {
+    onSaveTask(task, action) {
       if (task) this.task = task
       let idx = this.group.tasks.findIndex((gTask) => gTask.id === this.task.id)
       this.group.tasks.splice(idx, 1, this.task)
       idx = this.board.groups.findIndex((gGroup) => gGroup.id === this.group.id)
       this.board.groups.splice(idx, 1, this.group)
+
+      this.board.activities.unshift(action)
       this.$emit('updateBoard', this.board)
     },
     closeModal() {
@@ -230,22 +235,22 @@ export default {
     },
     openModal(type, elRef) {
       this.modalRef = elRef
-      const board = JSON.parse(JSON.stringify(this.board))
-      const info = { task: this.task, board }
+      const info = { task: this.task, board: this.board }
       const el = this.$refs[this.modalRef].getBoundingClientRect()
       eventBus.emit('modal', { el, type, info })
       this.modalOpen = true
       window.addEventListener('resize', this.handleResize)
-      eventBus.on('setInfo', (info) => {
+      eventBus.on('setInfo', (info, action) => {
         if (info) {
           this.task = info.task
           this.board = info.board
-          this.onSaveTask()
+          this.onSaveTask(action)
         } else {
           setTimeout(() => {
             this.modalOpen = false
             window.removeEventListener('resize', this.handleResize)
             eventBus.off('setInfo')
+
           }, 200)
         }
       })

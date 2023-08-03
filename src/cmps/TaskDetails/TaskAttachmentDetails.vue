@@ -6,7 +6,7 @@
         </div>
         <div class="task-attachment-content">
             <div class="task-attachment-container">
-                <div v-for="attach in task.attachment" class="task-attachment-item">
+                <div v-for="attach in task.attachments" class="task-attachment-item">
                     <a v-if="attach.type !== 'image'" class="attachment-thumbnail-preview" :title="attach.name">
                         <span class="attachment-thumbnail-preview-text">{{ attach.type
                         }}</span>
@@ -70,8 +70,8 @@ export default {
             return ' 5 hours ago'
         },
         removeAttach(attachId) {
-            const idx = this.task.attachment.findIndex(attach => attach.id === attachId)
-            this.task.attachment.splice(idx, 1)
+            const idx = this.task.attachments.findIndex(attach => attach.id === attachId)
+            this.task.attachments.splice(idx, 1)
             this.$emit('onSaveTask')
         },
         openModal(type, attachId) {
@@ -80,9 +80,9 @@ export default {
             eventBus.emit('modal', { el, type, info })
             this.$emit('toggleModalOpen')
             window.addEventListener('resize', this.handleResize)
-            eventBus.on('setInfo', (info) => {
+            eventBus.on('setInfo', (info, action) => {
                 if (info) {
-                    this.$emit('onSaveTask', info.task)
+                    this.$emit('onSaveTask', info.task, action)
                 }
                 setTimeout(() => {
                     window.removeEventListener('resize', this.handleResize)

@@ -1,6 +1,5 @@
 <template>
     <section class="task-preview-container" @click="onTaskDetails">
-        <!-- <div class="btn-edit" @click.stop="removeTask(task.id)"> -->
         <div class="btn-edit" @click.stop="openEditor">
             <span class="edit-icon"></span>
         </div>
@@ -27,7 +26,7 @@
                 <div class="badges">
                     <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
                     <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
-                    <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id)" class="badge"
+                    <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id, task.title)" class="badge"
                         :class="dateClass" :title="dateTitle">
                         <span class="clock-icon"></span>
                         <span class="badge-text">{{ dueDate() }}</span>
@@ -44,7 +43,7 @@
                         <span class="checklist-icon"></span>
                         <span class="badge-text">{{ checklistCount }}</span>
                     </div>
-                    <div v-if="task.attachments" class="badge attachment">
+                    <div v-if="task.attachments?.length" class="badge attachment">
                         <span class="attachment-icon"></span>
                         <span class="badge-text">{{ task.attachments.length }}</span>
                     </div>
@@ -138,9 +137,6 @@ export default {
         onTaskDetails() {
             const boardId = this.$route.params.id
             this.$router.push(`/board/${boardId}/group/${this.groupId}/task/${this.task.id}`)
-        },
-        removeTask(taskId) {
-            this.$emit('removeTask', taskId)
         },
         getLabelById(labelId) {
             return this.currBoard.labels?.find((label) => label.id === labelId)

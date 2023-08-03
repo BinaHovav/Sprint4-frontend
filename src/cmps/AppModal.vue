@@ -36,12 +36,12 @@ export default {
 
   created() {
     eventBus.on('modal', ({ el, type, info }) => {
+      if (info) {
+        this.info = JSON.parse(JSON.stringify(info))
+      }
       if (type !== this.type) {
         this.isVisible = true
         if (type) {
-          if (info) {
-            this.info = JSON.parse(JSON.stringify(info))
-          }
           this.type = type
         }
         this.setModalLocation(el)
@@ -74,11 +74,12 @@ export default {
         }
       }
     },
-    setInfo(info) {
+    setInfo(info, action) {
       if (info) {
-        eventBus.emit('setInfo', info)
+        eventBus.emit('setInfo', info, action)
       } else {
-        eventBus.emit('setInfo')
+        this.info = {}
+        eventBus.emit('setInfo', action)
         this.isVisible = false
         this.backBtn = false
       }
