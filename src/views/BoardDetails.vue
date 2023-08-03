@@ -68,6 +68,7 @@ export default {
         this.$store.commit({ type: 'setCurrBoardId', boardId: boardId })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         this.$store.commit({ type: 'setBackgroundImg', backgroundImg: this.board?.imgUrl })
+        if (!this.loggedinUser) this.$store.commit({ type: 'setGuestMode' })
       } catch (err) {
         showErrorMsg('Cannot load board')
       }

@@ -234,7 +234,6 @@ export default {
 
       const activity = boardService.getEmptyActivity()
       activity.action = action
-      console.log(action);
       activity.by = this.loggedinUser
       this.board.activities.unshift(activity)
       this.$emit('updateBoard', this.board)

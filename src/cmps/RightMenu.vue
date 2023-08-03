@@ -44,7 +44,8 @@
               </div>
               <div class="board-admins-details">
                 <div class="admin-logo">
-                  <img src="https://trello-members.s3.amazonaws.com/64b64dd31b313a8eba0f9341/3e7f20613b5c14501f9c6c728ac51b45/50.png" />
+                  <img
+                    src="https://trello-members.s3.amazonaws.com/64b64dd31b313a8eba0f9341/3e7f20613b5c14501f9c6c728ac51b45/50.png" />
                 </div>
                 <div class="admin-names">
                   <p class="fullname">Bina Hovav</p>
@@ -56,14 +57,19 @@
                   <span v-icon="'description'"></span>
                   <span>Description</span>
                 </div>
-                <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
+                <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize
+                  operations using innovative robotic technologies and task management.</p>
               </div>
             </div>
-            <div v-else-if="currentMenuOption === 'activity'">
-              <div v-for="activity in board.activities">
-                <!-- <div class="user-img">
-                  <img :src="activity.by.imgUrl" alt="">
-                </div>  -->
+            <div v-else-if="currentMenuOption === 'activity'" class="activities">
+              <div v-for="activity in board.activities" class="activity-container">
+                <div class="user-img">
+                  <img class="member-img" :src="activity.by?.imgUrl"
+                    :title="activity.by?.fullname"/>
+                </div>
+                <div class="action">
+                  <span> <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.type }} {{ activity.action?.txt }}</span>
+                </div>
               </div>
             </div>
             <div class="sub-options" v-else-if="currentMenuOption === 'changeBackground'">

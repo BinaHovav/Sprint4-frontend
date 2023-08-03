@@ -6,13 +6,16 @@
     top: 0;
     backdrop-filter: blur(4px);
     background-color: #fff;
-    transition: transform 0.1s ease-in; /* Transition the transform property */
+    transition: transform 0.1s ease-in;
+    /* Transition the transform property */
     z-index: 5;
 
     &.show-menu {
         background-color: $clr-tr-background-list;
-        transform: translate(-339px); /* Start the menu in its visible position */
+        transform: translate(-339px);
+        /* Start the menu in its visible position */
     }
+
     .board-menu-container {
         position: absolute;
         display: flex;
@@ -20,6 +23,7 @@
         bottom: 0;
         right: 0;
         top: 0;
+
         .board-menu-tab-content {
             align-items: flex-start;
             // background-color: var(--ds-background-neutral,#091e420f);
@@ -41,6 +45,7 @@
                 position: relative;
                 // transition: opacity 0.2s ease-in;
                 width: 100%;
+
                 .board-menu-header-content {
                     display: flex;
                     align-items: center;
@@ -49,6 +54,7 @@
                         font-size: 18px;
                         cursor: pointer;
                     }
+
                     .board-menu-header-title {
                         flex: 1;
                         line-height: 20px;
@@ -62,6 +68,7 @@
                         white-space: nowrap;
                         border-bottom: 1px solid lightgray;
                     }
+
                     .board-menu-header-close-button {
                         @include trello-icon($content: $icon-close, $type: md);
                         text-decoration: none;
@@ -69,6 +76,7 @@
                 }
             }
         }
+
         .board-menu-content {
             box-sizing: border-box;
             display: flex;
@@ -78,6 +86,7 @@
             overflow-y: auto;
             padding: 0;
             width: 100%;
+
             .board-menu-content-frame {
                 overflow-y: auto;
                 box-sizing: border-box;
@@ -88,9 +97,11 @@
                 transition-property: transform, opacity;
                 transition-timing-function: ease-in;
                 width: 100%;
+
                 .hr-line {
                     border-top: 0.8px solid rgb(195, 190, 190);
                 }
+
                 .board-menu-navigation {
                     margin: 4px 0;
                     list-style: none;
@@ -106,6 +117,7 @@
                             height: 36px;
                             // margin-bottom: 4px;
                         }
+
                         .board-menu-navigation-item-link,
                         .board-menu-navigation-item-link-about,
                         .board-menu-navigation-item-link-activity {
@@ -120,9 +132,11 @@
                             text-decoration: none;
                             position: relative;
                             cursor: pointer;
+
                             span {
                                 display: flex;
                             }
+
                             img {
                                 height: 20px;
                                 width: 20px;
@@ -140,6 +154,7 @@
                             margin-top: 10px;
 
                             @include trello-icon($content: $icon-activity, $type: md);
+
                             a {
                                 font-weight: 600;
                                 line-height: 20px;
@@ -151,6 +166,7 @@
                         }
                     }
                 }
+
                 .board-admins {
                     display: flex;
                     align-items: center;
@@ -163,42 +179,51 @@
                     font-size: 16px;
                     line-height: 20px;
                     font-weight: 600;
+
                     span {
                         @include trello-icon($content: $icon-member, $color: $clr-text, $type: lg);
                     }
                 }
+
                 .board-admins-details {
                     margin-top: 20px;
                     display: grid;
                     grid-template-columns: 70px 120px;
+
                     img {
                         width: 50px;
                     }
+
                     .fullname {
                         font-size: 16px;
                         font-weight: 600;
                         margin: 0;
                     }
+
                     .email {
                         margin: 0;
                     }
                 }
+
                 .board-description {
                     margin-top: 30px;
+
                     .description {
                         display: flex;
                         align-items: center;
                         gap: 8px;
+
                         span {
                             display: flex;
                             align-items: center;
                             font-size: 16px;
                             line-height: 20px;
                             font-weight: 600;
-                            svg {
-                            }
+
+                            svg {}
                         }
                     }
+
                     p {
                         background-color: $clr-background-neutral;
                         padding: 8px 12px;
@@ -207,6 +232,7 @@
                         line-height: 20px;
                     }
                 }
+
                 .sub-options {
                     .background-options {
                         display: flex;
@@ -233,6 +259,7 @@
                             width: 145px;
                             aspect-ratio: 3/2;
                             cursor: pointer;
+
                             &:hover {
                                 filter: brightness(85%);
                             }
@@ -243,26 +270,31 @@
                         margin-left: 10px;
                         line-height: 2.5;
                     }
+
                     .photo-option {
                         display: flex;
                         flex-wrap: wrap;
                         gap: 8px;
+
                         .photo-option-list {
                             img {
                                 border-radius: 15px;
                                 width: 145px;
                                 aspect-ratio: 3/2;
                                 cursor: pointer;
+
                                 &:hover {
                                     filter: brightness(85%);
                                 }
                             }
                         }
                     }
+
                     .color-option-list {
                         display: flex;
                         flex-wrap: wrap;
                         gap: 8px;
+
                         .color-gradient-list {
                             img {
                                 position: relative;
@@ -271,6 +303,7 @@
                                 aspect-ratio: 3/2;
                                 cursor: pointer;
                             }
+
                             .check-icon {
                                 @include trello-icon($content: $icon-checked, $color: #fff);
                                 position: absolute;
@@ -279,15 +312,57 @@
                                 transform: translate(-50%, -50%);
                                 opacity: 0;
                             }
+
                             &:hover {
                                 filter: brightness(80%);
                             }
+
                             &:focus {
                                 filter: brightness(80%);
                             }
+
                             &:focus .check-icon {
                                 opacity: 1;
                                 z-index: 5;
+                            }
+                        }
+                    }
+                }
+
+                .activities {
+
+                    .activity-container {
+                        margin-left: 40px;
+                        min-height: 32px;
+                        padding: 8px 0;
+                        position: relative;
+
+                        .user-img {
+                            height: 32px;
+                            width: 32px;
+                            left: -40px;
+                            position: absolute;
+                            top: 8px;
+
+                            img {
+                                height: 32px;
+                                width: 32px;
+                                line-height: 32px;
+                                border-radius: 100%;
+                            }
+                        }
+
+                        .action {
+                            display: block;
+                            word-wrap: break-word;
+                            margin: 0;
+
+                            span {
+
+                                .fullname {
+                                    cursor: pointer;
+                                    font-weight: 700;
+                                }
                             }
                         }
                     }
