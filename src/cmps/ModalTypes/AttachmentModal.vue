@@ -36,7 +36,7 @@ export default {
             const { secure_url } = await uploadService.uploadFile(ev)
             const fileUrl = secure_url
             const attachment = { id: utilService.makeId(5), type, name, size, fileUrl, createdAt: Date.now() }
-            this.info.task.attachment.unshift(attachment)
+            this.info.task.attachments.unshift(attachment)
             this.$emit('setInfo', this.info)
         },
         checkFileType(fileType) {

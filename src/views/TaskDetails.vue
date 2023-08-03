@@ -89,7 +89,7 @@
               </div>
             </div>
             <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask" />
-            <TaskAttachmentDetails v-if="task.attachment?.length" @toggleModalOpen="modalOpen = !modalOpen" :board="board"
+            <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen" :board="board"
               :task="task" @onSaveTask="onSaveTask" />
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" />
           </div>
@@ -192,11 +192,13 @@ export default {
     this.getTask()
   },
   unmounted() {
+    this.task = ''
     window.removeEventListener('resize', this.handleResize)
     eventBus.off('setInfo')
   },
   methods: {
     async getTask() {
+      console.log('now?');
       try {
         const boardId = this.$route.params.id
         const board = await boardService.getById(boardId)
@@ -230,8 +232,7 @@ export default {
     },
     openModal(type, elRef) {
       this.modalRef = elRef
-      const board = JSON.parse(JSON.stringify(this.board))
-      const info = { task: this.task, board }
+      const info = { task: this.task, board: this.board }
       const el = this.$refs[this.modalRef].getBoundingClientRect()
       eventBus.emit('modal', { el, type, info })
       this.modalOpen = true
@@ -246,6 +247,7 @@ export default {
             this.modalOpen = false
             window.removeEventListener('resize', this.handleResize)
             eventBus.off('setInfo')
+            
           }, 200)
         }
       })
