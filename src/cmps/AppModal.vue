@@ -5,7 +5,8 @@
       <span class="header-title">{{ headerTitle }}</span>
       <a class="close-modal" @click.stop="closeModal"> </a>
     </header>
-    <Component :is="type" :info="info" @closeModal="isVisible = false" @setInfo="setInfo" :backBtn="backBtn" @showBackBtn="changeBackBtn" />
+    <Component :is="type" :info="info" @closeModal="isVisible = false" @setInfo="setInfo" :backBtn="backBtn"
+      @showBackBtn="changeBackBtn" />
   </div>
 </template>
 <script>
@@ -31,54 +32,93 @@ export default {
       type: '',
       backBtn: false,
       edit: false,
+      elLocation: ''
     }
   },
 
   created() {
     eventBus.on('modal', ({ el, type, info }) => {
-      if (info) {
-        this.info = JSON.parse(JSON.stringify(info))
+      if (info === this.info) {
+        this.setInfo()
+      } else if (info === 'resize') {
+        (type === 'CreateBoardModal') ? this.setModalLocationBoard(el) : this.setModalLocation(el)
       }
-      if (type !== this.type) {
-        this.isVisible = true
-        if (type) {
+      else {
+        if (type !== 'CreateBoardModal') {
+          if (type === this.type) {
+            this.setInfo()
+          } else {
+            this.isVisible = true
+            this.info = info
+            this.type = type
+            this.elLocation = el
+            this.setModalLocation(el)
+          }
+        } else if (type === 'CreateBoardModal') {
+          this.setModalLocationBoard(el)
+          this.isVisible = true
+          this.info = info
           this.type = type
+          this.elLocation = el
         }
-        this.setModalLocation(el)
-      } else {
-        this.isVisible = !this.isVisible
       }
     })
   },
+  // created() {
+  //   eventBus.on('modal', ({ el, type, info }) => {
+  //     if (info) {
+  //       this.info = JSON.parse(JSON.stringify(info))
+  //     }
+  //     if (type !== this.type) {
+  //       this.isVisible = true
+  //       if (type) {
+  //         this.type = type
+  //       }
+  //       this.setModalLocation(el)
+  //     } else {
+  //       this.isVisible = !this.isVisible
+  //     }
+  //   })
+  // },
   methods: {
     setModalLocation(el) {
       const screen = { width: window.innerWidth, height: window.innerHeight }
-      if (this.type !== 'CreateBoardModal') {
-        if (el.left + 304 < screen.width) {
-          this.modalPlace.left = el.left + 'px'
-        } else {
-          this.modalPlace.left = screen.width - 304 + 'px'
-        }
-        setTimeout(() => {
-          const ele = this.$refs.appmodal.getBoundingClientRect()
-          if (el.top + ele.height > screen.height) {
-            this.modalPlace.top = '55px'
-          } else {
-            this.modalPlace.top = el.bottom + 'px'
-          }
-        }, 200)
+      if (el.left + 304 < screen.width) {
+        this.modalPlace.left = el.left + 'px'
       } else {
-        if (this.type === 'CreateBoardModal') {
-          this.modalPlace.bottom = el.bottom - 200 + 'px'
-          this.modalPlace.left = el.right + 'px'
-        }
+        this.modalPlace.left = screen.width - 304 + 'px'
       }
+      setTimeout(() => {
+        const ele = this.$refs.appmodal.getBoundingClientRect()
+        if (el.top + ele.height > screen.height) {
+          this.modalPlace.top = '55px'
+        } else {
+          this.modalPlace.top = el.bottom + 'px'
+        }
+      }, 200)
+    },
+    setModalLocationBoard(el) {
+      const screen = { width: window.innerWidth, height: window.innerHeight }
+      if (el.top === 8) {
+        this.modalPlace.left = el.left + 'px'
+        this.modalPlace.top = el.bottom + 5 + 'px'
+      } else {
+        this.modalPlace.bottom = el.bottom - 100 + 'px'
+        this.modalPlace.left = el.right + 5 + 'px'
+      }
+      setTimeout(() => {
+        const ele = this.$refs.appmodal.getBoundingClientRect()
+        if (ele.right >= screen.width) {
+          this.modalPlace.left = screen.width + ele.width - 20 + 'px'
+        }
+      }, 200)
     },
     setInfo(info) {
       if (info) {
         eventBus.emit('setInfo', info)
       } else {
         this.info = {}
+        this.type = ''
         eventBus.emit('setInfo')
         this.isVisible = false
         this.backBtn = false

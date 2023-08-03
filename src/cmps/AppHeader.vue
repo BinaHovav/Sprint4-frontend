@@ -39,7 +39,7 @@
           </span>
         </button>
         <div class="create-menu">
-          <button class="create-menu-button" ref="createBoardAppHeader" @click="openModal('CreateBoardModal', 'createBoardAppHeader')"><p>Create</p></button>
+          <button class="create-menu-button" ref="createBoardAppHeader" @click="openModal('CreateBoardModal')"><p>Create</p></button>
         </div>
       </div>
       <div class="nav-right-content">
@@ -102,6 +102,8 @@ export default {
   data() {
     return {
       bgImg: '',
+      elRef: '',
+      type: ''
     }
   },
   created() {
@@ -125,17 +127,20 @@ export default {
   },
 
   methods: {
-    openModal(type, elRef) {
-      // const board = JSON.parse(JSON.stringify(this.board))
-      // const info = { board }
-      const el = this.$refs[elRef].getBoundingClientRect()
+    openModal(type) {
+      this.type = type
+      const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
       eventBus.emit('modal', { el, type })
       window.addEventListener('resize', this.handleResize)
-      // document.removeEventListener('click', this.handleClickOutside)
+      eventBus.on('setInfo', () => {
+        window.removeEventListener('resize', this.handleResize)
+        eventBus.off('setInfo')
+        this.type = ''
+      })
     },
     handleResize() {
       const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
-      eventBus.emit('modal', { el })
+      eventBus.emit('modal', { el, type: this.type, info: 'resize' })
     },
     getAverageColor() {
       const img = new Image()

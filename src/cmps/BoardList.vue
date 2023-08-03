@@ -3,7 +3,8 @@
     <li v-for="board in boards" :key="board._id" @click="loadBoard(board._id)">
       <BoardTile :board="board" :isStarred="board.isStarred" @updateBoard="updateBoard" @loadBoard="loadBoard" />
     </li>
-    <div v-if="showCreateBoard" ref="createBoard" class="create-new-board" @click="openModal('CreateBoardModal', 'createBoard')">Create new board</div>
+    <div v-if="showCreateBoard" ref="createBoard" class="create-new-board"
+      @click="openModal('CreateBoardModal')">Create new board</div>
   </ul>
 </template>
 
@@ -20,10 +21,11 @@ export default {
   data() {
     return {
       newBoardTitle: '',
+      type: ''
     }
   },
   computed: {},
-  created() {},
+  created() { },
   methods: {
     loadBoard(boardId) {
       this.$emit('loadBoard', boardId)
@@ -43,18 +45,20 @@ export default {
         showErrorMsg('Cannot update board')
       }
     },
-    openModal(type, elRef) {
-      // const board = JSON.parse(JSON.stringify(this.board))
-      // const info = { board }
+    openModal(type) {
+      this.type = type
       const el = this.$refs.createBoard.getBoundingClientRect()
-      console.log(el)
       eventBus.emit('modal', { el, type })
       window.addEventListener('resize', this.handleResize)
-      // document.removeEventListener('click', this.handleClickOutside)
+      eventBus.on('setInfo', () => {
+        window.removeEventListener('resize', this.handleResize)
+        eventBus.off('setInfo')
+        this.type = ''
+      })
     },
     handleResize() {
       const el = this.$refs.createBoard.getBoundingClientRect()
-      eventBus.emit('modal', { el })
+      eventBus.emit('modal', { el, type: this.type, info: 'resize' })
     },
 
     closeModal() {
