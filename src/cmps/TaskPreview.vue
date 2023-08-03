@@ -44,7 +44,7 @@
                         <span class="checklist-icon"></span>
                         <span class="badge-text">{{ checklistCount }}</span>
                     </div>
-                    <div v-if="task.attachments" class="badge attachment">
+                    <div v-if="task.attachments.length" class="badge attachment">
                         <span class="attachment-icon"></span>
                         <span class="badge-text">{{ task.attachments.length }}</span>
                     </div>
