@@ -30,12 +30,12 @@ export default {
     },
     methods: { 
         getAttach(){
-            const idx = this.info.task.attachment.findIndex(attachment => attachment.id === this.info.attachId)
-            this.attach = this.info.task.attachment[idx]
+            const idx = this.info.task.attachments.findIndex(attachment => attachment.id === this.info.attachId)
+            this.attach = this.info.task.attachments[idx]
         },
         saveUpdate(){
-            const idx = this.info.task.attachment.findIndex(attachment => attachment.id === this.info.attachId)
-            this.info.task.attachment.splice(idx,1,this.attach)
+            const idx = this.info.task.attachments.findIndex(attachment => attachment.id === this.info.attachId)
+            this.info.task.attachments.splice(idx,1,this.attach)
             this.$emit('setInfo', this.info)
             this.$emit('setInfo')
         }
