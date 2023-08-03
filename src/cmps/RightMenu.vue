@@ -16,7 +16,7 @@
 
         <div class="board-menu-content u-fancy-scrollbar js-board-menu-content-wrapper">
           <div class="board-menu-content-frame">
-            <ul class="board-menu-navigation" v-if="currentMenuOption === 'default'">
+            <ul class="board-menu-navigation" v-if="currMenuOption === 'default'">
               <li class="board-menu-navigation-item">
                 <button class="board-menu-navigation-item-link-about">
                   <span v-icon="'aboutRightMenu'"></span>
@@ -37,7 +37,7 @@
               </li>
             </ul>
 
-            <div v-else-if="currentMenuOption === 'about'">
+            <div v-else-if="currMenuOption === 'about'">
               <div class="board-admins">
                 <span class="admin-icon"></span>
                 Board admnins
@@ -59,10 +59,10 @@
                 <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
               </div>
             </div>
-            <div v-else-if="currentMenuOption === 'activity'">
+            <div v-else-if="currMenuOption === 'activity'">
               <pre v-for="activity in board.activities">{{ activity }} bla</pre>
             </div>
-            <div class="sub-options" v-else-if="currentMenuOption === 'changeBackground'">
+            <div class="sub-options" v-else-if="currMenuOption === 'changeBackground'">
               <div v-if="currentSubmenu === null">
                 <div class="background-options">
                   <div class="photos-option">
@@ -161,21 +161,6 @@ export default {
     },
   },
   computed: {
-    currentMenuOption() {
-      switch (this.currMenuOption) {
-        case 'default':
-          return 'default'
-        case 'about':
-          return 'about'
-        case 'changeBackground':
-          return 'changeBackground'
-        case 'activity':
-          return 'activity'
-        default:
-          return 'default'
-      }
-    },
-
     showBackIcon() {
       return this.currMenuOption !== 'default' && this.prevMenuOption !== null
     },
