@@ -69,7 +69,7 @@
                   <span class="is-watching" v-if="isWatching"><span class="is-watching-icon"></span></span>
                 </a>
               </div>
-              <div class="task-details-item">
+              <div v-if="task.date.dueDate" class="task-details-item">
                 <h3>Due date</h3>
                 <div class="task-details-due-date">
                   <a @click.stop="task.date.isDone = !task.date.isDone" class="due-date-complete"
@@ -90,6 +90,8 @@
               </div>
             </div>
             <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask" />
+            <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen"
+              :board="board" :task="task" @onSaveTask="onSaveTask" />
             <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen"
               :board="board" :task="task" @onSaveTask="onSaveTask" />
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" />
@@ -159,6 +161,7 @@ export default {
       dueDateChecked: false,
       modalRef: 'labels',
       modalOpen: false,
+      type: ''
     }
   },
   computed: {
@@ -240,10 +243,11 @@ export default {
     },
     openModal(type, elRef) {
       this.modalRef = elRef
-      const info = { task: this.task, board: this.board }
+      // const info = { task: this.task, board: this.board }
       const el = this.$refs[this.modalRef].getBoundingClientRect()
-      eventBus.emit('modal', { el, type, info })
+      eventBus.emit('modal', { el, type, info: { task: this.task, board: this.board } })
       this.modalOpen = true
+      this.type = type
       window.addEventListener('resize', this.handleResize)
       eventBus.on('setInfo', (info, action) => {
         if (info) {
@@ -255,17 +259,16 @@ export default {
             this.modalOpen = false
             window.removeEventListener('resize', this.handleResize)
             eventBus.off('setInfo')
-
+            this.type = ''
           }, 200)
         }
       })
     },
     handleResize() {
       const el = this.$refs[this.modalRef].getBoundingClientRect()
-      eventBus.emit('modal', { el })
+      eventBus.emit('modal', { el, type: this.type, info: 'resize' })
     },
     isCoverImg() {
-      console.log(this.task.cover.background?.startsWith('https'))
       return this.task.cover.background?.startsWith('https')
     },
     getCoverImgStyle() {

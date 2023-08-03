@@ -40,6 +40,7 @@ export default {
 
             const action = { type: 'attached', txt: `${attachment.name} to ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
             this.$emit('setInfo', this.info, action)
+            this.$emit('setInfo')
         },
         checkFileType(fileType) {
             if (fileType === 'text/plain') return 'txt'
