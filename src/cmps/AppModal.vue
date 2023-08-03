@@ -64,22 +64,6 @@ export default {
       }
     })
   },
-  // created() {
-  //   eventBus.on('modal', ({ el, type, info }) => {
-  //     if (info) {
-  //       this.info = JSON.parse(JSON.stringify(info))
-  //     }
-  //     if (type !== this.type) {
-  //       this.isVisible = true
-  //       if (type) {
-  //         this.type = type
-  //       }
-  //       this.setModalLocation(el)
-  //     } else {
-  //       this.isVisible = !this.isVisible
-  //     }
-  //   })
-  // },
   methods: {
     setModalLocation(el) {
       const screen = { width: window.innerWidth, height: window.innerHeight }
