@@ -36,7 +36,38 @@
             flex-basis: 0;
             height: 100%;
             position: relative;
-
+            .modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                .modal-content {
+                    background-color: white;
+                    padding: 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    .modal ul {
+                        list-style: none;
+                        padding: 0;
+                        .modal li {
+                            margin: 5px 0;
+                        }
+                    }
+                    .modal-close {
+                        background-color: #f0f0f0;
+                        border: none;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                }
+            }
             .nav-button {
                 display: inline-flex;
                 font-weight: 400;
@@ -72,7 +103,19 @@
                     background-color: $dynamic-button-hovered;
                 }
             }
-
+            .small-screen-more-button {
+                background-color: rgb(186, 183, 183);
+                margin-right: 10px;
+                color: $clr-text;
+                display: none;
+                cursor: pointer;
+            }
+            .small-screen-plus-button {
+                @include trello-icon($icon-plus);
+                background-color: rgb(186, 183, 183);
+                display: none;
+                cursor: pointer;
+            }
             .create-menu {
                 display: flex;
                 flex-shrink: 0;
@@ -173,7 +216,7 @@
                 gap: 10px;
                 margin-right: 10px;
 
-                >* {
+                > * {
                     display: flex;
                     align-items: center;
                     cursor: pointer;
@@ -193,13 +236,13 @@
                     height: 24px;
                 }
 
-                .dark-mode-button {}
+                .dark-mode-button {
+                }
 
                 .user-account-button {
                     background-color: transparent;
                     border: none;
                     box-shadow: none;
-                    display: block;
                     height: 24px;
                     margin-right: 0;
                     padding: 4px;
@@ -280,7 +323,6 @@
         // }
     }
 
-
     // background-color: white;
     // justify-content: space-between;
 
@@ -299,4 +341,19 @@
     // nav .active {
     //     color: $clr1;
     // }
+}
+@media (max-width: 740px) {
+    .header-container nav .nav-left-content .nav-button,
+    .header-container nav .nav-left-content .create-menu {
+        display: none;
+    }
+    .header-container nav .nav-left-content .small-screen-plus-button {
+        display: block;
+    }
+    .header-container nav .nav-left-content .small-screen-more-button {
+        display: block;
+    }
+    .board-header nav .right-board-header {
+        gap: 10px;
+    }
 }

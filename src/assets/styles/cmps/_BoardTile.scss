@@ -64,3 +64,9 @@
         color: white;
     }
 }
+
+@media (max-width: 720px) {
+    .board-tile img {
+        width: 155px;
+    }
+}

@@ -4,11 +4,8 @@
       <span class="left-board-header">
         <div class="board-title">
           <form action="">
-            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title"
-              @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
+            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title" @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
           </form>
-
-          <!-- <h1 class="fs18">{{ boardToDisplay?.title }}</h1> -->
         </div>
         <button class="btn-star-container" @click.prevent="updateBoard(board)">
           <span class="star-icon">
@@ -36,9 +33,7 @@ export default {
   name: 'TopNavbar',
   props: ['board', 'isMenuOpen'],
   data() {
-    return {
-
-    }
+    return {}
   },
   created() {
     this.getAverageColor()

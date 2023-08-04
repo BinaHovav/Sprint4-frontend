@@ -78,3 +78,15 @@
     line-height: 1.5;
     cursor: pointer;
 }
+
+@media (max-width: 720px) {
+    .home-container .home-sticky-container {
+        grid-gap: 0;
+        .all-boards {
+            margin: 0 20px;
+        }
+    }
+    .create-new-board {
+        width: 155px;
+    }
+}

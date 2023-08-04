@@ -2,6 +2,11 @@
     backdrop-filter: blur(4px);
 
     nav {
+        // @media (max-width: 740px) {
+        //     nav {
+        //         padding: 6px 0;
+        //     }
+        // }
         &.menu-open {
             width: calc(100% - 339px - 23px);
         }
@@ -10,7 +15,7 @@
         position: relative;
         display: inline-flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
         flex-grow: 1;
         gap: 4px;
         width: calc(100% - 23px);
@@ -45,7 +50,8 @@
                 box-shadow: none;
                 resize: none;
                 // padding: 5px 12px;
-
+                form {
+                }
                 &:focus {
                     overflow: hidden;
                     overflow-wrap: break-word;
@@ -159,6 +165,24 @@
     }
 }
 
+@media (max-width: 740px) {
+    textarea {
+        padding: 6px 0;
+    }
+    .board-header nav {
+        padding: 8px 10px 12px 8px;
+        width: calc(100% - 10px);
+    }
+    .board-header nav .left-board-header .board-title {
+        width: 190px;
+    }
+    .board-header nav .right-board-header .board-members {
+        margin-right: 7px;
+    }
+    .board-header nav .right-board-header .open-menu-btn {
+        padding: 6px 0;
+    }
+}
 // .top-navbar {
 //     position: relative;
 //     overflow: hidden;

@@ -5,24 +5,39 @@
         <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691058928/image-removebg-preview_thzggs.png" alt="logo" />
       </RouterLink>
       <div class="nav-left-content">
-        <button class="nav-button">
+        <button class="small-screen-more-button">More</button>
+
+        <button class="nav-button" @click="openMiniModal('boards')">
           <span class="btn-title">Boards</span>
           <span class="nav-arrow-down">
             <span v-icon="'arrowDownSmall'"></span>
           </span>
         </button>
-        <button class="nav-button">
+        <button class="small-screen-plus-button" @click="openModal('CreateBoardModal')"></button>
+        <!-- <button class="nav-button">
           <span>Recent</span>
           <span class="nav-arrow-down">
             <span v-icon="'arrowDownSmall'"></span>
           </span>
-        </button>
-        <button class="nav-button">
+        </button> -->
+        <button class="nav-button" @click="openMiniModal('starredBoards')">
           <span>Starred</span>
           <span class="nav-arrow-down">
             <span v-icon="'arrowDownSmall'"></span>
           </span>
         </button>
+        <div class="modal" v-if="isModalOpen">
+          <div class="modal-content">
+            <ul v-if="modalList === 'boards'">
+              <li v-for="board in boards" :key="board.id">{{ board.title }}</li>
+            </ul>
+            <ul v-else-if="modalList === 'starredBoards'">
+              <li v-for="board in starredBoards" :key="board.id">{{ board.title }}</li>
+            </ul>
+            <button class="modal-close" @click="closeModal">Close</button>
+          </div>
+        </div>
+        <!-- </div> -->
         <div class="create-menu">
           <button class="create-menu-button" ref="createBoardAppHeader" @click="openModal('CreateBoardModal')"><p>Create</p></button>
         </div>
@@ -69,6 +84,8 @@ export default {
   name: 'AppHeader',
   data() {
     return {
+      isModalOpen: false,
+      modalList: '',
       bgImg: '',
       showUserDetails: false,
       elRef: '',
@@ -96,6 +113,13 @@ export default {
   },
 
   methods: {
+    openMiniModal(listType) {
+      this.modalList = listType
+      this.isModalOpen = true
+    },
+    closeModal() {
+      this.isModalOpen = false
+    },
     openModal(type) {
       this.type = type
       const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
@@ -155,6 +179,12 @@ export default {
     },
     board() {
       return this.$store.getters.getCurrBoard
+    },
+    boards() {
+      return this.$store.getters.boards
+    },
+    starredBoards() {
+      return this.$store.getters.boards.filter((board) => board.isStarred)
     },
   },
   components: {
