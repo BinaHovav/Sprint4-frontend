@@ -59,8 +59,17 @@
                 <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
               </div>
             </div>
-            <div v-else-if="currMenuOption === 'activity'">
-              <pre v-for="activity in board.activities">{{ activity }} bla</pre>
+            <div v-else-if="currentMenuOption === 'activity'" class="activities">
+              <div v-for="activity in board.activities" class="activity-container">
+                <div class="user-img">
+                  <img class="member-img" :src="activity.by?.imgUrl" :title="activity.by?.fullname" />
+                </div>
+                <div class="action">
+                  <span>
+                    <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.type }} {{ activity.action?.txt }}</span
+                  >
+                </div>
+              </div>
             </div>
             <div class="sub-options" v-else-if="currMenuOption === 'changeBackground'">
               <div v-if="currentSubmenu === null">

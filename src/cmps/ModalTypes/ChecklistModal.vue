@@ -32,7 +32,8 @@ export default {
             const id = utilService.makeId(6)
             const title = this.$refs.checklist.value
             this.info.task.checklists.push({ id, title, todos: [] })
-            this.$emit('setInfo', this.info)
+            const action = { type: 'added', txt: `${title} to ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            this.$emit('setInfo', this.info, action)
             this.$emit('setInfo')
         }
     },

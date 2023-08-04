@@ -28,17 +28,22 @@ export default {
     }
   },
   methods: {
-    toggleTaskMember(member){
+    toggleTaskMember(member) {
       if (this.info.task.members.includes(member._id)) {
+        var action = { type: 'removed', txt: `${member.fullname} from ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+        if (this.loggedinUser._id === member._id) action = { type: 'left', txt: `${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
         const idx = this.info.task.members.findIndex(tMember => tMember === member._id)
-        this.info.task.members.splice(idx,1)
+        this.info.task.members.splice(idx, 1)
       } else {
+        var action = { type: 'added', txt: `${member.fullname} to ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+        if (this.loggedinUser._id === member._id) action = { type: 'joined', txt: `${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
         this.info.task.members.push(member._id)
       }
-      this.$emit('setInfo', this.info)
+      this.$emit('setInfo', this.info, action)
     }
   },
   computed: {
+    loggedinUser() { return this.$store.getters.loggedinUser }
   },
 }
 </script>

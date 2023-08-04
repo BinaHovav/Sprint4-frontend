@@ -17,6 +17,7 @@ import RightMenu from '../cmps/RightMenu.vue'
 import { boardService } from '../services/board.service'
 import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { getActionUpdateBoard } from '../store/board.store'
+import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from '../services/socket.service'
 
 export default {
   name: 'BoardDetails',
@@ -35,8 +36,16 @@ export default {
       return this.$store.getters.loggedinUser
     }
   },
-  created() {
-    this.setBoard()
+  async created() {
+    await this.setBoard()
+    socketService.emit(SOCKET_EMIT_SET_TOPIC, this.board._id)
+    // socketService.on(SOCKET_EVENT_UPDATE_BOARD, ()=> {
+    //   console.log('updating-board');
+    //   this.setBoard()
+    // })
+
+
+
     eventBus.on('setActivity', (action = { type: '', txt: '', componentId: '', movedCmp: '', movedUser: '' }) => {
       console.log(action);
       const activity = boardService.getEmptyActivity()
@@ -46,7 +55,6 @@ export default {
       this.updateBoard()
       console.log(this.board.activities);
     })
-
   },
   unmounted() {
     eventBus.off('setActivity')
@@ -68,6 +76,7 @@ export default {
         this.$store.commit({ type: 'setCurrBoardId', boardId: boardId })
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         this.$store.commit({ type: 'setBackgroundImg', backgroundImg: this.board?.imgUrl })
+        if (!this.loggedinUser) this.$store.commit({ type: 'setGuestMode' })
       } catch (err) {
         showErrorMsg('Cannot load board')
       }
@@ -118,7 +127,10 @@ export default {
       const idx = this.board.groups.findIndex((group) => group.id === groupToEdit.id)
       this.board.groups.splice(idx, 1, groupToEdit)
 
-      if (action) this.board.activities.unshift(action)
+      if (action) {
+        const activity = this.getActivity(action)
+        this.board.activities.unshift(activity)
+      }
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
       } catch (err) {

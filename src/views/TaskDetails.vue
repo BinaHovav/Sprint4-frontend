@@ -72,7 +72,7 @@
               <div v-if="task.date.dueDate" class="task-details-item">
                 <h3>Due date</h3>
                 <div class="task-details-due-date">
-                  <a @click.stop="task.date.isDone = !task.date.isDone" class="due-date-complete"
+                  <a @click.stop="toggleTaskIsDone" class="due-date-complete"
                     :class="{ 'checked': task.date.isDone }" v-icon="'checkBox'"></a>
                   <div class="due-date-time-container">
                     <div>
@@ -90,8 +90,6 @@
               </div>
             </div>
             <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask" />
-            <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen"
-              :board="board" :task="task" @onSaveTask="onSaveTask" />
             <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen"
               :board="board" :task="task" @onSaveTask="onSaveTask" />
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" />
@@ -148,6 +146,7 @@ import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.se
 import TaskChecklistDetails from '../cmps/TaskDetails/TaskChecklistDetails.vue'
 import TaskDescriptionDetails from '../cmps/TaskDetails/TaskDescriptionDetails.vue'
 import TaskAttachmentDetails from '../cmps/TaskDetails/TaskAttachmentDetails.vue'
+import { socketService } from '../services/socket.service'
 
 export default {
   name: 'TaskDetails',
@@ -190,10 +189,16 @@ export default {
       if (now > taskDate) timeProgress = 'over'
       if (this.task.date.isDone) timeProgress = 'complete'
       return timeProgress
+    },
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
     }
   },
   created() {
     this.getTask()
+    socketService.on('update-board', () => {
+      this.getTask()
+    })
   },
   unmounted() {
     this.task = ''
@@ -228,8 +233,10 @@ export default {
       this.group.tasks.splice(idx, 1, this.task)
       idx = this.board.groups.findIndex((gGroup) => gGroup.id === this.group.id)
       this.board.groups.splice(idx, 1, this.group)
-
-      this.board.activities.unshift(action)
+      const activity = boardService.getEmptyActivity()
+      activity.action = action
+      activity.by = this.loggedinUser
+      this.board.activities.unshift(activity)
       this.$emit('updateBoard', this.board)
     },
     closeModal() {
@@ -243,11 +250,11 @@ export default {
       this.modalOpen = true
       this.type = type
       window.addEventListener('resize', this.handleResize)
-      eventBus.on('setInfo', (info, action) => {
+      eventBus.on('setInfo', (info) => {
         if (info) {
           this.task = info.task
           this.board = info.board
-          this.onSaveTask(action)
+          this.onSaveTask('', info.action)
         } else {
           setTimeout(() => {
             this.modalOpen = false
@@ -276,6 +283,10 @@ export default {
       const task = this.task
       return (this.task.cover.background?.startsWith('https')) ? { backgroundImage: `url(${task.cover.background})` } : ''
     },
+    toggleTaskIsDone(){
+      this.task.date.isDone = !this.task.date.isDone
+      this.onSaveTask()
+    }
   },
   components: {
     TaskChecklistDetails,

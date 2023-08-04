@@ -1,5 +1,5 @@
-import { userService } from '../services/user.service.local'
-// import { userService } from '../services/user.service'
+// import { userService } from '../services/user.service.local'
+import { userService } from '../services/user.service'
 
 
 export const userStore = {
@@ -11,17 +11,17 @@ export const userStore = {
     getters: {
         users({ users }) { return users },
         loggedinUser({ loggedinUser }) { return loggedinUser },
-        usersExcludeMe({users, loggedinUser}) {
+        usersExcludeMe({ users, loggedinUser }) {
             return users.filter(u => u._id !== loggedinUser._id)
         },
-        usersIsLoading({isLoading}) {
+        usersIsLoading({ isLoading }) {
             return isLoading
         }
     },
     mutations: {
         setLoggedinUser(state, { user }) {
             // Yaron: needed this workaround as score not reactive from birth
-            state.loggedinUser = (user)? {...user} : null
+            state.loggedinUser = (user) ? { ...user } : null
         },
         setUsers(state, { users }) {
             state.users = users
@@ -35,6 +35,9 @@ export const userStore = {
         setUserScore(state, { score }) {
             state.loggedinUser.score = score
         },
+        setGuestMode(state){
+            state.loggedinUser = {_id: '23hkb', fullname: 'guest', imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png', score: 0}
+        }
     },
     actions: {
         async login({ commit }, { userCred }) {
@@ -68,16 +71,16 @@ export const userStore = {
             }
         },
         async loadUsers({ commit }) {
-            commit({type: 'setIsLoading', isLoading: true})
+            commit({ type: 'setIsLoading', isLoading: true })
             try {
                 const users = await userService.getUsers()
                 commit({ type: 'setUsers', users })
-                commit({type: 'setIsLoading', isLoading: false})
+                commit({ type: 'setIsLoading', isLoading: false })
             } catch (err) {
                 console.log('userStore: Error in loadUsers', err)
                 throw err
             }
-        },        
+        },
         async removeUser({ commit }, { userId }) {
             try {
                 await userService.remove(userId)
@@ -105,6 +108,6 @@ export const userStore = {
                 console.log('userStore: Error in increaseScore', err)
                 throw err
             }
-        }
+        },
     }
 }
