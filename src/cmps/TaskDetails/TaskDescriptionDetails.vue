@@ -15,7 +15,7 @@
             </div>
             <div class="description-content">
                 <div class="description-txt">
-                    <div v-if="isEditable" class="description-quill" >
+                    <div v-if="isEditable" class="description-quill">
                         <div class="quill">
                             <QuillEditor ref="quill" theme="snow" toolbar="essential" dir="auto" />
                         </div>
@@ -24,8 +24,10 @@
                             <button class="description-cancel" @click.stop="saveDescription('cancel')">Cancel</button>
                         </div>
                     </div>
-                    <div v-if="!isEditable && !task.description" @click.stop="openDescriptionEdit">Add a more detailed description...</div>
-                    <div v-if="!isEditable" class="all" @click.stop="openDescriptionEdit" dir="auto" v-html="task.description"></div>
+                    <div v-if="!isEditable && !task.description" @click.stop="openDescriptionEdit">Add a more detailed
+                        description...</div>
+                    <div v-if="!isEditable" class="all" @click.stop="openDescriptionEdit" dir="auto"
+                        v-html="task.description"></div>
                 </div>
             </div>
         </div>

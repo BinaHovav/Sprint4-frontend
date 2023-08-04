@@ -97,8 +97,6 @@
 </template>
 
 <script>
-// import { Unsplash } from '../services/unsplash'
-
 export default {
   name: 'RightMenu',
   props: ['board', 'showMenu'],
@@ -166,6 +164,7 @@ export default {
     },
     backgroundOptions() {
       return [
+        'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1690442303/jefferson-sees-XbeDTBjTbME-unsplash_g3n7hb.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074938/stephen-leonardi-BQsHQ3MJ-zM-unsplash_vxmtuu.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074937/tobias-reich-cBTuyMkjAYc-unsplash_nqpg7d.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074937/marek-piwnicki-DpV5SAHNj8E-unsplash_rbmf3y.jpg',
@@ -184,7 +183,7 @@ export default {
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074933/martin-martz-HWImspFMiV4-unsplash_nvdo14.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074927/marek-piwnicki-5MVnLlI3Flg-unsplash_edtmp1.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074926/stephen-leonardi-1YjP9WmcAzI-unsplash_rpbacq.jpg',
-        'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074925/sir-simo-RlfePHKmm5w-unsplash_bbk96o.jpg',
+        // 'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074925/sir-simo-RlfePHKmm5w-unsplash_bbk96o.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074921/sebastian-svenson-lCsL76JhNlQ-unsplash_vr2l1k.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074921/fabio-sasso-UgpCjt4XLTY-unsplash_n1j7pz.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074920/javier-miranda-kBU5APay4T0-unsplash_lwhn6i.jpg',

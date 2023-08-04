@@ -38,6 +38,7 @@ export default {
             const attachment = { id: utilService.makeId(5), type, name, size, fileUrl, createdAt: Date.now() }
             this.info.task.attachments.unshift(attachment)
             this.$emit('setInfo', this.info)
+            this.$emit('setInfo')
         },
         checkFileType(fileType) {
             if (fileType === 'text/plain') return 'txt'

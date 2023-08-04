@@ -12,16 +12,16 @@
           </div>
         </RouterLink>
       </div>
-      <div></div>
+
       <div class="right-box">
         <img src="https://merllo-0m15.onrender.com/assets/TrelloUICollage_4x.193e8069.webp" />
       </div>
     </div>
     <div class="middle-section">
       <div class="top-box">
-        <p>MELLOW 101</p>
-        <h2>A productivity powerhouse</h2>
-        <p>Simple, flexible, and powerful. All it takes are boards, lists, and cards to get a clear view of who’s doing what and what needs to get done.</p>
+        <p class="top-box-title">MELLOW 101</p>
+        <h2 class="top-box-sub-title">A productivity powerhouse</h2>
+        <p class="top-box-content">Simple, flexible, and powerful. All it takes are boards, lists, and cards to get a clear view of who’s doing what and what needs to get done.</p>
       </div>
       <div class="left-box">
         <button>

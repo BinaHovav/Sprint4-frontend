@@ -1,6 +1,5 @@
 .homepage-header {
-    box-sizing: border-box;
-
+    margin: 0 10vw;
     display: flex;
     justify-content: space-between;
     height: 60px;
@@ -27,20 +26,26 @@
     list-style: none;
     margin: 0;
     padding: 0;
+
     a {
         text-decoration: none;
         padding: 1em;
-        cursor: pointer;
+        text-align: center;
+        width: 70px;
+
         // font-size: 0.9rem;
         display: flex;
         align-items: center;
         color: #121e30;
+        cursor: pointer;
     }
     .nav-link-signup {
-        padding: 0.5rem 1rem;
-        cursor: pointer;
+        justify-content: center;
+        // padding: 0.5rem 1rem;
         background-color: $clr-background-brand-bold;
         color: #fff;
+        width: 150px;
+        cursor: pointer;
         &:hover {
             background-color: $clr-background-brand-bold-hovered;
         }
