@@ -1,5 +1,6 @@
 // import { boardService } from '../services/board.service.local'
 import { boardService } from '../services/board.service.js'
+import { socketService } from '../services/socket.service.js'
 
 export function getActionSetCurrBoard(boardId) {
   return {
@@ -122,6 +123,7 @@ export const boardStore = {
       try {
         context.commit(getActionUpdateBoard(JSON.parse(JSON.stringify(board))))
         const savedBoard = await boardService.save(board)
+        socketService.emit('update-board')
         return savedBoard
       } catch (err) {
         console.log('boardStore: Error in updateBoard', err)

@@ -21,6 +21,7 @@ import HomepageHeader from './cmps/HomepageHeader.vue'
 import UserMsg from './cmps/UserMsg.vue'
 import AppModal from './cmps/AppModal.vue'
 import TaskEditor from './cmps/TaskEditor.vue'
+import { SOCKET_EVENT_UPDATE_BOARD, socketService } from './services/socket.service'
 
 export default {
   data() {
@@ -29,12 +30,16 @@ export default {
     }
   },
   created() {
-    this.loadBoard()
+    this.loadBoards()
+    socketService.on(SOCKET_EVENT_UPDATE_BOARD , ()=> {
+      console.log('updating-board');
+      this.loadBoards()
+    })
     // const user = userService.getLoggedinUser()
     // if (user) store.commit({ type: 'setLoggedinUser', user })
   },
   methods: {
-    async loadBoard() {
+    async loadBoards() {
       await this.$store.dispatch({ type: 'loadBoards' })
       this.loaded = true
 

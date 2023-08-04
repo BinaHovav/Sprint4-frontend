@@ -146,6 +146,7 @@ import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.se
 import TaskChecklistDetails from '../cmps/TaskDetails/TaskChecklistDetails.vue'
 import TaskDescriptionDetails from '../cmps/TaskDetails/TaskDescriptionDetails.vue'
 import TaskAttachmentDetails from '../cmps/TaskDetails/TaskAttachmentDetails.vue'
+import { socketService } from '../services/socket.service'
 
 export default {
   name: 'TaskDetails',
@@ -195,6 +196,9 @@ export default {
   },
   created() {
     this.getTask()
+    socketService.on('update-board', () => {
+      this.getTask()
+    })
   },
   unmounted() {
     this.task = ''
