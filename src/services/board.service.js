@@ -81,13 +81,7 @@ function getEmptyTask() {
 function getEmptyActivity() {
   return {
     id: utilService.makeId(6),
-    action: {
-      type: '',
-      txt: '',
-      componentId: '',
-      movedCmp: '',
-      movedUser: '',
-    },
+    action: {},
     date: Date.now(),
     by: '',
   }

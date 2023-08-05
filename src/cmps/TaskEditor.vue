@@ -12,9 +12,13 @@
                 </div>
                 <div class="task-details-container">
                     <div v-if="task?.labels" class="task-labels">
-                        <button v-for="label in task.labels" ref="labels" @click.stop="animateLabels"
+                        <!-- <button v-for="label in task.labels" ref="labels" @click.stop="animateLabels"
                             :class="[getLabelById(label)?.color, currBoard?.labelAnimation]">
                             {{ currBoard?.labelAnimation === 'labels-open' ? getLabelById(label)?.title : '' }}
+                        </button> -->
+                        <button v-for="label in task.labels" ref="labels" @click.stop="animateLabels"
+                            :class="[getLabelById(label)?.color, labelsShow ? 'labels-open' : 'labels-close']">
+                            {{ labelsShow ? getLabelById(label)?.title : '' }}
                         </button>
                     </div>
 
@@ -258,9 +262,12 @@ export default {
             // });
             // console.log(board.labelAnimation);
             // this.labelState = "labels-close" ? "labels-open" : "labels-close"
-            const board = JSON.parse(JSON.stringify(this.currBoard))
-            board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
-            await this.$store.dispatch({ type: 'updateBoard', board })
+
+            // const board = JSON.parse(JSON.stringify(this.currBoard))
+            // board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
+            // await this.$store.dispatch({ type: 'updateBoard', board })
+
+            this.$store.commit({ type: 'setLabelsShow' })
 
             // this.updateMinWidth(); // Call the function to update min-width after the animation state is updated
 

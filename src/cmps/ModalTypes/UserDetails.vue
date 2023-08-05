@@ -11,19 +11,20 @@
                         {{ loggedInUser.fullname }}
                     </div>
                     <div class="username">
-                        score: {{ loggedInUser.score }}
+                        <!-- score: {{ loggedInUser.score }} -->
+                        usermail012@gmail.com
                     </div>
                 </div>
             </div>
-            <ul>
+            <!-- <ul>
                 <li>Switch accounts</li>
                 <li>Manage account</li>
                 <hr>
-            </ul>
+            </ul> -->
         </header>
         <h2>Mellow</h2>
 
-        <ul>
+        <!-- <ul>
             <li>Profile and visibility</li>
             <li>Activity</li>
             <li>Cards</li>
@@ -34,7 +35,7 @@
             <li>Help</li>
             <li>Shortcuts</li>
             <hr>
-        </ul>
+        </ul> -->
         <ul>
             <li @click="onLogout">Log out</li>
         </ul>

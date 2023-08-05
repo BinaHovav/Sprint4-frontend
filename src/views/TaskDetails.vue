@@ -196,9 +196,7 @@ export default {
   },
   created() {
     this.getTask()
-    socketService.on('update-board', () => {
-      this.getTask()
-    })
+    
   },
   unmounted() {
     this.task = ''

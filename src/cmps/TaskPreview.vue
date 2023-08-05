@@ -16,9 +16,13 @@
                 <div v-if="task.labels" class="task-labels">
 
                     <button v-for="label in task.labels" ref="labels" @click.stop="animateLabels"
+                        :class="[getLabelById(label)?.color, labelsShow ? 'labels-open' : 'labels-close']">
+                        {{ labelsShow ? getLabelById(label)?.title : '' }}
+                    </button>
+                    <!-- <button v-for="label in task.labels" ref="labels" @click.stop="animateLabels"
                         :class="[getLabelById(label)?.color, currBoard.labelAnimation]">
                         {{ currBoard.labelAnimation === 'labels-open' ? getLabelById(label)?.title : '' }}
-                    </button>
+                    </button> -->
 
                 </div>
 
@@ -26,8 +30,8 @@
                 <div class="badges">
                     <!-- <div class="badge notificaition"> <span class="notificaition-icon"></span>a</div> -->
                     <!-- <div  class="badge watch" title="You are watching this card."><span class="watch-icon"></span></div> -->
-                    <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id, task.title)" class="badge"
-                        :class="dateClass" :title="dateTitle">
+                    <div v-if="task.date.dueDate" @click.stop="this.$emit('onTaskIsDone', task.id, task.title)"
+                        class="badge" :class="dateClass" :title="dateTitle">
                         <span class="clock-icon"></span>
                         <span class="badge-text">{{ dueDate() }}</span>
                     </div>
@@ -160,12 +164,14 @@ export default {
             // });
             // console.log(board.labelAnimation);
             // this.labelState = "labels-close" ? "labels-open" : "labels-close"
-            const board = JSON.parse(JSON.stringify(this.currBoard))
-            board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
-            await this.$store.dispatch({ type: 'updateBoard', board })
-           
-                // this.updateMinWidth(); // Call the function to update min-width after the animation state is updated
-        
+
+            // const board = JSON.parse(JSON.stringify(this.currBoard))
+            // board.labelAnimation = board.labelAnimation === "labels-close" ? "labels-open" : "labels-close"
+            // await this.$store.dispatch({ type: 'updateBoard', board })
+            this.$store.commit({ type: 'setLabelsShow' })
+
+            // this.updateMinWidth(); // Call the function to update min-width after the animation state is updated
+
         },
         updateMinWidth() {
             const buttons = this.$refs.labels; // Get the button elements using the ref
