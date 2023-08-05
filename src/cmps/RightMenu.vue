@@ -14,8 +14,8 @@
           </div>
         </div>
 
-        <div class="board-menu-content u-fancy-scrollbar js-board-menu-content-wrapper">
-          <div class="board-menu-content-frame">
+        <div class="board-menu-content  js-board-menu-content-wrapper">
+          <div class="board-menu-content-frame u-fancy-scrollbar">
             <ul class="board-menu-navigation" v-if="currMenuOption === 'default'">
               <li class="board-menu-navigation-item">
                 <button class="board-menu-navigation-item-link-about">
