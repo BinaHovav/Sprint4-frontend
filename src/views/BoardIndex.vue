@@ -40,9 +40,15 @@ export default {
     boards() {
       return this.$store.getters.boards
     },
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
+    }
   },
 
-  created() {},
+  created() {
+    if (!this.loggedinUser) this.$store.dispatch({ type: 'login', userCred: { username: 'Guest', password: '123' } })
+
+  },
   methods: {},
   components: {
     BoardList,

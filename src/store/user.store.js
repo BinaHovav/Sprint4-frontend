@@ -20,7 +20,6 @@ export const userStore = {
     },
     mutations: {
         setLoggedinUser(state, { user }) {
-            // Yaron: needed this workaround as score not reactive from birth
             state.loggedinUser = (user) ? { ...user } : null
         },
         setUsers(state, { users }) {
@@ -35,15 +34,13 @@ export const userStore = {
         setUserScore(state, { score }) {
             state.loggedinUser.score = score
         },
-        setGuestMode(state){
-            state.loggedinUser = {_id: '23hkb', fullname: 'guest', imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png', score: 0}
-        }
     },
     actions: {
         async login({ commit }, { userCred }) {
             try {
                 const user = await userService.login(userCred)
                 commit({ type: 'setLoggedinUser', user })
+                console.log(user);
                 return user
             } catch (err) {
                 console.log('userStore: Error in login', err)

@@ -59,7 +59,7 @@
                 <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
               </div>
             </div>
-            <div v-else-if="currentMenuOption === 'activity'" class="activities">
+            <div v-else-if="currMenuOption === 'activity'" class="activities">
               <div v-for="activity in board.activities" class="activity-container">
                 <div class="user-img">
                   <img class="member-img" :src="activity.by?.imgUrl" :title="activity.by?.fullname" />
@@ -132,6 +132,7 @@ export default {
   },
   methods: {
     openMenuOption(option) {
+      console.log(option);
       this.prevMenuOption = this.currMenuOption
       this.currMenuOption = option
       this.menuText = this.menuOptions[option]
