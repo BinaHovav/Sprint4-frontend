@@ -19,7 +19,7 @@
     scroll-margin: 8px;
     vertical-align: top;
 
-    
+
 
     .open-card-compose {
         align-items: center;
@@ -41,7 +41,8 @@
             -webkit-user-select: none;
             user-select: none;
             cursor: pointer;
-            &:hover{
+
+            &:hover {
                 background-color: $clr-background-neutral-hovered;
             }
 
@@ -62,6 +63,8 @@
                 text-align: center;
                 text-decoration: none;
                 vertical-align: bottom;
+                display: inline-flex;
+                align-items: center;
             }
         }
     }
