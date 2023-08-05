@@ -3,13 +3,11 @@
     <h1>User Details - {{ user.fullname }}</h1>
     <h2 v-if="isMe">Its me</h2>
     <h3>{{ user.username }} score: {{ user.score }}</h3>
-    <img style="max-width: 200px;" :src="user.imgUrl" />
+    <img style="max-width: 200px" :src="user.imgUrl" />
     <ul>
       <li v-for="review in user.givenReviews" :key="review._id">
         {{ review.txt }}
-        <RouterLink :to="`/user/${review.aboutUser._id}`">
-          About {{ review.aboutUser.fullname }}
-        </RouterLink>
+        <RouterLink :to="`/user/${review.aboutUser._id}`"> About {{ review.aboutUser.fullname }} </RouterLink>
       </li>
     </ul>
 
@@ -29,7 +27,7 @@ import { userService } from '../services/user.service'
 export default {
   data() {
     return {
-      user: null
+      user: null,
     }
   },
   watch: {
@@ -54,12 +52,12 @@ export default {
       try {
         const user = await userService.getById(this.userId)
         socketService.off(SOCKET_EVENT_USER_UPDATED, this.onUserUpdate)
-        
+
         socketService.emit(SOCKET_EMIT_USER_WATCH, this.userId)
         socketService.on(SOCKET_EVENT_USER_UPDATED, this.onUserUpdate)
         this.user = user
-      } catch(err) {
-        showErrorMsg('Cannot load user: ' + this.userId)
+      } catch (err) {
+        // showErrorMsg('Cannot load user: ' + this.userId)
         console.error('Failed to load user', err)
       }
     },
@@ -71,6 +69,6 @@ export default {
     unmounted() {
       socketService.off(SOCKET_EVENT_USER_UPDATED, this.onUserUpdate)
     },
-  }
+  },
 }
 </script>

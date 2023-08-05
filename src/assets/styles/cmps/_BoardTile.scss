@@ -2,6 +2,7 @@
     display: inline-block;
     position: relative;
     margin-right: 12px;
+    cursor: pointer;
     &:hover {
         filter: brightness(85%);
     }

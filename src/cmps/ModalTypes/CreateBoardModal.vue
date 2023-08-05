@@ -81,7 +81,7 @@ export default {
         this.$emit('closeModal')
       } catch (err) {
         console.log(err)
-        showErrorMsg('Cannot create board')
+        // showErrorMsg('Cannot create board')
       }
     },
     setBackground(chosenBackground) {
