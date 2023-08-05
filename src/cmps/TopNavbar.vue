@@ -4,7 +4,8 @@
       <span class="left-board-header">
         <div class="board-title">
           <form action="">
-            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title" @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
+            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title"
+              @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
           </form>
         </div>
         <button class="btn-star-container" @click.prevent="updateBoard(board)">
@@ -16,9 +17,10 @@
 
       <span class="right-board-header">
         <div class="board-members">
-          <div class="board-members-item" v-for="member in boardToDisplay?.members">
+          <div class="board-members-item" v-for="member in membersToShow">
             <img :src="member.imgUrl" alt="member" />
           </div>
+          <span class="members-count" v-if="membersCount"> +{{ membersCount }}</span>
         </div>
         <button class="open-menu-btn" :class="isMenuOpen" @click="openRightNav"></button>
       </span>
@@ -33,7 +35,8 @@ export default {
   name: 'TopNavbar',
   props: ['board', 'isMenuOpen'],
   data() {
-    return {}
+    return {
+    }
   },
   created() {
     this.getAverageColor()
@@ -102,6 +105,18 @@ export default {
         starred: this.board.isStarred,
       }
     },
+    membersToShow() {
+      const membersToShow = []
+      let counter = 0
+      this.board.members.forEach(member => {
+        counter++
+        if (counter <= 5) membersToShow.push(member)
+      })
+      return membersToShow
+    },
+    membersCount() {
+      return this.board.members.length > 5 ? this.board.members.length - 5 : ''
+    }
   },
   components: {
     RightMenu,

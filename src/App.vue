@@ -32,11 +32,10 @@ export default {
   created() {
     this.loadBoards()
     socketService.on(SOCKET_EVENT_UPDATE_BOARD , ()=> {
-      console.log('updating-board');
       this.loadBoards()
     })
-    // const user = userService.getLoggedinUser()
-    // if (user) store.commit({ type: 'setLoggedinUser', user })
+    const user = userService.getLoggedinUser()
+    if (user) this.$store.commit({ type: 'setLoggedinUser', user })
   },
   methods: {
     async loadBoards() {
