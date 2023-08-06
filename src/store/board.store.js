@@ -164,14 +164,7 @@ export const boardStore = {
     },
     async updateTaskList(context, payload){
         context.commit(payload)
-        try {
-          const savedBoard = await boardService.save(context.getters.getCurrBoard)
-          socketService.emit('update-board')
-          return savedBoard
-        } catch (err) {
-          console.log('boardStore: Error in updateBoard', err)
-          throw err
-        }
+        context.dispatch(getActionUpdateBoard(context.getters.getCurrBoard))
     }
   },
   
