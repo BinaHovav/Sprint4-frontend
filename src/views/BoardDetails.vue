@@ -45,13 +45,11 @@ export default {
     // })
 
     eventBus.on('setActivity', (action = { type: '', txt: '', componentId: '', movedCmp: '', movedUser: '' }) => {
-      console.log(action)
       const activity = boardService.getEmptyActivity()
       activity.action = action
       activity.by = this.loggedinUser.fullname
       this.board.activities.unshift(activity)
       this.updateBoard()
-      console.log(this.board.activities)
     })
   },
   unmounted() {

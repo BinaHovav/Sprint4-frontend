@@ -132,7 +132,6 @@ export default {
   },
   methods: {
     openMenuOption(option) {
-      console.log(option)
       this.prevMenuOption = this.currMenuOption
       this.currMenuOption = option
       this.menuText = this.menuOptions[option]

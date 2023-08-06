@@ -43,7 +43,6 @@ export default {
     computed: {
         taskList: {
             get() {
-                console.log('get',this.tasks);
                 return this.tasks
             },
             set(tasks) {
