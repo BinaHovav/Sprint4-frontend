@@ -300,10 +300,15 @@ export default {
         },
         openModal(type, elRef) {
             this.elRef = elRef
-            const board = JSON.parse(JSON.stringify(this.currBoard))
-            const info = { task: this.task, board }
-            const el = this.$refs[elRef].getBoundingClientRect()
-            eventBus.emit('modal', { el, type, info })
+            if (this.type === type) eventBus.emit('modal', { type: 'close' })
+            else {
+                const board = JSON.parse(JSON.stringify(this.currBoard))
+                const info = { task: this.task, board }
+                const elCoords = this.$refs[elRef].getBoundingClientRect()
+                this.$store.commit({ type: 'setBtnCoords', elCoords })
+                eventBus.emit('modal', { type, info })
+                window.addEventListener('resize', this.handleResize)
+            }
             this.isModalOpen = true
             eventBus.on('setInfo', (info, action) => {
                 if (info) {
@@ -311,12 +316,17 @@ export default {
                     this.updateTask(info.board, action)
                 } else {
                     setTimeout(() => {
+                        window.removeEventListener('resize', this.handleResize)
                         eventBus.off('setInfo')
                         this.isModalOpen = false
                     }, 200);
 
                 }
             })
+        },
+        handleResize() {
+            const elCoords = this.$refs[this.elRef].getBoundingClientRect()
+            this.$store.commit({ type: 'setBtnCoords', elCoords })
         },
         onTaskDetails() {
             const boardId = this.currBoard._id
