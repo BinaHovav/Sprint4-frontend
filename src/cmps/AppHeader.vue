@@ -103,7 +103,9 @@ export default {
     '$route.path'(newPath) {
       if (newPath === '/board') {
         this.$refs.header.style.backgroundColor = 'white'
-        this.$refs.input.style.backgroundColor = 'lightgray'
+        // this.$refs.input.style.backgroundColor = 'lightgray'
+      } else {
+        this.getAverageColor()
       }
     },
     board: function (newValue) {

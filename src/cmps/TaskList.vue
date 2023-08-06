@@ -43,9 +43,11 @@ export default {
     computed: {
         taskList: {
             get() {
+                console.log('get',this.tasks);
                 return this.tasks
             },
             set(tasks) {
+                console.log('set',tasks);
                 this.$emit('updateTasks', tasks, this.groupId)
             }
         }
