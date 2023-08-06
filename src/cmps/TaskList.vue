@@ -47,7 +47,7 @@ export default {
             },
             set(tasks) {
                 console.log('set', tasks);
-                this.$emit('updateTasks', tasks, this.groupId)
+                this.$emit('updateTasksList', tasks, this.groupId)
             }
         }
     },
