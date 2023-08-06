@@ -2,7 +2,6 @@
     backdrop-filter: blur(4px);
 
     nav {
-
         // @media (max-width: 740px) {
         //     nav {
         //         padding: 6px 0;
@@ -52,7 +51,8 @@
                 resize: none;
 
                 // padding: 5px 12px;
-                form {}
+                form {
+                }
 
                 &:focus {
                     overflow: hidden;
@@ -187,12 +187,13 @@
 
 @media (max-width: 740px) {
     textarea {
-        padding: 6px 0;
+        padding: 6px 6px;
     }
 
     .board-header nav {
         padding: 8px 10px 12px 8px;
         width: calc(100% - 10px);
+        flex-wrap: wrap;
     }
 
     .board-header nav .left-board-header .board-title {
@@ -205,6 +206,9 @@
 
     .board-header nav .right-board-header .open-menu-btn {
         padding: 6px 0;
+    }
+    .board-header nav.menu-open {
+        width: calc(100% - 23px);
     }
 }
 

@@ -99,7 +99,7 @@ export default {
     },
     setInfo(info, action) {
       if (info) {
-        info.action = action
+        if (action) info.action = action
         eventBus.emit('setInfo', info)
       } else {
         this.info = {}

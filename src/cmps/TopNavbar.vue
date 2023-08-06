@@ -36,10 +36,17 @@ export default {
   props: ['board', 'isMenuOpen'],
   data() {
     return {
+      screenWidth: window.innerWidth
     }
   },
   created() {
     this.getAverageColor()
+    window.addEventListener('resize', () => {
+      this.screenWidth = window.innerWidth
+    })
+  },
+  unmounted() {
+    window.removeEventListener('resize')
   },
   methods: {
     updateBoard(board) {
@@ -108,14 +115,16 @@ export default {
     membersToShow() {
       const membersToShow = []
       let counter = 0
+      const memberLimit = this.screenWidth > 740 ? 5 : 3
       this.board.members.forEach(member => {
         counter++
-        if (counter <= 5) membersToShow.push(member)
+        if (counter <= memberLimit) membersToShow.push(member)
       })
       return membersToShow
     },
     membersCount() {
-      return this.board.members.length > 5 ? this.board.members.length - 5 : ''
+      const memberLimit = this.screenWidth > 740 ? 5 : 3
+      return this.board.members.length > memberLimit ? this.board.members.length - memberLimit : ''
     }
   },
   components: {

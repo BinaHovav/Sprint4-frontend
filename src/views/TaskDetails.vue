@@ -16,9 +16,12 @@
             <span class="btn-title-icon"></span>
             <div class="task-header-title">
               <h2 v-if="!showTaskTitle" @click.stop="showTaskTitle = true">{{ task.title }}</h2>
-              <textarea v-if="showTaskTitle"
+              <textarea
+                v-if="showTaskTitle"
                 @blur="onSaveTask('', { type: 'added', txt: `${task.title} to ${group.title}`, componentId: '', movedCmp: '', movedUser: '' }), (showTaskTitle = false)"
-                v-model="task.title" v-focus></textarea>
+                v-model="task.title"
+                v-focus
+              ></textarea>
             </div>
             <div class="task-header-group">
               <p>
@@ -36,12 +39,10 @@
                 <h3>Members</h3>
                 <div class="">
                   <div v-for="memberId in task.members" class="task-details-members">
-                    <img class="task-member-img" :src="getMemberById(memberId).imgUrl"
-                      :title="getMemberById(memberId).fullname" />
+                    <img class="task-member-img" :src="getMemberById(memberId).imgUrl" :title="getMemberById(memberId).fullname" />
                   </div>
                   <a class="task-member-add">
-                    <span class="task-member-btn-add" ref="membersAdd"
-                      @click="openModal('MemberModal', 'membersAdd')"></span>
+                    <span class="task-member-btn-add" ref="membersAdd" @click="openModal('MemberModal', 'membersAdd')"></span>
                   </a>
                 </div>
               </div>
@@ -51,10 +52,8 @@
                     <h3>Labels</h3>
                     <div class="">
                       <div class="task-labels flex">
-                        <button v-for="label in task.labels" class="task-btn-label" :ref="label"
-                          :class="getLabelById(label)?.color">{{ getLabelById(label)?.title }}</button>
-                        <button ref="labelAdd" class="task-btn-add-label"
-                          @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
+                        <button v-for="label in task.labels" class="task-btn-label" :ref="label" :class="getLabelById(label)?.color">{{ getLabelById(label)?.title }}</button>
+                        <button ref="labelAdd" class="task-btn-add-label" @click="openModal('LabelModal', 'labelAdd')"><span></span></button>
                       </div>
                     </div>
                   </div>
@@ -62,8 +61,7 @@
               </div>
               <div class="task-details-item">
                 <h3>Notifications</h3>
-                <a class="task-btn-watch" :style="{ width: isWatching ? '138px' : 'auto' }"
-                  @click="isWatching = !isWatching">
+                <a class="task-btn-watch" :style="{ width: isWatching ? '138px' : 'auto' }" @click="isWatching = !isWatching">
                   <span class="task-icon-watch"></span>
                   <span class="task-txt-watch">{{ isWatching ? 'Watching' : 'Watch' }}</span>
                   <span class="is-watching" v-if="isWatching"><span class="is-watching-icon"></span></span>
@@ -72,12 +70,12 @@
               <div v-if="task.date.dueDate" class="task-details-item">
                 <h3>Due date</h3>
                 <div class="task-details-due-date">
-                  <a @click.stop="toggleTaskIsDone" class="due-date-complete"
-                    :class="{ 'checked': task.date.isDone }" v-icon="'checkBox'"></a>
+                  <a @click.stop="toggleTaskIsDone" class="due-date-complete" :class="{ checked: task.date.isDone }" v-icon="'checkBox'"></a>
                   <div class="due-date-time-container">
                     <div>
                       <button class="due-date-btn">
-                        <span ref="datePicker" @click.stop="openModal('DatePickerModal', 'datePicker')"> {{ dueDate }}
+                        <span ref="datePicker" @click.stop="openModal('DatePickerModal', 'datePicker')">
+                          {{ dueDate }}
                           <span class="soon" v-if="dueDateProgress === 'soon'">Due soon</span>
                           <span class="over" v-if="dueDateProgress === 'over'">Overdue</span>
                           <span class="complete" v-if="dueDateProgress === 'complete'">Complete</span>
@@ -90,8 +88,7 @@
               </div>
             </div>
             <TaskDescriptionDetails :task="task" @onSaveTask="onSaveTask" />
-            <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen"
-              :board="board" :task="task" @onSaveTask="onSaveTask" />
+            <TaskAttachmentDetails v-if="task.attachments?.length" @toggleModalOpen="modalOpen = !modalOpen" :board="board" :task="task" @onSaveTask="onSaveTask" />
             <TaskChecklistDetails :task="task" @onSaveTask="onSaveTask" />
           </div>
           <div class="task-sidebar">
@@ -126,8 +123,7 @@
                 <span class="btn-link-attachment"></span>
                 <span class="">Attachment</span>
               </a>
-              <a v-if="!task.cover.background" ref="covers" class="task-btn-link"
-                @click="openModal('CoverModal', 'covers')">
+              <a v-if="!task.cover.background" ref="covers" class="task-btn-link" @click="openModal('CoverModal', 'covers')">
                 <span class="btn-link-cover"></span>
                 <span class="">Cover</span>
               </a>
@@ -160,15 +156,12 @@ export default {
       dueDateChecked: false,
       modalRef: 'labels',
       modalOpen: false,
-      type: ''
+      type: '',
     }
   },
   computed: {
     dueDate() {
-      const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-      ]
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       const dateObj = new Date(this.task.date.dueDate * 1000)
       const month = months[dateObj.getMonth()]
       const day = dateObj.getDate()
@@ -192,11 +185,10 @@ export default {
     },
     loggedinUser() {
       return this.$store.getters.loggedinUser
-    }
+    },
   },
   created() {
     this.getTask()
-    
   },
   unmounted() {
     this.task = ''
@@ -216,7 +208,7 @@ export default {
           this.task = this.group.tasks.find((task) => task.id === taskId)
         }
       } catch (err) {
-        showErrorMsg('Cannot load board')
+        // showErrorMsg('Cannot load board')
       }
     },
     getLabelById(labelId) {
@@ -231,10 +223,12 @@ export default {
       this.group.tasks.splice(idx, 1, this.task)
       idx = this.board.groups.findIndex((gGroup) => gGroup.id === this.group.id)
       this.board.groups.splice(idx, 1, this.group)
-      const activity = boardService.getEmptyActivity()
-      activity.action = action
-      activity.by = this.loggedinUser
-      this.board.activities.unshift(activity)
+      if (action) {
+        const activity = boardService.getEmptyActivity()
+        activity.action = action
+        activity.by = this.loggedinUser
+        this.board.activities.unshift(activity)
+      }
       this.$emit('updateBoard', this.board)
     },
     closeModal() {
@@ -275,22 +269,21 @@ export default {
     },
     getTaskCoverClass() {
       const task = this.task
-      return (this.task.cover.background?.startsWith('https')) ? 'task-cover-img' : `task-cover-color ${task.cover.background}`
+      return this.task.cover.background?.startsWith('https') ? 'task-cover-img' : `task-cover-color ${task.cover.background}`
     },
     getTaskCoverStyle() {
       const task = this.task
-      return (this.task.cover.background?.startsWith('https')) ? { backgroundImage: `url(${task.cover.background})` } : ''
+      return this.task.cover.background?.startsWith('https') ? { backgroundImage: `url(${task.cover.background})` } : ''
     },
-    toggleTaskIsDone(){
+    toggleTaskIsDone() {
       this.task.date.isDone = !this.task.date.isDone
       this.onSaveTask()
-    }
+    },
   },
   components: {
     TaskChecklistDetails,
     TaskDescriptionDetails,
-    TaskAttachmentDetails
+    TaskAttachmentDetails,
   },
 }
-
 </script>

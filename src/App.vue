@@ -48,7 +48,6 @@ export default {
   computed: {
     showAppHeader() {
       const routeName = this.$route.name // Get the current route name directly from Vue Router
-
       // Define the names of routes that should show the AppHeader component
       const appHeaderRoutes = ['BoardIndex', 'BoardDetails', 'ReviewIndex', 'UserDetails', 'TaskDetails']
 

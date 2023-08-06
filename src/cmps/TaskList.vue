@@ -46,7 +46,8 @@ export default {
                 return this.tasks
             },
             set(tasks) {
-                this.$emit('updateTasks', tasks, this.groupId)
+                console.log('set', tasks);
+                this.$emit('updateTasksList', tasks, this.groupId)
             }
         }
     },

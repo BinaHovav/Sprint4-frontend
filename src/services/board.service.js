@@ -47,6 +47,7 @@ function getEmptyBoard() {
     style: {},
     labels: [],
     members: [],
+    activities: []
   }
 }
 function getEmptyGroup() {

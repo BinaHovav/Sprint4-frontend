@@ -7,12 +7,12 @@
       <div class="nav-left-content">
         <button class="small-screen-more-button">More</button>
 
-        <button class="nav-button" @click="openMiniModal('boards')">
+        <!-- <button class="nav-button" @click="openMiniModal('boards')">
           <span class="btn-title">Boards</span>
           <span class="nav-arrow-down">
             <span v-icon="'arrowDownSmall'"></span>
           </span>
-        </button>
+        </button> -->
         <button class="small-screen-plus-button" @click="openModal('CreateBoardModal')"></button>
         <!-- <button class="nav-button">
           <span>Recent</span>
@@ -20,12 +20,12 @@
             <span v-icon="'arrowDownSmall'"></span>
           </span>
         </button> -->
-        <button class="nav-button" @click="openMiniModal('starredBoards')">
+        <!-- <button class="nav-button" @click="openMiniModal('starredBoards')">
           <span>Starred</span>
           <span class="nav-arrow-down">
             <span v-icon="'arrowDownSmall'"></span>
           </span>
-        </button>
+        </button> -->
         <div class="modal" v-if="isModalOpen">
           <div class="modal-content">
             <ul v-if="modalList === 'boards'">
@@ -103,7 +103,9 @@ export default {
     '$route.path'(newPath) {
       if (newPath === '/board') {
         this.$refs.header.style.backgroundColor = 'white'
-        this.$refs.input.style.backgroundColor = 'lightgray'
+        // this.$refs.input.style.backgroundColor = 'lightgray'
+      } else {
+        this.getAverageColor()
       }
     },
     board: function (newValue) {

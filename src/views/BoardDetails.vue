@@ -1,7 +1,7 @@
 <template>
-  <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${board?.imgUrl})` }">
+  <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${boardToDisplay?.imgUrl})` }">
     <TopNavbar :board="this.board" @openMenu="onShowMenu" @updateBoard="updateBoard" :isMenuOpen="isMenuOpen" />
-    <RightMenu @closeMenu="onCloseMenu" :showMenu="showMenu" :board="this.board" @updateBoard="updateBoard" />
+    <RightMenu @closeMenu="onCloseMenu" :showMenu="showMenu" :board="boardToDisplay" @updateBoard="updateBoard" />
     <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
       @updateGroups="updateGroups" />
   </section>
@@ -25,7 +25,7 @@ export default {
     return {
       board: null,
       showMenu: false,
-      isMenuOpen: ''
+      isMenuOpen: '',
     }
   },
   computed: {
@@ -34,7 +34,7 @@ export default {
     },
     loggedinUser() {
       return this.$store.getters.loggedinUser
-    }
+    },
   },
   async created() {
     await this.setBoard()
@@ -44,16 +44,12 @@ export default {
     //   this.setBoard()
     // })
 
-
-
     eventBus.on('setActivity', (action = { type: '', txt: '', componentId: '', movedCmp: '', movedUser: '' }) => {
-      console.log(action);
       const activity = boardService.getEmptyActivity()
       activity.action = action
       activity.by = this.loggedinUser.fullname
       this.board.activities.unshift(activity)
       this.updateBoard()
-      console.log(this.board.activities);
     })
   },
   unmounted() {
@@ -77,7 +73,7 @@ export default {
         this.$store.commit({ type: 'setCurrLabels', labels: this.board.labels })
         this.$store.commit({ type: 'setBackgroundImg', backgroundImg: this.board?.imgUrl })
       } catch (err) {
-        showErrorMsg('Cannot load board')
+        // showErrorMsg('Cannot load board')
       }
     },
     async updateBoard(updatedBoard = this.board, action = '') {
@@ -88,12 +84,13 @@ export default {
       try {
         await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
         this.board = updatedBoard
+        this.boardToDisplay
       } catch (err) {
-        showErrorMsg('Cannot update board')
+        // showErrorMsg('Cannot update board')
       }
     },
     async removeGroup(groupId) {
-      const group = this.board.groups.find(group => groupId === group.id)
+      const group = this.board.groups.find((group) => groupId === group.id)
       const action = { type: 'archived', txt: `list ${group.title}`, componentId: '', movedCmp: '', movedUser: '' }
       const activity = this.getActivity(action)
       this.board.activities.unshift(activity)
@@ -104,7 +101,7 @@ export default {
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
       } catch (err) {
-        showErrorMsg('Cannot remove group')
+        // showErrorMsg('Cannot remove group')
       }
     },
     async addGroup(title) {
@@ -119,7 +116,7 @@ export default {
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
       } catch (err) {
-        showErrorMsg('Cannot add group')
+        // showErrorMsg('Cannot add group')
       }
     },
     async updateGroup(groupToEdit, action = '') {
@@ -133,7 +130,7 @@ export default {
       try {
         await this.$store.dispatch(getActionUpdateBoard(this.board))
       } catch (err) {
-        showErrorMsg('Cannot update group')
+        // showErrorMsg('Cannot update group')
       }
     },
     async updateGroups(groups) {
@@ -145,7 +142,7 @@ export default {
       activity.by = this.loggedinUser
       activity.action = action
       return activity
-    }
+    },
   },
 
   components: {

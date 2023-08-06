@@ -10,9 +10,9 @@
           </div>
           <BoardList :boards="starredBoards" :showCreateBoard="false" />
           <div class="board-category-title">
-            <!-- <span class="clock"></span> -->
+            <span class="member"></span>
             <!-- <h3>Recently viewed</h3> -->
-            <h3>All boards</h3>
+            <h3>Your boards</h3>
           </div>
         </div>
         <BoardList :boards="boards" :showCreateBoard="true" />
@@ -42,12 +42,11 @@ export default {
     },
     loggedinUser() {
       return this.$store.getters.loggedinUser
-    }
+    },
   },
 
   created() {
     if (!this.loggedinUser) this.$store.dispatch({ type: 'login', userCred: { username: 'Guest', password: '123' } })
-
   },
   methods: {},
   components: {

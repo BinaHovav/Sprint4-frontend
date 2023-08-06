@@ -24,7 +24,6 @@
         .btn-edit {
             visibility: visible;
         }
-
     }
 
     cursor: pointer;
@@ -93,6 +92,7 @@
             font-weight: 500;
             line-height: 20px;
             padding: 8px 8px 8px 12px;
+
             word-wrap: break-word;
             clear: both;
             display: block;
@@ -100,8 +100,6 @@
             text-decoration: none;
         }
     }
-
-
 
     .task-details-container {
         position: relative;
@@ -117,7 +115,6 @@
 
             .task-label {
                 display: inline-flex;
-
             }
 
             button {
@@ -163,7 +160,7 @@
                 max-height: 0.5rem;
                 // color: transparent;
                 width: fit-content;
-                transition: min-width .22s ease-in, height .22s ease-in .28s, width .22s ease-in;
+                transition: min-width 0.22s ease-in, height 0.22s ease-in 0.28s, width 0.22s ease-in;
 
                 &.labels-close {
                     // animation-name: labelsClose;
@@ -205,14 +202,10 @@
                     margin: 0;
                 }
 
-
-
-
                 &:hover {
                     cursor: pointer;
                     filter: saturate(85%) brightness(85%);
                 }
-
             }
         }
 
@@ -221,12 +214,11 @@
             clear: both;
             color: $clr-text, #172b4d;
             display: block;
-            margin: 0 0 4px;
+            margin: 4px 0;
             overflow: hidden;
             text-decoration: none;
             word-wrap: break-word;
             clear: both;
-
         }
 
         .badges {
@@ -239,7 +231,7 @@
             float: right;
             margin: 0;
 
-            &>* {
+            & > * {
                 float: right;
                 height: 24px;
                 margin: 0 0 4px 4px;
@@ -282,7 +274,7 @@
         right: 2px;
         top: 2px;
         z-index: 40;
-        opacity: .8;
+        opacity: 0.8;
         width: 32px;
         height: 32px;
         display: flex;
@@ -291,15 +283,11 @@
 
         .edit-icon {
             @include trello-icon($icon-edit);
-
         }
 
         &:hover {
             background-color: $clr-surface-raised-pressed;
             opacity: 1;
         }
-
     }
-
-
 }
