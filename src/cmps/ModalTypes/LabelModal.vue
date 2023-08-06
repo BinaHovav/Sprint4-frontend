@@ -90,12 +90,12 @@ export default {
             const labelIdx = this.info.task.labels.findIndex(labelId => labelId === labelToRemove.id)
             if (labelIdx !== -1) {
                 this.info.task.labels.splice(labelIdx, 1)
-                const idx = this.info.board.labels.findIndex(label => labelToRemove.id === label.id)
-                this.info.board.labels.splice(idx, 1)
-                this.setInfo()
-                this.showCreate = false
-                this.$emit('showBackBtn', this.currLabelId)
             }
+            const idx = this.info.board.labels.findIndex(label => labelToRemove.id === label.id)
+            this.info.board.labels.splice(idx, 1)
+            this.setInfo()
+            this.showCreate = false
+            this.$emit('showBackBtn', this.currLabelId)
 
         }
     },
