@@ -69,7 +69,7 @@
                 <div class="action">
                   <span>
                     <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.type }} {{
-                      activity.action?.txt }}</span> <br> <span class="date">{{ bla(activity.date) }}</span>
+                      activity.action?.txt }}</span> <br> <span class="date">{{ getActivityTime(activity.date) }}</span>
                 </div>
               </div>
             </div>
@@ -169,12 +169,12 @@ export default {
     closeRightNav() {
       this.$emit('closeMenu')
     },
-    bla(timeStamp) {
+    getActivityTime(timeStamp) {
       const months = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
       ]
-      const dateObj = new Date(timeStamp * 1000)
+      const dateObj = new Date(timeStamp)
       const month = months[dateObj.getMonth()]
       const day = dateObj.getDate()
       const hours = dateObj.getHours()

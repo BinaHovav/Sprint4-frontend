@@ -170,7 +170,6 @@ export const boardStore = {
     async updateTaskList(context, payload){
         context.commit(payload)
         if (context.state.dragCount === 2) {
-          console.log('dispatch');
           context.dispatch(getActionUpdateBoard(context.getters.getCurrBoard))
           context.commit({type:'resetCount'})
         }

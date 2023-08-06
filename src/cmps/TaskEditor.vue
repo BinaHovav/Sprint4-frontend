@@ -100,7 +100,7 @@
 <script>
 import { eventBus } from '../services/event-bus.service'
 import { getActionUpdateBoard } from '../store/board.store'
-import { boardService } from '../services/board.service.local'
+import { boardService } from '../services/board.service'
 
 export default {
     name: 'TaskEditor',
