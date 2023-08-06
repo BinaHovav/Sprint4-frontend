@@ -8,7 +8,7 @@
       <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
           class="three-dots"></span></button>
     </div>
-    <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasks="updateTasks" :add="add"
+    <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasksList="updateTasksList" @updateTasks="updateTasks" :add="add"
       @changeAdd="add = !add" @addTask="addTask" />
 
     <div v-if="!add" class="open-card-compose">
@@ -84,6 +84,9 @@ export default {
     },
     updateTasks(tasks, groupId, action) {
       this.$emit('updateTasks', tasks, groupId, action)
+    },
+    updateTasksList(tasks, groupId, action){
+      this.$emit('updateTasksList', tasks, groupId, action)
     },
     openadd() {
       this.add = true
