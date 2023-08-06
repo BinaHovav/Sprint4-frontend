@@ -47,7 +47,10 @@ export default {
             },
             set(tasks) {
                 console.log('set',tasks);
-                this.$emit('updateTasks', tasks, this.groupId)
+                setTimeout(() => {
+                    
+                    this.$emit('updateTasks', tasks, this.groupId)
+                }, 500);
             }
         }
     },
