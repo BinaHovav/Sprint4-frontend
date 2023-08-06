@@ -1,17 +1,41 @@
 .homepage-main-container {
     padding: 0;
 
+    &.u-fancy-scrollbar {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        -webkit-transform: translateZ(0);
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #c4c8d0;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 14px;
+        }
+
+        &::-webkit-scrollbar-track-piece {
+
+            background-color: #e3e5e9;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            margin: 0 7px 0 2px;
+
+        }
+    }
+
     .top-section {
         display: grid;
 
         grid-template-columns: 1fr 540px 630px 1fr;
-        background: url(https://images.ctfassets.net/rz1oowkt5gyp/6bFuTiN5YQ78rFkHb3aJlo/b608362b08e14f5dec4c4aeea3a3ca72/white-wave-mobile.svg)
-                center bottom -0.5px/100% 24% no-repeat scroll padding-box border-box,
-            linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto no-repeat scroll padding-box
-                border-box rgb(82, 67, 170);
+        background: url(https://images.ctfassets.net/rz1oowkt5gyp/6bFuTiN5YQ78rFkHb3aJlo/b608362b08e14f5dec4c4aeea3a3ca72/white-wave-mobile.svg) center bottom -0.5px/100% 24% no-repeat scroll padding-box border-box,
+            linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto no-repeat scroll padding-box border-box rgb(82, 67, 170);
         color: #fff;
         padding-top: 5.5em;
         height: 85vh;
+
         .left-box {
             grid-column: 2;
             margin-top: 1rem;
@@ -23,11 +47,13 @@
                 line-height: 1.25;
                 font-weight: 800;
             }
+
             p {
                 font-size: 20px;
                 letter-spacing: 1;
                 line-height: 1.5;
             }
+
             .btn-try {
                 font-size: 28px;
                 letter-spacing: 0.8px;
@@ -45,15 +71,19 @@
                 margin-top: 35px;
                 width: 50%;
                 text-decoration: none;
+
                 &:hover {
                     background-color: $clr-background-brand-boldest-hovered;
                 }
+
                 .arrow {
                     @include trello-icon($content: $icon-arrow-right, $color: white);
                 }
+
                 .arrow-icons {
                     margin-left: 18px;
                     margin-top: 7px;
+
                     span {
                         svg {
                             margin-left: -10px;
@@ -62,6 +92,7 @@
                 }
             }
         }
+
         .right-box {
             grid-column: 3;
 
@@ -71,13 +102,13 @@
             }
         }
     }
+
     .middle-section {
         display: grid;
         grid-template-columns: 1fr 400px 770px 1fr;
         font-family: Charlie-text;
         font-size: 2.25rem;
-        background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box
-            border-box rgb(178, 212, 255);
+        background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box border-box rgb(178, 212, 255);
         margin-top: -80px;
         padding-bottom: 100px;
 
@@ -100,6 +131,7 @@
                 line-height: 1.25;
                 font-family: Charlie-display;
             }
+
             .top-box-sub-title {
                 padding-bottom: 1rem;
                 font-family: Charlie-display;
@@ -108,6 +140,7 @@
                 margin-bottom: 0.5rem;
                 margin-top: 0px;
             }
+
             .top-box-content {
                 margin-bottom: 0px;
                 font-family: Charlie-text;
@@ -117,6 +150,7 @@
                 text-size-adjust: 100%;
             }
         }
+
         .left-box {
             grid-column: 2;
             // padding: 0px 4rem;
@@ -129,11 +163,13 @@
             // display: none;
             margin-top: 0px;
             margin-bottom: 0px;
+
             button {
                 font-family: Charlie-text;
                 background-color: transparent;
                 border-radius: 0.3rem;
                 padding: 1rem 1rem 1rem 1.5rem;
+
                 &:first-child {
                     box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
                     background-color: white;
@@ -141,21 +177,23 @@
                     cursor: pointer;
                 }
             }
-            > * {
+
+            >* {
                 text-align: left;
             }
 
-            h2 {
-            }
-            p {
-            }
+            h2 {}
+
+            p {}
         }
+
         .right-box {
             grid-column: 3;
 
             // padding-left: 4rem;
 
             cursor: grab;
+
             img {
                 width: 100%;
             }
@@ -173,6 +211,7 @@
     .homepage-main-container {
         display: flex;
         flex-direction: column;
+
         .top-section {
             display: flex;
             flex-direction: column;
@@ -187,16 +226,19 @@
                 align-items: center;
                 text-align: center;
                 padding-bottom: 25px;
+
                 h1 {
                     margin-bottom: 0.5rem;
                     margin-top: 0px;
                     font-size: 2rem;
                     line-height: 1.25;
                 }
+
                 p {
                     margin-top: 0.5rem;
                     margin-bottom: 1rem;
                 }
+
                 .btn-try {
                     width: 100%;
                     margin-top: 5px;
@@ -205,6 +247,7 @@
                     letter-spacing: 0.2;
                 }
             }
+
             .right-box {
                 display: flex;
                 flex-direction: column;
@@ -215,6 +258,7 @@
                 // text-align: start;
             }
         }
+
         .middle-section {
             margin-top: 20px;
             padding: 0;
@@ -222,14 +266,17 @@
             scroll-margin-top: 72px;
             // text-align: center;
             width: 100%;
+
             .top-box {
                 display: flex;
                 flex-direction: column;
                 width: 80%;
             }
+
             .top-box-title {
                 font-size: 1rem;
             }
+
             .top-box-sub-title {
                 padding-bottom: 0.5rem;
                 font-size: 1.5rem;
@@ -237,6 +284,7 @@
         }
     }
 }
+
 // @media (max-width: 460px) {
 //     .homepage-main-container {
 //         grid-template-columns: 1fr max-content 1fr;

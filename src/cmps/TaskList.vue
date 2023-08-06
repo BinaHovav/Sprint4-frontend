@@ -46,7 +46,6 @@ export default {
                 return this.tasks
             },
             set(tasks) {
-                console.log('set', tasks);
                 this.$emit('updateTasksList', tasks, this.groupId)
             }
         }
@@ -76,7 +75,10 @@ export default {
             const idx = tasks.findIndex(task => task.id === taskId)
             tasks[idx].date.isDone = !tasks[idx].date.isDone
 
-            const action = { type: 'marked', txt: `the due date on ${title} complete`, componentId: '', movedCmp: '', movedUser: '' }
+            let action
+            if (tasks[idx].date.isDone) {
+                action = { type: 'marked', txt: `the due date on ${title} complete`, componentId: '', movedCmp: '', movedUser: '' }
+            }
             this.$emit('updateTasks', tasks, this.groupId, action)
         },
         toggleAdd() {

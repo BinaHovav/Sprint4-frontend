@@ -76,9 +76,12 @@ export default {
             const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistId)
             const todoIdx = this.task.checklists[idx].todos.findIndex(task => task.id === itemId)
             this.task.checklists[idx].todos[todoIdx].isDone = !this.task.checklists[idx].todos[todoIdx].isDone
-            
-            const todoTitle = this.task.checklists[idx].todos[todoIdx]
-            const action = { type: 'completed', txt: `${todoTitle} on ${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+
+            let action
+            if (this.task.checklists[idx].todos[todoIdx].isDone) {
+                const todoTitle = this.task.checklists[idx].todos[todoIdx].txt
+                action = { type: 'completed', txt: `${todoTitle} on ${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            }
             this.$emit('onSaveTask', '', action)
         },
         getTaskProgress(todos) {

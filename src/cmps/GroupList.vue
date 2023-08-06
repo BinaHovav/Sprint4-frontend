@@ -3,8 +3,8 @@
         class="group-list-container flex u-fancy-scrollbar" @start="drag = true" @end="drag = false"
         @change="handleDragChange" item-key="name" handle=".drag-me" drag-class="drag-group">
         <template #item="{ element }">
-            <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateTasksList="updateTasksList" @updateGroup="updateGroup"
-                @updateTasks="updateTasks" @click.right.prevent />
+            <GroupPreview :key="element.id" :group="element" @removeGroup="removeGroup" @updateTasksList="updateTasksList"
+                @updateGroup="updateGroup" @updateTasks="updateTasks" @click.right.prevent />
         </template>
         <template #footer>
             <div @click="toggleAdd" v-if="!addList" class="add-group-before">
@@ -74,13 +74,13 @@ export default {
         updateGroup(group, action) {
             this.$emit('updateGroup', group, action)
         },
-        updateTasksList(tasks, groupId, action){
-            this.$store.dispatch({type: 'updateTaskList', groupId, tasks})
+        updateTasksList(tasks, groupId, action) {
+            this.$store.dispatch({ type: 'updateTaskList', groupId, tasks })
         },
         updateTasks(tasks, groupId, action) {
             const clonedGroup = JSON.parse(JSON.stringify(this.groups.find(group => group.id === groupId)))
-            clonedGroup.tasks = tasks  
-            this.updateGroup()
+            clonedGroup.tasks = tasks
+            this.updateGroup(clonedGroup, action)
         },
         // onDragStart(event) {
         //     // Apply the custom drag styles when dragging starts

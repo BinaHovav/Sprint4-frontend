@@ -46,7 +46,7 @@ export default {
     })
   },
   unmounted() {
-    window.removeEventListener('resize')
+    window.removeEventListener('resize', ()=>{})
   },
   methods: {
     updateBoard(board) {

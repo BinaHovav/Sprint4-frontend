@@ -1,5 +1,5 @@
 <template>
-  <main class="homepage-main-container">
+  <main class="homepage-main-container u-fancy-scrollbar">
     <div class="top-section">
       <div class="left-box">
         <h1>Mellow brings all your tasks, teammates, and tools together</h1>
