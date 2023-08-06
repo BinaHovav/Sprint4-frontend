@@ -4,8 +4,7 @@
       <span class="left-board-header">
         <div class="board-title">
           <form action="">
-            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title"
-              @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
+            <textarea v-model="board.title" rows="1" ref="boardNameInput" class="board-title" @blur="updateBoardTitle(board)" @keydown.enter.prevent="updateBoardTitle(board)"></textarea>
           </form>
         </div>
         <button class="btn-star-container" @click.prevent="updateBoard(board)">
@@ -36,7 +35,7 @@ export default {
   props: ['board', 'isMenuOpen'],
   data() {
     return {
-      screenWidth: window.innerWidth
+      screenWidth: window.innerWidth,
     }
   },
   created() {
@@ -116,7 +115,7 @@ export default {
       const membersToShow = []
       let counter = 0
       const memberLimit = this.screenWidth > 740 ? 5 : 3
-      this.board.members.forEach(member => {
+      this.board.members.forEach((member) => {
         counter++
         if (counter <= memberLimit) membersToShow.push(member)
       })
@@ -125,7 +124,7 @@ export default {
     membersCount() {
       const memberLimit = this.screenWidth > 740 ? 5 : 3
       return this.board.members.length > memberLimit ? this.board.members.length - memberLimit : ''
-    }
+    },
   },
   components: {
     RightMenu,
