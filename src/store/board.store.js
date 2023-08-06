@@ -43,6 +43,7 @@ export const boardStore = {
     labelsShow: false,
     backgroundImg: null,
     taskQEId: null,
+    dragCount: 0
   },
   getters: {
     boards({ boards }) {
@@ -111,6 +112,10 @@ export const boardStore = {
       const board = state.boards.find(board=> state.currBoardId === board._id)
       const group = board.groups.find(group => groupId === group.id)
       group.tasks = tasks
+      state.dragCount++
+    },
+    resetCount(state){
+      state.dragCount = 0
     }
   },
   actions: {
@@ -164,7 +169,11 @@ export const boardStore = {
     },
     async updateTaskList(context, payload){
         context.commit(payload)
-        context.dispatch(getActionUpdateBoard(context.getters.getCurrBoard))
+        if (context.state.dragCount === 2) {
+          console.log('dispatch');
+          context.dispatch(getActionUpdateBoard(context.getters.getCurrBoard))
+          context.commit({type:'resetCount'})
+        }
     }
   },
   
