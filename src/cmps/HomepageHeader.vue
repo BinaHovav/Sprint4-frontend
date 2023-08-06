@@ -6,7 +6,7 @@
         <nav class="homepage-navbar"></nav>
       </div>
       <div class="right-nav">
-        <a href="#/login" class="nav-link">{{ loggedInUser ? `Hello ${loggedInUser.fullname}` : 'Log in' }}</a>
+        <a href="#/login" class="nav-link">{{ loggedInUser ? `Log out` : 'Log in' }}</a>
         <RouterLink to="/board" class="nav-link-signup nav-link">Try Mellow</RouterLink>
         <RouterLink to="/board" class="nav-link-signup-small-screen nav-link">Try</RouterLink>
       </div>
@@ -25,7 +25,7 @@ export default {
       return this.$store.getters.loggedinUser
     },
   },
-  created() {},
+  created() { },
   methods: {},
 }
 </script>

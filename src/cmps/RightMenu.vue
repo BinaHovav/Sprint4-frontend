@@ -44,7 +44,8 @@
               </div>
               <div class="board-admins-details">
                 <div class="admin-logo">
-                  <img src="https://trello-members.s3.amazonaws.com/64b64dd31b313a8eba0f9341/3e7f20613b5c14501f9c6c728ac51b45/50.png" />
+                  <img
+                    src="https://trello-members.s3.amazonaws.com/64b64dd31b313a8eba0f9341/3e7f20613b5c14501f9c6c728ac51b45/50.png" />
                 </div>
                 <div class="admin-names">
                   <p class="fullname">Bina Hovav</p>
@@ -56,7 +57,8 @@
                   <span v-icon="'description'"></span>
                   <span>Description</span>
                 </div>
-                <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize operations using innovative robotic technologies and task management.</p>
+                <p>Gas station robotics project aims to automate fueling processes, enhance safety, and optimize
+                  operations using innovative robotic technologies and task management.</p>
               </div>
             </div>
             <div v-else-if="currMenuOption === 'activity'" class="activities">
@@ -66,8 +68,8 @@
                 </div>
                 <div class="action">
                   <span>
-                    <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.type }} {{ activity.action?.txt }}</span
-                  >
+                    <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.type }} {{
+                      activity.action?.txt }}</span> <br> <span class="date">{{ bla(activity.date) }}</span>
                 </div>
               </div>
             </div>
@@ -167,6 +169,22 @@ export default {
     closeRightNav() {
       this.$emit('closeMenu')
     },
+    bla(timeStamp) {
+      const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      ]
+      const dateObj = new Date(timeStamp * 1000)
+      const month = months[dateObj.getMonth()]
+      const day = dateObj.getDate()
+      const hours = dateObj.getHours()
+      const minutes = dateObj.getMinutes()
+      const ampm = hours >= 12 ? 'PM' : 'AM'
+      const displayHours = hours % 12 || 12
+      const displayMinutes = minutes.toString().padStart(2, '0')
+      const formattedDate = `${month} ${day} at ${displayHours}:${displayMinutes} ${ampm}`
+      return formattedDate
+    }
   },
   computed: {
     showBackIcon() {
