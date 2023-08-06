@@ -107,6 +107,11 @@ export const boardStore = {
     onQuickEditor(state, { taskId }) {
       state.taskQEId = taskId
     },
+    updateTaskList(state, {groupId, tasks}){
+      const board = state.boards.find(board=> state.currBoardId === board._id)
+      const group = board.groups.find(group => groupId === group.id)
+      group.tasks = tasks
+    }
   },
   actions: {
     async addBoard(context, { board }) {
@@ -157,5 +162,18 @@ export const boardStore = {
         throw err
       }
     },
+    async updateTaskList(context, payload){
+        context.commit(payload)
+        try {
+          const savedBoard = await boardService.save(context.getters.getCurrBoard)
+          socketService.emit('update-board')
+          return savedBoard
+        } catch (err) {
+          console.log('boardStore: Error in updateBoard', err)
+          throw err
+        }
+    }
   },
+  
+
 }
