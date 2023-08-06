@@ -160,9 +160,10 @@ export default {
       this.currentSubmenu = null
     },
     changeBackground(backgroundImg) {
-      this.board.imgUrl = backgroundImg
+      const board = JSON.parse(JSON.stringify(this.board))
+      board.imgUrl = backgroundImg
       const action = { type: 'changed', txt: 'the background of this board', componentId: '', movedCmp: '', movedUser: '' }
-      this.$emit('updateBoard', this.board, action)
+      this.$emit('updateBoard', board, action)
     },
     closeRightNav() {
       this.$emit('closeMenu')

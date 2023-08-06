@@ -1,7 +1,7 @@
 <template>
-  <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${board?.imgUrl})` }">
+  <section v-if="board" class="board-details-container flex column" :style="{ backgroundImage: `url(${boardToDisplay?.imgUrl})` }">
     <TopNavbar :board="this.board" @openMenu="onShowMenu" @updateBoard="updateBoard" :isMenuOpen="isMenuOpen" />
-    <RightMenu @closeMenu="onCloseMenu" :showMenu="showMenu" :board="this.board" @updateBoard="updateBoard" />
+    <RightMenu @closeMenu="onCloseMenu" :showMenu="showMenu" :board="boardToDisplay" @updateBoard="updateBoard" />
     <GroupList :groups="boardToDisplay?.groups" @removeGroup="removeGroup" @addGroup="addGroup" @updateGroup="updateGroup"
       @updateGroups="updateGroups" />
   </section>
@@ -88,6 +88,7 @@ export default {
       try {
         await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
         this.board = updatedBoard
+        this.boardToDisplay
       } catch (err) {
         showErrorMsg('Cannot update board')
       }
