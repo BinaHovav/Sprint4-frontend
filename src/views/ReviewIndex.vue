@@ -64,7 +64,7 @@ export default {
         await this.$store.dispatch({ type: 'addReview', review: this.reviewToEdit })
         this.reviewToEdit = reviewService.getEmptyReview()
       } catch (err) {
-        showErrorMsg('Cannot add review')
+        // showErrorMsg('Cannot add review')
       }
     },
   },

@@ -27,15 +27,21 @@
         padding: 0;
 
         a {
-            text-decoration: none;
-            padding: 1em;
-            text-align: center;
-            width: 70px;
-
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            text-decoration: none;
+            padding: 0.8em;
+            line-height: 1.4;
+            text-align: center;
+            width: 180px;
+
             color: #121e30;
             cursor: pointer;
+            .fullname {
+                display: block;
+            }
         }
         .nav-link-signup {
             justify-content: center;
@@ -66,6 +72,8 @@
         .right-nav {
             a {
                 padding: 0;
+                width: 100px;
+                line-height: 1;
             }
             .nav-link-signup {
                 width: 100px;

@@ -14,7 +14,7 @@
           </div>
         </div>
 
-        <div class="board-menu-content  js-board-menu-content-wrapper">
+        <div class="board-menu-content js-board-menu-content-wrapper">
           <div class="board-menu-content-frame u-fancy-scrollbar">
             <ul class="board-menu-navigation" v-if="currMenuOption === 'default'">
               <li class="board-menu-navigation-item">
@@ -132,7 +132,7 @@ export default {
   },
   methods: {
     openMenuOption(option) {
-      console.log(option);
+      console.log(option)
       this.prevMenuOption = this.currMenuOption
       this.currMenuOption = option
       this.menuText = this.menuOptions[option]

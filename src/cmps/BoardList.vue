@@ -3,8 +3,7 @@
     <li v-for="board in boards" :key="board._id" @click="loadBoard(board._id)">
       <BoardTile :board="board" :isStarred="board.isStarred" @updateBoard="updateBoard" @loadBoard="loadBoard" />
     </li>
-    <div v-if="showCreateBoard" ref="createBoard" class="create-new-board"
-      @click="openModal('CreateBoardModal')">Create new board</div>
+    <div v-if="showCreateBoard" ref="createBoard" class="create-new-board" @click="openModal('CreateBoardModal')">Create new board</div>
   </ul>
 </template>
 
@@ -21,11 +20,11 @@ export default {
   data() {
     return {
       newBoardTitle: '',
-      type: ''
+      type: '',
     }
   },
   computed: {},
-  created() { },
+  created() {},
   methods: {
     loadBoard(boardId) {
       this.$emit('loadBoard', boardId)
@@ -42,7 +41,7 @@ export default {
         await this.$store.dispatch(getActionUpdateBoard(boardToUpdate))
       } catch (err) {
         console.log(err)
-        showErrorMsg('Cannot update board')
+        // showErrorMsg('Cannot update board')
       }
     },
     openModal(type) {
