@@ -223,10 +223,12 @@ export default {
       this.group.tasks.splice(idx, 1, this.task)
       idx = this.board.groups.findIndex((gGroup) => gGroup.id === this.group.id)
       this.board.groups.splice(idx, 1, this.group)
-      const activity = boardService.getEmptyActivity()
-      activity.action = action
-      activity.by = this.loggedinUser
-      this.board.activities.unshift(activity)
+      if (action) {
+        const activity = boardService.getEmptyActivity()
+        activity.action = action
+        activity.by = this.loggedinUser
+        this.board.activities.unshift(activity)
+      }
       this.$emit('updateBoard', this.board)
     },
     closeModal() {
