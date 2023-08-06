@@ -33,8 +33,8 @@
             @include trello-icon($icon-star, $type: sm, $color: $clr-text);
             font-size: 24px;
         }
-        .clock {
-            @include trello-icon($icon-clock, $type: sm, $color: $clr-text);
+        .member {
+            @include trello-icon($icon-member, $type: sm, $color: $clr-text);
             font-size: 24px;
         }
         h3 {

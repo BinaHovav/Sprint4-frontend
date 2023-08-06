@@ -85,6 +85,7 @@ export default {
       try {
         await this.$store.dispatch(getActionUpdateBoard(updatedBoard))
         this.board = updatedBoard
+        // console.log('this.board', this.board)
       } catch (err) {
         // showErrorMsg('Cannot update board')
       }
