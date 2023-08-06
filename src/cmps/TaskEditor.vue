@@ -204,11 +204,12 @@ export default {
             this.group.tasks.splice(idx, 1, this.task)
             const groupIdx = board.groups.findIndex(group => group.id === this.group.id)
             board.groups.splice(groupIdx, 1, this.group)
-
-            const activity = boardService.getEmptyActivity()
-            activity.by = this.loggedinUser
-            activity.action = action
-            board.activities.unshift(activity)
+            if (action) {
+                const activity = boardService.getEmptyActivity()
+                activity.by = this.loggedinUser
+                activity.action = action
+                board.activities.unshift(activity)
+            }
             try {
                 await this.$store.dispatch(getActionUpdateBoard(board))
             }
