@@ -7,7 +7,6 @@
     backdrop-filter: blur(4px);
     background-color: #fff;
     transition: transform 0.1s ease-in;
-    /* Transition the transform property */
     z-index: 5;
 
     &.show-menu {
@@ -23,7 +22,6 @@
         bottom: 0;
         right: 0;
         top: 0;
-
 
         .board-menu-tab-content {
             align-items: flex-start;
@@ -88,8 +86,6 @@
             padding: 0;
             width: 100%;
 
-
-
             .board-menu-content-frame {
                 overflow-y: auto;
                 box-sizing: border-box;
@@ -117,12 +113,10 @@
                     }
 
                     &::-webkit-scrollbar-track-piece {
-
                         background-color: #e3e5e9;
                         -webkit-border-radius: 10px;
                         border-radius: 10px;
                         margin: 0 7px 0 2px;
-
                     }
                 }
 
@@ -248,7 +242,8 @@
                             line-height: 20px;
                             font-weight: 600;
 
-                            svg {}
+                            svg {
+                            }
                         }
                     }
 
@@ -358,7 +353,6 @@
                 }
 
                 .activities {
-
                     .activity-container {
                         margin-left: 40px;
                         min-height: 32px;
@@ -386,7 +380,6 @@
                             margin: 0;
 
                             span {
-
                                 .fullname {
                                     cursor: pointer;
                                     font-weight: 700;
@@ -409,7 +402,5 @@
                 }
             }
         }
-
-
     }
 }

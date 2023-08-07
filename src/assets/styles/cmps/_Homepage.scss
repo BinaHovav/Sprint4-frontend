@@ -199,12 +199,15 @@
             cursor: grab;
 
             img {
-                width: 100%;
                 position: absolute;
-                left: 0;
-                transition: transform 0.5s ease-in;
+                width: 500px;
+                left: -1000px;
+                top: 0;
+                bottom: 0;
+                transition: transform 0.2s ease-in;
+                z-index: 5;
                 &.slide-in {
-                    transform: translateX(0);
+                    transform: translate(-500px);
                 }
             }
         }
