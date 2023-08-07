@@ -8,8 +8,8 @@
       <button class="btn-three-dots" ref="listActions" @click="openModal('ListActions', 'listActions')"><span
           class="three-dots"></span></button>
     </div>
-    <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasksList="updateTasksList" @updateTasks="updateTasks" :add="add"
-      @changeAdd="add = !add" @addTask="addTask" />
+    <TaskList :tasks="group.tasks" :groupId="group.id" @removeTask="removeTask" @updateTasksList="updateTasksList"
+      @updateTasks="updateTasks" :add="add" @changeAdd="add = !add" @addTask="addTask" />
 
     <div v-if="!add" class="open-card-compose">
       <a @click="openadd">
@@ -72,7 +72,7 @@ export default {
       newTask.title = title
       this.clonedGroup.tasks.push(newTask)
 
-      const action = { type: 'added', txt: `${title} to ${this.clonedGroup.title}`, componentId: '', movedCmp: '', movedUser: '' }
+      const action = { type: 'add task',command: 'added', span: `${title}`, txt: ` to ${this.clonedGroup.title}`, componentId: newTask.id, groupId: this.group.id, movedCmp: '', movedUser: '' }
 
       this.updateGroup(action)
     },
@@ -85,7 +85,7 @@ export default {
     updateTasks(tasks, groupId, action) {
       this.$emit('updateTasks', tasks, groupId, action)
     },
-    updateTasksList(tasks, groupId, action){
+    updateTasksList(tasks, groupId, action) {
       this.$emit('updateTasksList', tasks, groupId, action)
     },
     openadd() {

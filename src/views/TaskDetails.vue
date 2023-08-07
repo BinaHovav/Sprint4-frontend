@@ -211,6 +211,9 @@ export default {
           this.board = JSON.parse(JSON.stringify(board))
           this.group = this.board.groups.find((group) => group.id === groupId)
           this.task = this.group.tasks.find((task) => task.id === taskId)
+          if (!this.task) {
+            this.$router.push(`/board/${boardId}`)
+          }
         }
       } catch (err) {
         // showErrorMsg('Cannot load board')
@@ -289,7 +292,10 @@ export default {
 
       let action
       if (this.task.date.isDone) {
-        action = { type: 'marked', txt: `the due date on ${this.task.title} complete`, componentId: '', movedCmp: '', movedUser: '' }
+        action = { type: 'due date', command: 'marked the due date on ', span: this.task.title, txt: ` complete`, componentId: this.task.id, groupId: this.group.id, movedCmp: '', movedUser: '' }
+      } else {
+        action = { type: 'due date', command: 'marked the due date on ', span: this.task.title, txt: ` incomplete`, componentId: this.task.id, groupId: this.group.id, movedCmp: '', movedUser: '' }
+
       }
       this.onSaveTask('', action)
     },

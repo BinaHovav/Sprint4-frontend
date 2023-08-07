@@ -72,7 +72,7 @@ function getEmptyTask() {
       isDone: false,
     },
     checklists: [],
-    attachment: [],
+    attachments: [],
     activity: [],
     cover: { background: '', isFull: false },
     comments: [],

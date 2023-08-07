@@ -80,7 +80,8 @@ export default {
             let action
             if (this.task.checklists[idx].todos[todoIdx].isDone) {
                 const todoTitle = this.task.checklists[idx].todos[todoIdx].txt
-                action = { type: 'completed', txt: `${todoTitle} on ${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+                const groupId = this.$route.params.groupId
+                action = { type: 'completed', span: this.task.title, txt: `${todoTitle} on `, componentId: this.task.id, groupId: groupId, movedCmp: '', movedUser: '' }
             }
             this.$emit('onSaveTask', '', action)
         },
@@ -91,7 +92,8 @@ export default {
         },
         removeChecklist(checklistId) {
             const checklist = this.task.checklists.find(checklist => checklist.id === checklistId)
-            const action = { type: 'removed', txt: `${checklist.title} from ${this.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            const groupId = this.$route.params.groupId
+            const action = { type: 'removed', span: this.task.title, txt: `${checklist.title} from `, componentId: this.task.id, groupId: groupId, movedCmp: '', movedUser: '' }
 
             const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistId)
             this.task.checklists.splice(idx, 1)

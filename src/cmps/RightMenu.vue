@@ -65,10 +65,24 @@
                   <img class="member-img" :src="activity.by?.imgUrl" :title="activity.by?.fullname" />
                 </div>
                 <div class="action">
-                  <span>
-                    <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.type }} {{ activity.action?.txt }}</span
-                  >
-                  <br />
+                  <span v-if="activity.action.type === 'add task'">
+                    <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.command }}
+                    <span class="link" @click="link(activity.action.componentId, activity.action.groupId)">
+                      {{ activity.action.span }}</span>
+                    {{ activity.action?.txt }}</span>
+                  <span v-else-if="activity.action.type === 'due date'">
+                    <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.command }}
+                    <span class="link" @click="link(activity.action.componentId, activity.action.groupId)">
+                      {{ activity.action.span }}</span>
+                    {{ activity.action?.txt }}
+                  </span>
+                  <span v-else>
+                    <span class="fullname">{{ activity.by?.fullname }}</span> {{ activity.action?.type }}
+                    {{ activity.action?.txt }}
+                    <span class="link" @click="link(activity.action.componentId, activity.action.groupId)">
+                      {{ activity.action.span }}</span>
+                  </span>
+                  <br>
                   <span class="date">{{ getActivityTime(activity.date) }}</span>
                 </div>
               </div>
@@ -182,6 +196,9 @@ export default {
       const formattedDate = `${month} ${day} at ${displayHours}:${displayMinutes} ${ampm}`
       return formattedDate
     },
+    link(taskId, groupId) {
+      this.$router.push(`/board/${this.board._id}/group/${groupId}/task/${taskId}`)
+    }
   },
   computed: {
     showBackIcon() {

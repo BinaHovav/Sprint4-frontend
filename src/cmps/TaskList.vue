@@ -77,7 +77,10 @@ export default {
 
             let action
             if (tasks[idx].date.isDone) {
-                action = { type: 'marked', txt: `the due date on ${title} complete`, componentId: '', movedCmp: '', movedUser: '' }
+                action = { type: 'due date',command:'marked the due date on ', span: tasks[idx].title, txt: ` complete`, componentId: tasks[idx].id, groupId: this.groupId, movedCmp: '', movedUser: '' }
+            } else {
+                action = { type: 'due date',command:'marked the due date on ', span: tasks[idx].title, txt: ` incomplete`, componentId: tasks[idx].id, groupId: this.groupId, movedCmp: '', movedUser: '' }
+
             }
             this.$emit('updateTasks', tasks, this.groupId, action)
         },
