@@ -191,7 +191,7 @@ export default {
       return [
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691392868/tobias-reich-wJTj-hVQZfo-unsplash_c5vimo.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691392868/steven-van-elk-1cFPr3n13cI-unsplash_pkr0zf.jpg',
-        'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691392867/tobias-reich-cBTuyMkjAYc-unsplash_fdbyak.jpg',
+        'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691394885/tobias-reich-cBTuyMkjAYc-unsplash_swrh6v.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691392867/stephen-leonardi-BQsHQ3MJ-zM-unsplash_ehbqnw.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691074936/marek-piwnicki-H5cFBKV5czo-unsplash_peligp.jpg',
         'https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691392867/sebastian-svenson-lCsL76JhNlQ-unsplash_l8bpwl.jpg',
