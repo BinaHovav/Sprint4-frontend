@@ -176,6 +176,7 @@
                     box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
                     background-color: white;
                     border-left: 10px solid #00c7e5;
+                    outline: none;
                 }
             }
 
@@ -191,23 +192,25 @@
         }
 
         .right-box {
-            grid-column: 3;
-            position: relative;
+            .dynamic-image {
+                grid-column: 3;
+                position: relative;
 
-            // padding-left: 4rem;
+                // padding-left: 4rem;
 
-            cursor: grab;
+                cursor: grab;
 
-            img {
-                position: absolute;
-                width: 500px;
-                left: -1000px;
-                top: 0;
-                bottom: 0;
-                transition: transform 0.2s ease-in;
-                z-index: 5;
-                &.slide-in {
-                    transform: translate(-500px);
+                img {
+                    position: absolute;
+                    width: 100%;
+                    // left: -1000px;
+                    top: 0;
+                    bottom: 0;
+                    transition: transform 0.2s ease-in;
+                    z-index: 5;
+                    &.slide-in {
+                        transform: translate(0);
+                    }
                 }
             }
         }

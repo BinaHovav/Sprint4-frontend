@@ -24,7 +24,7 @@
         <p class="top-box-content">Simple, flexible, and powerful. All it takes are boards, lists, and cards to get a clear view of who’s doing what and what needs to get done.</p>
       </div>
       <div class="left-box">
-        <button @click="changeImage('boards')">
+        <button @click="changeImage('boards')" v-focus>
           <h3>Boards</h3>
           <p>Mello boards keep tasks organized and work moving forward. In a glance, see everything from “things to do” to “aww yeah, we did it!</p>
         </button>
@@ -38,7 +38,9 @@
         </button>
       </div>
       <div class="right-box">
-        <img :src="currentImage" :class="{ 'slide-in': showImage }" />
+        <div class="dynamic-image">
+          <img :src="currentImage" :class="{ 'slide-in': showImage }" />
+        </div>
       </div>
     </div>
   </main>
