@@ -123,10 +123,15 @@ export default {
       this.isModalOpen = false
     },
     openModal(type) {
-      this.type = type
-      const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
-      eventBus.emit('modal', { el, type })
-      window.addEventListener('resize', this.handleResize)
+      if (type === this.type) {
+        eventBus.emit('modal', { type: 'close' })
+      } else {
+        this.type = type
+        const elCoords = this.$refs.createBoardAppHeader.getBoundingClientRect()
+        this.$store.commit({ type: 'setBtnCoords', elCoords })
+        eventBus.emit('modal', { type })
+        window.addEventListener('resize', this.handleResize)
+      }
       eventBus.on('setInfo', () => {
         window.removeEventListener('resize', this.handleResize)
         eventBus.off('setInfo')
@@ -134,8 +139,8 @@ export default {
       })
     },
     handleResize() {
-      const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
-      eventBus.emit('modal', { el, type: this.type, info: 'resize' })
+      const elCoords = this.$refs.createBoardAppHeader.getBoundingClientRect()
+      this.$store.commit({ type: 'setBtnCoords', elCoords })
     },
     getAverageColor() {
       const img = new Image()

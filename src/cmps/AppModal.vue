@@ -37,32 +37,21 @@ export default {
   },
 
   created() {
-    eventBus.on('modal', ({ el, type, info }) => {
-      if (info === this.info) {
-        this.setInfo()
-      } else if (info === 'resize') {
-        (type === 'CreateBoardModal') ? this.setModalLocationBoard(el) : this.setModalLocation(el)
-      }
+    eventBus.on('modal', ({ type, info }) => {
+      if (type === 'close') this.setInfo()
       else {
-        if (type !== 'CreateBoardModal') {
-          if (type === this.type) {
-            this.setInfo()
-          } else {
-            this.isVisible = true
-            this.info = info
-            this.type = type
-            this.elLocation = el
-            this.setModalLocation(el)
-          }
-        } else if (type === 'CreateBoardModal') {
-          this.isVisible = true
-          this.info = info
-          this.type = type
-          this.elLocation = el
-          this.setModalLocationBoard(el)
-        }
+        this.isVisible = true
+        this.info = info
+        this.type = type
       }
     })
+  },
+  watch: {
+    btnCoords: function (newValue) {
+      if (newValue) {
+        ; (this.type === 'CreateBoardModal') ? this.setModalLocationBoard(newValue) : this.setModalLocation(newValue)
+      }
+    },
   },
   methods: {
     setModalLocation(el) {
@@ -104,9 +93,9 @@ export default {
       } else {
         this.info = {}
         this.type = ''
-        eventBus.emit('setInfo')
         this.isVisible = false
         this.backBtn = false
+        eventBus.emit('setInfo')
       }
     },
     changeBackBtn(labelId) {
@@ -145,6 +134,9 @@ export default {
           break
       }
     },
+    btnCoords() {
+      return this.$store.getters.getBtnCoords
+    }
   },
   components: {
     LabelModal,
