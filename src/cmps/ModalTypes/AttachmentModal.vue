@@ -38,7 +38,8 @@ export default {
             const attachment = { id: utilService.makeId(5), type, name, size, fileUrl, createdAt: Date.now() }
             this.info.task.attachments.unshift(attachment)
 
-            const action = { type: 'attached', txt: `${attachment.name} to ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+            const groupId = this.$route.params.groupId
+            const action = { type: 'attached', span: this.info.task.title, txt: `${attachment.name} to `, componentId: this.info.task.id, groupId: groupId, movedCmp: '', movedUser: '' }
             this.$emit('setInfo', this.info, action)
             this.$emit('setInfo')
         },

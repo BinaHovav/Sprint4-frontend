@@ -391,8 +391,17 @@
                                     cursor: pointer;
                                     font-weight: 700;
                                 }
-                                &.date{
+
+                                &.date {
                                     font-size: 12px;
+                                }
+
+                                &.link {
+                                    color: $clr-link;
+                                    cursor: pointer;
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
                                 }
                             }
                         }
