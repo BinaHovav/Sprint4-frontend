@@ -29,14 +29,15 @@ export default {
   },
   methods: {
     toggleTaskMember(member) {
+      const groupId = this.$route.params.groupId
       if (this.info.task.members.includes(member._id)) {
-        var action = { type: 'removed', txt: `${member.fullname} from ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
-        if (this.loggedinUser._id === member._id) action = { type: 'left', txt: `${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+        var action = { type: 'removed', txt: `${member.fullname} from `, span: this.info.task.title, componentId: this.info.task.id, groupId: groupId, movedCmp: '', movedUser: '' }
+        if (this.loggedinUser._id === member._id) action = { type: 'left', txt: ``, span: this.info.task.title, componentId: this.info.task.id, groupId: groupId, movedCmp: '', movedUser: '' }
         const idx = this.info.task.members.findIndex(tMember => tMember === member._id)
         this.info.task.members.splice(idx, 1)
       } else {
-        var action = { type: 'added', txt: `${member.fullname} to ${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
-        if (this.loggedinUser._id === member._id) action = { type: 'joined', txt: `${this.info.task.title}`, componentId: '', movedCmp: '', movedUser: '' }
+        var action = { type: 'added', txt: `${member.fullname} to `, span: this.info.task.title, componentId: this.info.task.id, groupId: groupId, movedCmp: '', movedUser: '' }
+        if (this.loggedinUser._id === member._id) action = { type: 'joined', txt: ``, span: this.info.task.title, componentId: this.info.task.id, groupId: groupId, movedCmp: '', movedUser: '' }
         this.info.task.members.push(member._id)
       }
       this.$emit('setInfo', this.info, action)
