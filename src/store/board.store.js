@@ -43,7 +43,8 @@ export const boardStore = {
     labelsShow: false,
     backgroundImg: null,
     taskQEId: null,
-    dragCount: 0
+    dragCount: 0,
+    btnCoords: ''
   },
   getters: {
     boards({ boards }) {
@@ -60,6 +61,9 @@ export const boardStore = {
     },
     getEmptyActivity() {
       return boardService.getEmptyActivity()
+    },
+    getBtnCoords(state){
+      return state.btnCoords
     },
     // backgroundImg({ backgroundImg }) {
     //   return backgroundImg
@@ -116,6 +120,9 @@ export const boardStore = {
     },
     resetCount(state){
       state.dragCount = 0
+    },
+    setBtnCoords(state,{elCoords}){
+      state.btnCoords = elCoords
     }
   },
   actions: {

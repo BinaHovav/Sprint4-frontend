@@ -2,7 +2,7 @@
   <header ref="header" class="header-container">
     <nav>
       <RouterLink to="/board">
-        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691058928/image-removebg-preview_thzggs.png" alt="logo" />
+        <img src="https://res.cloudinary.com/dyu8jwe4o/image/upload/v1691386564/Screenshot_2023-08-02_at_16.22.17-removebg-preview_msgzwz.png" alt="logo" />
       </RouterLink>
       <div class="nav-left-content">
         <button class="small-screen-more-button">More</button>
@@ -123,10 +123,15 @@ export default {
       this.isModalOpen = false
     },
     openModal(type) {
-      this.type = type
-      const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
-      eventBus.emit('modal', { el, type })
-      window.addEventListener('resize', this.handleResize)
+      if (type === this.type) {
+        eventBus.emit('modal', { type: 'close' })
+      } else {
+        this.type = type
+        const elCoords = this.$refs.createBoardAppHeader.getBoundingClientRect()
+        this.$store.commit({ type: 'setBtnCoords', elCoords })
+        eventBus.emit('modal', { type })
+        window.addEventListener('resize', this.handleResize)
+      }
       eventBus.on('setInfo', () => {
         window.removeEventListener('resize', this.handleResize)
         eventBus.off('setInfo')
@@ -134,8 +139,8 @@ export default {
       })
     },
     handleResize() {
-      const el = this.$refs.createBoardAppHeader.getBoundingClientRect()
-      eventBus.emit('modal', { el, type: this.type, info: 'resize' })
+      const elCoords = this.$refs.createBoardAppHeader.getBoundingClientRect()
+      this.$store.commit({ type: 'setBtnCoords', elCoords })
     },
     getAverageColor() {
       const img = new Image()

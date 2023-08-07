@@ -26,7 +26,7 @@
         .left-board-header {
             position: relative;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             min-height: 32px;
             flex-wrap: nowrap;
             max-width: 100%;
@@ -49,9 +49,13 @@
                 // padding: 0;
                 box-shadow: none;
                 resize: none;
+                // padding: 6px 12px;
 
                 // padding: 5px 12px;
                 form {
+                    textarea {
+                        padding: 6px 12px;
+                    }
                 }
 
                 &:focus {
@@ -197,7 +201,7 @@
     }
 
     .board-header nav .left-board-header .board-title {
-        width: 190px;
+        width: 200px;
     }
 
     .board-header nav .right-board-header .board-members {

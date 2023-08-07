@@ -244,12 +244,16 @@ export default {
     },
     openModal(type, elRef) {
       this.modalRef = elRef
-      // const info = { task: this.task, board: this.board }
-      const el = this.$refs[this.modalRef].getBoundingClientRect()
-      eventBus.emit('modal', { el, type, info: { task: this.task, board: this.board } })
-      this.modalOpen = true
-      this.type = type
-      window.addEventListener('resize', this.handleResize)
+      const elCoords = this.$refs[this.modalRef].getBoundingClientRect()
+      if (this.type === type) {
+        eventBus.emit('modal', { type: 'close' })
+      } else {
+        this.$store.commit({ type: 'setBtnCoords', elCoords })
+        eventBus.emit('modal', { type, info: { task: this.task, board: this.board } })
+        this.modalOpen = true
+        this.type = type
+        window.addEventListener('resize', this.handleResize)
+      }
       eventBus.on('setInfo', (info) => {
         if (info) {
           this.task = info.task
@@ -266,8 +270,8 @@ export default {
       })
     },
     handleResize() {
-      const el = this.$refs[this.modalRef].getBoundingClientRect()
-      eventBus.emit('modal', { el, type: this.type, info: 'resize' })
+      const elCoords = this.$refs[this.modalRef].getBoundingClientRect()
+      this.$store.commit({ type: 'setBtnCoords', elCoords })
     },
     isCoverImg() {
       return this.task.cover.background?.startsWith('https')

@@ -104,13 +104,14 @@ export default {
       })
       const board = JSON.parse(JSON.stringify(this.board))
       const info = { group: this.group, board }
-      const el = this.$refs[elRef].getBoundingClientRect()
-      eventBus.emit('modal', { el, type, info })
+      const elCoords = this.$refs[elRef].getBoundingClientRect()
+      this.$store.commit({ type: 'setBtnCoords', elCoords })
+      eventBus.emit('modal', { type, info })
       window.addEventListener('resize', this.handleResize)
     },
     handleResize() {
-      const el = this.$refs.listActions.getBoundingClientRect()
-      eventBus.emit('modal', { el })
+      const elCoords = this.$refs.listActions.getBoundingClientRect()
+      this.$store.commit({ type: 'setBtnCoords', elCoords })
     },
   },
   components: {

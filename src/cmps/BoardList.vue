@@ -3,7 +3,8 @@
     <li v-for="board in boards" :key="board._id" @click="loadBoard(board._id)">
       <BoardTile :board="board" :isStarred="board.isStarred" @updateBoard="updateBoard" @loadBoard="loadBoard" />
     </li>
-    <div v-if="showCreateBoard" ref="createBoard" class="create-new-board" @click="openModal('CreateBoardModal')">Create new board</div>
+    <div v-if="showCreateBoard" ref="createBoard" class="create-new-board" @click="openModal('CreateBoardModal')">Create
+      new board</div>
   </ul>
 </template>
 
@@ -24,7 +25,7 @@ export default {
     }
   },
   computed: {},
-  created() {},
+  created() { },
   methods: {
     loadBoard(boardId) {
       this.$emit('loadBoard', boardId)
@@ -45,10 +46,14 @@ export default {
       }
     },
     openModal(type) {
-      this.type = type
-      const el = this.$refs.createBoard.getBoundingClientRect()
-      eventBus.emit('modal', { el, type })
-      window.addEventListener('resize', this.handleResize)
+      if (type === this.type) eventBus.emit('modal', { type: 'close' })
+      else {
+        this.type = type
+        const elCoords = this.$refs.createBoard.getBoundingClientRect()
+        this.$store.commit({ type: 'setBtnCoords', elCoords })
+        eventBus.emit('modal', { type })
+        window.addEventListener('resize', this.handleResize)
+      }
       eventBus.on('setInfo', () => {
         window.removeEventListener('resize', this.handleResize)
         eventBus.off('setInfo')
@@ -56,8 +61,8 @@ export default {
       })
     },
     handleResize() {
-      const el = this.$refs.createBoard.getBoundingClientRect()
-      eventBus.emit('modal', { el, type: this.type, info: 'resize' })
+      const elCoords = this.$refs.createBoard.getBoundingClientRect()
+      this.$store.commit({ type: 'setBtnCoords', elCoords })
     },
 
     closeModal() {
