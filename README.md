@@ -7,7 +7,7 @@ Welcome to Mellow, a project management application inspired by Trello. <br>
 
 ## Features
 
-* User Authentication: manage user and admin registrations, along with secure login functionality. <br>
+* User Authentication: Manage user and admin registrations, along with secure login functionality. <br>
 * Real-time notifications: Experience the convenience of real-time notifications, seamlessly connecting users who share the same board. <br>
 * Drag and drop: Enjoy the intuitive drag-and-drop interface, available for organizing both lists and cards.
 * Labels, Due Dates, and Checklists: Manage any task according to your personal preferences.
