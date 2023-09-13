@@ -1,5 +1,5 @@
-![WhatsApp Image 2023-08-31 at 14 54 52](https://github.com/BinaHovav/mellow-frontend/assets/123931280/b561d247-debc-48ae-bbdf-4f9ec1e6c9e9)
 
+<img width="1792" alt="Screenshot 2023-09-13 at 18 18 54" src="https://github.com/BinaHovav/mellow-frontend/assets/123931280/07019b37-97f5-43f1-b887-36985f3aa43c">
 
 # Mellow - Elevate Your Project Management to Excellence
 
