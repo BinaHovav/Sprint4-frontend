@@ -1,5 +1,6 @@
 
 <img width="1792" alt="Screenshot 2023-09-13 at 18 18 54" src="https://github.com/BinaHovav/mellow-frontend/assets/123931280/07019b37-97f5-43f1-b887-36985f3aa43c">
+<img width="1787" alt="Screenshot 2023-09-14 at 9 03 30" src="https://github.com/BinaHovav/mellow-frontend/assets/123931280/f2a7fe22-1d9a-47ed-9ae8-5e8b72cb2134">
 
 # Mellow - Optimize any Project Management
 
