@@ -1,7 +1,7 @@
 
 <img width="1792" alt="Screenshot 2023-09-13 at 18 18 54" src="https://github.com/BinaHovav/mellow-frontend/assets/123931280/07019b37-97f5-43f1-b887-36985f3aa43c">
 
-# Mellow - Elevate Your Project Management to Excellence
+# Mellow - Optimize any Project Management
 
 Welcome to Mellow, a project management application inspired by Trello. <br>
 
