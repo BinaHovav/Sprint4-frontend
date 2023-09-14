@@ -33,3 +33,6 @@ Server: Node.js, Express, MongoDB
 * @MeitarM<br>
 * @Me
 
+## Available on PC and Mobile:
+https://mellow-vhm8.onrender.com/?#/board/64c8fd3376e48335bcae48cd
+
